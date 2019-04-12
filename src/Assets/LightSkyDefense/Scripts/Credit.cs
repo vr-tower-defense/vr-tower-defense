@@ -7,16 +7,11 @@ using Valve.VR.InteractionSystem;
 public class Credit : MonoBehaviour
 {
     public const int value = 5;
-    // Start is called before the first frame update
-    void Start()
-    {
         
-    }
-
     private void OnHandHoverBegin(Hand hand)
     {
         var player = Player.instance.gameObject;
-        var creditOwner = GetComponent<CreditOwner>();
+        var creditOwner = player.GetComponent<CreditOwner>();
         creditOwner?.AddCredits(value);
     }
 }
