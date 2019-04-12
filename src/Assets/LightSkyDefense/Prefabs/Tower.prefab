@@ -135,5 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca710548a00e6744ab052437ecce0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Projectile: {fileID: 6130869729085579564, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
   BulletSpawn: {fileID: 7127235948243814977}

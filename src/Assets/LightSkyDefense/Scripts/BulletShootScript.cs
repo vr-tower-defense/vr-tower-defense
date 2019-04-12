@@ -4,6 +4,7 @@ namespace Assets
 {
     public class BulletShootScript : MonoBehaviour
     {
+        public Rigidbody Projectile;
         public Transform BulletSpawn;
 
         // Use this for initialization
@@ -17,6 +18,7 @@ namespace Assets
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                var clone = (Rigidbody)Instantiate(Projectile, BulletSpawn.position, Projectile.rotation);
 
                 clone.velocity = BulletSpawn.TransformDirection(Vector3.forward * 20);
             }
