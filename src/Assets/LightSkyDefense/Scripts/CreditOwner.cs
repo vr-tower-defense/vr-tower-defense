@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CreditOwner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private int credits;
+
+    public void AddCredits(int val)
+    { 
+        credits += val;
     }
 }
