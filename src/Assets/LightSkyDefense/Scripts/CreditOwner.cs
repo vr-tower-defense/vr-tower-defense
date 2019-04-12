@@ -6,9 +6,9 @@ public class CreditOwner : MonoBehaviour
 {
     private int credits;
 
-    public void AddCredits(int i)
+    public void AddCredits(int val)
     {
-        credits += 1;
+        credits += val;
     }
 
     // Start is called before the first frame update
