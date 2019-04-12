@@ -2,7 +2,7 @@
 
 namespace Assets
 {
-    public class BulletShootScript : MonoBehaviour
+    public class ShootBullet : MonoBehaviour
     {
         public Rigidbody Projectile;
         public Transform BulletSpawn;
