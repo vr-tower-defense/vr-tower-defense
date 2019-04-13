@@ -205,6 +205,10 @@ MonoBehaviour:
   DialClickAction:
     actionPath: /actions/default/in/DialClick
     needsReinit: 0
+  dialRotationOffset: 90
+  dialOptions:
+  - {fileID: 5869170822198081814, guid: a579ba97a47daa540b96cd0ec2bc76c9, type: 3}
+  - {fileID: 2707905244860294426, guid: e2435355a835bad45a686f1606db1d24, type: 3}
 --- !u!1 &1841069982
 GameObject:
   m_ObjectHideFlags: 0
