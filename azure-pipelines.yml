@@ -19,8 +19,8 @@ steps:
   displayName: 'Announce build'
 
 - script: '%UNITY_EDITOR_PATH% -batchmode
-  -projectPath $(Repository.LocalPath)/src
-  -buildWindows64Player $(build.artifactstagingdirectory)/$(player.executableName).exe
+  -projectPath $(build.sourcesdirectory)\src
+  -buildWindows64Player $(build.artifactstagingdirectory)\$(player.executableName).exe
   -quit'
   displayName: "Build unity for windows 64 platform"
 
