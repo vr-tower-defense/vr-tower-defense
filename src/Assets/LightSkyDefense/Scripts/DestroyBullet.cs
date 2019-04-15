@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,5 +15,15 @@ public class DestroyBullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Enemy enemyScript = GameObject.FindObjectOfType(typeof(Enemy)) as Enemy;
+            enemyScript.Damage(20);
+            Destroy(gameObject);
+        }
     }
 }
