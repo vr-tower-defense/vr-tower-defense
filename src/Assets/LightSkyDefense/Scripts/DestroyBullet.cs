@@ -20,9 +20,9 @@ public class DestroyBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Enemy") return;
-            Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
-            enemyScript.Damage(BulletDamage);
-            Destroy(gameObject);
+        Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
+        if (enemyScript == null) return;
+        enemyScript.Damage(BulletDamage);
+        Destroy(gameObject);
     }
 }
