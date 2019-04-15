@@ -18,10 +18,15 @@ steps:
 - script: echo Starting Unity build!
   displayName: 'Announce build'
 
-- script: '%UNITY_EDITOR_PATH% -batchmode
-  -projectPath $(build.sourcesdirectory)\src
-  -buildWindows64Player $(build.artifactstagingdirectory)\$(player.executableName).exe
-  -quit'
+- script: '
+  %UNITY_EDITOR_PATH% 
+    -batchmode
+    -quit
+    -nographics
+    -projectPath $(build.sourcesdirectory)\src
+    -buildWindows64Player $(build.artifactstagingdirectory)\$(player.executableName).exe
+    -logFile $(build.artifactstagingdirectory)/output.log
+'
   displayName: "Build unity for windows 64 platform"
 
 - task: PublishBuildArtifacts@1
