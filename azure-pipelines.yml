@@ -4,16 +4,25 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  batch: true
+  branches:
+   include:
+    - master
+    - develop
 
-pool:
-  vmImage: 'Ubuntu-16.04'
+pool: 'default'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo Starting Unity build!
+  displayName: 'Announce build'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: '%UNITY_EDITOR_PATH% -batchmode
+  -projectPath $(Repository.LocalPath)/src
+  -buildWindows64Player $(build.artifactstagingdirectory)/$(player.executableName).exe
+  -quit'
+  displayName: "Build unity for windows 64 platform"
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
