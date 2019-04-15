@@ -10,8 +10,6 @@ trigger:
     - master
     - develop
 
-pool: 'default'
-
 steps:
 - script: echo Starting Unity build!
   displayName: 'Announce build'
