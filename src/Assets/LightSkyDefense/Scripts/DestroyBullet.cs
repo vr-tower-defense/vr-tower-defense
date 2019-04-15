@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DestroyBullet : MonoBehaviour
 {
+    public int BulletDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class DestroyBullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy enemyScript = GameObject.FindObjectOfType(typeof(Enemy)) as Enemy;
-            enemyScript.Damage(20);
+            enemyScript.Damage(BulletDamage);
             Destroy(gameObject);
         }
     }
