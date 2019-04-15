@@ -7,8 +7,14 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class Credit : MonoBehaviour
 {
-    public const int value = 5;
-        
+    public int Value = 5;
+    private AudioSource source;
+    public AudioClip pickupSound;
+    void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
     /// <summary>
     /// When the credit touches the hand, the credit gets added to the players total credit count
     /// </summary>
@@ -17,7 +23,11 @@ public class Credit : MonoBehaviour
     {
         var player = Player.instance.gameObject;
         var creditOwner = player.GetComponent<CreditOwner>();
-        creditOwner?.AddCredits(value);
+        if (creditOwner == null) return;
+        creditOwner.AddCredits(Value);
+        source.PlayOneShot(pickupSound);
         Destroy(gameObject);
     }
+
+
 }
