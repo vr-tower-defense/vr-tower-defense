@@ -10,6 +10,10 @@ trigger:
     - master
     - develop
 
+pool:
+ demands:
+   - Unity -equals 2018.3.12
+
 steps:
 - script: echo Starting Unity build!
   displayName: 'Announce build'
