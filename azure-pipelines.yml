@@ -16,13 +16,12 @@ steps:
 - script: echo Starting Unity build!
   displayName: 'Announce build'
 
-- script: '%UNITY_EDITOR_PATH% -batchmode
-  -projectPath $(Repository.LocalPath)/src
-  -buildWindows64Player $(build.artifactstagingdirectory)/$(player.executableName).exe
-  -quit'
-  displayName: "Build unity for windows 64 platform"
+- task: UnityBuildTask@2
+  inputs:
+    buildTarget: 'standalone'
+    unityProjectPath: ./src
+    buildScenes: 'LSDScene'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
   inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
