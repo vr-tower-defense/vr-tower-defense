@@ -3,27 +3,38 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class TowerAI : MonoBehaviour
+    public class TowerBehaviour : MonoBehaviour
     {
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
         public Transform Target = null;
-        private IEnumerator _coroutine;
+
         public float ReloadTime = 2;
         public float BulletSpeed = 5;
 
+        private IEnumerator _coroutine;
+
         void OnTriggerEnter(Collider target)
         {
-            Enemy enemyScript = target.gameObject.GetComponent<Enemy>();
+            var enemyScript = target.gameObject.GetComponent<Enemy>();
+
             if (enemyScript == null) return;
+
             Target = target.transform;
         }
 
         void OnTriggerExit(Collider target)
         {
-            Enemy enemyScript = target.gameObject.GetComponent<Enemy>();
+            var enemyScript = target.gameObject.GetComponent<Enemy>();
+
             if (enemyScript == null) return;
+
             Target = null;
+        }
+
+        void OnDisable()
+        {
+            StopCoroutine(_coroutine);
         }
 
 
@@ -46,13 +57,9 @@ namespace Assets
         void AimAndShoot()
         {
             if (Target == null) return;
+
             var newProjectile = (Rigidbody)Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
         }
     }
 }
