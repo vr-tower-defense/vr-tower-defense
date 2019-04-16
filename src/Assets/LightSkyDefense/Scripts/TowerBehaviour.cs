@@ -9,10 +9,11 @@ namespace Assets
         public Transform ProjectileSpawn;
         public Transform Target = null;
 
-        public float ReloadTime = 2;
+        public float ReloadTime = 3;
         public float BulletSpeed = 5;
 
         private IEnumerator _coroutine;
+        private AudioSource source;
 
         void OnTriggerEnter(Collider target)
         {
@@ -41,7 +42,9 @@ namespace Assets
         // Use this for initialization
         void Start()
         {
+            source = GetComponent<AudioSource>();
             _coroutine = Reload(ReloadTime);
+
             StartCoroutine(_coroutine);
         }
 
@@ -60,6 +63,8 @@ namespace Assets
 
             var newProjectile = (Rigidbody)Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
+
+            source.Play();
         }
     }
 }
