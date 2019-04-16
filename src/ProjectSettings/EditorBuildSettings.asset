@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/LightSkyDefense/Scenes/LSDScene.unity
+    guid: 93e743ea3ad4c9e4d9c6ebae4ab47d47
   m_configObjects: {}
