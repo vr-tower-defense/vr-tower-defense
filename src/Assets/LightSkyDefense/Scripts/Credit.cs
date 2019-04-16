@@ -10,6 +10,7 @@ public class Credit : MonoBehaviour
     public int Value = 5;
     private AudioSource source;
     public AudioClip pickupSound;
+
     void Awake()
     {
         source = GetComponent<AudioSource>();
@@ -21,11 +22,13 @@ public class Credit : MonoBehaviour
     /// <param name="hand"></param>
     private void OnHandHoverBegin(Hand hand)
     {
-        var player = Player.instance.gameObject;
-        var creditOwner = player.GetComponent<CreditOwner>();
-        if (creditOwner == null) return;
+        var creditOwner = Player.instance.gameObject.GetComponent<CreditOwner>();
+
+        if (creditOwner == null) { return; }
+
         creditOwner.AddCredits(Value);
         source.PlayOneShot(pickupSound);
+
         Destroy(gameObject);
     }
 
