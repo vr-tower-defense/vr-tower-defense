@@ -74,7 +74,7 @@ public class Dial : MonoBehaviour
     /// <param name="positionOnTouchpad"></param>
     private DialOption FindDialOption(Vector2 positionOnTouchpad)
     {
-        // We can't find a dial option when there are not options :D
+        // We can't find a dial option when there are no options :D
         if(DialOptions.Length < 1)
         {
             return null;
