@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class Dial : MonoBehaviour
 {
@@ -8,16 +9,23 @@ public class Dial : MonoBehaviour
     public SteamVR_Action_Boolean DialClickAction = SteamVR_Input.GetBooleanAction("DialClick");
 
     [Tooltip("Offset in degrees on which the first element in dialOptions starts, ie. make the options horizontal by adding 90 degrees")]
-    public int DialRotationOffset = 90;
+    public float DialRotationOffset = 90;
+
+    [Tooltip("Radius of the dial option circle")]
+    public float DialOptionRadius= .1f;
+
+    [Tooltip("Offset from the hand position")]
+    public Vector3 DialOptionOffset = new Vector3(0, .1f, 0);
 
     [Tooltip("Options that can are placed onto the Dial")]
     public GameObject[] DialOptions;
 
     // Field used to check whether user is in process of clicking touchpad
     private DialOption _pressedDial;
+    private GameObject[] _dialOptions;
 
     /// <summary>
-    /// Valdiate properties
+    /// Valdiate properties and create dial options
     /// </summary>
     private void Start()
     {
@@ -27,12 +35,20 @@ public class Dial : MonoBehaviour
 
         if (DialClickAction == null)
             Debug.LogError("`DialClick` action has not been set on this component.");
+
+        _dialOptions = new GameObject[DialOptions.Length];
+
+        // Create dial option instances
+        for (int i = 0; i < DialOptions.Length; i++)
+        {
+            _dialOptions[i] = Instantiate(DialOptions[i]);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ResetDialOptions();
+        UpdateDialOptions();
 
         // Ignore the rest of this method if the touchpad is not touched
         if (DialAction.axis == Vector2.zero)
@@ -116,22 +132,40 @@ public class Dial : MonoBehaviour
     /// <summary>
     /// Resets all dial options
     /// </summary>
-    private void ResetDialOptions()
+    private void UpdateDialOptions()
     {
-        // Reset IsSelected property on all DialOptions
-        // We might want to do this only once since this loop will run every update.
-        foreach (var dialOption in DialOptions)
+        var handTransform = Player.instance.rightHand.transform;
+        var segmentAngle = (365 / DialOptions.Length);
+        var segmentAngleCenter = segmentAngle / 2;
+
+        // Create dial option instances
+        for (int i = 0; i < DialOptions.Length; i++)
         {
-            if (dialOption == null)
+            if (_dialOptions[i] == null)
             {
                 continue;
             }
 
-            var dialOptionScript = dialOption.GetComponent<DialOption>();
+            // Reset IsSelected property on all DialOptions
+            var dialOptionScript = _dialOptions[i].GetComponent<DialOption>();
             if (dialOptionScript != null)
             {
                 dialOptionScript.IsSelected = false;
             }
+
+            // Update position
+            var localRotationInRadians = ((segmentAngle * i) + segmentAngleCenter + DialRotationOffset) * Mathf.Deg2Rad;
+
+            // Create a local position using the rotation hand rotation
+            var localPosition =
+                Quaternion.Euler(handTransform.rotation.eulerAngles) *
+                (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) + DialOptionOffset);
+
+            // Change distance to center of dial
+            localPosition *= DialOptionRadius;
+
+            // Update position by adding local position to world position of right hand
+            _dialOptions[i].transform.position = handTransform.position + localPosition;
         }
     }
 }

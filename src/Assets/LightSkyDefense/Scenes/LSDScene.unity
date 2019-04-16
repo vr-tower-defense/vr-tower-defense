@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -343,10 +343,13 @@ MonoBehaviour:
   DialClickAction:
     actionPath: /actions/default/in/DialClick
     needsReinit: 0
-  DialRotationOffset: 90
+  DialRotationOffset: 0
+  DialOptionCenterOffset: 0.1
   DialOptions:
   - {fileID: 5869170822198081814, guid: a579ba97a47daa540b96cd0ec2bc76c9, type: 3}
   - {fileID: 2707905244860294426, guid: e2435355a835bad45a686f1606db1d24, type: 3}
+  - {fileID: 1000013227978282, guid: 4d7627d70abb4e247b7d958e6634b2f1, type: 3}
+  - {fileID: 173732, guid: 81fc1450441aca64e8cc1a0e14b1aa77, type: 3}
 --- !u!1 &1841069982
 GameObject:
   m_ObjectHideFlags: 0
