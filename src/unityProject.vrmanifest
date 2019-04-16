@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.vrtowerdefense.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Projects\\V\\vr-tower-defense\\src\\actions.json",
+      "action_manifest_path": "D:\\GitHub\\vr-tower-defense\\src\\actions.json",
       "strings": {
         "en_us": {
           "name": "VR Tower Defense [Testing]"
