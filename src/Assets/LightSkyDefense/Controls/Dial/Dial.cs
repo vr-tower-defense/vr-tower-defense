@@ -84,7 +84,7 @@ public class Dial : MonoBehaviour
         var radians = Mathf.Atan2(positionOnTouchpad.x, positionOnTouchpad.y);
         var degrees = (Mathf.Rad2Deg * radians) + -DialRotationOffset;
 
-        if (Mathf.Sign(degrees) == -1)
+        if (degrees < 0)
         {
             degrees += 360;
         }
