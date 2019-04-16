@@ -50,6 +50,7 @@ namespace Assets
         void AimAndShoot()
         {
             if (Target == null) return;
+
             var newProjectile = (Rigidbody)Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
         }
