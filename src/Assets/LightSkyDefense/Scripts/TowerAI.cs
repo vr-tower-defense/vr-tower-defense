@@ -10,6 +10,7 @@ namespace Assets
         public Transform Target = null;
         private IEnumerator _coroutine;
         public float ReloadTime;
+        public float BulletSpeed;
 
         void OnTriggerEnter(Collider target)
         {
@@ -45,9 +46,8 @@ namespace Assets
         void AimAndShoot()
         {
             if (Target == null) return;
-            transform.LookAt(Target);
             var newProjectile = (Rigidbody)Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
-            newProjectile.velocity = ProjectileSpawn.TransformDirection(Vector3.forward * 20);
+            newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
         }
 
         // Update is called once per frame
