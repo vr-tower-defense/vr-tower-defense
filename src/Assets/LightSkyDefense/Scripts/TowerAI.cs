@@ -23,7 +23,7 @@ namespace Assets
 
         void OnTriggerExit(Collider target)
         {
-            Enemy enemyScript = target.gameObject.GetComponent<Enemy>();
+            var enemyScript = target.gameObject.GetComponent<Enemy>();
 
             if (enemyScript == null) return;
 
