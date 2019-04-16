@@ -82,7 +82,7 @@ public class Dial : MonoBehaviour
 
         // Find option index by calculating the angle of the touchpad position
         var radians = Mathf.Atan2(positionOnTouchpad.x, positionOnTouchpad.y);
-        var degrees = (Mathf.Rad2Deg * radians) + -DialRotationOffset;
+        var degrees = (Mathf.Rad2Deg * radians) - DialRotationOffset;
 
         if (degrees < 0)
         {
