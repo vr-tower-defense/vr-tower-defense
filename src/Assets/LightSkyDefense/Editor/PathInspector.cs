@@ -5,20 +5,23 @@ using UnityEngine;
 public class PathInspector : Editor
 {
     private Path path;
-    private Transform handleTransform;
-    private Quaternion handleRotation;
 
     private void OnSceneGUI()
     {
         path = target as Path;
-        handleTransform = path.transform;
-        handleRotation = Tools.pivotRotation == PivotRotation.Local ?
-            handleTransform.rotation : Quaternion.identity;
+        Transform handleTransform = path.transform;
+        Quaternion handleRotation = Tools.pivotRotation == PivotRotation.Local ?
+          handleTransform.rotation : Quaternion.identity;
 
         if (path.curves == null)
             return;
 
-        Vector3[] pathVectors = path.GetVector3sCordinatesFromPath(30);
+        Vector3[] pathVectors = path.GetVector3sCordinatesFromPath(100);
+
+        for(int i = 0; i < pathVectors.Length - 1; i++)
+        {
+            pathVectors[i] = handleTransform.TransformPoint(pathVectors[i]);
+        }
 
         Handles.DrawPolyLine(pathVectors);
 
@@ -38,4 +41,5 @@ public class PathInspector : Editor
         }   
     }
 
+    
 }
