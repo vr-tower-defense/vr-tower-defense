@@ -22,9 +22,9 @@ public class Curve
 
     public Curve(Vector3 _start, Vector3 _end, Vector3 _startTangent, Vector3 _endTangent)
     {
-        _start = start;
-        _end = end;
-        _startTangent = startTangent;
-        _endTangent = endTangent;
+        start = _start;
+        end = _end;
+        startTangent = _startTangent;
+        endTangent = _endTangent;
     }
 }

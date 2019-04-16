@@ -18,7 +18,7 @@ public class PathInspector : Editor
         if (path.curves == null)
             return;
 
-        for(int i = 0; i < path.curves.Count; i++)
+        for(int i = 0; i < path.curves.Length; i++)
         {
             Vector3[] points;
 
