@@ -8,7 +8,7 @@ namespace Assets
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
         public Transform Target = null;
-
+        
         public float ReloadTime = 3;
         public float BulletSpeed = 5;
 
@@ -65,6 +65,7 @@ namespace Assets
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
 
             source.Play();
+
         }
     }
 }
