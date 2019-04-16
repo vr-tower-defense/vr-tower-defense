@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7127235948388862707}
   - component: {fileID: 1742231140803179004}
   - component: {fileID: 7127235948388862704}
-  - component: {fileID: 7127235948388862719}
+  - component: {fileID: 6878613169134175629}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -137,7 +137,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7127235948388862719
+--- !u!114 &6878613169134175629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,4 +153,5 @@ MonoBehaviour:
     type: 3}
   ProjectileSpawn: {fileID: 7127235948243814977}
   Target: {fileID: 0}
-  MaxRange: 100
+  ReloadTime: 2
+  BulletSpeed: 5

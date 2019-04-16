@@ -9,8 +9,8 @@ namespace Assets
         public Transform ProjectileSpawn;
         public Transform Target = null;
         private IEnumerator _coroutine;
-        public float ReloadTime;
-        public float BulletSpeed;
+        public float ReloadTime = 2;
+        public float BulletSpeed = 5;
 
         void OnTriggerEnter(Collider target)
         {
