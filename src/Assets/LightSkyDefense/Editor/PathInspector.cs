@@ -18,21 +18,11 @@ public class PathInspector : Editor
         if (path.curves == null)
             return;
 
-        for(int i = 0; i < path.curves.Length; i++)
-        {
-            Vector3[] points;
+        Vector3[] pathVectors = path.GetVector3sCordinatesFromPath(30);
 
-            points = Handles.MakeBezierPoints(
-                path.curves[i].start,
-                path.curves[i].end,
-                path.curves[i].startTangent,
-                path.curves[i].endTangent,
-                30);
+        Handles.DrawPolyLine(pathVectors);
 
-            Handles.DrawPolyLine(points);
-
-            HandleUtility.Repaint();
-        }
+        HandleUtility.Repaint();
     }
 
     public override void OnInspectorGUI()
@@ -45,7 +35,7 @@ public class PathInspector : Editor
             Undo.RecordObject(path, "Add Curve");
             path.AddCurve();
             EditorUtility.SetDirty(path);
-        }
+        }   
     }
 
 }

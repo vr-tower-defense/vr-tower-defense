@@ -30,4 +30,27 @@ public class Path : MonoBehaviour
 
         curves[curves.Length - 1] = newCurve;
     }
+
+    public Vector3[] GetVector3sCordinatesFromPath(int cordinatesAmountPerCurve)
+    {
+        Vector3[] returnPoints = new Vector3[0];
+
+        for (int i = 0; i < curves.Length; i++)
+        {
+            Vector3[] points = Handles.MakeBezierPoints(
+               curves[i].start,
+               curves[i].end,
+               curves[i].startTangent,
+               curves[i].endTangent,
+               cordinatesAmountPerCurve);
+
+            var newArray = new List<Vector3>();
+            newArray.AddRange(returnPoints);
+            newArray.AddRange(points);
+
+            returnPoints = newArray.ToArray();
+        }
+
+        return returnPoints;
+    }
 }
