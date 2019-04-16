@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
@@ -26,8 +27,10 @@ public class Credit : MonoBehaviour
 
         if (creditOwner == null) { return; }
 
+       
         creditOwner.AddCredits(Value);
         source.PlayOneShot(pickupSound);
+        
 
         Destroy(gameObject);
     }
