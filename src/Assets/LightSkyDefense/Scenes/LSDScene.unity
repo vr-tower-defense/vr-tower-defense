@@ -346,6 +346,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215481d3e26800241a5d52d050b8a226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1620514274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620514272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7c0bb85aeacf34bbbbc082f18f775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialAction:
+    actionPath: /actions/default/in/Dial
+    needsReinit: 0
+  DialClickAction:
+    actionPath: /actions/default/in/DialClick
+    needsReinit: 0
+  DialRotationOffset: 90
+  DialOptions:
+  - {fileID: 5869170822198081814, guid: a579ba97a47daa540b96cd0ec2bc76c9, type: 3}
+  - {fileID: 2707905244860294426, guid: e2435355a835bad45a686f1606db1d24, type: 3}
 --- !u!1 &1841069982
 GameObject:
   m_ObjectHideFlags: 0
