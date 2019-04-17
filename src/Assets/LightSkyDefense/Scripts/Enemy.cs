@@ -7,16 +7,19 @@ public class Enemy : MonoBehaviour
     private float health = 100f;
     private float energy = 100f;
 
+    public ParticleSystem explodeEffect;
+    private ParticleSystem explodeEffectInstance = null;
+
     //private EnemyBehaviour behaviour;
         
     void Start()
     {
-        
+
     }
     
     void Update()
     {
-        if(energy >0)
+        if (energy >0)
         {
 
         }
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour
 
         if (health<=0)
         {
+            Explode();
             Destroy(this.gameObject);
         }
 
@@ -73,4 +77,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This function kills the enemy and starts the explosion particle system
+    /// </summary>
+    public void Explode()
+    {
+        //if not in the world, instantiate
+        //if(explodeEffect.scene.name == null)
+        if (explodeEffectInstance == null)
+        {
+            explodeEffectInstance = Instantiate(explodeEffect, this.transform.position, new Quaternion());
+        }
+        //play effect
+        explodeEffectInstance.Play();
+        //Destroy after particle (emit) duration + maximum particle lifetime
+        Destroy(explodeEffectInstance.gameObject, (explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax));
+
+        //Kill enemy (if Explode() called when the enemy was still alive)
+        SetHealth(0);
+    }
 }
