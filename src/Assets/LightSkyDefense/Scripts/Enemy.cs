@@ -19,11 +19,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_energy > 0)
-        {
-
-        }
-        else
+        if (_energy < 0)
         {
             Damage(30);
         }
@@ -43,14 +39,14 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// This function will remove the specified dmgAmount from the enemy's health
     /// </summary>
-    /// <param name="dmgAmount"></param>
-    public void Damage(float dmgAmount)
+    /// <param name="damageAmount"></param>
+    public void Damage(float damageAmount)
     {
-        _health -= dmgAmount;
+        _health -= damageAmount;
         if (_health <= 0)
         {
             Explode();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -60,7 +56,7 @@ public class Enemy : MonoBehaviour
     /// <param name="healAmount"></param>
     public void Heal(float healAmount)
     {
-        _health += healAmount % MaxHealth;
+        _health = Mathf.Clamp(_health + healAmount, 0, MaxHealth);
     }
 
     /// <summary>
@@ -69,10 +65,9 @@ public class Enemy : MonoBehaviour
     public void Explode()
     {
         //if not in the world, instantiate
-        //if(explodeEffect.scene.name == null)
         if (_explodeEffectInstance == null)
         {
-            _explodeEffectInstance = Instantiate(ExplodeEffect, this.transform.position, new Quaternion());
+            _explodeEffectInstance = Instantiate(ExplodeEffect, transform.position, new Quaternion());
         }
         //play effect
         _explodeEffectInstance.Play();
@@ -80,6 +75,6 @@ public class Enemy : MonoBehaviour
         Destroy(_explodeEffectInstance.gameObject, (_explodeEffectInstance.main.duration + _explodeEffectInstance.main.startLifetime.constantMax));
 
         //Kill enemy (if Explode() called when the enemy was still alive)
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
