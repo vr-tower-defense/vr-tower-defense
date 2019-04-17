@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnCreditOnDestruction : MonoBehaviour
 {
-    public Credit credit;
-    public int value;
+    public Credit Credit;
+    public int Value;
 
     private bool _isQuitting = false;
 
@@ -21,8 +21,8 @@ public class SpawnCreditOnDestruction : MonoBehaviour
     {
         if (!_isQuitting)
         {
-            credit.value = value;
-            Instantiate(credit, gameObject.transform.position, gameObject.transform.rotation);
+            Credit.Value = Value;
+            Instantiate(Credit, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
 }

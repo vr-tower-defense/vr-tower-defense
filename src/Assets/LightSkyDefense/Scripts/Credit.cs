@@ -8,8 +8,8 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class Credit : MonoBehaviour
 {
-    public int value = 5;
-    public AudioClip pickupSound;
+    public int Value = 5;
+    public AudioClip PickupSound;
 
 
     /// <summary>
@@ -23,8 +23,8 @@ public class Credit : MonoBehaviour
         if (creditOwner == null) { return; }
 
        
-        creditOwner.AddCredits(value);
-        AudioSource.PlayClipAtPoint(pickupSound, this.gameObject.transform.position);
+        creditOwner.AddCredits(Value);
+        AudioSource.PlayClipAtPoint(PickupSound, this.gameObject.transform.position);
 
         Destroy(gameObject);
     }
