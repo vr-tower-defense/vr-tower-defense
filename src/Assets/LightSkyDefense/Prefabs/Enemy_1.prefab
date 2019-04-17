@@ -230,5 +230,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4d9db1fd34f91418b62f36ad84612a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credit: {fileID: 5332771238933343437, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
-  value: 5
+  Credit: {fileID: 5332771238933343437, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
+  Value: 5
