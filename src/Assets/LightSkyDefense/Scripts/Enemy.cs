@@ -9,17 +9,15 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem explodeEffect;
     private ParticleSystem explodeEffectInstance = null;
-
-    //private EnemyBehaviour behaviour;
-        
+    
     void Start()
     {
 
     }
-    
-    void Update()
+
+    void FixedUpdate()
     {
-        if (energy >0)
+        if (energy > 0)
         {
 
         }
@@ -28,7 +26,7 @@ public class Enemy : MonoBehaviour
             health -= 30;
         }
 
-        if (health<=0)
+        if (health <= 0)
         {
             Explode();
             Destroy(this.gameObject);
@@ -51,7 +49,7 @@ public class Enemy : MonoBehaviour
         health = newHealth;
     }
 
-    
+
     /// <summary>
     /// This function will remove the specified dmgAmount from the enemy's health
     /// </summary>
@@ -67,7 +65,7 @@ public class Enemy : MonoBehaviour
     /// <param name="healAmount"></param>
     public void Heal(float healAmount)
     {
-        if(health+healAmount>100)
+        if (health + healAmount > 100)
         {
             health = 100;
         }
