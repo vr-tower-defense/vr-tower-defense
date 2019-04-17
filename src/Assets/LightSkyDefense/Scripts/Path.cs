@@ -6,18 +6,16 @@ using System.Collections.Generic;
 
 public class Path : MonoBehaviour
 {
+    public Curve[] Curves;
 
     [SerializeField]
-    private GameObject lineGeneratorPrefab;
+    private int _lineDivision = 100;
 
-    [SerializeField]
-    private int lineDivision = 100;
+    private LineRenderer _lineRenderer;
 
-    public Curve[] curves;
-   
     void Start()
     {
-        Vector3[] pathVectors = GetVector3sCordinatesFromPath(lineDivision);
+        Vector3[] pathVectors = GetVector3sCordinatesFromPath(_lineDivision);
         DrawPath(pathVectors);
     }
 
@@ -28,32 +26,32 @@ public class Path : MonoBehaviour
     {
         Curve newCurve;
 
-        if (curves.Length == 0)
+        if (Curves.Length == 0)
             newCurve = new Curve();
         else
         {
             // Mirror newCurve to Previous endPoint
             Vector3 newCurveOffset = new Vector3(1f, 1f, 1f);
-            Vector3 endPoint = curves[curves.Length - 1].end;
+            Vector3 endPoint = Curves[Curves.Length - 1].End;
             newCurve = new Curve(endPoint, (endPoint + newCurveOffset), endPoint, (endPoint + newCurveOffset));
         }
 
-        Array.Resize(ref curves, curves.Length + 1);
+        Array.Resize(ref Curves, Curves.Length + 1);
 
-        curves[curves.Length - 1] = newCurve;
+        Curves[Curves.Length - 1] = newCurve;
     }
 
     public Vector3[] GetVector3sCordinatesFromPath(int cordinatesAmountPerCurve)
     {
         var newArray = new List<Vector3>();
 
-        for (int i = 0; i < curves.Length; i++)
+        for (int i = 0; i < Curves.Length; i++)
         {
             Vector3[] points = Handles.MakeBezierPoints(
-                curves[i].start,
-                curves[i].end,
-                curves[i].startTangent,
-                curves[i].endTangent,
+                Curves[i].Start,
+                Curves[i].End,
+                Curves[i].StartTangent,
+                Curves[i].EndTangent,
                 cordinatesAmountPerCurve
             );
 
@@ -65,11 +63,9 @@ public class Path : MonoBehaviour
 
     private void DrawPath(Vector3[] pathCordinates)
     {
-        GameObject newLineGen = Instantiate(lineGeneratorPrefab);
-        LineRenderer renderer = newLineGen.GetComponent<LineRenderer>();
+        LineRenderer renderer = GetComponent<LineRenderer>();
 
         renderer.positionCount = pathCordinates.Length;
         renderer.SetPositions(pathCordinates);
-
     }
 }

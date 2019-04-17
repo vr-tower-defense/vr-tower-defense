@@ -141,19 +141,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b776867c4583b4bac83d68dd67ed1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curves:
-  - start: {x: 0, y: 0, z: 0}
-    end: {x: 2.6, y: 1.4, z: 1.2}
-    startTangent: {x: 1.9, y: 4.9, z: 2.5}
-    endTangent: {x: 0, y: -1.15, z: 0}
-  - start: {x: 2.6, y: 1.4, z: 1.2}
-    end: {x: 2, y: 2.8, z: 1.7}
-    startTangent: {x: 5.2, y: 2.8, z: 1.4}
-    endTangent: {x: 2.4, y: 1.4, z: 1.2}
-  - start: {x: 2, y: 2.8, z: 1.7}
-    end: {x: 3, y: 3.8, z: 2.7}
-    startTangent: {x: 2, y: 2.8, z: 1.7}
-    endTangent: {x: 3, y: 3.8, z: 2.7}
+  Curves:
+  - Start: {x: 0, y: 0, z: 0}
+    End: {x: 2.6, y: 1.4, z: 1.2}
+    StartTangent: {x: 1.9, y: 4.9, z: 2.5}
+    EndTangent: {x: 0, y: -1.15, z: 0}
+  - Start: {x: 2.6, y: 1.4, z: 1.2}
+    End: {x: 2, y: 2.8, z: 1.7}
+    StartTangent: {x: 5.2, y: 2.8, z: 1.4}
+    EndTangent: {x: 2.4, y: 1.4, z: 1.2}
+  - Start: {x: 2, y: 2.8, z: 1.7}
+    End: {x: 3, y: 3.8, z: 2.7}
+    StartTangent: {x: 2, y: 2.8, z: 1.7}
+    EndTangent: {x: 3, y: 3.8, z: 2.7}
+  _lineGeneratorPrefab: {fileID: 4972353933390999702, guid: fad4b2e610d10ae46be72b9561db970d,
+    type: 3}
+  _lineDivision: 100
 --- !u!4 &781720502
 Transform:
   m_ObjectHideFlags: 0

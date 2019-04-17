@@ -5,26 +5,26 @@ using UnityEngine;
 [System.Serializable]
 public class Curve
 {
-    public Vector3 start;
-    public Vector3 end;
-    public Vector3 startTangent;
-    public Vector3 endTangent;
+    public Vector3 Start;
+    public Vector3 End;
+    public Vector3 StartTangent;
+    public Vector3 EndTangent;
 
     public Curve()
     {
         Vector3 cleanVector = new Vector3(0, 0, 0);
 
-        start = cleanVector;
-        end = cleanVector;
-        startTangent = cleanVector;
-        endTangent = cleanVector;
+        Start = cleanVector;
+        End = cleanVector;
+        StartTangent = cleanVector;
+        EndTangent = cleanVector;
     }
 
-    public Curve(Vector3 _start, Vector3 _end, Vector3 _startTangent, Vector3 _endTangent)
+    public Curve(Vector3 start, Vector3 end, Vector3 startTangent, Vector3 endTangent)
     {
-        start = _start;
-        end = _end;
-        startTangent = _startTangent;
-        endTangent = _endTangent;
+        Start = start;
+        End = end;
+        StartTangent = startTangent;
+        EndTangent = endTangent;
     }
 }
