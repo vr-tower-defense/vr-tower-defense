@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 1226447468475903079}
   - component: {fileID: 5472812961651748678}
   - component: {fileID: 8786077068969312448}
+  - component: {fileID: 979572960815167569}
   m_Layer: 0
   m_Name: Enemy_1
   m_TagString: Enemy
@@ -214,3 +215,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62367b71292e62f4793ecfbac8d945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 100
+  ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
+    type: 3}
+--- !u!114 &979572960815167569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394283025760544744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4d9db1fd34f91418b62f36ad84612a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Credit: {fileID: 5332771238933343437, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
+  Value: 5
