@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float health = 100f;
-    private float energy = 100f;
+    public float MaxHealth = 100f;
 
-    //private EnemyBehaviour behaviour;
-        
+    private float _health = 100f;
+    private float _energy = 100f;
+
+    public ParticleSystem ExplodeEffect;
+    private ParticleSystem _explodeEffectInstance = null;
+
     void Start()
     {
-        
+
     }
-    
-    void Update()
+
+    void FixedUpdate()
     {
-        if(energy >0)
+        if (_energy < 0)
         {
-
-        }
-        else
-        {
-            health -= 30;
-        }
-
-        if (health<=0)
-        {
-            Destroy(this.gameObject);
+            Damage(30);
         }
 
         //todo: intergrate  behaviour
@@ -39,22 +33,21 @@ public class Enemy : MonoBehaviour
 
     public float GetHealth()
     {
-        return health;
+        return _health;
     }
 
-    public void SetHealth(float newHealth)
-    {
-        health = newHealth;
-    }
-
-    
     /// <summary>
     /// This function will remove the specified dmgAmount from the enemy's health
     /// </summary>
-    /// <param name="dmgAmount"></param>
-    public void Damage(float dmgAmount)
+    /// <param name="damageAmount"></param>
+    public void Damage(float damageAmount)
     {
-        health -= dmgAmount;
+        _health -= damageAmount;
+        if (_health <= 0)
+        {
+            Explode();
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -63,14 +56,25 @@ public class Enemy : MonoBehaviour
     /// <param name="healAmount"></param>
     public void Heal(float healAmount)
     {
-        if(health+healAmount>100)
-        {
-            health = 100;
-        }
-        else
-        {
-            health += healAmount;
-        }
+        _health = Mathf.Clamp(_health + healAmount, 0, MaxHealth);
     }
 
+    /// <summary>
+    /// This function kills the enemy and starts the explosion particle system
+    /// </summary>
+    public void Explode()
+    {
+        //if not in the world, instantiate
+        if (_explodeEffectInstance == null)
+        {
+            _explodeEffectInstance = Instantiate(ExplodeEffect, transform.position, new Quaternion());
+        }
+        //play effect
+        _explodeEffectInstance.Play();
+        //Destroy after particle (emit) duration + maximum particle lifetime
+        Destroy(_explodeEffectInstance.gameObject, (_explodeEffectInstance.main.duration + _explodeEffectInstance.main.startLifetime.constantMax));
+
+        //Kill enemy (if Explode() called when the enemy was still alive)
+        Destroy(gameObject);
+    }
 }
