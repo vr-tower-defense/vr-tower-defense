@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CreditOwner : MonoBehaviour
 {
-    private int credits;
+    private int Credits;
 
     public void AddCredits(int val)
     { 
-        credits += val;
+        Credits += val;
     }
 }
