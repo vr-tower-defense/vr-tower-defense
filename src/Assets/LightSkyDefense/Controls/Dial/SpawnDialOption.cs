@@ -38,14 +38,4 @@ public class SpawnDialOption : DialOption
         // Clear clone property
         _clone = null;
     }
-
-    private void Update()
-    {
-        if(!IsSelected)
-        {
-            return;
-        }
-
-        Debug.Log($"Update {this}");
-    }
 }
