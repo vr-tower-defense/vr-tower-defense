@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
@@ -8,13 +9,8 @@ using Valve.VR.InteractionSystem;
 public class Credit : MonoBehaviour
 {
     public int Value = 5;
-    private AudioSource source;
-    public AudioClip pickupSound;
+    public AudioClip PickupSound;
 
-    void Awake()
-    {
-        source = GetComponent<AudioSource>();
-    }
 
     /// <summary>
     /// When the credit touches the hand, the credit gets added to the players total credit count
@@ -26,8 +22,9 @@ public class Credit : MonoBehaviour
 
         if (creditOwner == null) { return; }
 
+       
         creditOwner.AddCredits(Value);
-        source.PlayOneShot(pickupSound);
+        AudioSource.PlayClipAtPoint(PickupSound, this.gameObject.transform.position);
 
         Destroy(gameObject);
     }
