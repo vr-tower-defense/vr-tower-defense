@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     public ParticleSystem explodeEffect;
     private ParticleSystem explodeEffectInstance = null;
-    
+
     void Start()
     {
 
@@ -23,13 +23,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            health -= 30;
-        }
-
-        if (health <= 0)
-        {
-            Explode();
-            Destroy(this.gameObject);
+            Damage(30);
         }
 
         //todo: intergrate  behaviour
@@ -47,6 +41,11 @@ public class Enemy : MonoBehaviour
     public void SetHealth(float newHealth)
     {
         health = newHealth;
+        if (health <= 0)
+        {
+            Explode();
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -57,6 +56,11 @@ public class Enemy : MonoBehaviour
     public void Damage(float dmgAmount)
     {
         health -= dmgAmount;
+        if (health <= 0)
+        {
+            Explode();
+            Destroy(this.gameObject);
+        }
     }
 
     /// <summary>
@@ -92,6 +96,6 @@ public class Enemy : MonoBehaviour
         Destroy(explodeEffectInstance.gameObject, (explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax));
 
         //Kill enemy (if Explode() called when the enemy was still alive)
-        SetHealth(0);
+        Destroy(this.gameObject);
     }
 }
