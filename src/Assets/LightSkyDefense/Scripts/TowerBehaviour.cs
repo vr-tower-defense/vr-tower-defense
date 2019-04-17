@@ -115,13 +115,11 @@ namespace Assets
         //Used to rotate towards an enemy on the Y-axis before shooting.
         void RotateToEnemy()
         {
-            transform.LookAt(Target);
-
-            Vector3 eulerAngles = transform.rotation.eulerAngles;
-            eulerAngles.x = 0;
-            eulerAngles.z = 0;
-
-            transform.rotation = Quaternion.Euler(eulerAngles);
+            var speed = 8;
+            Vector3 direction = Target.position - transform.position;
+            direction.y = 0;
+            Quaternion toRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, speed * Time.deltaTime);
         }
 
         //If there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
@@ -138,7 +136,10 @@ namespace Assets
         void Update()
         {
             PickNextAfterTargetDies();
+        }
 
+        void FixedUpdate()
+        {
             if (Target == null) return;
 
             RotateToEnemy();
