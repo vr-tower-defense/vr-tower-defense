@@ -1,8 +1,6 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-
 
 [RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
@@ -47,19 +45,19 @@ public class Path : MonoBehaviour
     /// <summary>
     /// Returns a Vector3 array from combined curves
     /// </summary>
-    /// <param name="cordinatesAmountPerCurve"></param>
-    public Vector3[] GetVector3sCordinatesFromPath(int cordinatesAmountPerCurve)
+    /// <param name="coordinatesAmountPerCurve"></param>
+    public Vector3[] GetVector3sCordinatesFromPath(int coordinatesAmountPerCurve)
     {
         var newArray = new List<Vector3>();
 
         for (int i = 0; i < Curves.Length; i++)
         {
-            var points = Handles.MakeBezierPoints(
+            var points = MakeBezierPoints(
                 Curves[i].Start,
-                Curves[i].End,
                 Curves[i].StartTangent,
                 Curves[i].EndTangent,
-                cordinatesAmountPerCurve
+                Curves[i].End,
+                coordinatesAmountPerCurve
             );
 
             newArray.AddRange(points);
@@ -78,5 +76,35 @@ public class Path : MonoBehaviour
 
         renderer.positionCount = pathCordinates.Length;
         renderer.SetPositions(pathCordinates);
+    }
+
+    /// <summary>
+    /// Retuns an array of points to representing the bezier curve.
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="startTangent"></param>
+    /// <param name="endTangent"></param>
+    /// <param name="end"></param>
+    /// <param name="coordinatesAmountPerCurve"></param>
+    /// <returns></returns>
+    private Vector3[] MakeBezierPoints(Vector3 start, Vector3 startTangent,Vector3 endTangent, Vector3 end, int coordinatesAmountPerCurve)
+    {
+        List<Vector3> curve = new List<Vector3>();
+
+        var stepping = 1.0f / coordinatesAmountPerCurve;
+
+        for (var x = 0.0f; x <= 1.0f; x += stepping)
+        {
+            var ap1 = Vector3.Lerp(start, startTangent, x);
+            var ap2 = Vector3.Lerp(startTangent, endTangent, x);
+            var ap3 = Vector3.Lerp(endTangent, end, x);
+
+            var bp1 = Vector3.Lerp(ap1, ap2, x);
+            var bp2 = Vector3.Lerp(ap2, ap3, x);
+
+            curve.Add(Vector3.Lerp(bp1, bp2, x));
+        }
+
+        return curve.ToArray();
     }
 }
