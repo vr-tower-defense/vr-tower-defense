@@ -6,9 +6,6 @@ public class PathInspector : Editor
 {
     private Path _path;
 
-    Transform handleTransform;
-    Quaternion handleRotation;
-
     /// <summary>
     /// Visualize for SceneGUI
     /// </summary>
@@ -16,8 +13,8 @@ public class PathInspector : Editor
     {
         // Bind Transform handlers to Path
         _path = target as Path;
-        handleTransform = _path.transform;
-        handleRotation = Tools.pivotRotation == PivotRotation.Local ?
+        var handleTransform = _path.transform;
+        var handleRotation = Tools.pivotRotation == PivotRotation.Local ?
           handleTransform.rotation : Quaternion.identity;
 
         // Dont go further if path has no curves

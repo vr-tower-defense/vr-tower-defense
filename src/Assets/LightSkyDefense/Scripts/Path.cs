@@ -4,18 +4,18 @@ using System;
 using System.Collections.Generic;
 
 
+[RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
 {
+    [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
-    [SerializeField]
-    private int _lineDivision = 100;
-
-    private LineRenderer _lineRenderer;
+    [Tooltip("Smootheness of rendered line")]
+    public int LineDivision = 100;
 
     void Start()
     {
-        var pathVectors = GetVector3sCordinatesFromPath(_lineDivision);
+        var pathVectors = GetVector3sCordinatesFromPath(LineDivision);
         DrawPath(pathVectors);
     }
 
@@ -27,7 +27,9 @@ public class Path : MonoBehaviour
         Curve newCurve;
 
         if (Curves.Length == 0)
+        {
             newCurve = new Curve();
+        }
         else
         {
             var newCurveOffset = new Vector3(1f, 1f, 1f);
