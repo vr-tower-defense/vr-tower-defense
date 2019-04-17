@@ -1,100 +1,105 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets
 {
     public class TowerBehaviour : MonoBehaviour
     {
-        public Rigidbody Projectile;
-        public Transform ProjectileSpawn;
-        public Transform Target = null;
-
-        public float ReloadTime = 3;
-        public float BulletSpeed = 5;
+        private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
 
         private IEnumerator _coroutine;
+        private Collider _focusEnemy;
         private AudioSource _source;
 
-        private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
-        private Collider _focusEnemy;
+        public float BulletSpeed = 5;
+        public Rigidbody Projectile;
+        public Transform ProjectileSpawn;
 
-        //Called whenever a colliding gameobject enters the tower's detection radius
-        void OnTriggerEnter(Collider target)
+        public float ReloadTime = 3;
+        public Transform Target;
+
+        /// <summary>
+        ///     Called whenever a colliding gameobject enters the tower's detection radius
+        /// </summary>
+        private void OnTriggerEnter(Collider target)
         {
             var enemyScript = target.gameObject.GetComponent<Enemy>();
 
-            //If it's not an enemy, then there's no reason to keep going
+            ///If it's not an enemy, then there's no reason to keep going
             if (enemyScript == null) return;
 
             _enemySet.Add(target);
 
-            //If the tower is already shooting at a Target, there's no need to change his Target
+            ///If the tower is already shooting at a Target, there's no need to change his Target
             if (Target != null) return;
 
             Target = target.transform;
             _focusEnemy = target;
         }
 
-        //Called when a colliding gameobject leaves the tower's detection radius
-        void OnTriggerExit(Collider target)
+        /// <summary>
+        /// Called when a colliding gameobject leaves the tower's detection radius
+        /// </summary>
+        private void OnTriggerExit(Collider target)
         {
             var enemyScript = target.gameObject.GetComponent<Enemy>();
 
-            //If it's not an enemy, then there's no reason to keep going
+            ///If it's not an enemy, then there's no reason to keep going
             if (enemyScript == null) return;
 
             _enemySet.Remove(target);
 
-            //Checks for the enemy that came in closest after his last Target.
-            foreach (Collider c in _enemySet)
-            {
+            ///Checks for the enemy that came in closest after his last Target.
+            foreach (var c in _enemySet)
                 if (c != null)
                 {
                     Target = c.transform;
                     _focusEnemy = c;
                     return;
                 }
-            }
 
-            //If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
+            ///If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
             Target = null;
             _focusEnemy = null;
             _enemySet.Clear();
         }
 
-        //Called to check if the tower's current target is dead, and if so, pick the next target.
-        void PickNextAfterTargetDies()
+        /// <summary>
+        /// Called to check if the tower's current target is dead, and if so, pick the next target.
+        /// </summary>
+        private void PickNextAfterTargetDies()
         {
             if (_focusEnemy) return;
 
-            //Checks for the enemy that came in closest after his last Target.
-            foreach (Collider c in _enemySet)
-            {
+            ///Checks for the enemy that came in closest after his last Target.
+            foreach (var c in _enemySet)
                 if (c != null)
                 {
                     Target = c.transform;
                     _focusEnemy = c;
                     return;
                 }
-            }
 
-            //If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
+            ///If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
             Target = null;
             _focusEnemy = null;
             _enemySet.Clear();
         }
 
-        //Called if the tower gets destroyed.
-        void OnDisable()
+        /// <summary>
+        /// Called if the tower gets destroyed.
+        /// </summary>
+        private void OnDisable()
         {
             StopCoroutine(_coroutine);
         }
 
 
-        // Use this for initialization
-        void Start()
+        /// <summary>
+        /// Use this for initialization
+        /// </summary>
+        private void Start()
         {
             _source = GetComponent<AudioSource>();
             _coroutine = Reload(ReloadTime);
@@ -102,8 +107,10 @@ namespace Assets
             StartCoroutine(_coroutine);
         }
 
-        //While the tower is alive and there is enemies nearby, the tower will aim, shoot and then wait for a small period of time.
-        IEnumerator Reload(float waitTime)
+        /// <summary>
+        /// While the tower is alive and there is enemies nearby, the tower will aim, shoot and then wait for a small period of time.
+        /// </summary>
+        private IEnumerator Reload(float waitTime)
         {
             while (true)
             {
@@ -112,33 +119,37 @@ namespace Assets
             }
         }
 
-        //Used to rotate towards an enemy on the Y-axis before shooting.
-        void RotateToEnemy()
+        /// <summary>
+        /// Used to rotate towards an enemy on the Y-axis before shooting.
+        /// </summary>
+        private void RotateToEnemy()
         {
             var speed = 8;
-            Vector3 direction = Target.position - transform.position;
+            var direction = Target.position - transform.position;
             direction.y = 0;
-            Quaternion toRotation = Quaternion.LookRotation(direction);
+            var toRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, speed * Time.deltaTime);
         }
 
-        //If there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
-        void AimAndShoot()
+        /// <summary>
+        ///     If there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
+        /// </summary>
+        private void AimAndShoot()
         {
             if (Target == null) return;
 
-            var newProjectile = (Rigidbody) Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
+            var newProjectile = Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
 
             _source.Play();
         }
 
-        void Update()
+        private void Update()
         {
             PickNextAfterTargetDies();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             if (Target == null) return;
 
