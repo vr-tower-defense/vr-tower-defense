@@ -21,7 +21,7 @@ public class PathInspector : Editor
         if (_path.Curves == null)
             return;
 
-        var pathVectors = _path.GetVector3sCordinatesFromPath(100);
+        var pathVectors = _path.GetVector3sCoordinatesFromPath(100);
 
         // Transform path points to Path position in WorldSpace
         for(int i = 0; i < pathVectors.Length; i++)
