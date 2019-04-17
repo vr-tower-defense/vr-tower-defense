@@ -22,13 +22,14 @@ public class Deletable : MonoBehaviour
             Debug.LogError("`TriggerClick` action has not been set on this component.");
 
         if (TriggerClickAction != null)
-            TriggerClickAction.onStateDown += (action, source) => deleteIfHover();
+            TriggerClickAction.onStateDown += (action, source) => DeleteOnHover();
 
     }
 
-    private void deleteIfHover()
+    private void DeleteOnHover()
     {
-        if (gameObject.GetComponent<Interactable>().isHovering)
-            Destroy(gameObject);
+        if (!gameObject.GetComponent<Interactable>().isHovering) return;
+        
+        Destroy(gameObject);
     }
 }
