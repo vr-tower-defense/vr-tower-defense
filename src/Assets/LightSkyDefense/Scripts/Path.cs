@@ -30,8 +30,9 @@ public class Path : MonoBehaviour
             newCurve = new Curve();
         else
         {
-            // Mirror newCurve to Previous endPoint
             Vector3 newCurveOffset = new Vector3(1f, 1f, 1f);
+
+            // Mirror newCurve to Previous endPoint
             Vector3 endPoint = Curves[Curves.Length - 1].End;
             newCurve = new Curve(endPoint, (endPoint + newCurveOffset), endPoint, (endPoint + newCurveOffset));
         }
@@ -41,6 +42,10 @@ public class Path : MonoBehaviour
         Curves[Curves.Length - 1] = newCurve;
     }
 
+    /// <summary>
+    /// Returns a Vector3 array from combined curves
+    /// </summary>
+    /// <param name="cordinatesAmountPerCurve"></param>
     public Vector3[] GetVector3sCordinatesFromPath(int cordinatesAmountPerCurve)
     {
         var newArray = new List<Vector3>();
@@ -61,6 +66,10 @@ public class Path : MonoBehaviour
         return newArray.ToArray();
     }
 
+    /// <summary>
+    /// Draws the path
+    /// </summary>
+    /// <param name="pathCordinates"></param>
     private void DrawPath(Vector3[] pathCordinates)
     {
         LineRenderer renderer = GetComponent<LineRenderer>();
