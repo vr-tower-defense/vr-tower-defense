@@ -13,7 +13,7 @@ namespace Assets
         public float BulletSpeed = 5;
 
         private IEnumerator _coroutine;
-        private AudioSource source;
+        private AudioSource _source;
 
         void OnTriggerEnter(Collider target)
         {
@@ -42,7 +42,7 @@ namespace Assets
         // Use this for initialization
         void Start()
         {
-            source = GetComponent<AudioSource>();
+            _source = GetComponent<AudioSource>();
             _coroutine = Reload(ReloadTime);
 
             StartCoroutine(_coroutine);
@@ -57,14 +57,27 @@ namespace Assets
             }
         }
 
+        void RotateToEnemy()
+        {
+            transform.LookAt(Target);
+
+            Vector3 eulerAngles = transform.rotation.eulerAngles;
+            eulerAngles.x = 0;
+            eulerAngles.z = 0;
+
+            transform.rotation = Quaternion.Euler(eulerAngles);
+        }
+
         void AimAndShoot()
         {
             if (Target == null) return;
 
+            RotateToEnemy();
+
             var newProjectile = (Rigidbody)Instantiate(Projectile, ProjectileSpawn.position, Projectile.rotation);
             newProjectile.velocity = (Target.transform.position - transform.position).normalized * BulletSpeed;
 
-            source.Play();
+            _source.Play();
 
         }
     }
