@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class SpawnCreditOnDestruction : MonoBehaviour
 {
-    public Credit Credit;
-    public int Value;
+    public Credit credit;
+    public int value;
 
-    private bool isQuitting = false;
+    private bool _isQuitting = false;
+
     void OnApplicationQuit()
     {
-        isQuitting = true;
+        _isQuitting = true;
     }
 
     /// <summary>
     /// Spawn money when its gameObject is destroyed.
     /// </summary>
-    void OnDisable()
+    void OnDestroy()
     {
-        Credit.Value = Value;
-        Instantiate(Credit, gameObject.transform.position, gameObject.transform.rotation);
-        if (!isQuitting)
+        if (!_isQuitting)
         {
-
-            Credit.Value = Value;
-            Instantiate(Credit, gameObject.transform.position, gameObject.transform.rotation);
+            credit.value = value;
+            Instantiate(credit, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
 }
