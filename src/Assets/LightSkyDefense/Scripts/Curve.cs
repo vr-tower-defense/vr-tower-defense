@@ -12,7 +12,7 @@ public class Curve
 
     public Curve()
     {
-        Vector3 cleanVector = new Vector3(0, 0, 0);
+        var cleanVector = new Vector3(0, 0, 0);
 
         Start = cleanVector;
         End = cleanVector;

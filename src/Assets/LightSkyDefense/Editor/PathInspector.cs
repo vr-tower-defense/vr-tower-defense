@@ -6,6 +6,9 @@ public class PathInspector : Editor
 {
     private Path _path;
 
+    Transform handleTransform;
+    Quaternion handleRotation;
+
     /// <summary>
     /// Visualize for SceneGUI
     /// </summary>
@@ -13,15 +16,15 @@ public class PathInspector : Editor
     {
         // Bind Transform handlers to Path
         _path = target as Path;
-        Transform handleTransform = _path.transform;
-        Quaternion handleRotation = Tools.pivotRotation == PivotRotation.Local ?
+        handleTransform = _path.transform;
+        handleRotation = Tools.pivotRotation == PivotRotation.Local ?
           handleTransform.rotation : Quaternion.identity;
 
         // Dont go further if path has no curves
         if (_path.Curves == null)
             return;
 
-        Vector3[] pathVectors = _path.GetVector3sCordinatesFromPath(100);
+        var pathVectors = _path.GetVector3sCordinatesFromPath(100);
 
         // Transform path points to Path position in WorldSpace
         for(int i = 0; i < pathVectors.Length; i++)

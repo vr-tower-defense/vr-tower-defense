@@ -15,7 +15,7 @@ public class Path : MonoBehaviour
 
     void Start()
     {
-        Vector3[] pathVectors = GetVector3sCordinatesFromPath(_lineDivision);
+        var pathVectors = GetVector3sCordinatesFromPath(_lineDivision);
         DrawPath(pathVectors);
     }
 
@@ -30,10 +30,10 @@ public class Path : MonoBehaviour
             newCurve = new Curve();
         else
         {
-            Vector3 newCurveOffset = new Vector3(1f, 1f, 1f);
+            var newCurveOffset = new Vector3(1f, 1f, 1f);
 
             // Mirror newCurve to Previous endPoint
-            Vector3 endPoint = Curves[Curves.Length - 1].End;
+            var endPoint = Curves[Curves.Length - 1].End;
             newCurve = new Curve(endPoint, (endPoint + newCurveOffset), endPoint, (endPoint + newCurveOffset));
         }
 
@@ -52,7 +52,7 @@ public class Path : MonoBehaviour
 
         for (int i = 0; i < Curves.Length; i++)
         {
-            Vector3[] points = Handles.MakeBezierPoints(
+            var points = Handles.MakeBezierPoints(
                 Curves[i].Start,
                 Curves[i].End,
                 Curves[i].StartTangent,
@@ -72,7 +72,7 @@ public class Path : MonoBehaviour
     /// <param name="pathCordinates"></param>
     private void DrawPath(Vector3[] pathCordinates)
     {
-        LineRenderer renderer = GetComponent<LineRenderer>();
+        var renderer = GetComponent<LineRenderer>();
 
         renderer.positionCount = pathCordinates.Length;
         renderer.SetPositions(pathCordinates);
