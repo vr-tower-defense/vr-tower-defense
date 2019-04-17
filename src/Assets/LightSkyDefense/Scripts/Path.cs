@@ -13,7 +13,7 @@ public class Path : MonoBehaviour
 
     void Start()
     {
-        var pathVectors = GetVector3sCordinatesFromPath(LineDivision);
+        var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
         DrawPath(pathVectors);
     }
 
@@ -46,7 +46,7 @@ public class Path : MonoBehaviour
     /// Returns a Vector3 array from combined curves
     /// </summary>
     /// <param name="coordinatesAmountPerCurve"></param>
-    public Vector3[] GetVector3sCordinatesFromPath(int coordinatesAmountPerCurve)
+    public Vector3[] GetVector3sCoordinatesFromPath(int coordinatesAmountPerCurve)
     {
         var newArray = new List<Vector3>();
 
