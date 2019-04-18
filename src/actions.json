@@ -28,6 +28,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/TriggerClick",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
