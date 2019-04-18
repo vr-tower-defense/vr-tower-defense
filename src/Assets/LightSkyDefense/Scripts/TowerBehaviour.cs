@@ -9,7 +9,6 @@ namespace Assets
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
 
         private IEnumerator _coroutine;
-        private Collider _focusEnemy;
         private AudioSource _source;
 
         public float BulletSpeed = 5;
@@ -26,16 +25,15 @@ namespace Assets
         {
             var enemyScript = target.gameObject.GetComponent<Enemy>();
 
-            ///If it's not an enemy, then there's no reason to keep going
+            //If it's not an enemy, then there's no reason to keep going
             if (enemyScript == null) return;
 
             _enemySet.Add(target);
 
-            ///If the tower is already shooting at a Target, there's no need to change his Target
+            //If the tower is already shooting at a Target, there's no need to change his Target
             if (Target != null) return;
 
             Target = target.transform;
-            _focusEnemy = target;
         }
 
         /// <summary>
@@ -45,23 +43,21 @@ namespace Assets
         {
             var enemyScript = target.gameObject.GetComponent<Enemy>();
 
-            ///If it's not an enemy, then there's no reason to keep going
+            //If it's not an enemy, then there's no reason to keep going
             if (enemyScript == null) return;
 
             _enemySet.Remove(target);
 
-            ///Checks for the enemy that came in closest after his last Target.
+            //Checks for the enemy that came in closest after his last Target.
             foreach (var c in _enemySet)
                 if (c != null)
                 {
                     Target = c.transform;
-                    _focusEnemy = c;
                     return;
                 }
 
-            ///If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
+            //If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
             Target = null;
-            _focusEnemy = null;
             _enemySet.Clear();
         }
 
@@ -70,20 +66,18 @@ namespace Assets
         /// </summary>
         private void PickNextAfterTargetDies()
         {
-            if (_focusEnemy) return;
+            if (Target) return;
 
-            ///Checks for the enemy that came in closest after his last Target.
+            //Checks for the enemy that came in closest after his last Target.
             foreach (var c in _enemySet)
                 if (c != null)
                 {
                     Target = c.transform;
-                    _focusEnemy = c;
                     return;
                 }
 
-            ///If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
+            //If there are no enemies left in the tower's radius, reset his target and clear his list of enemies.
             Target = null;
-            _focusEnemy = null;
             _enemySet.Clear();
         }
 
@@ -124,7 +118,7 @@ namespace Assets
         /// </summary>
         private void RotateToEnemy()
         {
-            var speed = 8;
+            const int speed = 8;
             var direction = Target.position - transform.position;
             direction.y = 0;
             var toRotation = Quaternion.LookRotation(direction);
