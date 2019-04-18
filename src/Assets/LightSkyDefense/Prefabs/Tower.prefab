@@ -62,14 +62,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7127235948388862705}
-  m_LocalRotation: {x: 0.010288275, y: -0.706464, z: 0.009374368, w: 0.7076121}
-  m_LocalPosition: {x: 3.24, y: 0.2, z: -7.68}
-  m_LocalScale: {x: 0.7537057, y: 1.4383429, z: 0.7052459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7127235948243814977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 1.593, y: -89.908005, z: -0.07300001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7127235948388862706
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -153,12 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca710548a00e6744ab052437ecce0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileSpeed: 10
+  RotationSpeed: 1
+  ShootInterval: 3
+  ActiveTargetTransform: {fileID: 0}
   Projectile: {fileID: 6130869729085579564, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
   ProjectileSpawn: {fileID: 7127235948243814977}
-  Target: {fileID: 0}
-  ReloadTime: 2
-  BulletSpeed: 5
 --- !u!82 &5376842034840131071
 AudioSource:
   m_ObjectHideFlags: 0
