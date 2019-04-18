@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  MovementSpeed: 4
+  MovementSpeed: 2
   EnergyCapacity: 10
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
@@ -225,17 +225,3 @@ MonoBehaviour:
   Value: 1
   ExplodeSound: {fileID: 8300000, guid: 65aa875554300d948a99e3e44393932e, type: 3}
   TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
---- !u!114 &979572960815167569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4394283025760544744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4d9db1fd34f91418b62f36ad84612a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  credit: {fileID: 5332771238933343437, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
-  value: 5
