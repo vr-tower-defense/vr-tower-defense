@@ -113,6 +113,11 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
+            if(ActiveTargetTransform == null)
+            {
+                return;
+            }
+
             var newProjectile = Instantiate(
                 Projectile, 
                 ProjectileSpawn.position, 
@@ -130,7 +135,7 @@ namespace Assets
         private void RotateTowardsEnemy()
         {
             // Find first target in list
-            if (FindTarget(out var targetTransform))
+            if (!FindTarget(out var targetTransform))
             {
                 return;
             }
