@@ -90,7 +90,7 @@ namespace Assets
         /// Finds first target in list
         /// </summary>
         /// <returns></returns>
-        private Collider FindTarget()
+        private bool FindTarget(out Transform targetTransform)
         {
             // Checks for the enemy that came in closest after his last Target.
             foreach (var targetCollider in _enemySet)
@@ -100,10 +100,12 @@ namespace Assets
                     continue;
                 }
 
-                return targetCollider;
+                targetTransform = targetCollider.transform;
+                return true;
             }
 
-            return null;
+            targetTransform = null;
+            return false;
         }
 
         /// <summary>
@@ -111,25 +113,13 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
-            // Find first target in list
-            var targetCollider = FindTarget();
-
-
-            // Can't shoot at nothing
-            if(targetCollider == null)
-            {
-                return;
-            }
-
-            ActiveTargetTransform = targetCollider.transform;
-
             var newProjectile = Instantiate(
                 Projectile, 
                 ProjectileSpawn.position, 
                 Projectile.rotation
             );
 
-            newProjectile.velocity = (targetCollider.transform.position - transform.position).normalized * ProjectileSpeed;
+            newProjectile.velocity = (ActiveTargetTransform.position - transform.position).normalized * ProjectileSpeed;
 
             _source.Play();
         }
@@ -139,17 +129,17 @@ namespace Assets
         /// </summary>
         private void RotateTowardsEnemy()
         {
-            if (ActiveTargetTransform == null)
+            // Find first target in list
+            if (FindTarget(out var targetTransform))
             {
                 return;
             }
 
-            var direction = ActiveTargetTransform.position - transform.position;
-            direction.y = 0;
+            ActiveTargetTransform = targetTransform;
 
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
-                Quaternion.LookRotation(direction),
+                Quaternion.LookRotation(targetTransform.position - transform.position),
                 RotationSpeed * Time.deltaTime
             );
         }
