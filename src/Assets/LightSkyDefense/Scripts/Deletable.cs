@@ -10,11 +10,13 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class Deletable : MonoBehaviour
 {
-    private bool _eventSet = false;
-    public AudioClip DestroySound;
-
     private static GameObject _currentHover;
+    private bool _eventSet = false;
+
+
+    public AudioClip DestroySound;
     public SteamVR_Action_Boolean TriggerClickAction = SteamVR_Input.GetBooleanAction("TriggerClick");
+
     /// <summary>
     /// Valdiate properties
     /// </summary>
