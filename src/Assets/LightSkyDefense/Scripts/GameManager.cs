@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameObject _wayPointPrefab;
 
+    private Vector3[] _calculatedPathPoints = null;
+
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -53,8 +55,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    
-    private Vector3[] _calculatedPathPoints = null;
 
     public Vector3[] GetLevelPath()
     {
