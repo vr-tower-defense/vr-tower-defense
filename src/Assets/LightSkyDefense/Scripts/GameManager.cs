@@ -54,23 +54,23 @@ public class GameManager : MonoBehaviour
         
     }
     
-    private Vector3[] calculatedPathPoints = null;
+    private Vector3[] _calculatedPathPoints = null;
 
     public Vector3[] GetLevelPath()
     {
-        if(calculatedPathPoints==null)
+        if(_calculatedPathPoints==null)
         {
             return new Vector3[0];
         }
         else
         {
-            return calculatedPathPoints;
+            return _calculatedPathPoints;
         }
     }
 
     public void SetPathPoints(Vector3[] pathPoints, GameObject parent)
     {
-        calculatedPathPoints = pathPoints;
+        _calculatedPathPoints = pathPoints;
 
         //Spawn road waypoints
         //Quaternion quaternion = new Quaternion();
