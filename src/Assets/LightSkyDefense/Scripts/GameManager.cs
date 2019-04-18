@@ -4,16 +4,84 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [HideInInspector]
+    public GameObject _wayPointPrefab;
 
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Initialize();
+            }
+
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
+    private static bool _initializing = false;
+    public static void Initialize()
+    {
+        if (_instance == null && _initializing == false)
+        {
+            _initializing = true;
+
+            GameManager instance = FindObjectOfType<GameManager>();
+            if (instance == null)
+            {
+                //todo if player doesn't exist, create new gameobject Player?
+                instance = GameObject.Find("Player").AddComponent<GameManager>();
+            }
+
+            instance._wayPointPrefab = Resources.Load("PathWayPoint") as GameObject;
+
+            _instance = instance;
+   
+            _initializing = false;
+        }
+    }
+
+    
+    void Start()
+    {
+        
+    }
+    
     void Update()
     {
         
+    }
+    
+    private Vector3[] calculatedPathPoints = null;
+
+    public Vector3[] GetLevelPath()
+    {
+        if(calculatedPathPoints==null)
+        {
+            return new Vector3[0];
+        }
+        else
+        {
+            return calculatedPathPoints;
+        }
+    }
+
+    public void SetPathPoints(Vector3[] pathPoints, GameObject parent)
+    {
+        calculatedPathPoints = pathPoints;
+
+        //Spawn road waypoints
+        //Quaternion quaternion = new Quaternion();
+        int i = 0;
+        foreach (Vector3 pathPoint in GetLevelPath())
+        {
+            GameObject point = Instantiate(GameManager.Instance._wayPointPrefab);//, pathPoint, quaternion, parent.transform);
+            point.transform.parent = parent.transform;
+            point.transform.position = pathPoint;
+            point.name = "Way" + (i++);
+        }
     }
 
 }

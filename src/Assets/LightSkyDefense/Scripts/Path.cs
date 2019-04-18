@@ -13,7 +13,15 @@ public class Path : MonoBehaviour
 
     void Start()
     {
+        //Get the path points, convert the coordinates to world space and save it in the GameManager
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
+        var pathWorldVectors = new Vector3[pathVectors.Length];
+        for(int i=0;i<pathVectors.Length;i++)
+        {
+            pathWorldVectors[i] = transform.TransformPoint(pathVectors[i]);
+        }
+        GameManager.Instance.SetPathPoints(pathWorldVectors, gameObject);
+        
         DrawPath(pathVectors);
     }
 
