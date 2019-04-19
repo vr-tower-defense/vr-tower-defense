@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Interactable))]

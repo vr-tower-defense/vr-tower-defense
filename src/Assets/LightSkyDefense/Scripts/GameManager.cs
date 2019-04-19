@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [HideInInspector]
-    public GameObject _wayPointPrefab;
+    private GameObject _wayPointPrefab;
 
-    private Vector3[] _calculatedPathPoints = null;
+    private Vector3[] _calculatedPathPoints;
+    private Vector3[] CalculatedPathPoints {
+        get => _calculatedPathPoints == null ? new Vector3[0] : _calculatedPathPoints;
+        set => _calculatedPathPoints = value;
+    }
 
     private static GameManager _instance;
     public static GameManager Instance
@@ -26,60 +27,42 @@ public class GameManager : MonoBehaviour
     private static bool _initializing = false;
     public static void Initialize()
     {
-        if (_instance == null && _initializing == false)
+        if (_instance != null || _initializing != false)
         {
-            _initializing = true;
-
-            GameManager instance = FindObjectOfType<GameManager>();
-            if (instance == null)
-            {
-                //todo if player doesn't exist, create new gameobject Player?
-                instance = GameObject.Find("Player").AddComponent<GameManager>();
-            }
-
-            instance._wayPointPrefab = Resources.Load("PathWayPoint") as GameObject;
-
-            _instance = instance;
-   
-            _initializing = false;
+            return;
         }
-    }
 
-    
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
-    }
+        _initializing = true;
 
-    public Vector3[] GetLevelPath()
-    {
-        if(_calculatedPathPoints==null)
+        var instance = FindObjectOfType<GameManager>();
+        if (instance == null)
         {
-            return new Vector3[0];
+            //todo if player doesn't exist, create new gameobject Player?
+            instance = GameObject.Find("Player").AddComponent<GameManager>();
         }
-        else
-        {
-            return _calculatedPathPoints;
-        }
+
+        instance._wayPointPrefab = Resources.Load("PathWayPoint") as GameObject;
+
+        _instance = instance;
+        _initializing = false;
     }
 
+    /// <summary>
+    /// Spawn road waypoints
+    /// </summary>
+    /// <param name="pathPoints"></param>
+    /// <param name="parent"></param>
     public void SetPathPoints(Vector3[] pathPoints, GameObject parent)
     {
-        _calculatedPathPoints = pathPoints;
-
-        //Spawn road waypoints
-        //Quaternion quaternion = new Quaternion();
-        int i = 0;
-        foreach (Vector3 pathPoint in GetLevelPath())
+        for (int i = 0; i < CalculatedPathPoints.Length; i++)
         {
-            GameObject point = Instantiate(GameManager.Instance._wayPointPrefab);//, pathPoint, quaternion, parent.transform);
+            var pathPoint = CalculatedPathPoints[i];
+
+            var point = Instantiate(Instance._wayPointPrefab);
             point.transform.parent = parent.transform;
             point.transform.position = pathPoint;
+
+            // TODO Find solution to avoid usage of strings when finding nodes during enemy steering.
             point.name = "Way" + (i++);
         }
     }
