@@ -42,12 +42,5 @@ public abstract class DialOption : MonoBehaviour
             _renderer.material.color.b,
             IsSelected ? 1f : .7f
         );
-
-        if (!IsSelected)
-        {
-            return;
-        }
-
-        Debug.Log($"Update {this}");
     }
 }
