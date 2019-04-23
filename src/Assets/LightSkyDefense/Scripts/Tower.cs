@@ -12,12 +12,11 @@ public class Tower : MonoBehaviour
         if (creditOwner.Credits < Cost)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            //constructie geluid hier
-            creditOwner.Credits -= Cost;
-        }
+
+        // TODO Play tower build sound effect
+        creditOwner.Credits -= Cost;
     }
 }
 
