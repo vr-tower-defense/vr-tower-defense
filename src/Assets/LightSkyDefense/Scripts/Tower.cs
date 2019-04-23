@@ -4,7 +4,7 @@ using Valve.VR.InteractionSystem;
 public class Tower : MonoBehaviour
 {
     public int Cost;
-
+    public AudioClip BuildSound;
     public void Start()
     {
         var creditOwner = Player.instance.GetComponent<CreditOwner>();
@@ -15,7 +15,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            //constructie geluid hier
+            AudioSource.PlayClipAtPoint(BuildSound, gameObject.transform.position);
             creditOwner.Credits -= Cost;
         }
     }
