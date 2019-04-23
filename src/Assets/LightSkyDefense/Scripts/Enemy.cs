@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         // Calculate energy potential
         _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex]);
         
-        if(_potentialEnergy>=0)
+        if(_potentialEnergy >= 0)
         {
             Charge(0.1f);
         }
