@@ -19,7 +19,7 @@ public class Credit : MonoBehaviour
         if (creditOwner == null) { return; }
 
        
-        creditOwner.AddCredits(Value);
+        creditOwner.Credits += Value;
         AudioSource.PlayClipAtPoint(PickupSound, this.gameObject.transform.position);
 
         Destroy(gameObject);
