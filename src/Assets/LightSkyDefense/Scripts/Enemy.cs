@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     void ApplySteeringForce()
     {
-        if (_waypointIndex >= GameManager.Instance.GetLevelPath().Length)
+        if (_waypointIndex >= GameManager.Instance.CalculatedPathPoints.Length)
         {
             return;
         }
@@ -70,21 +70,21 @@ public class Enemy : MonoBehaviour
         // Following if statement isn't needed if we spawn the enemy in the correct place
         if (_waypointIndex == 0)
         {
-            transform.position = GameManager.Instance.GetLevelPath()[_waypointIndex + _lookAheadDistance];
+            transform.position = GameManager.Instance.CalculatedPathPoints[_waypointIndex + _lookAheadDistance];
         }
 
         if (_lost)
         {
             // Lost so go back to last known waypoint
-            _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (GameManager.Instance.GetLevelPath()[_waypointIndex] - transform.position).normalized));
+            _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (GameManager.Instance.CalculatedPathPoints[_waypointIndex] - transform.position).normalized));
             return;
         }
 
         // Move enemy towards path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (GameManager.Instance.GetLevelPath()[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
+        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (GameManager.Instance.CalculatedPathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
 
         // Move enemy parallel to the path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (GameManager.Instance.GetLevelPath()[_waypointIndex] - GameManager.Instance.GetLevelPath()[_waypointIndex - _lookAheadDistance]).normalized));
+        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (GameManager.Instance.CalculatedPathPoints[_waypointIndex] - GameManager.Instance.CalculatedPathPoints[_waypointIndex - _lookAheadDistance]).normalized));
     }
 
     public float GetHealth()
@@ -226,12 +226,12 @@ public class Enemy : MonoBehaviour
         _waypointIndex = Mathf.Clamp(
             int.Parse(col.gameObject.name.Substring(3)) + 1,
             _lookAheadDistance, 
-            GameManager.Instance.GetLevelPath().Length - _lookAheadDistance - 1
+            GameManager.Instance.CalculatedPathPoints.Length - _lookAheadDistance - 1
         );
 
         _lost = false;
 
-        if(_waypointIndex == (GameManager.Instance.GetLevelPath().Length - _lookAheadDistance - 1))
+        if(_waypointIndex == (GameManager.Instance.CalculatedPathPoints.Length - _lookAheadDistance - 1))
         {
             Finish();
         }

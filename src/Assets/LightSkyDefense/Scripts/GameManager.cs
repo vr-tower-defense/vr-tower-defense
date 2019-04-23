@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     private GameObject _wayPointPrefab;
 
     private Vector3[] _calculatedPathPoints;
-    private Vector3[] CalculatedPathPoints {
+    public Vector3[] CalculatedPathPoints {
         get => _calculatedPathPoints == null ? new Vector3[0] : _calculatedPathPoints;
         set => _calculatedPathPoints = value;
     }
