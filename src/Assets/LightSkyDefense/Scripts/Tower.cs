@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
     public AudioClip BuildSound;
     public void Start()
     {
+        AudioSource source = gameObject.GetComponent<AudioSource>();
         var creditOwner = Player.instance.GetComponent<CreditOwner>();
 
         if (creditOwner.Credits < Cost)
@@ -15,7 +16,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            AudioSource.PlayClipAtPoint(BuildSound, gameObject.transform.position);
+            source.PlayOneShot(BuildSound);
             creditOwner.Credits -= Cost;
         }
     }
