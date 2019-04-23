@@ -34,8 +34,10 @@ public class Enemy : MonoBehaviour
     
     void FixedUpdate()
     {
+        var pathPoints = GameManager.Instance.CalculatedPathPoints;
+
         // Calculate energy potential
-        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, GameManager.Instance.GetLevelPath()[_waypointIndex]);
+        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex]);
         
         if(_potentialEnergy>=0)
         {
@@ -57,12 +59,12 @@ public class Enemy : MonoBehaviour
         }
 
         //
-        ApplySteeringForce();
+        ApplySteeringForce(pathPoints);
     }
 
-    void ApplySteeringForce()
+    void ApplySteeringForce(Vector3[] pathPoints)
     {
-        if (_waypointIndex >= GameManager.Instance.CalculatedPathPoints.Length)
+        if (_waypointIndex > pathPoints.Length)
         {
             return;
         }
@@ -70,21 +72,21 @@ public class Enemy : MonoBehaviour
         // Following if statement isn't needed if we spawn the enemy in the correct place
         if (_waypointIndex == 0)
         {
-            transform.position = GameManager.Instance.CalculatedPathPoints[_waypointIndex + _lookAheadDistance];
+            transform.position = pathPoints[_waypointIndex + _lookAheadDistance];
         }
 
         if (_lost)
         {
             // Lost so go back to last known waypoint
-            _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (GameManager.Instance.CalculatedPathPoints[_waypointIndex] - transform.position).normalized));
+            _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (pathPoints[_waypointIndex] - transform.position).normalized));
             return;
         }
 
         // Move enemy towards path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (GameManager.Instance.CalculatedPathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
+        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (pathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
 
         // Move enemy parallel to the path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (GameManager.Instance.CalculatedPathPoints[_waypointIndex] - GameManager.Instance.CalculatedPathPoints[_waypointIndex - _lookAheadDistance]).normalized));
+        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (pathPoints[_waypointIndex] - pathPoints[_waypointIndex - _lookAheadDistance]).normalized));
     }
 
     public float GetHealth()
@@ -216,22 +218,24 @@ public class Enemy : MonoBehaviour
     /// When the enemy collides with a waypoint collider, update the waypoint index
     /// </summary>
     /// <param name="col"></param>
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (!col.gameObject.name.StartsWith("Way"))
+        if (!collider.gameObject.name.StartsWith("Way"))
         {
             return;
         }
 
+        var pathPoints = GameManager.Instance.CalculatedPathPoints;
+
         _waypointIndex = Mathf.Clamp(
-            int.Parse(col.gameObject.name.Substring(3)) + 1,
+            int.Parse(collider.gameObject.name.Substring(3)) + 1,
             _lookAheadDistance, 
-            GameManager.Instance.CalculatedPathPoints.Length - _lookAheadDistance - 1
+            pathPoints.Length - _lookAheadDistance - 1
         );
 
         _lost = false;
 
-        if(_waypointIndex == (GameManager.Instance.CalculatedPathPoints.Length - _lookAheadDistance - 1))
+        if(_waypointIndex == (pathPoints.Length - _lookAheadDistance - 1))
         {
             Finish();
         }

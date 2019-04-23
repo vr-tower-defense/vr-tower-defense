@@ -59,14 +59,6 @@ namespace Assets
         }
 
         /// <summary>
-        /// Called if the tower gets destroyed.
-        /// </summary>
-        private void OnDisable()
-        {
-            StopCoroutine(_coroutine);
-        }
-
-        /// <summary>
         /// Called every 16 ms.
         /// </summary>
         private void FixedUpdate()

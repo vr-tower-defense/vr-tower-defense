@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     private Vector3[] _calculatedPathPoints;
     public Vector3[] CalculatedPathPoints {
-        get => _calculatedPathPoints == null ? new Vector3[0] : _calculatedPathPoints;
+        get => _calculatedPathPoints ?? (new Vector3[0]);
         set => _calculatedPathPoints = value;
     }
 
@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     /// <param name="parent"></param>
     public void SetPathPoints(Vector3[] pathPoints, GameObject parent)
     {
+        CalculatedPathPoints = pathPoints;
+
         for (int i = 0; i < CalculatedPathPoints.Length; i++)
         {
             var pathPoint = CalculatedPathPoints[i];
