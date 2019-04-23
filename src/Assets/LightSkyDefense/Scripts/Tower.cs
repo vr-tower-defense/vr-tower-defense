@@ -13,6 +13,7 @@ public class Tower : MonoBehaviour
         if (creditOwner.Credits < Cost)
         {
             Destroy(gameObject);
+            return;
         }
         else
         {
