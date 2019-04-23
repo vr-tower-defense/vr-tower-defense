@@ -155,6 +155,7 @@ MonoBehaviour:
   ProjectileSpeed: 10
   RotationSpeed: 1
   ShootInterval: 3
+  MaxHealth: 100
   ActiveTargetTransform: {fileID: 0}
   Projectile: {fileID: 6130869729085579564, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}

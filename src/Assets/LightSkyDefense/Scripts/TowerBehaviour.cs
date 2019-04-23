@@ -11,9 +11,12 @@ namespace Assets
         private IEnumerator _coroutine;
         private AudioSource _source;
 
+        private float _health = 100f;
+
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
+        public float MaxHealth = 100f;
 
         public Transform ActiveTargetTransform;
 
@@ -139,6 +142,17 @@ namespace Assets
                 Quaternion.LookRotation(targetTransform.position - transform.position),
                 RotationSpeed * Time.deltaTime
             );
+        }
+
+        public void Damage(float damageAmount)
+        {
+            _health -= damageAmount;
+            if (_health > 0)
+            {
+                return;
+            }
+
+            Destroy(gameObject);
         }
     }
 }
