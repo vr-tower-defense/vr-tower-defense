@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void Explode()
     {
-        //if not in the world, instantiate
+        // If not in the world, instantiate
         if (_explodeEffectInstance == null)
         {
             _explodeEffectInstance = Instantiate(
