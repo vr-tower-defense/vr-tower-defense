@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 7377427765659148308}
   - component: {fileID: 2603589764987211252}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: SpeedShotTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ Transform:
   - {fileID: 7127235948243814977}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7127235948388862706
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9183fbb8de279f240aff676c3ef4288b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,11 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca710548a00e6744ab052437ecce0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 10
+  ProjectileSpeed: 15
   RotationSpeed: 1
-  ShootInterval: 3
+  ShootInterval: 0.5
   ActiveTargetTransform: {fileID: 0}
-  Projectile: {fileID: 6130869729085579564, guid: fc5d0aacb27aceb4392758cd2fc7976b,
+  Projectile: {fileID: 6130869729085579564, guid: 43940cfd1478e2342b0d88366c87b3bb,
     type: 3}
   ProjectileSpawn: {fileID: 7127235948243814977}
 --- !u!82 &5376842034840131071
@@ -170,7 +170,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c93b3adcf2e4cb84289f9857fb864470, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e9f497b3c8d534849ab1f6eb8b6ea2d4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
