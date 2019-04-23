@@ -20,6 +20,7 @@ public class Path : MonoBehaviour
         {
             pathWorldVectors[i] = transform.TransformPoint(pathVectors[i]);
         }
+
         GameManager.Instance.SetPathPoints(pathWorldVectors, gameObject);
         
         DrawPath(pathVectors);
