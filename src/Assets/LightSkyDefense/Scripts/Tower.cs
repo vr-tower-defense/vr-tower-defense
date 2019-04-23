@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            source.PlayOneShot(BuildSound);
+            source?.PlayOneShot(BuildSound);
             creditOwner.Credits -= Cost;
         }
     }
