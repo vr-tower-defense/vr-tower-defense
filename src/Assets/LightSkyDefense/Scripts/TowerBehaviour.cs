@@ -11,7 +11,7 @@ namespace Assets
         private IEnumerator _coroutine;
         private AudioSource _source;
 
-        public float ProjectileSpeed = 10;
+        public float ProjectileSpeed = 1;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
 
