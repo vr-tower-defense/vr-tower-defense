@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 7403832294734038282}
   - component: {fileID: 7377427765659148308}
   - component: {fileID: 2603589764987211252}
+  - component: {fileID: 4106369746403962299}
   m_Layer: 0
   m_Name: FastBulletLowDamageLowIntervalTower
   m_TagString: Tower
@@ -337,3 +338,17 @@ MonoBehaviour:
   handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
+--- !u!114 &4106369746403962299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127235948388862705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1413f9d5154791245a2ff252b0585e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  Cost: 0

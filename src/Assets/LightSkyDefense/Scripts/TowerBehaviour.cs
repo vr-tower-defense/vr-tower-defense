@@ -126,13 +126,17 @@ namespace Assets
         /// </summary>
         private void RotateTowardsEnemy()
         {
+            var hasTarget = FindTarget(out var targetTransform);
+
+            // Update new active target
+            ActiveTargetTransform = targetTransform;
+
             // Find first target in list
-            if (!FindTarget(out var targetTransform))
+            if (!hasTarget)
             {
                 return;
             }
 
-            ActiveTargetTransform = targetTransform;
 
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
