@@ -11,7 +11,7 @@ namespace Assets
 
         private IEnumerator _coroutine;
         private AudioSource _source;
-
+        
         public AudioClip BuildSound;
 
         public int Cost;
@@ -20,7 +20,7 @@ namespace Assets
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
 
-        public Transform ActiveTargetTransform;
+        private Rigidbody ActiveTarget;
 
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
@@ -98,7 +98,7 @@ namespace Assets
         /// Finds first target in list
         /// </summary>
         /// <returns></returns>
-        private bool FindTarget(out Transform targetTransform)
+        private bool FindTarget(out Rigidbody targetTransform)
         {
             // Checks for the enemy that came in closest after his last Target.
             foreach (var targetCollider in _enemySet)
@@ -108,7 +108,7 @@ namespace Assets
                     continue;
                 }
 
-                targetTransform = targetCollider.transform;
+                targetTransform = targetCollider.GetComponent<Rigidbody>();
                 return true;
             }
 
@@ -121,18 +121,18 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
-            if(ActiveTargetTransform == null)
+            if(ActiveTarget == null)
             {
                 return;
             }
 
             var newProjectile = Instantiate(
                 Projectile, 
-                ProjectileSpawn.position, 
-                Projectile.rotation
+                ProjectileSpawn.position,
+                ProjectileSpawn.rotation
             );
 
-            newProjectile.velocity = (ActiveTargetTransform.position - transform.position).normalized * ProjectileSpeed;
+            newProjectile.velocity = transform.forward * ProjectileSpeed;
 
             _source.Play();
         }
@@ -145,7 +145,7 @@ namespace Assets
             var hasTarget = FindTarget(out var targetTransform);
 
             // Update new active target
-            ActiveTargetTransform = targetTransform;
+            ActiveTarget = targetTransform;
 
             // Find first target in list
             if (!hasTarget)
@@ -154,11 +154,18 @@ namespace Assets
             }
 
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(targetTransform.position - transform.position),
-                RotationSpeed * Time.deltaTime
+            var targetDistance = Vector3.Distance(transform.position, ActiveTarget.position);
+            var traveltime = targetDistance / ProjectileSpeed;
+
+            var targetDisplacement = ActiveTarget.velocity * traveltime;
+
+            var predictedlookRotation = Quaternion.LookRotation(
+                (ActiveTarget.position + targetDisplacement) - transform.position,
+                Vector3.forward
             );
+
+            // Rotate our transform a step closer to the target's.
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, predictedlookRotation, RotationSpeed);
         }
     }
 }
