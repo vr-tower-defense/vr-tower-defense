@@ -180,7 +180,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4394283025760544744}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.013292946
   m_Height: 0.017012803
@@ -217,6 +217,7 @@ MonoBehaviour:
   MaxHealth: 100
   MovementSpeed: 2
   EnergyCapacity: 10
+  CollisionDamage: 35
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
