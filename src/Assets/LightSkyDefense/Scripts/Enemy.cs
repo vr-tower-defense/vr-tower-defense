@@ -246,7 +246,9 @@ public class Enemy : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
+
         if (towerScript == null) return;
+
         towerScript.Damage(CollisionDamage);
         Explode();
     }
