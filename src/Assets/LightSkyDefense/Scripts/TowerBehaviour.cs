@@ -8,20 +8,19 @@ namespace Assets
     public class TowerBehaviour : MonoBehaviour
     {
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
-
+        
         private IEnumerator _coroutine;
         private AudioSource _source;
+        private float _health = 100f;
         
-        public AudioClip BuildSound;
-
         public int Cost;
-
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
+        public float MaxHealth = 100f;
 
+        public AudioClip BuildSound;
         private Rigidbody ActiveTarget;
-
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
 
@@ -103,10 +102,7 @@ namespace Assets
             // Checks for the enemy that came in closest after his last Target.
             foreach (var targetCollider in _enemySet)
             {
-                if (targetCollider == null)
-                {
-                    continue;
-                }
+                if (targetCollider == null) continue;
 
                 targetTransform = targetCollider.GetComponent<Rigidbody>();
                 return true;
@@ -121,10 +117,7 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
-            if(ActiveTarget == null)
-            {
-                return;
-            }
+            if (ActiveTarget == null) return;
 
             var newProjectile = Instantiate(
                 Projectile, 
@@ -148,11 +141,7 @@ namespace Assets
             ActiveTarget = targetTransform;
 
             // Find first target in list
-            if (!hasTarget)
-            {
-                return;
-            }
-
+            if (!hasTarget) return;
 
             var targetDistance = Vector3.Distance(transform.position, ActiveTarget.position);
             var traveltime = targetDistance / ProjectileSpeed;
@@ -166,6 +155,15 @@ namespace Assets
 
             // Rotate our transform a step closer to the target's.
             transform.rotation = Quaternion.RotateTowards(transform.rotation, predictedlookRotation, RotationSpeed);
+        }
+
+        public void Damage(float damageAmount)
+        {
+            _health -= damageAmount;
+
+            if (_health > 0) return;
+
+            Destroy(gameObject);
         }
     }
 }

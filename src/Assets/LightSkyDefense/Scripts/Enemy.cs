@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float MaxHealth = 100f;
     public float MovementSpeed = 0.3f;
     public float EnergyCapacity = 40f;
+    public float CollisionDamage = 35f;
 
     public ParticleSystem ExplodeEffect;
     public ParticleSystem TeleportEffect;
@@ -239,6 +241,16 @@ public class Enemy : MonoBehaviour
         {
             Finish();
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
+
+        if (towerScript == null) return;
+
+        towerScript.Damage(CollisionDamage);
+        Explode();
     }
 
 }
