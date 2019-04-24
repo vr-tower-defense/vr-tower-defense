@@ -3,7 +3,11 @@ guid: ca710548a00e6744ab052437ecce0140
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BuildSound: {fileID: 8300000, guid: b509b096ba4e6f9458743a20631695c0, type: 3}
+  - ActiveTargetTransform: {instanceID: 0}
+  - Projectile: {instanceID: 0}
+  - ProjectileSpawn: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
