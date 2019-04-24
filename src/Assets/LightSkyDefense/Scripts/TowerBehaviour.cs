@@ -164,7 +164,10 @@ namespace Assets
         public void Damage(float damageAmount)
         {
             _health -= damageAmount;
-            if (_health < 0) Destroy(gameObject);
+
+            if (_health > 0) return;
+
+            Destroy(gameObject);
         }
     }
 }
