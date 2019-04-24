@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
@@ -10,15 +11,41 @@ namespace Assets
 
         private IEnumerator _coroutine;
         private AudioSource _source;
+        
+        public AudioClip BuildSound;
 
-        public float ProjectileSpeed = 1;
+        public int Cost;
+
+        public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
 
-        public Rigidbody ActiveTarget;
+        private Rigidbody ActiveTarget;
 
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
+
+        /// <summary>
+        /// Use this for initialization
+        /// </summary>
+        private void Start()
+        {
+            _source = GetComponent<AudioSource>();
+            var creditOwner = Player.instance.GetComponent<CreditOwner>();
+
+            if (creditOwner.Credits < Cost)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _source?.PlayOneShot(BuildSound);
+            creditOwner.Credits -= Cost;
+
+            // Start new coroutine to shoot projectiles
+            _coroutine = ShootWithInterval(ShootInterval);
+            StartCoroutine(_coroutine);
+        }
 
         /// <summary>
         /// Called whenever a colliding gameobject enters the tower's detection radius
@@ -46,17 +73,6 @@ namespace Assets
             _enemySet.Remove(target);
         }
 
-        /// <summary>
-        /// Use this for initialization
-        /// </summary>
-        private void Start()
-        {
-            _source = GetComponent<AudioSource>();
-
-            // Start new coroutine to shoot projectiles
-            _coroutine = ShootWithInterval(ShootInterval);
-            StartCoroutine(_coroutine);
-        }
 
         /// <summary>
         /// Called every 16 ms.
