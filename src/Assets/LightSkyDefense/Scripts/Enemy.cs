@@ -249,7 +249,7 @@ public class Enemy : MonoBehaviour
 
         if (towerScript == null) return;
 
-        towerScript.Damage(CollisionDamage);
+        towerScript.ReceiveDamage(CollisionDamage);
         Explode();
     }
 
