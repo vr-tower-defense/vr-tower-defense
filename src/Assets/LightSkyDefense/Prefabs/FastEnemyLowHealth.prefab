@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4986396300897381402}
   - component: {fileID: 4986396300900248634}
-  - component: {fileID: 4986396300899151610}
+  - component: {fileID: 7073890643881863432}
   - component: {fileID: 9202056953789534630}
   - component: {fileID: 3619709108155021460}
   - component: {fileID: 10967276864640786}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4986396300896956474}
   m_Mesh: {fileID: 4300000, guid: f97580b30c25d5141a702b762a7af97a, type: 3}
---- !u!23 &4986396300899151610
+--- !u!23 &7073890643881863432
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ec797c2432ac184293acdc443f01a44, type: 2}
+  - {fileID: 2100000, guid: 9000d944e01b5ea4fb832513fa987a4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   MaxHealth: 20
   MovementSpeed: 6
   EnergyCapacity: 10
+  CollisionDamage: 35
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
