@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Assets;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 

@@ -1,24 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
     public class TowerBehaviour : MonoBehaviour
     {
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
-
+        
         private IEnumerator _coroutine;
         private AudioSource _source;
-
+        private float _health = 100f;
+        
+        public int Cost;
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
+        public float MaxHealth = 100f;
 
-        public Transform ActiveTargetTransform;
-
+        public AudioClip BuildSound;
+        private Rigidbody ActiveTarget;
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
+
+        /// <summary>
+        /// Use this for initialization
+        /// </summary>
+        private void Start()
+        {
+            _source = GetComponent<AudioSource>();
+            var creditOwner = Player.instance.GetComponent<CreditOwner>();
+
+            if (creditOwner.Credits < Cost)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _source?.PlayOneShot(BuildSound);
+            creditOwner.Credits -= Cost;
+
+            // Start new coroutine to shoot projectiles
+            _coroutine = ShootWithInterval(ShootInterval);
+            StartCoroutine(_coroutine);
+        }
 
         /// <summary>
         /// Called whenever a colliding gameobject enters the tower's detection radius
@@ -46,25 +72,6 @@ namespace Assets
             _enemySet.Remove(target);
         }
 
-        /// <summary>
-        /// Use this for initialization
-        /// </summary>
-        private void Start()
-        {
-            _source = GetComponent<AudioSource>();
-
-            // Start new coroutine to shoot projectiles
-            _coroutine = ShootWithInterval(ShootInterval);
-            StartCoroutine(_coroutine);
-        }
-
-        /// <summary>
-        /// Called if the tower gets destroyed.
-        /// </summary>
-        private void OnDisable()
-        {
-            StopCoroutine(_coroutine);
-        }
 
         /// <summary>
         /// Called every 16 ms.
@@ -90,17 +97,14 @@ namespace Assets
         /// Finds first target in list
         /// </summary>
         /// <returns></returns>
-        private bool FindTarget(out Transform targetTransform)
+        private bool FindTarget(out Rigidbody targetTransform)
         {
             // Checks for the enemy that came in closest after his last Target.
             foreach (var targetCollider in _enemySet)
             {
-                if (targetCollider == null)
-                {
-                    continue;
-                }
+                if (targetCollider == null) continue;
 
-                targetTransform = targetCollider.transform;
+                targetTransform = targetCollider.GetComponent<Rigidbody>();
                 return true;
             }
 
@@ -113,18 +117,15 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
-            if(ActiveTargetTransform == null)
-            {
-                return;
-            }
+            if (ActiveTarget == null) return;
 
             var newProjectile = Instantiate(
                 Projectile, 
-                ProjectileSpawn.position, 
-                Projectile.rotation
+                ProjectileSpawn.position,
+                ProjectileSpawn.rotation
             );
 
-            newProjectile.velocity = (ActiveTargetTransform.position - transform.position).normalized * ProjectileSpeed;
+            newProjectile.velocity = transform.forward * ProjectileSpeed;
 
             _source.Play();
         }
@@ -134,19 +135,35 @@ namespace Assets
         /// </summary>
         private void RotateTowardsEnemy()
         {
+            var hasTarget = FindTarget(out var targetTransform);
+
+            // Update new active target
+            ActiveTarget = targetTransform;
+
             // Find first target in list
-            if (!FindTarget(out var targetTransform))
-            {
-                return;
-            }
+            if (!hasTarget) return;
 
-            ActiveTargetTransform = targetTransform;
+            var targetDistance = Vector3.Distance(transform.position, ActiveTarget.position);
+            var traveltime = targetDistance / ProjectileSpeed;
 
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(targetTransform.position - transform.position),
-                RotationSpeed * Time.deltaTime
+            var targetDisplacement = ActiveTarget.velocity * traveltime;
+
+            var predictedlookRotation = Quaternion.LookRotation(
+                (ActiveTarget.position + targetDisplacement) - transform.position,
+                Vector3.forward
             );
+
+            // Rotate our transform a step closer to the target's.
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, predictedlookRotation, RotationSpeed);
+        }
+
+        public void Damage(float damageAmount)
+        {
+            _health -= damageAmount;
+
+            if (_health > 0) return;
+
+            Destroy(gameObject);
         }
     }
 }

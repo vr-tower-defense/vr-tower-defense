@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Interactable))]
@@ -23,7 +19,7 @@ public class Credit : MonoBehaviour
         if (creditOwner == null) { return; }
 
        
-        creditOwner.AddCredits(Value);
+        creditOwner.Credits += Value;
         AudioSource.PlayClipAtPoint(PickupSound, this.gameObject.transform.position);
 
         Destroy(gameObject);
