@@ -3,6 +3,10 @@ using Valve.VR;
 
 public abstract class DialOption : MonoBehaviour
 {
+    [Tooltip("Value between 0 and 1")]
+    public float InactiveTransparency = .5f;
+
+    [HideInInspector]
     public bool IsSelected;
 
     /// <summary>
@@ -40,7 +44,7 @@ public abstract class DialOption : MonoBehaviour
             _renderer.material.color.r,
             _renderer.material.color.g,
             _renderer.material.color.b,
-            IsSelected ? 1f : .7f
+            IsSelected ? 1f : InactiveTransparency
         );
     }
 }

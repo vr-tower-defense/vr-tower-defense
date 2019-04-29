@@ -11,21 +11,38 @@ public class Wave1 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemy_1");
+        var enemyPrefab = Resources.Load("Prefabs/Enemy");
 
         // Create a new enemy every 20 seconds
-        for(var i = 30; i > 0; i--)
+        for (var i = 10; i > 0; i--)
         {
-            yield return new WaitForSeconds(.25f);
             // Spawn more enemies
             Instantiate(enemyPrefab);
+            yield return new WaitForSeconds(.5f);
+        }
+
+        // Cooldown timeout
+        yield return new WaitForSeconds(5);
+    }
+}
+
+public class Wave2 : MonoBehaviour, IWave
+{
+    public IEnumerator Play(MonoBehaviour monoBehaviour)
+    {
+        var enemyPrefab = Resources.Load("Prefabs/Enemy");
+
+        for (var i = 10; i > 0; i--)
+        {
+            Instantiate(enemyPrefab);
+            yield return new WaitForSeconds(2f);
         }
     }
 }
 
 public class Waves : MonoBehaviour, IGameState
 {
-    Type[] PreconfiguredWaves { get; } = { typeof(Wave1) };
+    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
 
     public Waves()
     {
@@ -53,18 +70,13 @@ public class Waves : MonoBehaviour, IGameState
 
             // iterate through the steps of wave
             var enumerator = wave.Play(this);
-            enumerator.MoveNext();
 
-            while (enumerator.Current != null)
+            while (enumerator.MoveNext())
             {
                 yield return enumerator.Current;
-                enumerator.MoveNext();
             }
 
-            // Wait before next wave start
-            yield return new WaitForFixedUpdate();
-
-            Destroy((MonoBehaviour) wave);
+            Destroy((MonoBehaviour)wave);
         }
     }
 }
