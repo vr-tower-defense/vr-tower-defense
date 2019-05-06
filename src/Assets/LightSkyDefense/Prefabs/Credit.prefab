@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2342008109831063637}
   - component: {fileID: 4269723753542125514}
   - component: {fileID: 596003911644874855}
+  - component: {fileID: 6061984868492117779}
   m_Layer: 0
   m_Name: Credit
   m_TagString: Untagged
@@ -144,3 +145,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Value: 5
   PickupSound: {fileID: 8300000, guid: 006ec1c69b7ce544d85e93f013eb7adc, type: 3}
+--- !u!64 &6061984868492117779
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2342008109833262741}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: cbd3c915a7c6dfa40a1fead553b5c44c, type: 3}
