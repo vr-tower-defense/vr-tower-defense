@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
+    private readonly float _rotationSpeed = 2f;
 
     private int _lookAheadDistance = 5; // in waypoints
     private int _waypointIndex = 0;
@@ -62,6 +63,8 @@ public class Enemy : MonoBehaviour
 
         //
         ApplySteeringForce(pathPoints);
+
+        RotateToVelocityDirection();
     }
 
     void ApplySteeringForce(Vector3[] pathPoints)
@@ -243,6 +246,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void RotateToVelocityDirection()
+    {
+        var velocity = gameObject.GetComponent<Rigidbody>().velocity;
+
+        var lookAngle = Quaternion.LookRotation(
+              velocity,
+              Vector3.forward);
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
@@ -252,5 +266,4 @@ public class Enemy : MonoBehaviour
         towerScript.Damage(CollisionDamage);
         Explode();
     }
-
 }
