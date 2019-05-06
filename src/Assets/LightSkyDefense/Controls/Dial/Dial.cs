@@ -10,16 +10,10 @@ public class Dial : MonoBehaviour
     public float DialRotationOffset = 90;
 
     [Tooltip("Radius of the dial option circle")]
-    public float DialOptionRadius= .1f;
-
-    [Tooltip("Offset from the hand position")]
-    public Vector3 DialOptionOffset = new Vector3(0, .1f, 0);
+    public float DialRadius = .1f;
 
     [Tooltip("Options that can are placed onto the Dial")]
     public GameObject[] DialOptions;
-
-    [Tooltip("Object that the dial is attached to")]
-    public GameObject AttachmentPoint;
 
     // Field used to check whether user is in process of clicking touchpad
     private DialOption _pressedDial;
@@ -28,7 +22,7 @@ public class Dial : MonoBehaviour
     /// <summary>
     /// Valdiate properties and create dial options
     /// </summary>
-    private void Start()
+    void Start()
     {
         // Validate actions
         if (DialAction == null)
@@ -36,13 +30,31 @@ public class Dial : MonoBehaviour
 
         if (DialClickAction == null)
             Debug.LogError("`DialClick` action has not been set on this component.");
+    }
 
+    void Awake()
+    {
+        //
         _dialOptions = new GameObject[DialOptions.Length];
+
+        //
+        var segmentAngle = (365 / DialOptions.Length);
+        var segmentAngleCenter = segmentAngle / 2;
 
         // Create dial option instances
         for (int i = 0; i < DialOptions.Length; i++)
         {
+            // Update position
+            var localRotationInRadians = ((segmentAngle * i) + segmentAngleCenter + DialRotationOffset) * Mathf.Deg2Rad;
+
+            var localX = Mathf.Sin(localRotationInRadians);
+            var localZ = Mathf.Cos(localRotationInRadians);
+
+            // Create the local position using the rotation hand rotation
+            var localPosition = new Vector3(localX, 0, localZ) * DialRadius;
+
             _dialOptions[i] = Instantiate(DialOptions[i]);
+            _dialOptions[i].transform.SetParent(gameObject.transform);
         }
     }
 
@@ -62,7 +74,7 @@ public class Dial : MonoBehaviour
 
         // Update dial option IsSelected state to true, this property could for 
         // example be used to change the appearance when the dial option is selected
-        dialOption.IsSelected = true;   
+        dialOption.IsSelected = true;
 
         // Invoke OnPressUp when dial touchpad click ends
         if (_pressedDial != null && DialClickAction.stateUp)
@@ -135,10 +147,7 @@ public class Dial : MonoBehaviour
     /// </summary>
     private void UpdateDialOptions()
     {
-        var segmentAngle = (365 / _dialOptions.Length);
-        var segmentAngleCenter = segmentAngle / 2;
-
-        // Create dial option instances
+        // Update dial option instances
         for (int i = 0; i < _dialOptions.Length; i++)
         {
             if (_dialOptions[i] == null)
@@ -152,17 +161,6 @@ public class Dial : MonoBehaviour
             {
                 dialOptionScript.IsSelected = false;
             }
-
-            // Update position
-            var localRotationInRadians = ((segmentAngle * i) + segmentAngleCenter + DialRotationOffset) * Mathf.Deg2Rad;
-
-            // Create a local position using the rotation hand rotation
-            var localPosition =
-                Quaternion.Euler(AttachmentPoint.transform.rotation.eulerAngles) *
-                (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) * DialOptionRadius + DialOptionOffset);
-
-            // Update position by adding local position to world position of right hand
-            _dialOptions[i].transform.position = AttachmentPoint.transform.position + localPosition;
         }
     }
 }
