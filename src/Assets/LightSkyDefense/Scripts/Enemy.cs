@@ -1,5 +1,6 @@
 using Assets;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Enemy : MonoBehaviour
 {
@@ -215,6 +216,12 @@ public class Enemy : MonoBehaviour
             _teleportEffectInstance.main.duration + _teleportEffectInstance.main.startLifetime.constantMax
         );
 
+        // Damage player
+        var playerStats = Player.instance?.gameObject?.GetComponent<PlayerStats>();
+        if (playerStats != null)
+        {
+            playerStats.Lives--;
+        }
         // Teleport enemy
         Destroy(gameObject);
     }
