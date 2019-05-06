@@ -1,4 +1,4 @@
-﻿using Assets;
+using Assets;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -34,15 +34,15 @@ public class Enemy : MonoBehaviour
         _energyCharge = EnergyCapacity;
         _rigidbody = GetComponent<Rigidbody>();
     }
-    
+
     void FixedUpdate()
     {
         var pathPoints = GameManager.Instance.CalculatedPathPoints;
 
         // Calculate energy potential
         _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex]);
-        
-        if(_potentialEnergy >= 0)
+
+        if (_potentialEnergy >= 0)
         {
             Charge(0.1f);
         }
@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour
     public void Charge(float amount)
     {
         _energyCharge = Mathf.Clamp(
-            _energyCharge + amount, 
+            _energyCharge + amount,
             0,
             EnergyCapacity
         );
@@ -161,8 +161,8 @@ public class Enemy : MonoBehaviour
         if (_explodeEffectInstance == null)
         {
             _explodeEffectInstance = Instantiate(
-                ExplodeEffect, 
-                transform.position, 
+                ExplodeEffect,
+                transform.position,
                 new Quaternion()
             );
         }
@@ -186,8 +186,8 @@ public class Enemy : MonoBehaviour
         Credit.Value = CreditValue;
 
         Instantiate(
-            Credit, 
-            gameObject.transform.position, 
+            Credit,
+            gameObject.transform.position,
             gameObject.transform.rotation
         );
     }
@@ -202,7 +202,7 @@ public class Enemy : MonoBehaviour
         {
             _teleportEffectInstance = Instantiate(TeleportEffect, transform.position, new Quaternion());
         }
-        
+
         // Play effect
         _teleportEffectInstance.Play();
 
@@ -211,7 +211,7 @@ public class Enemy : MonoBehaviour
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
-            _teleportEffectInstance.gameObject, 
+            _teleportEffectInstance.gameObject,
             _teleportEffectInstance.main.duration + _teleportEffectInstance.main.startLifetime.constantMax
         );
 
@@ -234,13 +234,13 @@ public class Enemy : MonoBehaviour
 
         _waypointIndex = Mathf.Clamp(
             int.Parse(collider.gameObject.name.Substring(3)) + 1,
-            _lookAheadDistance, 
+            _lookAheadDistance,
             pathPoints.Length - _lookAheadDistance - 1
         );
 
         _lost = false;
 
-        if(_waypointIndex == (pathPoints.Length - _lookAheadDistance - 1))
+        if (_waypointIndex == (pathPoints.Length - _lookAheadDistance - 1))
         {
             Finish();
         }
