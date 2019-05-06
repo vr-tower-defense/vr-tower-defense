@@ -30,7 +30,7 @@ namespace Assets
         private void Start()
         {
             _source = GetComponent<AudioSource>();
-            var creditOwner = Player.instance.GetComponent<CreditOwner>();
+            var creditOwner = Player.instance.GetComponent<PlayerStats>();
 
             if (creditOwner.Credits < Cost)
             {
