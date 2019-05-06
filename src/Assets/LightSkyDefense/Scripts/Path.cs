@@ -33,14 +33,18 @@ public class Path : MonoBehaviour
 
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
 
-        PathPoints = Enumerable.Range(0, pathVectors.Length - 1).Select(i =>
+        PathPoints = new PathPoint[pathVectors.Length];
+
+        for (int i = 0; i < pathVectors.Length - 1; i++)
         {
             var pathPoint = transform.TransformPoint(pathVectors[i]);
-            var nextPathPoint = transform.TransformPoint(pathVectors[i+1]);
+            var nextPathPoint = transform.TransformPoint(pathVectors[i + 1]);
             var point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
             point.name = "Way" + i;
-            return new PathPoint(pathPoint, pathPoint- nextPathPoint);
-        }).ToArray();
+            PathPoints[i] = new PathPoint(pathPoint, pathPoint - nextPathPoint);
+        }
+
+        PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);
 
         DrawPath(pathVectors);
     }
@@ -115,7 +119,7 @@ public class Path : MonoBehaviour
     /// <param name="end"></param>
     /// <param name="coordinatesAmountPerCurve"></param>
     /// <returns></returns>
-    private Vector3[] MakeBezierPoints(Vector3 start, Vector3 startTangent,Vector3 endTangent, Vector3 end, int coordinatesAmountPerCurve)
+    private Vector3[] MakeBezierPoints(Vector3 start, Vector3 startTangent, Vector3 endTangent, Vector3 end, int coordinatesAmountPerCurve)
     {
         List<Vector3> curve = new List<Vector3>();
 
