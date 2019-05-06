@@ -3,7 +3,12 @@ guid: 62367b71292e62f4793ecfbac8d945c4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ExplodeEffect: {instanceID: 0}
+  - TeleportEffect: {instanceID: 0}
+  - ExplodeSound: {instanceID: 0}
+  - TeleportSound: {instanceID: 0}
+  - Credit: {fileID: 596003911644874855, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
