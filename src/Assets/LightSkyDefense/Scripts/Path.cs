@@ -1,28 +1,47 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
 {
+    public class PathPoint
+    {
+        public Vector3 Position;
+        public Vector3 DirectionVector;
+
+        public PathPoint(Vector3 position, Vector3 directionVector)
+        {
+            Position = position;
+            DirectionVector = directionVector;
+        }
+    }
+
     [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
     [Tooltip("Smootheness of rendered line")]
     public int LineDivision = 100;
 
+    [HideInInspector]
+    public PathPoint[] PathPoints;
+
     void Start()
     {
-        //Get the path points, convert the coordinates to world space and save it in the GameManager
-        var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
-        var pathWorldVectors = new Vector3[pathVectors.Length];
-        for(var i = 0; i < pathVectors.Length; i++)
-        {
-            pathWorldVectors[i] = transform.TransformPoint(pathVectors[i]);
-        }
+        // Get the path points, convert the coordinates to world space and spawn WayPointPrefab in the world
 
-        GameManager.Instance.SetPathPoints(pathWorldVectors, gameObject);
-        
+        var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
+
+        PathPoints = Enumerable.Range(0, pathVectors.Length - 1).Select(i =>
+        {
+            var pathPoint = transform.TransformPoint(pathVectors[i]);
+            var nextPathPoint = transform.TransformPoint(pathVectors[i+1]);
+            var point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
+            point.name = "Way" + i;
+            return new PathPoint(pathPoint, pathPoint- nextPathPoint);
+        }).ToArray();
+
         DrawPath(pathVectors);
     }
 
