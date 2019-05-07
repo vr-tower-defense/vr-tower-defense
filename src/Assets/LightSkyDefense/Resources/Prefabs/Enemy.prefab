@@ -218,6 +218,7 @@ MonoBehaviour:
   MovementSpeed: 2
   EnergyCapacity: 10
   CollisionDamage: 35
+  PointValue: 10
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
@@ -225,4 +226,4 @@ MonoBehaviour:
   ExplodeSound: {fileID: 8300000, guid: 65aa875554300d948a99e3e44393932e, type: 3}
   TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
   Credit: {fileID: 596003911644874855, guid: a730a956b049fa24e89c75408a8a64c7, type: 3}
-  CreditValue: 0
+  CreditValue: 5
