@@ -14,7 +14,7 @@ public class Credit : MonoBehaviour
     /// <param name="hand"></param>
     private void OnHandHoverBegin(Hand hand)
     {
-        var creditOwner = Player.instance.gameObject.GetComponent<CreditOwner>();
+        var creditOwner = Player.instance.gameObject.GetComponent<PlayerStats>();
 
         if (creditOwner == null) { return; }
 

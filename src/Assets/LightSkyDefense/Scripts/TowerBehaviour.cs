@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
-    public class TowerBehaviour : MonoBehaviour
+    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget
     {
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
         
@@ -30,7 +30,7 @@ namespace Assets
         private void Start()
         {
             _source = GetComponent<AudioSource>();
-            var creditOwner = Player.instance.GetComponent<CreditOwner>();
+            var creditOwner = Player.instance.GetComponent<PlayerStats>();
 
             if (creditOwner.Credits < Cost)
             {
@@ -164,6 +164,12 @@ namespace Assets
             if (_health > 0) return;
 
             Destroy(gameObject);
+        }
+
+        public void OnGameLoss()
+        {
+            enabled = false;
+            StopCoroutine(_coroutine);
         }
     }
 }
