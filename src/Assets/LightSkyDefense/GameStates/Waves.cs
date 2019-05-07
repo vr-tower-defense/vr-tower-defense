@@ -23,7 +23,7 @@ public class Wave1 : MonoBehaviour, IWave
         }
 
         // Cooldown timeout
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
     }
 }
 
@@ -43,7 +43,7 @@ public class Wave2 : MonoBehaviour, IWave
 
 public class Waves : MonoBehaviour, IGameState
 {
-    Type[] PreconfiguredWaves { get; } = { typeof(Wave1) };
+    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
 
     public Waves()
     {

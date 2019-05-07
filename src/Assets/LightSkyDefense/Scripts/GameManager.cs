@@ -104,4 +104,26 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
 
     }
+
+    /// <summary>
+    /// Adds a destroy dispatcher to all enemies that are left in the game.
+    /// </summary>
+    public void LastEnemiesTrigger()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.AddComponent<EnemyDestroyDispatcher>();
+        }
+    }
+
+    public void CheckAllEnemiesDestroyed()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0)
+        {
+            Debug.Log("End");
+        }
+    }
 }
