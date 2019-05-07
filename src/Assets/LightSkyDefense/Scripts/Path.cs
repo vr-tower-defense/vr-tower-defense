@@ -1,28 +1,51 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
 {
+    public class PathPoint
+    {
+        public Vector3 Position;
+        public Vector3 DirectionVector;
+
+        public PathPoint(Vector3 position, Vector3 directionVector)
+        {
+            Position = position;
+            DirectionVector = directionVector;
+        }
+    }
+
     [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
     [Tooltip("Smootheness of rendered line")]
     public int LineDivision = 100;
 
+    [HideInInspector]
+    public PathPoint[] PathPoints;
+
     void Start()
     {
-        //Get the path points, convert the coordinates to world space and save it in the GameManager
+        // Get the path points, convert the coordinates to world space and spawn WayPointPrefab in the world
+
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
-        var pathWorldVectors = new Vector3[pathVectors.Length];
-        for(var i = 0; i < pathVectors.Length; i++)
+
+        PathPoints = new PathPoint[pathVectors.Length];
+
+        for (int i = 0; i < pathVectors.Length - 1; i++)
         {
-            pathWorldVectors[i] = transform.TransformPoint(pathVectors[i]);
+            var pathPoint = transform.TransformPoint(pathVectors[i]);
+            var nextPathPoint = transform.TransformPoint(pathVectors[i + 1]);
+            var point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
+            point.name = "Way" + i;
+            PathPoints[i] = new PathPoint(pathPoint, pathPoint - nextPathPoint);
         }
 
-        GameManager.Instance.SetPathPoints(pathWorldVectors, gameObject);
-        
+        PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);
+
         DrawPath(pathVectors);
     }
 
@@ -96,7 +119,7 @@ public class Path : MonoBehaviour
     /// <param name="end"></param>
     /// <param name="coordinatesAmountPerCurve"></param>
     /// <returns></returns>
-    private Vector3[] MakeBezierPoints(Vector3 start, Vector3 startTangent,Vector3 endTangent, Vector3 end, int coordinatesAmountPerCurve)
+    private Vector3[] MakeBezierPoints(Vector3 start, Vector3 startTangent, Vector3 endTangent, Vector3 end, int coordinatesAmountPerCurve)
     {
         List<Vector3> curve = new List<Vector3>();
 
