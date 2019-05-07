@@ -95,7 +95,9 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     public void OnGameLoss()
     {
         var camera = Camera.main.gameObject.GetComponent<GreyscaleAfterEffect>();
-        if(camera == null) { return;}
+
+        if(camera == null)
+            return;
 
         camera.Active = true;
 

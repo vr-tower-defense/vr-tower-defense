@@ -15,11 +15,12 @@ public class PlayerStats : MonoBehaviour
 
     public int Lives
     {
-        get => lives;
+        get => _lives;
         set
         {
-            lives = value;
-            if (lives > 0)
+            _lives = value;
+
+            if (_lives > 0)
                 return;
 
             GameObject[] targets = gameObject.scene.GetRootGameObjects();
@@ -29,8 +30,8 @@ public class PlayerStats : MonoBehaviour
 
     public int Credits
     {
-        get => credits;
-        set => credits = value;
+        get => _credits;
+        set => _credits = value;
     }
 
     public void Start()
