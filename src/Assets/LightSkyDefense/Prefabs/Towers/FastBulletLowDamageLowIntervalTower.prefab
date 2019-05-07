@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4d9db1fd34f91418b62f36ad84612a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Credit: {fileID: 0}
+  Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   Value: 0
 --- !u!114 &7377427765659148308
 MonoBehaviour:

@@ -31,7 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 9148621495014958283}
+  - {fileID: 8320790623766121802}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,7 +85,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 064a7d1e06d6e5847ad8205f8171a9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 2
+  BulletDamage: 10
+--- !u!1 &4696521757361662191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 9148621495014571593}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9148621495014958283}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9148621495014958283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 400002, guid: a1d6e62d33cf897408fc4d37a58ae282,
+    type: 3}
+  m_PrefabInstance: {fileID: 9148621495014571593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696521757361662191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8320790623766121802}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5941963535890933064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 9148621495014571593}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8320790623766121802}
+  m_Layer: 0
+  m_Name: SpeedBullet (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8320790623766121802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 9148621495014571593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5941963535890933064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9148621495014958283}
+  m_Father: {fileID: 1945967994869956103}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &9148621495014571593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93,10 +155,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1945967994869956103}
     m_Modifications:
-    - target: {fileID: 100002, guid: a1d6e62d33cf897408fc4d37a58ae282, type: 3}
-      propertyPath: m_Name
-      value: SpeedBullet
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: a1d6e62d33cf897408fc4d37a58ae282, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -153,15 +211,13 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: a1d6e62d33cf897408fc4d37a58ae282, type: 3}
+      propertyPath: m_Name
+      value: SpeedBullet
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: a1d6e62d33cf897408fc4d37a58ae282, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2db3d0e75c8b7a544954032dba80f9e4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1d6e62d33cf897408fc4d37a58ae282, type: 3}
---- !u!4 &9148621495014958283 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: a1d6e62d33cf897408fc4d37a58ae282,
-    type: 3}
-  m_PrefabInstance: {fileID: 9148621495014571593}
-  m_PrefabAsset: {fileID: 0}

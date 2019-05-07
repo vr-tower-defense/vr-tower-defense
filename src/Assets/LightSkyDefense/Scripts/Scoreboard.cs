@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Valve.VR;
+﻿using UnityEngine;
 
 public class Scoreboard : MonoBehaviour
 {
@@ -127,10 +124,10 @@ public class Scoreboard : MonoBehaviour
         {
             string minutesToNextWave = Mathf.Floor(_timeToNextWave / 60).ToString("00");
             string secondsToNextWave = Mathf.Ceil(_timeToNextWave % 60).ToString("00");
-            _timerToNextWave.text = "Time to next wave: " + $"{minutesToNextWave}:{secondsToNextWave}";
+            _timerToNextWave.text = $"Time to next wave: {minutesToNextWave}:{secondsToNextWave}";
         }
 
         //Wave progression update
-        _waveProgression.text = "Wave: " + WaveNumber + "/" + TotalNumberOfWaves;
+        _waveProgression.text = $"Wave: {WaveNumber} / {TotalNumberOfWaves}";
     }
 }
