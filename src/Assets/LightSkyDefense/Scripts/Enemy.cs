@@ -1,4 +1,5 @@
 using Assets;
+using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -38,10 +39,10 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        var pathPoints = GameManager.Instance.CalculatedPathPoints;
+        var pathPoints = GameManager.Instance.Path.PathPoints;
 
         // Calculate energy potential
-        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex]);
+        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex].Position);
 
         if (_potentialEnergy >= 0)
         {
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour
         }
 
         //
-        ApplySteeringForce(pathPoints);
+        ApplySteeringForce(pathPoints.Select(p => p.Position).ToArray());
 
         RotateToVelocityDirection();
     }
@@ -237,7 +238,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        var pathPoints = GameManager.Instance.CalculatedPathPoints;
+        var pathPoints = GameManager.Instance.Path.PathPoints;
 
         _waypointIndex = Mathf.Clamp(
             int.Parse(collider.gameObject.name.Substring(3)) + 1,
@@ -257,11 +258,14 @@ public class Enemy : MonoBehaviour
     {
         var velocity = gameObject.GetComponent<Rigidbody>().velocity;
 
-        var lookAngle = Quaternion.LookRotation(
-              velocity,
-              Vector3.forward);
+        if (velocity != Vector3.zero)
+        {
+            var lookAngle = Quaternion.LookRotation(
+                  velocity,
+                  Vector3.forward);
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+        }
     }
 
     void OnCollisionEnter(Collision collision)

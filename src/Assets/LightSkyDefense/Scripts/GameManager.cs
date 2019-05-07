@@ -3,16 +3,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static bool _initializing = false;
+
     private readonly Type _defaultGameState = typeof(Waves);
     private MonoBehaviour _gameState { get; set; }
 
-    private GameObject _wayPointPrefab;
+    [HideInInspector]
+    public GameObject WayPointPrefab;
 
-    private Vector3[] _calculatedPathPoints;
-    public Vector3[] CalculatedPathPoints
+    private Path _path;
+    public Path Path
     {
-        get => _calculatedPathPoints ?? (new Vector3[0]);
-        set => _calculatedPathPoints = value;
+        get => _path ?? (_path = FindObjectOfType<Path>());
     }
 
     private static GameManager _instance;
@@ -29,24 +31,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private static bool _initializing = false;
     public static void Initialize()
     {
-        if (_instance != null || _initializing != false)
+        if (_instance != null || _initializing)
         {
             return;
         }
 
         _initializing = true;
 
-        var instance = FindObjectOfType<GameManager>();
-        if (instance == null)
-        {
-            //todo if player doesn't exist, create new gameobject Player?
-            instance = GameObject.Find("Player").AddComponent<GameManager>();
-        }
+        //todo if player doesn't exist, create new gameobject Player?
+        var instance = FindObjectOfType<GameManager>() ?? GameObject.Find("Player").AddComponent<GameManager>();
 
-        instance._wayPointPrefab = Resources.Load("Prefabs/PathWayPoint") as GameObject;
+        instance.WayPointPrefab = Resources.Load("Prefabs/PathWayPoint") as GameObject;
 
         _instance = instance;
         _initializing = false;
@@ -74,28 +71,6 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         _gameState.enabled = true;
-    }
-
-    /// <summary>
-    /// Spawn road waypoints
-    /// </summary>
-    /// <param name="pathPoints"></param>
-    /// <param name="parent"></param>
-    public void SetPathPoints(Vector3[] pathPoints, GameObject parent)
-    {
-        CalculatedPathPoints = pathPoints;
-
-        for (int i = 0; i < CalculatedPathPoints.Length; i++)
-        {
-            var pathPoint = CalculatedPathPoints[i];
-
-            var point = Instantiate(Instance._wayPointPrefab);
-            point.transform.parent = parent.transform;
-            point.transform.position = pathPoint;
-
-            // TODO Find solution to avoid usage of strings when finding nodes during enemy steering.
-            point.name = "Way" + (i++);
-        }
     }
 
     /// <summary>
