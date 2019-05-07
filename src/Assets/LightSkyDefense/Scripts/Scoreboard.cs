@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class Scoreboard : MonoBehaviour
+public class Scoreboard : MonoBehaviour, IOnGameLossTarget
 {
     public int Score = 0;
     public float Timer;
@@ -146,5 +146,10 @@ public class Scoreboard : MonoBehaviour
         //Lifes update
         _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
         _lives.text = "Lives: " + _remaininglives;
+    }
+
+    public void OnGameLoss()
+    {
+        enabled = false;
     }
 }
