@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5376842034840131071}
   - component: {fileID: 7377427765659148308}
   - component: {fileID: 2603589764987211252}
+  - component: {fileID: 6832579776544511282}
   m_Layer: 0
   m_Name: SlowBulletHighDamageHighIntervalTower
   m_TagString: Tower
@@ -324,3 +325,18 @@ MonoBehaviour:
   handFollowTransform: 1
   highlightOnHover: 1
   hideHighlight: []
+--- !u!114 &6832579776544511282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7127235948388862705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef068ad8ded15e45823fd5ead07d966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InactiveTransparency: 0.5
+  IsSelected: 0
+  prefab: {fileID: 7127235948388862705}

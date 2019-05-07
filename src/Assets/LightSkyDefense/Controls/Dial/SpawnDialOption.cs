@@ -16,14 +16,16 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnPressStart(SteamVR_Action_Vector2 action)
     {
-        _clone = Instantiate(prefab);
-    }
+        _clone = Instantiate(
+            prefab,
+            Player.instance.rightHand.transform.position,
+            Player.instance.rightHand.transform.rotation
+        );
 
-    public override void OnPressDown(SteamVR_Action_Vector2 action)
-    {
-        if (_clone == null) return;
+        // Attach game object to hand
+        Player.instance.rightHand.AttachObject(_clone, GrabTypes.Trigger);
 
-        _clone.transform.position = Player.instance.rightHand.transform.position;
+        Debug.Log($"Created new instance of {_clone}");
     }
 
     /// <summary>
@@ -31,6 +33,8 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnPressUp(SteamVR_Action_Vector2 action)
     {
+        Player.instance.rightHand.DetachObject(_clone);
+
         // Clear clone property
         _clone = null;
     }
