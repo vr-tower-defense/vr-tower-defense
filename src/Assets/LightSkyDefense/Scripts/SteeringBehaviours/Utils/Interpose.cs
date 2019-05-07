@@ -10,7 +10,8 @@ public class Interpose
     )
     {
         return Arrive.Calculate(
-            rigidbody,
+            rigidbody.position,
+            rigidbody.velocity,
             (transformOne.position + transformTwo.position) / 2,
             maxSpeed
         );

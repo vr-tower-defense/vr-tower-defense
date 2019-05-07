@@ -7,12 +7,13 @@ public class Arrive
     private const float DecelerationTweaker = 0.3f;
 
     public static Vector3 Calculate(
-        Rigidbody rigidbody, 
+        Vector3 position,
+        Vector3 velocity, 
         Vector3 targetPosition, 
         float maxSpeed = 1
     )
     {
-        var distanceToTarget = targetPosition - rigidbody.position;
+        var distanceToTarget = targetPosition - position;
 
         // Calculate the distance to the target
         var dist = distanceToTarget.magnitude;
@@ -33,6 +34,6 @@ public class Arrive
         // of calculating its length: dist. 
         var desiredVelocity = distanceToTarget * speed / dist;
 
-        return desiredVelocity - rigidbody.velocity;
+        return desiredVelocity - velocity;
     }
 }

@@ -7,12 +7,12 @@ public class Seek
     /// </summary>
     public static Vector3 Calculate(Vector3 position, Vector3 targetPosition, float maxSpeed = 1)
     {
-        var steringForce = targetPosition - position;
+        var steeringForce = targetPosition - position;
 
         // Can't divide by zero so we just return Vector2.Zero
-        if (steringForce == Vector3.zero)
+        if (steeringForce == Vector3.zero)
             return Vector3.zero;
             
-        return Vector3.Normalize(steringForce) * maxSpeed;
+        return Vector3.ClampMagnitude(steeringForce, maxSpeed);
     }
 }
