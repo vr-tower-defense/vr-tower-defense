@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -109,5 +110,27 @@ public class GameManager : MonoBehaviour
 
         // Create new game state
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
+    }
+
+    /// <summary>
+    ///  
+    /// </summary>
+    public void LastEnemiesTrigger()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.AddComponent<EnemyDestroyDispatcher>();
+        }
+    }
+
+    public void CheckAllEnemiesDestroyed()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");   
+        if (enemies.Length == 0)
+        {
+            Debug.Log("End");
+        }
     }
 }

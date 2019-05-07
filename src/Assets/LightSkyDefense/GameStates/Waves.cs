@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 interface IWave
 {
@@ -22,7 +23,7 @@ public class Wave1 : MonoBehaviour, IWave
         }
 
         // Cooldown timeout
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
     }
 }
 
@@ -42,7 +43,7 @@ public class Wave2 : MonoBehaviour, IWave
 
 public class Waves : MonoBehaviour, IGameState
 {
-    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
+    Type[] PreconfiguredWaves { get; } = { typeof(Wave1) };
 
     public Waves()
     {
@@ -68,12 +69,19 @@ public class Waves : MonoBehaviour, IGameState
             // We need to wait one tick to make sure that the component has initialized properly
             yield return new WaitForFixedUpdate();
 
-            // iterate through the steps of wave
+            // Iterate through the steps of wave
             var enumerator = wave.Play(this);
 
             while (enumerator.MoveNext())
             {
                 yield return enumerator.Current;
+            }
+
+            // DOESN'T work if duplicate with last wave
+            if (PreconfiguredWaves[PreconfiguredWaves.Length - 1] == waveType)
+            {
+                var gameManager = Player.instance.GetComponent<GameManager>();
+                gameManager.LastEnemiesTrigger();
             }
 
             Destroy((MonoBehaviour)wave);
