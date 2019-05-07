@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 using UnityEngine.EventSystems;
 
 
-interface IOnGameEndTarget : IEventSystemHandler
+interface IOnGameWinTarget : IEventSystemHandler
 {
     void OnGameWin();
-    void OnGameLoss();
 }
 
+interface IOnGameLossTarget : IEventSystemHandler
+{
+    void OnGameLoss();
+}
