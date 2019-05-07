@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 public class PlayerStats : MonoBehaviour
 {
     private int _lives;
-    private int credits;
+    private int _credits;
 
 
     public int StartLives = 5;
