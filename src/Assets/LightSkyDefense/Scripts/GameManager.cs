@@ -1,7 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.Analytics;
+using Valve.VR.InteractionSystem;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IOnGameLossTarget
 {
     private static bool _initializing = false;
 
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     }
 
     private static GameManager _instance;
+
+
     public static GameManager Instance
     {
         get
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
         _gameState.enabled = true;
     }
 
+
     /// <summary>
     /// Used to switch between game states
     /// </summary>
@@ -84,5 +89,16 @@ public class GameManager : MonoBehaviour
 
         // Create new game state
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
+    }
+
+
+    public void OnGameLoss()
+    {
+        var camera = Camera.main.gameObject.GetComponent<GreyscaleAfterEffect>();
+        if(camera == null) { return;}
+
+        camera.Active = true;
+
+
     }
 }

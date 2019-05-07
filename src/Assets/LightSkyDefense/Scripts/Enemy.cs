@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IOnGameLossTarget
 {
     public float MaxHealth = 100f;
     public float MovementSpeed = 0.3f;
@@ -276,5 +276,10 @@ public class Enemy : MonoBehaviour
 
         towerScript.Damage(CollisionDamage);
         Explode();
+    }
+
+    public void OnGameLoss()
+    {
+        enabled = false;
     }
 }
