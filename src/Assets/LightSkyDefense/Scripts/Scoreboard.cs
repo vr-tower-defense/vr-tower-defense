@@ -6,19 +6,19 @@ using Valve.VR;
 public class Scoreboard : MonoBehaviour
 {
     public int Score = 0;
-    public int Lifes = 10;
     public float Timer;
     public float TimeBetweenWaves = 0;
     public float WaveNumber = 0;
     public float TotalNumberOfWaves = 15;
     public AudioClip BossSpawnedClip;
 
+    private float _remaininglives;
     private float _timeToNextWave;
     private AudioSource _source;
     private TextMesh _score;
     private TextMesh _timer;
     private TextMesh _timerToNextWave;
-    private TextMesh _lifes;
+    private TextMesh _lives;
     private TextMesh _waveProgression;
 
 
@@ -69,6 +69,16 @@ public class Scoreboard : MonoBehaviour
         _waveProgression.anchor = TextAnchor.MiddleLeft;
         //_timer.transform.localEulerAngles += new Vector3(90, 0, 0);
         _waveProgression.transform.localPosition = new Vector3(0, -0.011f, -0.0025f);
+
+        GameObject remainingLivesText = new GameObject();
+        _lives = remainingLivesText.AddComponent<TextMesh>();
+        _lives.fontSize = 30;
+        //_score.font = Resources.Load<Font>("Fonts/Potra");
+        _lives.transform.SetParent(this.transform);
+        _lives.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
+        _lives.anchor = TextAnchor.MiddleLeft;
+        //_timer.transform.localEulerAngles += new Vector3(90, 0, 0);
+        _lives.transform.localPosition = new Vector3(0, -0.011f, 0.0025f);
     }
 
     //void SetTextToScoreboard(TextMesh text, int fontsize, 
@@ -132,5 +142,9 @@ public class Scoreboard : MonoBehaviour
 
         //Wave progression update
         _waveProgression.text = "Wave: " + WaveNumber + "/" + TotalNumberOfWaves;
+
+        //Lifes update
+        _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
+        _lives.text = "Lives: " + _remaininglives;
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3851389679838845009}
   - component: {fileID: 6031943635460963683}
   - component: {fileID: 1465542252710862369}
+  - component: {fileID: 8055094518234311997}
   m_Layer: 0
   m_Name: Scoreboard
   m_TagString: Untagged
@@ -195,3 +196,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8055094518234311997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3851389679836645009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2be689568125b94a841211b565748c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: -0.5, y: 0.25, z: 1.5}
+  RotationSpeed: 0.3
+  Mass: 1
+  MaxSpeed: 1
