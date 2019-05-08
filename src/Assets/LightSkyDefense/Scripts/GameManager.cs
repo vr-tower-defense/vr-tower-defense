@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     }
 
     private static GameManager _instance;
-
-
     public static GameManager Instance
     {
         get
@@ -79,7 +77,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         _gameState.enabled = true;
     }
 
-
     /// <summary>
     /// Used to switch between game states
     /// </summary>
@@ -98,7 +95,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     {
         var camera = Camera.main.gameObject.GetComponent<GreyscaleAfterEffect>();
 
-        if(camera == null)
+        if (camera == null)
             return;
 
         camera.Active = true;
@@ -117,13 +114,20 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         }
     }
 
+    /// <summary>
+    /// Checks if all enemies are dead, this function only gets triggerd on last Wave.
+    /// </summary>
     public void CheckAllEnemiesDestroyed()
     {
+        // Finding the first is enough
         var firstEnemy = GameObject.FindGameObjectWithTag("Enemy");
-        if (firstEnemy == null)
+
+        if (firstEnemy)
         {
-            GameObject[] targets = gameObject.scene.GetRootGameObjects();
-            targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
+            return;
         }
+
+        GameObject[] targets = gameObject.scene.GetRootGameObjects();
+        targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
     }
 }
