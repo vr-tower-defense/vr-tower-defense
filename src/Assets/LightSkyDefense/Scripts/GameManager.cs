@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour, IOnGameLossTarget
@@ -101,8 +102,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
             return;
 
         camera.Active = true;
-
-
     }
 
     /// <summary>
@@ -120,10 +119,11 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
     public void CheckAllEnemiesDestroyed()
     {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if (enemies.Length == 0)
+        var firstEnemy = GameObject.FindGameObjectWithTag("Enemy");
+        if (firstEnemy == null)
         {
-            Debug.Log("End");
+            GameObject[] targets = gameObject.scene.GetRootGameObjects();
+            targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
         }
     }
 }

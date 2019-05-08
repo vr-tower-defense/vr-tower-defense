@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
-    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget
+    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarget
     {
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
         
@@ -57,6 +57,8 @@ namespace Assets
             if (enemyScript == null) return;
 
             _enemySet.Add(target);
+
+
         }
 
         /// <summary>
@@ -170,6 +172,11 @@ namespace Assets
         {
             enabled = false;
             StopCoroutine(_coroutine);
+        }
+
+        public void OnGameWin()
+        {
+            gameObject.AddComponent<WinCelebrationBehaviour>();
         }
     }
 }
