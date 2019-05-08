@@ -170,7 +170,6 @@ namespace Assets
         {
             StopCoroutine(_coroutine);
             enabled = false;
-
         }
     }
 }

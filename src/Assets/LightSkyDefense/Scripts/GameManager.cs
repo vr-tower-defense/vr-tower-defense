@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
     public string GameOverText = "Wasted!";
     public float FontQuality = 250;
-    private static GameManager _instance;
 
+    private static GameManager _instance;
 
     public static GameManager Instance
     {
@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
     }
 
-
     public void OnGameLoss()
     {
         var camera = Camera.main;
@@ -114,14 +113,11 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         gameLossDisplayObject.transform.localScale = new Vector3(10f/ FontQuality, 10f / FontQuality);
         gameLossDisplayObject.transform.localPosition = new Vector3(-2,0.5f,2f);
         
-
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
         if(greyScale == null)
             return;
 
         greyScale.Active = true;
-
-
     }
 }
