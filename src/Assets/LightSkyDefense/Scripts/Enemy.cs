@@ -173,7 +173,7 @@ public class Enemy : MonoBehaviour
         _explodeEffectInstance.Play();
 
         // Play sound effect
-        AudioSource.PlayClipAtPoint(ExplodeSound, this.gameObject.transform.position);
+        SoundUtil.PlayClipAtPointWithRandomPitch(ExplodeSound, this.gameObject.transform.position, 0.5f, 1.5f);
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
@@ -209,7 +209,7 @@ public class Enemy : MonoBehaviour
         _teleportEffectInstance.Play();
 
         // Play sound effect
-        AudioSource.PlayClipAtPoint(TeleportSound, this.gameObject.transform.position);
+        SoundUtil.PlayClipAtPointWithRandomPitch(TeleportSound, this.gameObject.transform.position, 0.5f, 1.5f);
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
