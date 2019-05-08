@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Pursuit
+public static class Pursuit
 {
     public static Vector3 Calculate(Rigidbody rigidbody, Transform target)
     {

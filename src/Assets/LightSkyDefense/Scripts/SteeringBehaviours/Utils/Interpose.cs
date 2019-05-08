@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Interpose
+public static class Interpose
 {
     public static Vector3 Calculate(
         Rigidbody rigidbody, 

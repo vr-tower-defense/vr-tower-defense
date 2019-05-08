@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Flee
+public static class Flee
 {
     public static Vector3 Calculate(
         Vector3 position,

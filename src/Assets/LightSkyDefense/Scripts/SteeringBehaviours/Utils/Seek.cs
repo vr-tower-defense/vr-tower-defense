@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Seek
+public static class Seek
 {
     /// <summary>
     /// Set a velocity that will make the agent move the world target
