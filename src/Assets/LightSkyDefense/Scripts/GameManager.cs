@@ -14,17 +14,16 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     [HideInInspector]
     public GameObject WayPointPrefab;
 
+    public string GameOverText = "Wasted!";
+    public float FontQuality = 250;
+
     private Path _path;
     public Path Path
     {
         get => _path ?? (_path = FindObjectOfType<Path>());
     }
 
-    public string GameOverText = "Wasted!";
-    public float FontQuality = 250;
-
     private static GameManager _instance;
-
     public static GameManager Instance
     {
         get
