@@ -168,8 +168,8 @@ namespace Assets
 
         public void OnGameLoss()
         {
-            enabled = false;
             StopCoroutine(_coroutine);
+            enabled = false;
         }
     }
 }
