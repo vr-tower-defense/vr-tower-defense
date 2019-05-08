@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         gameLossDisplayObject.name = "Game Over screen";
         var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
         mesh.text = GameOverText;
-        mesh.fontSize = FontQuality;
+        mesh.fontSize = Mathf.FloorToInt(FontQuality);
         mesh.color = Color.red;
         
         gameLossDisplayObject.transform.parent = camera.transform;
