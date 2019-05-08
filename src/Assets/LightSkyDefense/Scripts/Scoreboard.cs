@@ -2,42 +2,49 @@
 
 public class Scoreboard : MonoBehaviour, IOnGameLossTarget
 {
-    public float Score;
-    public float Timer;
-    public float TimeBetweenWaves = 0;
-    public float WaveNumber;
-    public float TotalNumberOfWaves = 15;
-    public AudioClip BossSpawnedClip;
-
-    private float _remaininglives;
-    private float _playercredits;
-    private float _timeToNextWave;
-
-    private AudioSource _source;
-    private TextMesh _score;
-    private TextMesh _timer;
-    private TextMesh _timerToNextWave;
-    private TextMesh _lives;
-    private TextMesh _waveProgression;
     private TextMesh _credits;
-
-    private TextMesh _scoreClone;
-    private TextMesh _timerClone;
-    private TextMesh _timerToNextWaveClone;
-    private TextMesh _livesClone;
-    private TextMesh _waveProgressionClone;
     private TextMesh _creditsClone;
+    private TextMesh _lives;
+    private TextMesh _livesClone;
+    private float _playercredits;
+    private float _remaininglives;
+    private TextMesh _score;
+    private TextMesh _scoreClone;
+    private AudioSource _source;
+    private TextMesh _timer;
+    private TextMesh _timerClone;
+    private TextMesh _timerToNextWave;
+    private TextMesh _timerToNextWaveClone;
+    private float _timeToNextWave;
+    private TextMesh _waveProgression;
+    private TextMesh _waveProgressionClone;
+
+    public AudioClip BossSpawnedClip;
+    public float Score;
+    public float TimeBetweenWaves = 0;
+    public float Timer;
+    public float TotalNumberOfWaves = 15;
+    public float WaveNumber;
+
+    //When the player loses
+    public void OnGameLoss()
+    {
+        _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
+        _lives.text = $"Lives: {_remaininglives}";
+        _livesClone.text = _lives.text;
+        enabled = false;
+    }
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _source = GetComponent<AudioSource>();
         _timeToNextWave = TimeBetweenWaves;
 
         //Scoreboard Front
         //Score
-        GameObject scoreText = gameObject.transform.Find("ScoreText").gameObject;
+        var scoreText = gameObject.transform.Find("ScoreText").gameObject;
         _score = scoreText.GetComponent<TextMesh>();
         _score.fontSize = 30;
         _score.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -46,7 +53,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _score.transform.localPosition = new Vector3(-0.01f, -0.0115f, -0.002f);
 
         //Time
-        GameObject timerText = gameObject.transform.Find("TimerText").gameObject;
+        var timerText = gameObject.transform.Find("TimerText").gameObject;
         _timer = timerText.GetComponent<TextMesh>();
         _timer.fontSize = 30;
         _timer.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -55,7 +62,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _timer.transform.localPosition = new Vector3(-0.01f, -0.0115f, 0.002f);
 
         //Time to next wave
-        GameObject timerToNextWaveText = gameObject.transform.Find("TimeToNextWaveText").gameObject;
+        var timerToNextWaveText = gameObject.transform.Find("TimeToNextWaveText").gameObject;
         _timerToNextWave = timerToNextWaveText.GetComponent<TextMesh>();
         _timerToNextWave.fontSize = 30;
         _timerToNextWave.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -64,7 +71,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _timerToNextWave.transform.localPosition = new Vector3(-0.008f, -0.0115f, 0.005f);
 
         //Wave Progression
-        GameObject waveProgressionText = gameObject.transform.Find("WaveProgressionText").gameObject;
+        var waveProgressionText = gameObject.transform.Find("WaveProgressionText").gameObject;
         _waveProgression = waveProgressionText.GetComponent<TextMesh>();
         _waveProgression.fontSize = 30;
         _waveProgression.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -73,7 +80,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _waveProgression.transform.localPosition = new Vector3(-0.004f, -0.0115f, -0.005f);
 
         //Remaining lives
-        GameObject remainingLivesText = gameObject.transform.Find("LivesText").gameObject;
+        var remainingLivesText = gameObject.transform.Find("LivesText").gameObject;
         _lives = remainingLivesText.GetComponent<TextMesh>();
         _lives.fontSize = 30;
         _lives.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -82,7 +89,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _lives.transform.localPosition = new Vector3(0.01f, -0.0115f, -0.002f);
 
         //Credits
-        GameObject creditsText = gameObject.transform.Find("CreditText").gameObject;
+        var creditsText = gameObject.transform.Find("CreditText").gameObject;
         _credits = creditsText.GetComponent<TextMesh>();
         _credits.fontSize = 30;
         _credits.transform.localScale = new Vector3(0.0005f, 0.0005f, 0.0005f);
@@ -123,7 +130,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //Score update
         _score.text = $"Score: {Score}";
@@ -131,8 +138,8 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
 
         //Time update
         Timer += Time.deltaTime;
-        string minutes = Mathf.Floor(Timer / 60).ToString("00");
-        string seconds = Mathf.Floor(Timer % 60).ToString("00");
+        var minutes = Mathf.Floor(Timer / 60).ToString("00");
+        var seconds = Mathf.Floor(Timer % 60).ToString("00");
         _timer.text = $"Time: {minutes}:{seconds}";
         _timerClone.text = _timer.text;
 
@@ -145,13 +152,9 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
             {
                 WaveNumber++;
                 if (WaveNumber % 5 == 0)
-                {
                     _source?.PlayOneShot(BossSpawnedClip);
-                }
                 else
-                {
                     _source.Play();
-                }
 
                 if (WaveNumber == TotalNumberOfWaves)
                 {
@@ -162,8 +165,8 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
 
                 _timeToNextWave = TimeBetweenWaves;
             }
-            string minutesToNextWave = Mathf.Floor(_timeToNextWave / 60).ToString("00");
-            string secondsToNextWave = Mathf.Ceil(_timeToNextWave % 60).ToString("00");
+            var minutesToNextWave = Mathf.Floor(_timeToNextWave / 60).ToString("00");
+            var secondsToNextWave = Mathf.Ceil(_timeToNextWave % 60).ToString("00");
             _timerToNextWave.text = $"Time to next wave: {minutesToNextWave}:{secondsToNextWave}";
             _timerToNextWaveClone.text = _timerToNextWave.text;
         }
@@ -181,15 +184,6 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _playercredits = GameObject.Find("Player").GetComponent<PlayerStats>().Credits;
         _credits.text = $"Credits: {_playercredits}";
         _creditsClone.text = _credits.text;
-    }
-
-    //When the player loses
-    public void OnGameLoss()
-    {
-        _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
-        _lives.text = $"Lives: {_remaininglives}";
-        _livesClone.text = _lives.text;
-        enabled = false;
     }
 
     //Points gained when enemy dies
