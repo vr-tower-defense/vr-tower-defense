@@ -194,7 +194,7 @@ public class Enemy : MonoBehaviour
             gameObject.transform.rotation
         );
 
-        GameObject.Find("Scoreboard").GetComponent<Scoreboard>().PointGain(PointValue);
+        GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
     }
 
     /// <summary>
