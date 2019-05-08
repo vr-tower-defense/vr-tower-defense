@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class WinCelebrationBehaviour : MonoBehaviour
 {
-    private ParticleSystem _fireWorkEffect;
-    private Quaternion _aimAngle;
-    private bool _effectIsPlaying = false;
-
-    void Start()
-    {
-        _fireWorkEffect = Resources.Load<ParticleSystem>("Effects/FireworkParticleSystem");
-
-        // Set aim angle upwards
-        _aimAngle = Quaternion.LookRotation(Vector3.up);
-    }
+    // Default aim upwards
+    private Quaternion _aimAngle = Quaternion.LookRotation(Vector3.up);
+    private bool _rotationFinished = false;
 
     void FixedUpdate()
     {
+        if (_rotationFinished)
+            return;
+
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _aimAngle, 2);
 
-        if (!_effectIsPlaying && (Quaternion.Angle(transform.rotation, _aimAngle) <= 0.01f))
+        if(Quaternion.Angle(transform.rotation, _aimAngle) <= 0.01f)
         {
-            _effectIsPlaying = true;
-            FireCelebration();
+            _rotationFinished = true;
+            PlayCelebration();
         }
     }
 
-    private void FireCelebration()
+    private void PlayCelebration()
     {
-        var fireWorkInstance = Instantiate(_fireWorkEffect, transform.position, transform.rotation);
-        fireWorkInstance.Play();
+        var celebrationParticle = Resources.Load<ParticleSystem>("Effects/FireworkParticleSystem");
+
+        var celebrationInstance = Instantiate(celebrationParticle, transform.position, transform.rotation);
+        celebrationInstance.Play();
     }
 }
