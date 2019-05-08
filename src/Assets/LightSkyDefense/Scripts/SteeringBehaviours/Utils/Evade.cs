@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Evade
+public static class Evade
 {
     public static Vector3 Calculate(
         Rigidbody rigidbody,
