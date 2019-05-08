@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public float MovementSpeed = 0.3f;
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
+    public float PointValue = 10f;
 
     public ParticleSystem ExplodeEffect;
     public ParticleSystem TeleportEffect;
@@ -16,7 +17,7 @@ public class Enemy : MonoBehaviour
     public AudioClip TeleportSound;
 
     public Credit Credit;
-    public int CreditValue;
+    public int CreditValue = 5;
 
     private ParticleSystem _explodeEffectInstance = null;
     private ParticleSystem _teleportEffectInstance = null;
@@ -192,6 +193,8 @@ public class Enemy : MonoBehaviour
             gameObject.transform.position,
             gameObject.transform.rotation
         );
+
+        GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
     }
 
     /// <summary>
