@@ -1,35 +1,44 @@
 ﻿using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Scoreboard : MonoBehaviour, IOnGameLossTarget
 {
-    private TextMesh _credits;
-    private TextMesh _creditsClone;
-    private TextMesh _lives;
-    private TextMesh _livesClone;
-    private float _playercredits;
-    private float _remaininglives;
-    private TextMesh _score;
-    private TextMesh _scoreClone;
-    private AudioSource _source;
-    private TextMesh _timer;
-    private TextMesh _timerClone;
-    private TextMesh _timerToNextWave;
-    private TextMesh _timerToNextWaveClone;
-    private float _timeToNextWave;
-    private TextMesh _waveProgression;
-    private TextMesh _waveProgressionClone;
-
     public AudioClip BossSpawnedClip;
     public float Score;
     public float TimeBetweenWaves = 0;
     public float Timer;
-    public float TotalNumberOfWaves = 15;
-    public float WaveNumber;
+    public int TotalNumberOfWaves = 15;
+    public int WaveNumber;
+
+    private TextMesh _credits;
+    private TextMesh _creditsClone;
+    private float _playercredits;
+
+    private TextMesh _lives;
+    private TextMesh _livesClone;
+    private float _remaininglives;
+
+    private TextMesh _score;
+    private TextMesh _scoreClone;
+
+    private AudioSource _source;
+
+    private TextMesh _timer;
+    private TextMesh _timerClone;
+
+    private TextMesh _timerToNextWave;
+    private TextMesh _timerToNextWaveClone;
+    private float _timeToNextWave;
+
+    private TextMesh _waveProgression;
+    private TextMesh _waveProgressionClone;
+
+    private PlayerStats _player;
 
     //When the player loses
     public void OnGameLoss()
     {
-        _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
+        _remaininglives = _player.Lives;
         _lives.text = $"Lives: {_remaininglives}";
         _livesClone.text = _lives.text;
         enabled = false;
@@ -41,6 +50,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
     {
         _source = GetComponent<AudioSource>();
         _timeToNextWave = TimeBetweenWaves;
+        _player = Player.instance.gameObject.GetComponent<PlayerStats>();
 
         //Scoreboard Front
         //Score
@@ -154,7 +164,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
                 if (WaveNumber % 5 == 0)
                     _source?.PlayOneShot(BossSpawnedClip);
                 else
-                    _source.Play();
+                    _source?.Play();
 
                 if (WaveNumber == TotalNumberOfWaves)
                 {
@@ -176,12 +186,12 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _waveProgressionClone.text = _waveProgression.text;
 
         //Lifes update
-        _remaininglives = GameObject.Find("Player").GetComponent<PlayerStats>().Lives;
+        _remaininglives = _player.Lives;
         _lives.text = $"Lives: {_remaininglives}";
         _livesClone.text = _lives.text;
 
         //Credit update
-        _playercredits = GameObject.Find("Player").GetComponent<PlayerStats>().Credits;
+        _playercredits = _player.Credits;
         _credits.text = $"Credits: {_playercredits}";
         _creditsClone.text = _credits.text;
     }

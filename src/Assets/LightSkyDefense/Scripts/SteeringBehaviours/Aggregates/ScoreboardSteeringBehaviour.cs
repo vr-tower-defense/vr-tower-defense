@@ -18,7 +18,6 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         _headsetTransform = Player.instance.headCollider.transform;
-
     }
 
     // Update is called once per frame
