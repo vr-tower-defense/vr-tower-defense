@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Arrive
+public static class Arrive
 {
     public const float DecelerationSpeed = 1;
     private const float DecelerationTweaker = 0.3f;

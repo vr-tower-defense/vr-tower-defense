@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Enemy : MonoBehaviour, IOnGameLossTarget
+public class Enemy : MonoBehaviour
 {
     public float MaxHealth = 100f;
     public float MovementSpeed = 0.3f;
@@ -174,7 +174,7 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
         _explodeEffectInstance.Play();
 
         // Play sound effect
-        AudioSource.PlayClipAtPoint(ExplodeSound, this.gameObject.transform.position);
+        SoundUtil.PlayClipAtPointWithRandomPitch(ExplodeSound, this.gameObject.transform.position, 0.5f, 1.5f);
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
@@ -194,7 +194,7 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
             gameObject.transform.rotation
         );
 
-        GameObject.Find("Scoreboard").GetComponent<Scoreboard>().PointGain(PointValue);
+        GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
     }
 
     /// <summary>
@@ -212,7 +212,7 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
         _teleportEffectInstance.Play();
 
         // Play sound effect
-        AudioSource.PlayClipAtPoint(TeleportSound, this.gameObject.transform.position);
+        SoundUtil.PlayClipAtPointWithRandomPitch(TeleportSound, this.gameObject.transform.position, 0.5f, 1.5f);
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(

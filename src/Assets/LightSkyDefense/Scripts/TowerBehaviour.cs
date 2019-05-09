@@ -9,7 +9,7 @@ namespace Assets
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]
-    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget
+    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarget
     {
         public int Cost;
         public float ProjectileSpeed = 10;
@@ -38,7 +38,8 @@ namespace Assets
             creditOwner.Credits -= Cost;
 
 
-            AudioSource?.PlayOneShot(BuildSound);
+            AudioSource?.PlayOneShotWithRandomPitch(BuildSound, 0.5f, 1.5f);
+            creditOwner.Credits -= Cost;
 
             // Start new coroutine to shoot projectiles
             _coroutine = ShootWithInterval(ShootInterval);
@@ -119,14 +120,14 @@ namespace Assets
             if (_activeTarget == null) return;
 
             var newProjectile = Instantiate(
-                Projectile, 
+                Projectile,
                 ProjectileSpawn.position,
                 ProjectileSpawn.rotation
             );
 
             newProjectile.velocity = transform.forward * ProjectileSpeed;
 
-            AudioSource?.PlayOneShot(ShootSound);
+            AudioSource?.PlayOneShotWithRandomPitch(ShootSound, 0.5f, 1.5f);
         }
 
         /// <summary>
@@ -167,8 +168,13 @@ namespace Assets
 
         public void OnGameLoss()
         {
-            enabled = false;
             StopCoroutine(_coroutine);
+            enabled = false;
+        }
+
+        public void OnGameWin()
+        {
+            gameObject.AddComponent<TowerWinBehaviour>();
         }
     }
 }
