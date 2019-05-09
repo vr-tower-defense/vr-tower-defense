@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WinCelebrationBehaviour : MonoBehaviour
+public class TowerWinBehaviour : MonoBehaviour
 {
     // Default aim upwards
     private Quaternion _aimAngle = Quaternion.LookRotation(Vector3.up);
