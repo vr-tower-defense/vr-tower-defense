@@ -58,8 +58,6 @@ namespace Assets
             if (enemyScript == null) return;
 
             _enemySet.Add(target);
-
-
         }
 
         /// <summary>
@@ -129,7 +127,6 @@ namespace Assets
             );
 
             newProjectile.velocity = transform.forward * ProjectileSpeed;
-
 
             _source.PlayWithRandomPitch(0.5f,1.5f);
         }
