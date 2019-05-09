@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3619709108155021460}
   - component: {fileID: 10967276864640786}
   - component: {fileID: 6544540398130761165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 20
+  MovementSpeed: 5
   EnergyCapacity: 10
   CollisionDamage: 35
   PointValue: 10

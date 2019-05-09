@@ -5,41 +5,40 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
+    [RequireComponent(typeof(Interactable))]
+    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(AudioSource))]
     public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarget
     {
-        private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
-        
-        private IEnumerator _coroutine;
-        private AudioSource _source;
-        private float _health = 100f;
-        
         public int Cost;
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
         public float MaxHealth = 100f;
 
+        public AudioSource AudioSource;
         public AudioClip BuildSound;
-        private Rigidbody ActiveTarget;
+        public AudioClip ShootSound;
         public Rigidbody Projectile;
         public Transform ProjectileSpawn;
+
+        private IEnumerator _coroutine;
+        private float _health;
+
+        private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
+        private Rigidbody _activeTarget;
 
         /// <summary>
         /// Use this for initialization
         /// </summary>
         private void Start()
         {
-            _source = GetComponent<AudioSource>();
             var creditOwner = Player.instance.GetComponent<PlayerStats>();
+            creditOwner.Credits -= Cost;
 
-            if (creditOwner.Credits < Cost)
-            {
-                Destroy(gameObject);
-                return;
-            }
 
-            _source?.PlayOneShotWithRandomPitch(BuildSound, 0.5f, 1.5f);
-
+            AudioSource?.PlayOneShotWithRandomPitch(BuildSound, 0.5f, 1.5f);
             creditOwner.Credits -= Cost;
 
             // Start new coroutine to shoot projectiles
@@ -118,17 +117,17 @@ namespace Assets
         /// </summary>
         private void ShootProjectile()
         {
-            if (ActiveTarget == null) return;
+            if (_activeTarget == null) return;
 
             var newProjectile = Instantiate(
-                Projectile, 
+                Projectile,
                 ProjectileSpawn.position,
                 ProjectileSpawn.rotation
             );
 
             newProjectile.velocity = transform.forward * ProjectileSpeed;
 
-            _source.PlayWithRandomPitch(0.5f,1.5f);
+            AudioSource?.PlayOneShotWithRandomPitch(ShootSound, 0.5f, 1.5f);
         }
 
         /// <summary>
@@ -139,18 +138,18 @@ namespace Assets
             var hasTarget = FindTarget(out var targetTransform);
 
             // Update new active target
-            ActiveTarget = targetTransform;
+            _activeTarget = targetTransform;
 
             // Find first target in list
             if (!hasTarget) return;
 
-            var targetDistance = Vector3.Distance(transform.position, ActiveTarget.position);
+            var targetDistance = Vector3.Distance(transform.position, _activeTarget.position);
             var traveltime = targetDistance / ProjectileSpeed;
 
-            var targetDisplacement = ActiveTarget.velocity * traveltime;
+            var targetDisplacement = _activeTarget.velocity * traveltime;
 
             var predictedlookRotation = Quaternion.LookRotation(
-                (ActiveTarget.position + targetDisplacement) - transform.position,
+                (_activeTarget.position + targetDisplacement) - transform.position,
                 Vector3.forward
             );
 
