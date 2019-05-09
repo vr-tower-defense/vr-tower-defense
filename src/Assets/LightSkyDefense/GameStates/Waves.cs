@@ -36,7 +36,7 @@ public class Wave2 : MonoBehaviour, IWave
         for (var i = 10; i > 0; i--)
         {
             Instantiate(enemyPrefab);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

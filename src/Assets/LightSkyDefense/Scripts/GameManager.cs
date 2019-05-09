@@ -8,16 +8,15 @@ using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour, IOnGameLossTarget
 {
-    private static bool _initializing = false;
-
-    private readonly Type _defaultGameState = typeof(Waves);
-    private MonoBehaviour _gameState { get; set; }
-
     [HideInInspector]
     public GameObject WayPointPrefab;
-
     public string GameOverText = "Wasted!";
     public float FontQuality = 250;
+
+    private static bool _initializing = false;
+    private readonly Type _defaultGameState = typeof(Waves);
+    private MonoBehaviour _gameState { get; set; }
+    private int _lastWaveEnemiesAmount = 0;
 
     private Path _path;
     public Path Path
@@ -130,22 +129,20 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
         foreach (GameObject enemy in enemies)
         {
+            _lastWaveEnemiesAmount++;
             enemy.AddComponent<EnemyDestroyDispatcher>();
         }
     }
 
     /// <summary>
-    /// Checks if all enemies are dead, this function only gets triggerd on last Wave.
+    /// Checks if all enemies are dead, 
+    /// this function only gets triggerd when a enemy dies on last Wave.
     /// </summary>
     public void CheckAllEnemiesDestroyed()
     {
-        // Finding the first is enough
-        var firstEnemy = GameObject.FindGameObjectWithTag("Enemy");
-
-        if (firstEnemy)
-        {
+        _lastWaveEnemiesAmount--;
+        if (_lastWaveEnemiesAmount != 0)
             return;
-        }
 
         GameObject[] targets = gameObject.scene.GetRootGameObjects();
         targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
