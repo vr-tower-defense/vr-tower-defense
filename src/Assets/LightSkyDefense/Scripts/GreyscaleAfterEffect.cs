@@ -9,7 +9,7 @@ public class GreyscaleAfterEffect : MonoBehaviour
 {
     private Material _afterEffectMaterial;
 
-    public float Intensity = 1f;
+    public float Intensity = 0.5f;
     public bool Active;
 
     public void Start()

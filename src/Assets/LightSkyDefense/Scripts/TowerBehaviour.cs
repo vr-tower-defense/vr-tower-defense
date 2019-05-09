@@ -38,7 +38,8 @@ namespace Assets
                 return;
             }
 
-            _source?.PlayOneShot(BuildSound);
+            _source?.PlayOneShotWithRandomPitch(BuildSound, 0.5f, 1.5f);
+
             creditOwner.Credits -= Cost;
 
             // Start new coroutine to shoot projectiles
@@ -129,7 +130,8 @@ namespace Assets
 
             newProjectile.velocity = transform.forward * ProjectileSpeed;
 
-            _source.Play();
+
+            _source.PlayWithRandomPitch(0.5f,1.5f);
         }
 
         /// <summary>
@@ -170,8 +172,8 @@ namespace Assets
 
         public void OnGameLoss()
         {
-            enabled = false;
             StopCoroutine(_coroutine);
+            enabled = false;
         }
 
         public void OnGameWin()
