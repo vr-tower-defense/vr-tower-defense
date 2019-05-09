@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        PathFollower = new GameObject("PathFollower").AddComponent(typeof(PathFollower)) as PathFollower;
+        PathFollower = new GameObject("PathFollower").AddComponent<PathFollower>();
         PathFollower.transform.parent = transform;
     }
 
