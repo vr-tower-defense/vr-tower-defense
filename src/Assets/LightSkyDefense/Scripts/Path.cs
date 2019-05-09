@@ -50,7 +50,6 @@ public class Path : MonoBehaviour
 
         PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);
 
-
         DrawPath(pathVectors);
     }
 

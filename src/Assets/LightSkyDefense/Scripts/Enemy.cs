@@ -6,38 +6,39 @@ using Valve.VR.InteractionSystem;
 public class Enemy : MonoBehaviour
 {
     public float MaxHealth = 100f;
-    public float MovementSpeed = 0.3f;
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
     public float PointValue = 10f;
 
     public ParticleSystem ExplodeEffect;
     public ParticleSystem TeleportEffect;
+
     public AudioClip ExplodeSound;
     public AudioClip TeleportSound;
 
     public Credit Credit;
     public int CreditValue = 5;
 
+    public PathFollower PathFollower { get; private set; }
+
+    public Rigidbody Rigidbody { get; private set; }
+
     private ParticleSystem _explodeEffectInstance = null;
     private ParticleSystem _teleportEffectInstance = null;
-    public Rigidbody Rigidbody { get; private set; }
+
+    private Path.PathPoint[] _pathPoints;
 
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
+    private bool _lost = true;
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
 
-    //private int _lookAheadDistance = 5; // in waypoints
-    //private int _waypointIndex = 0;
-    private bool _lost = true;
-    public PathFollower _pathFollower { get; private set; }
-    private Path.PathPoint[] _pathPoints;
-
     private void Awake()
     {
-        _pathFollower = GetComponentInChildren<PathFollower>();
+        PathFollower = new GameObject("PathFollower").AddComponent(typeof(PathFollower)) as PathFollower;
+        PathFollower.transform.parent = transform;
     }
 
     private void Start()
@@ -45,68 +46,15 @@ public class Enemy : MonoBehaviour
         _energyCharge = EnergyCapacity;
         _pathPoints = GameManager.Instance.Path.PathPoints;
         Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.position = GameManager.Instance.Path.PathPoints[_pathFollower.PathPointIndex].Position;
+        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex].Position;
     }
 
     private void FixedUpdate()
     {
-        //var pathPoints = GameManager.Instance.Path.PathPoints;
-
-        // Calculate energy potential
-        //_potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex].Position);
-        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[_pathFollower.PathPointIndex].Position);
-
-        if (_potentialEnergy >= 0)
-        {
-            Charge(0.1f);
-        }
-        else
-        {
-            DisCharge(0.1f);
-
-            if (_potentialEnergy < _potentialEnergyRange/2)
-            {
-                _lost = true;
-            }
-        }
-
-        if (_energyCharge < 0)
-        {
-            //Damage(30);
-        }
-
-        //
-        //ApplySteeringForce(pathPoints.Select(p => p.Position).ToArray());
+        EnergyBehaviour();
 
         RotateToVelocityDirection();
     }
-
-    //void ApplySteeringForce(Vector3[] pathPoints)
-    //{
-    //    if (_waypointIndex > pathPoints.Length)
-    //    {
-    //        return;
-    //    }
-
-    //    // Following if statement isn't needed if we spawn the enemy in the correct place
-    //    if (_waypointIndex == 0)
-    //    {
-    //        transform.position = pathPoints[_waypointIndex + _lookAheadDistance];
-    //    }
-
-    //    if (_lost)
-    //    {
-    //        // Lost so go back to last known waypoint
-    //        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (pathPoints[_waypointIndex] - transform.position).normalized));
-    //        return;
-    //    }
-
-    //    // Move enemy towards path
-    //    _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (pathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
-
-    //    // Move enemy parallel to the path
-    //    _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (pathPoints[_waypointIndex] - pathPoints[_waypointIndex - _lookAheadDistance]).normalized));
-    //}
 
     public float GetHealth()
     {
@@ -160,11 +108,10 @@ public class Enemy : MonoBehaviour
     /// This function will remove the specified chargeAmount from the enemy's charge
     /// </summary>
     /// <param name="amount"></param>
-    public void DisCharge(float amount)
+    public void Discharge(float amount)
     {
         _energyCharge -= amount;
     }
-
 
     /// <summary>
     /// This function kills the enemy and starts the explosion particle system and sound effect
@@ -251,61 +198,71 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-        
+
         var foundIndex = int.Parse(collider.gameObject.name.Substring(3));
-        
-        if (foundIndex == (_pathPoints.Length-2))
+
+        if (foundIndex == (_pathPoints.Length - 2))
         {
             Finish();
         }
 
-        if (foundIndex>_pathFollower.PathPointIndex)
+        if (foundIndex > PathFollower.PathPointIndex)
         {
-            _pathFollower.PathPointIndex = foundIndex;
+            PathFollower.PathPointIndex = foundIndex;
         }
 
         _lost = false;
     }
 
+    /// <summary>
+    /// Calculates the potential energy for the enemy and applies the effects (charge, discharge, damage
+    /// </summary>
+    private void EnergyBehaviour()
+    {
+        // Calculate energy potential
+        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[PathFollower.PathPointIndex].Position);
+
+        if (_potentialEnergy >= 0)
+        {
+            Charge(0.1f);
+        }
+        else
+        {
+            Discharge(0.1f);
+
+            if (_potentialEnergy < _potentialEnergyRange / 2)
+            {
+                _lost = true;
+            }
+        }
+
+        if (_energyCharge < 0)
+        {
+            Damage(30);
+        }
+    }
+
     private void RotateToVelocityDirection()
     {
-        //var velocity = gameObject.GetComponent<Rigidbody>().velocity;
-        var translationVector = _pathFollower.transform.position - _pathFollower.PreviousPosition;
+        var translationVector = PathFollower.transform.position - PathFollower.PreviousPosition;
+
         if (translationVector != Vector3.zero)
         {
             var lookAngle = Quaternion.LookRotation(translationVector);
-                       
-            //_rigidbody.rotation = lookAngle;;
+
+            //Alternative if performance becomes an issue: _rigidbody.rotation = lookAngle;
             Rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        //return;
-        //var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
-        var components = collision.collider.gameObject.GetComponents(typeof (Component));
+        var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
 
-        //Check for components like TowerBehaviour, Enemy, DestroyBullet, etc..
-        foreach (Component c in components)
+        if (towerScript != null)
         {
-            if (c is TowerBehaviour towerBehaviour)
-            {
-                towerBehaviour.Damage(CollisionDamage);
-                Explode();
-            }
-            else if (c is Enemy enemy)
-            {
-                //enemy._pathFollower.AddOffset(collision.GetContact(0).normal, 0.02f);
-            }
+            towerScript.Damage(CollisionDamage);
+            Explode();
         }
-
-        
-        {
-            //towerScript.Damage(CollisionDamage);
-            //Explode();
-        }
-
-
     }
 }

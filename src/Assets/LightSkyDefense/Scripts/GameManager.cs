@@ -1,8 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Analytics;
-using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour, IOnGameLossTarget
 {
@@ -79,7 +76,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         _gameState.enabled = true;
     }
 
-
     /// <summary>
     /// Used to switch between game states
     /// </summary>
@@ -97,7 +93,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     {
         var camera = Camera.main;
 
-        if(camera == null)
+        if (camera == null)
             return;
 
         var gameLossDisplayObject = new GameObject();
@@ -106,15 +102,15 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         mesh.text = GameOverText;
         mesh.fontSize = Mathf.FloorToInt(FontQuality);
         mesh.color = Color.red;
-        
+
         gameLossDisplayObject.transform.parent = camera.transform;
-        gameLossDisplayObject.transform.rotation = new Quaternion(0,0,0,0);
-        gameLossDisplayObject.transform.localScale = new Vector3(10f/ FontQuality, 10f / FontQuality);
-        gameLossDisplayObject.transform.localPosition = new Vector3(-2,0.5f,2f);
-        
+        gameLossDisplayObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        gameLossDisplayObject.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
+        gameLossDisplayObject.transform.localPosition = new Vector3(-2, 0.5f, 2f);
+
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
-        if(greyScale == null)
+        if (greyScale == null)
             return;
 
         greyScale.Active = true;
