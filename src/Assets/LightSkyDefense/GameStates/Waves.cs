@@ -15,7 +15,7 @@ public class Wave1 : MonoBehaviour, IWave
         var enemyPrefab = Resources.Load("Prefabs/Enemy");
 
         // Create a new enemy every 20 seconds
-        for (var i = 10; i > 0; i--)
+        for (var i = 3; i > 0; i--)
         {
             // Spawn more enemies
             Instantiate(enemyPrefab);
@@ -23,7 +23,7 @@ public class Wave1 : MonoBehaviour, IWave
         }
 
         // Cooldown timeout
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0);
     }
 }
 
@@ -43,7 +43,7 @@ public class Wave2 : MonoBehaviour, IWave
 
 public class Waves : MonoBehaviour, IGameState
 {
-    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
+    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2), typeof(Wave1) };
 
     public Waves()
     {
@@ -61,9 +61,14 @@ public class Waves : MonoBehaviour, IGameState
     /// <returns></returns>
     private IEnumerator WavesRoutine()
     {
+        int waveAmount = PreconfiguredWaves.Length;
+        int waveCounter = 0;
+
         // Create new predefined waves and iterate trough them
         foreach (var waveType in PreconfiguredWaves)
         {
+            waveCounter++;
+
             var wave = (IWave)gameObject.AddComponent(waveType);
 
             // We need to wait one tick to make sure that the component has initialized properly
@@ -77,8 +82,8 @@ public class Waves : MonoBehaviour, IGameState
                 yield return enumerator.Current;
             }
 
-            // DOESN'T work if duplicate with last wave
-            if (PreconfiguredWaves[PreconfiguredWaves.Length - 1] == waveType)
+            // If last wave
+            if (waveAmount == waveCounter)
             {
                 var gameManager = Player.instance.GetComponent<GameManager>();
                 gameManager.LastEnemiesTrigger();
