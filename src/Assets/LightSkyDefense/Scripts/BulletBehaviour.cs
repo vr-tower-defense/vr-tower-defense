@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
 
-public class DestroyBullet : MonoBehaviour
+public class BulletBehaviour : MonoBehaviour
 {
-    public int BulletDamage;
+    public float BulletDamage;
+    public float TimeBeforeDestroy = 3;
+
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 5);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(gameObject, TimeBeforeDestroy);
     }
 
     void OnCollisionEnter(Collision collision)
     {
         Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
-        if (enemyScript == null) return;
-        enemyScript.Damage(BulletDamage);
+        enemyScript?.Damage(BulletDamage);
+
         Destroy(gameObject);
     }
 }

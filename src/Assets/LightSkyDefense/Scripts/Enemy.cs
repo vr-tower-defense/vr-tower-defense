@@ -280,4 +280,9 @@ public class Enemy : MonoBehaviour
         towerScript.Damage(CollisionDamage);
         Explode();
     }
+
+    public void OnGameLoss()
+    {
+        Debug.Log("Enemy: Game lost!");
+    }
 }
