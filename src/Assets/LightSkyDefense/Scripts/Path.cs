@@ -8,8 +8,8 @@ public class Path : MonoBehaviour
 {
     public class PathPoint
     {
-        public Vector3 Position;
-        public Vector3 DirectionVector;
+        public Vector3 Position;// Tail
+        public Vector3 DirectionVector;// Translation Vector
 
         public PathPoint(Vector3 position, Vector3 directionVector)
         {
@@ -41,7 +41,7 @@ public class Path : MonoBehaviour
             var nextPathPoint = transform.TransformPoint(pathVectors[i + 1]);
             var point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
             point.name = "Way" + i;
-            PathPoints[i] = new PathPoint(pathPoint, pathPoint - nextPathPoint);
+            PathPoints[i] = new PathPoint(pathPoint, nextPathPoint - pathPoint);
         }
 
         PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);

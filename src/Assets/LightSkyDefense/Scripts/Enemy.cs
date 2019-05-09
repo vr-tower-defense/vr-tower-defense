@@ -28,21 +28,28 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
     private readonly float _rotationSpeed = 2f;
 
     private int _lookAheadDistance = 5; // in waypoints
-    private int _waypointIndex = 0;
+    //private int _waypointIndex = 0;
     private bool _lost = true;
+    private PathFollower _pathFollower;
 
-    void Start()
+    private void Awake()
+    {
+        _pathFollower = GetComponentInChildren<PathFollower>();
+    }
+
+    private void Start()
     {
         _energyCharge = EnergyCapacity;
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         var pathPoints = GameManager.Instance.Path.PathPoints;
 
         // Calculate energy potential
-        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex].Position);
+        //_potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex].Position);
+        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_pathFollower.PathPointIndex].Position);
 
         if (_potentialEnergy >= 0)
         {
@@ -64,37 +71,37 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
         }
 
         //
-        ApplySteeringForce(pathPoints.Select(p => p.Position).ToArray());
+        //ApplySteeringForce(pathPoints.Select(p => p.Position).ToArray());
 
         RotateToVelocityDirection();
     }
 
-    void ApplySteeringForce(Vector3[] pathPoints)
-    {
-        if (_waypointIndex > pathPoints.Length)
-        {
-            return;
-        }
+    //void ApplySteeringForce(Vector3[] pathPoints)
+    //{
+    //    if (_waypointIndex > pathPoints.Length)
+    //    {
+    //        return;
+    //    }
 
-        // Following if statement isn't needed if we spawn the enemy in the correct place
-        if (_waypointIndex == 0)
-        {
-            transform.position = pathPoints[_waypointIndex + _lookAheadDistance];
-        }
+    //    // Following if statement isn't needed if we spawn the enemy in the correct place
+    //    if (_waypointIndex == 0)
+    //    {
+    //        transform.position = pathPoints[_waypointIndex + _lookAheadDistance];
+    //    }
 
-        if (_lost)
-        {
-            // Lost so go back to last known waypoint
-            _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (pathPoints[_waypointIndex] - transform.position).normalized));
-            return;
-        }
+    //    if (_lost)
+    //    {
+    //        // Lost so go back to last known waypoint
+    //        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * 2 * (pathPoints[_waypointIndex] - transform.position).normalized));
+    //        return;
+    //    }
 
-        // Move enemy towards path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (pathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
+    //    // Move enemy towards path
+    //    _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * _potentialEnergy * (pathPoints[_waypointIndex + _lookAheadDistance] - transform.position).normalized));
 
-        // Move enemy parallel to the path
-        _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (pathPoints[_waypointIndex] - pathPoints[_waypointIndex - _lookAheadDistance]).normalized));
-    }
+    //    // Move enemy parallel to the path
+    //    _rigidbody.AddForce(_rigidbody.mass * (MovementSpeed * (pathPoints[_waypointIndex] - pathPoints[_waypointIndex - _lookAheadDistance]).normalized));
+    //}
 
     public float GetHealth()
     {
@@ -233,22 +240,22 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
     /// <param name="col"></param>
     private void OnTriggerEnter(Collider collider)
     {
-        if (!collider.gameObject.name.StartsWith("Way"))
-        {
-            return;
-        }
+        //if (!collider.gameObject.name.StartsWith("Way"))
+        //{
+        //    return;
+        //}
 
-        var pathPoints = GameManager.Instance.Path.PathPoints;
+        //var pathPoints = GameManager.Instance.Path.PathPoints;
 
-        _waypointIndex = Mathf.Clamp(
-            int.Parse(collider.gameObject.name.Substring(3)) + 1,
-            _lookAheadDistance,
-            pathPoints.Length - _lookAheadDistance - 1
-        );
+        //_waypointIndex = Mathf.Clamp(
+        //    int.Parse(collider.gameObject.name.Substring(3)) + 1,
+        //    _lookAheadDistance,
+        //    pathPoints.Length - _lookAheadDistance - 1
+        //);
 
-        _lost = false;
+        //_lost = false;
 
-        if (_waypointIndex == (pathPoints.Length - _lookAheadDistance - 1))
+        if (_pathFollower.PathPointIndex == (GameManager.Instance.Path.PathPoints.Length - _lookAheadDistance - 1))
         {
             Finish();
         }
@@ -256,26 +263,48 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
 
     private void RotateToVelocityDirection()
     {
-        var velocity = gameObject.GetComponent<Rigidbody>().velocity;
-
-        if (velocity != Vector3.zero)
+        //var velocity = gameObject.GetComponent<Rigidbody>().velocity;
+        var translationVector = _pathFollower.transform.position - _pathFollower.PreviousPosition;
+        if (translationVector != Vector3.zero)
         {
-            var lookAngle = Quaternion.LookRotation(
-                  velocity,
-                  Vector3.forward);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+            var lookAngle = Quaternion.LookRotation(translationVector);
+                       
+            //_rigidbody.rotation = lookAngle;;
+            _rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
+        return;
+        //var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
+        var components = collision.collider.gameObject.GetComponents(typeof (Component));
+        
+        foreach (Component c in components)
+        {
+            if (c is TowerBehaviour towerBehaviour)
+            {
+                towerBehaviour.Damage(CollisionDamage);
+                Explode();
+                Debug.Log("Enemy hit Tower");
+            }
+            else if (c is Enemy)
+            {
+                //Debug.Log("Enemy hit Enemy");
+            }
+            else if (c is DestroyBullet)
+            {
+                Debug.Log("Enemy hit Bullet");
+            }
+        }
 
-        if (towerScript == null) return;
+        
+        {
+            //towerScript.Damage(CollisionDamage);
+            //Explode();
+        }
 
-        towerScript.Damage(CollisionDamage);
-        Explode();
+
     }
 
     public void OnGameLoss()
