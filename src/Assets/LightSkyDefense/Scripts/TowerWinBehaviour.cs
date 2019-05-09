@@ -11,7 +11,10 @@ public class WinCelebrationBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         if (_rotationFinished)
+        {
+            transform.Rotate(new Vector3(0, 0, 0.2f));
             return;
+        }
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, _aimAngle, 2);
 
