@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: fc5d0aacb27aceb4392758cd2fc7976b
+guid: c9dc7c728ff86fb40b69c960577f791f
+labels:
+- Weapon
 PrefabImporter:
   externalObjects: {}
   userData: 

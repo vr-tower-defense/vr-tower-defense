@@ -283,6 +283,6 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
 
     public void OnGameLoss()
     {
-        enabled = false;
+        Debug.Log("Enemy: Game lost!");
     }
 }

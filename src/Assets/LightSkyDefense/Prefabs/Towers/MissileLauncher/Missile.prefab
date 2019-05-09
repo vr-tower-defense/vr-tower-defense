@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1945967994869956103}
-  - component: {fileID: 4345736391670138283}
   - component: {fileID: 2614879476725174190}
   - component: {fileID: 6130869729085579564}
   - component: {fileID: 3225043650925669176}
   - component: {fileID: 7801479159624637851}
-  m_Layer: 0
-  m_Name: SlowSpeedHighDamageBullet
+  m_Layer: 12
+  m_Name: Missile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,21 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2750454542051786134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0086, y: 0, z: 0.0011}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 287345814034722605}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4345736391670138283
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2750454542051786134}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!136 &2614879476725174190
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -54,8 +45,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.01
-  m_Height: 0.05
+  m_Radius: 0.008
+  m_Height: 0.04
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6130869729085579564
@@ -87,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletDamage: 20
+  TimeBeforeDestroy: 10
 --- !u!96 &7801479159624637851
 TrailRenderer:
   serializedVersion: 2
@@ -200,7 +192,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_Name
-      value: BigBullet
+      value: Missile
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -248,15 +240,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}

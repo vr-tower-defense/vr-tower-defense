@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4378280900032468661}
   - component: {fileID: 1343675722329424218}
   - component: {fileID: 9133426486142341555}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Credit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: cbd3c915a7c6dfa40a1fead553b5c44c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cbd3c915a7c6dfa40a1fead553b5c44c, type: 3}
       propertyPath: m_LocalPosition.x

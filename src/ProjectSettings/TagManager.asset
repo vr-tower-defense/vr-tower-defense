@@ -17,12 +17,12 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - Hand
-  - 
-  - 
-  - 
-  - 
+  - Towers
+  - Enemies
+  - Path
+  - Controls
+  - Projectiles
+  - Pickups
   - 
   - 
   - 
