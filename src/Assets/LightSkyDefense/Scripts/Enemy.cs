@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public Credit Credit;
     public int CreditValue = 5;
 
+    public float ChargeSpeed = 0.1f;
+    public float DischargeSpeed = 0.1f;
+
     public PathFollower PathFollower { get; private set; }
 
     public Rigidbody Rigidbody { get; private set; }
@@ -31,7 +34,7 @@ public class Enemy : MonoBehaviour
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
-    private bool _lost = true;
+    private bool _lost = true;// todo implement this in steering behaviour
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
 
@@ -224,11 +227,11 @@ public class Enemy : MonoBehaviour
 
         if (_potentialEnergy >= 0)
         {
-            Charge(0.1f);
+            Charge(ChargeSpeed);
         }
         else
         {
-            Discharge(0.1f);
+            Discharge(DischargeSpeed);
 
             if (_potentialEnergy < _potentialEnergyRange / 2)
             {
