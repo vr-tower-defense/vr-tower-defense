@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
-    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget
+    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarget
     {
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
         
@@ -128,7 +128,6 @@ namespace Assets
 
             newProjectile.velocity = transform.forward * ProjectileSpeed;
 
-
             _source.PlayWithRandomPitch(0.5f,1.5f);
         }
 
@@ -172,6 +171,11 @@ namespace Assets
         {
             StopCoroutine(_coroutine);
             enabled = false;
+        }
+
+        public void OnGameWin()
+        {
+            gameObject.AddComponent<TowerWinBehaviour>();
         }
     }
 }

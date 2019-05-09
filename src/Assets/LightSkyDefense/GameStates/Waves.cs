@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 interface IWave
 {
@@ -35,7 +36,7 @@ public class Wave2 : MonoBehaviour, IWave
         for (var i = 10; i > 0; i--)
         {
             Instantiate(enemyPrefab);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
         }
     }
 }
@@ -60,20 +61,32 @@ public class Waves : MonoBehaviour, IGameState
     /// <returns></returns>
     private IEnumerator WavesRoutine()
     {
+        int waveAmount = PreconfiguredWaves.Length;
+        int waveCounter = 0;
+
         // Create new predefined waves and iterate trough them
         foreach (var waveType in PreconfiguredWaves)
         {
+            waveCounter++;
+
             var wave = (IWave)gameObject.AddComponent(waveType);
 
             // We need to wait one tick to make sure that the component has initialized properly
             yield return new WaitForFixedUpdate();
 
-            // iterate through the steps of wave
+            // Iterate through the steps of wave
             var enumerator = wave.Play(this);
 
             while (enumerator.MoveNext())
             {
                 yield return enumerator.Current;
+            }
+
+            // If last wave
+            if (waveAmount == waveCounter)
+            {
+                var gameManager = Player.instance.GetComponent<GameManager>();
+                gameManager.LastEnemiesTrigger();
             }
 
             Destroy((MonoBehaviour)wave);
