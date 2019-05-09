@@ -35,16 +35,21 @@ public class Path : MonoBehaviour
 
         PathPoints = new PathPoint[pathVectors.Length];
 
+        GameObject point = null;
+
         for (int i = 0; i < pathVectors.Length - 1; i++)
         {
             var pathPoint = transform.TransformPoint(pathVectors[i]);
             var nextPathPoint = transform.TransformPoint(pathVectors[i + 1]);
-            var point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
+            point = Instantiate(GameManager.Instance.WayPointPrefab, pathPoint, Quaternion.identity, transform);
             point.name = "Way" + i;
             PathPoints[i] = new PathPoint(pathPoint, nextPathPoint - pathPoint);
         }
 
+        point.transform.localScale *= 5;
+
         PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);
+
 
         DrawPath(pathVectors);
     }

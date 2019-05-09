@@ -18,7 +18,7 @@ public class Wave1 : MonoBehaviour, IWave
         {
             // Spawn more enemies
             Instantiate(enemyPrefab);
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         // Cooldown timeout

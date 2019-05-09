@@ -3,6 +3,9 @@
 public class DestroyBullet : MonoBehaviour
 {
     public int BulletDamage;
+    
+    public int KnockBackAmount = 25;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,8 @@ public class DestroyBullet : MonoBehaviour
         Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
         if (enemyScript == null) return;
         enemyScript.Damage(BulletDamage);
+        //enemyScript._pathFollower.AddOffset(collision.GetContact(0).normal, KnockBackAmount);
+        enemyScript.Rigidbody.AddForce(-collision.GetContact(0).normal* KnockBackAmount);
         Destroy(gameObject);
     }
 }

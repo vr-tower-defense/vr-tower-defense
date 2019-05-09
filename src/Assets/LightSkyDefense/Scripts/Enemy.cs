@@ -20,17 +20,19 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
 
     private ParticleSystem _explodeEffectInstance = null;
     private ParticleSystem _teleportEffectInstance = null;
-    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody { get; private set; }
 
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
     private readonly float _rotationSpeed = 2f;
+    private readonly float _potentialEnergyRange = 0.8f;
 
-    private int _lookAheadDistance = 5; // in waypoints
+    //private int _lookAheadDistance = 5; // in waypoints
     //private int _waypointIndex = 0;
     private bool _lost = true;
-    private PathFollower _pathFollower;
+    public PathFollower _pathFollower { get; private set; }
+    private Path.PathPoint[] _pathPoints;
 
     private void Awake()
     {
@@ -40,16 +42,18 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
     private void Start()
     {
         _energyCharge = EnergyCapacity;
-        _rigidbody = GetComponent<Rigidbody>();
+        _pathPoints = GameManager.Instance.Path.PathPoints;
+        Rigidbody = GetComponent<Rigidbody>();
+        Rigidbody.position = GameManager.Instance.Path.PathPoints[_pathFollower.PathPointIndex].Position;
     }
 
     private void FixedUpdate()
     {
-        var pathPoints = GameManager.Instance.Path.PathPoints;
+        //var pathPoints = GameManager.Instance.Path.PathPoints;
 
         // Calculate energy potential
         //_potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_waypointIndex].Position);
-        _potentialEnergy = 0.8f - Vector3.Distance(transform.position, pathPoints[_pathFollower.PathPointIndex].Position);
+        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[_pathFollower.PathPointIndex].Position);
 
         if (_potentialEnergy >= 0)
         {
@@ -59,7 +63,7 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
         {
             DisCharge(0.1f);
 
-            if (_potentialEnergy < 0.4f)
+            if (_potentialEnergy < _potentialEnergyRange/2)
             {
                 _lost = true;
             }
@@ -67,7 +71,7 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
 
         if (_energyCharge < 0)
         {
-            Damage(30);
+            //Damage(30);
         }
 
         //
@@ -240,25 +244,24 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
     /// <param name="col"></param>
     private void OnTriggerEnter(Collider collider)
     {
-        //if (!collider.gameObject.name.StartsWith("Way"))
-        //{
-        //    return;
-        //}
-
-        //var pathPoints = GameManager.Instance.Path.PathPoints;
-
-        //_waypointIndex = Mathf.Clamp(
-        //    int.Parse(collider.gameObject.name.Substring(3)) + 1,
-        //    _lookAheadDistance,
-        //    pathPoints.Length - _lookAheadDistance - 1
-        //);
-
-        //_lost = false;
-
-        if (_pathFollower.PathPointIndex == (GameManager.Instance.Path.PathPoints.Length - _lookAheadDistance - 1))
+        if (!collider.gameObject.name.StartsWith("Way"))
+        {
+            return;
+        }
+        
+        var foundIndex = int.Parse(collider.gameObject.name.Substring(3));
+        
+        if (foundIndex == (_pathPoints.Length-2))
         {
             Finish();
         }
+
+        if (foundIndex>_pathFollower.PathPointIndex)
+        {
+            _pathFollower.PathPointIndex = foundIndex;
+        }
+
+        _lost = false;
     }
 
     private void RotateToVelocityDirection()
@@ -270,31 +273,27 @@ public class Enemy : MonoBehaviour, IOnGameLossTarget
             var lookAngle = Quaternion.LookRotation(translationVector);
                        
             //_rigidbody.rotation = lookAngle;;
-            _rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+            Rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        return;
+        //return;
         //var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
         var components = collision.collider.gameObject.GetComponents(typeof (Component));
-        
+
+        //Check for components like TowerBehaviour, Enemy, DestroyBullet, etc..
         foreach (Component c in components)
         {
             if (c is TowerBehaviour towerBehaviour)
             {
                 towerBehaviour.Damage(CollisionDamage);
                 Explode();
-                Debug.Log("Enemy hit Tower");
             }
-            else if (c is Enemy)
+            else if (c is Enemy enemy)
             {
-                //Debug.Log("Enemy hit Enemy");
-            }
-            else if (c is DestroyBullet)
-            {
-                Debug.Log("Enemy hit Bullet");
+                //enemy._pathFollower.AddOffset(collision.GetContact(0).normal, 0.02f);
             }
         }
 
