@@ -175,7 +175,7 @@ namespace Assets
 
         public void OnGameWin()
         {
-            gameObject.AddComponent<WinCelebrationBehaviour>();
+            gameObject.AddComponent<TowerWinBehaviour>();
         }
     }
 }
