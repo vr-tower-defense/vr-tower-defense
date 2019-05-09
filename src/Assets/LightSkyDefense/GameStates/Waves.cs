@@ -15,7 +15,7 @@ public class Wave1 : MonoBehaviour, IWave
         var enemyPrefab = Resources.Load("Prefabs/Enemy");
 
         // Create a new enemy every 20 seconds
-        for (var i = 3; i > 0; i--)
+        for (var i = 10; i > 0; i--)
         {
             // Spawn more enemies
             Instantiate(enemyPrefab);
@@ -23,7 +23,7 @@ public class Wave1 : MonoBehaviour, IWave
         }
 
         // Cooldown timeout
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(5);
     }
 }
 
@@ -43,7 +43,7 @@ public class Wave2 : MonoBehaviour, IWave
 
 public class Waves : MonoBehaviour, IGameState
 {
-    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2), typeof(Wave1) };
+    Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
 
     public Waves()
     {
