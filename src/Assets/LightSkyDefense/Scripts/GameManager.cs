@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
 using Valve.VR.InteractionSystem;
 
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     [HideInInspector]
     public GameObject WayPointPrefab;
 
+    public string GameOverText = "Wasted!";
+    public float FontQuality = 250;
+
     private Path _path;
     public Path Path
     {
@@ -20,8 +24,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     }
 
     private static GameManager _instance;
-
-
     public static GameManager Instance
     {
         get
@@ -91,16 +93,30 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
     }
 
-
     public void OnGameLoss()
     {
-        var camera = Camera.main.gameObject.GetComponent<GreyscaleAfterEffect>();
+        var camera = Camera.main;
 
         if(camera == null)
             return;
 
-        camera.Active = true;
+        var gameLossDisplayObject = new GameObject();
+        gameLossDisplayObject.name = "Game Over screen";
+        var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
+        mesh.text = GameOverText;
+        mesh.fontSize = Mathf.FloorToInt(FontQuality);
+        mesh.color = Color.red;
+        
+        gameLossDisplayObject.transform.parent = camera.transform;
+        gameLossDisplayObject.transform.rotation = new Quaternion(0,0,0,0);
+        gameLossDisplayObject.transform.localScale = new Vector3(10f/ FontQuality, 10f / FontQuality);
+        gameLossDisplayObject.transform.localPosition = new Vector3(-2,0.5f,2f);
+        
+        var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
+        if(greyScale == null)
+            return;
 
+        greyScale.Active = true;
     }
 }
