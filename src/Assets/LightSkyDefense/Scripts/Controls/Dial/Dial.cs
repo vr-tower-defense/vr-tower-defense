@@ -12,14 +12,8 @@ public class Dial : MonoBehaviour
     [Tooltip("Radius of the dial option circle")]
     public float DialOptionRadius = .1f;
 
-    [Tooltip("Offset from the hand position")]
-    public Vector3 DialOptionOffset = new Vector3(0, .15f, 0);
-
     [Tooltip("Options that can are placed onto the Dial")]
     public GameObject[] DialOptions;
-
-    [Tooltip("Object that the dial is attached to")]
-    public GameObject AttachmentPoint;
 
     // Field used to check whether user is in process of clicking touchpad
     private DialOption _pressedDial;
@@ -42,7 +36,21 @@ public class Dial : MonoBehaviour
         // Create dial option instances
         for (int i = 0; i < DialOptions.Length; i++)
         {
-            _dialOptions[i] = Instantiate(DialOptions[i]);
+            _dialOptions[i] = Instantiate(DialOptions[i], gameObject.transform);
+
+            var segmentAngle = (365 / _dialOptions.Length);
+            var segmentAngleCenter = segmentAngle / 2;
+
+            // Update position
+            var localRotationInRadians = ((segmentAngle * i) + segmentAngleCenter) * Mathf.Deg2Rad;
+
+            // Create a local position using the rotation hand rotation
+            var localPosition =
+                Quaternion.Euler(transform.rotation.eulerAngles) * 
+                (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) * DialOptionRadius);
+
+            // Update position by adding local position to world position of right hand
+            _dialOptions[i].transform.position = transform.position + localPosition;
         }
     }
 
@@ -135,9 +143,6 @@ public class Dial : MonoBehaviour
     /// </summary>
     private void UpdateDialOptions()
     {
-        var segmentAngle = (365 / _dialOptions.Length);
-        var segmentAngleCenter = segmentAngle / 2;
-
         // Create dial option instances
         for (int i = 0; i < _dialOptions.Length; i++)
         {
@@ -152,17 +157,6 @@ public class Dial : MonoBehaviour
             {
                 dialOptionScript.IsSelected = false;
             }
-
-            // Update position
-            var localRotationInRadians = ((segmentAngle * i) + segmentAngleCenter + DialRotationOffset) * Mathf.Deg2Rad;
-
-            // Create a local position using the rotation hand rotation
-            var localPosition =
-                Quaternion.Euler(AttachmentPoint.transform.rotation.eulerAngles) *
-                (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) * DialOptionRadius + DialOptionOffset);
-
-            // Update position by adding local position to world position of right hand
-            _dialOptions[i].transform.position = AttachmentPoint.transform.position + localPosition;
         }
     }
 }

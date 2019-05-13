@@ -46,7 +46,7 @@ public abstract class DialOption : MonoBehaviour
                 renderer.material.color.r,
                 renderer.material.color.g,
                 renderer.material.color.b,
-                IsSelected ? 1f : InactiveTransparency
+                IsSelected ? .5f : InactiveTransparency
             );
         }
     }
