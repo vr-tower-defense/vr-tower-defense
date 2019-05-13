@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
-    [RequireComponent(typeof(Interactable))]
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]

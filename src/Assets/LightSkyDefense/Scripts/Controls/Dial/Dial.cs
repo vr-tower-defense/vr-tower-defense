@@ -46,7 +46,7 @@ public class Dial : MonoBehaviour
 
             // Create a local position using the rotation hand rotation
             var localPosition =
-                Quaternion.Euler(transform.rotation.eulerAngles) * 
+                Quaternion.Euler(transform.rotation.eulerAngles) *
                 (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) * DialOptionRadius);
 
             // Update position by adding local position to world position of right hand

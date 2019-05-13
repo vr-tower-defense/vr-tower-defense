@@ -4,21 +4,27 @@ using Valve.VR.InteractionSystem;
 
 public class SpawnDialOption : DialOption
 {
-    public GameObject prefab;
+    public GameObject Preview;
+    public GameObject Final;
 
     /// <summary>
     /// Instance that is currently being placed
     /// </summary>
-    private GameObject _clone;
+    private GameObject _preview;
 
     /// <summary>
     /// Create new instance of `prefab` and attach it to player hand
     /// </summary>
     public override void OnPressStart(SteamVR_Action_Vector2 action)
     {
-        _clone = Instantiate(prefab, Player.instance.rightHand.transform);
+        var handTransform = Player.instance.rightHand.transform;
 
-        Debug.Log($"Created new instance of {_clone}");
+        _preview = Instantiate(
+            Preview,
+            handTransform.position,
+            handTransform.rotation,
+            Player.instance.rightHand.transform
+        );
     }
 
     /// <summary>
@@ -26,9 +32,22 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnPressUp(SteamVR_Action_Vector2 action)
     {
-        _clone.transform.parent = null;
+        var handTransform = Player.instance.rightHand.transform;
 
-        // Clear clone property
-        _clone = null;
+        // Destroy clone and replace with "real" instance
+        Destroy(_preview);
+        Instantiate(Final, handTransform.position, handTransform.rotation);
+    }
+
+    // Applies an upwards force to all rigidbodies that enter the trigger.
+    void OnTriggerStay(Collider collider)
+    {
+        Debug.Log("bAammm collision" + collider.name);
+    }
+
+    // Applies an upwards force to all rigidbodies that enter the trigger.
+    void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("bAammm collision enter" + collider.name);
     }
 }
