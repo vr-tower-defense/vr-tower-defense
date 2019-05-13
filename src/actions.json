@@ -32,6 +32,11 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/MenuButtonClick",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
