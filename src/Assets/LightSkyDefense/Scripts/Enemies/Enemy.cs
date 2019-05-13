@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
-    private bool _lost = true; // todo implement this in steering behaviour
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
 
@@ -181,11 +180,13 @@ public class Enemy : MonoBehaviour
         );
 
         // Damage player
-        var playerStats = Player.instance?.gameObject?.GetComponent<PlayerStatistics>();
-        if (playerStats != null)
+        var playerStatistics = Player.instance?.gameObject?.GetComponent<PlayerStatistics>();
+
+        if (playerStatistics != null)
         {
-            playerStats.Lives--;
+            playerStatistics.Lives--;
         }
+
         // Teleport enemy
         Destroy(gameObject);
     }
@@ -212,8 +213,6 @@ public class Enemy : MonoBehaviour
         {
             PathFollower.PathPointIndex = foundIndex;
         }
-
-        _lost = false;
     }
 
     /// <summary>
@@ -231,11 +230,6 @@ public class Enemy : MonoBehaviour
         else
         {
             Discharge(DischargeSpeed);
-
-            if (_potentialEnergy < _potentialEnergyRange / 2)
-            {
-                _lost = true;
-            }
         }
 
         if (_energyCharge < 0)

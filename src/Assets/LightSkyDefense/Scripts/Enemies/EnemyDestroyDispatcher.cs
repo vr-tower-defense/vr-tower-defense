@@ -6,7 +6,7 @@ public class EnemyDestroyDispatcher : MonoBehaviour
     private void OnDestroy()
     {
         var gameManager = Player.instance.GetComponent<GameManager>();
-        gameManager.CheckAllEnemiesDestroyed();
+        gameManager?.CheckAllEnemiesDestroyed();
     }
 }
 

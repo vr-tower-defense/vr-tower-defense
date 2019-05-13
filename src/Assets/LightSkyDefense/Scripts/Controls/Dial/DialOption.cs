@@ -12,11 +12,11 @@ public abstract class DialOption : MonoBehaviour
     /// <summary>
     /// Render program that is used to render the dial preview
     /// </summary>
-    private Renderer _renderer;
+    private Renderer[] _renderers;
 
     private void Start()
     {
-        _renderer = gameObject.GetComponent<Renderer>();
+        _renderers = gameObject.GetComponentsInChildren<Renderer>();
     }
 
     /// <summary>
@@ -40,11 +40,14 @@ public abstract class DialOption : MonoBehaviour
 
     private void Update()
     {
-        _renderer.material.color = new Color(
-            _renderer.material.color.r,
-            _renderer.material.color.g,
-            _renderer.material.color.b,
-            IsSelected ? 1f : InactiveTransparency
-        );
+        foreach(var renderer in _renderers)
+        {
+            renderer.material.color = new Color(
+                renderer.material.color.r,
+                renderer.material.color.g,
+                renderer.material.color.b,
+                IsSelected ? 1f : InactiveTransparency
+            );
+        }
     }
 }
