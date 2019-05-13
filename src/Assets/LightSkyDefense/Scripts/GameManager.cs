@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     public void CheckAllEnemiesDestroyed()
     {
         _lastWaveEnemiesAmount--;
+
         if (_lastWaveEnemiesAmount != 0)
             return;
 

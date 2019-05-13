@@ -346,8 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca710548a00e6744ab052437ecce0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 0
-  ProjectileSpeed: 3
+  Cost: 10
+  ProjectileSpeed: 1
   RotationSpeed: 1
   ShootInterval: 1
   MaxHealth: 100
