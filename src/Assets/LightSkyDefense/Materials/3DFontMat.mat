@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 3D_Font_Mat
+  m_Name: 3DFontMat
   m_Shader: {fileID: 4800000, guid: 28c21393e71993c4083ce5cb8eec3b48, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

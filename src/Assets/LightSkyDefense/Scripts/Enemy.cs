@@ -241,7 +241,7 @@ public class Enemy : MonoBehaviour
 
         if (_energyCharge < 0)
         {
-            Damage(30);
+            Explode();
         }
     }
 

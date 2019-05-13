@@ -20,6 +20,6 @@ public class EnemySteeringBehaviour : MonoBehaviour
 
         var steeringForce = Arrive.Calculate(transform.position, _enemy.Rigidbody.velocity, targetPosition, MaxSpeed);
 
-        _enemy.Rigidbody.AddForce(Vector3.ClampMagnitude(steeringForce, MaxSpeed));
+        _enemy.Rigidbody.AddForce(steeringForce);
     }
 }

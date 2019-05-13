@@ -8,8 +8,10 @@ public class Path : MonoBehaviour
 {
     public class PathPoint
     {
-        public Vector3 Position;// Tail
-        public Vector3 DirectionVector;// Translation Vector
+        // Tail
+        public Vector3 Position;
+        // Translation Vector
+        public Vector3 DirectionVector;
 
         public PathPoint(Vector3 position, Vector3 directionVector)
         {
