@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9202056953789534630}
   - component: {fileID: 3619709108155021460}
   - component: {fileID: 10967276864640786}
+  - component: {fileID: 2599132469148774452}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -104,8 +105,8 @@ Rigidbody:
   m_GameObject: {fileID: 4986396300896956474}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 20
-  m_AngularDrag: 20
+  m_Drag: 2
+  m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -120,22 +121,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4986396300896956474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62367b71292e62f4793ecfbac8d945c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
-  MovementSpeed: 5
-  EnergyCapacity: 10
+  MaxHealth: 100
+  EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
     type: 3}
-  ExplodeSound: {fileID: 8300000, guid: 65aa875554300d948a99e3e44393932e, type: 3}
+  ExplodeSound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
   TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   CreditValue: 5
+  ChargeSpeed: 0.1
+  DischargeSpeed: 0.1
+--- !u!114 &2599132469148774452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986396300896956474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74ff024d693452459c0f6fb87136cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeed: 1
 --- !u!1 &8775435558714434898
 GameObject:
   m_ObjectHideFlags: 0

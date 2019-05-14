@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
@@ -141,6 +138,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
     public void CheckAllEnemiesDestroyed()
     {
         _lastWaveEnemiesAmount--;
+
         if (_lastWaveEnemiesAmount != 0)
             return;
 
