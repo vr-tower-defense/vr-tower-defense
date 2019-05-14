@@ -23,13 +23,13 @@ public class Path : MonoBehaviour
 
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
 
-        PathPoints = new Vector3[pathVectors.Length/ PathPointDivider];
+        PathPoints = new Vector3[pathVectors.Length / PathPointDivider];
 
         GameObject point = null;
 
-        for (int i = 0; i < pathVectors.Length/ PathPointDivider; i++)
+        for (int i = 0; i < pathVectors.Length / PathPointDivider; i++)
         {
-            var transformedPoint = transform.TransformPoint(pathVectors[i* PathPointDivider]);
+            var transformedPoint = transform.TransformPoint(pathVectors[i * PathPointDivider]);
 
             point = Instantiate(
                 GameManager.Instance.WayPointPrefab,

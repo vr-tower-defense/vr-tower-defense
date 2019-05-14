@@ -15,7 +15,6 @@ public class PathFollower : MonoBehaviour
     private static readonly float _distance = 0.00808f;
     private static readonly float _pathThickness = .08f;
 
-
     void Start()
     {
         _path = GameManager.Instance.Path;
