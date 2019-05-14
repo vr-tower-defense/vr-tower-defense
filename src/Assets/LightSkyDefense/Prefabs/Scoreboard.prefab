@@ -187,15 +187,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3851389679836645009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8441a67f4ee73e49923cd9071249b47, type: 3}
+  m_Script: {fileID: 11500000, guid: e31697225c16e6946996da0d8aa98cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
-  Timer: 0
-  TimeBetweenWaves: 30
-  WaveNumber: 0
-  TotalNumberOfWaves: 15
   BossSpawnedClip: {fileID: 8300000, guid: 70a1255dec58d884db9acd8a2dc68d02, type: 3}
+  Score: 0
+  TimeBetweenWaves: 0
+  Timer: 0
+  TotalNumberOfWaves: 15
+  WaveNumber: 0
 --- !u!82 &1465542252710862369
 AudioSource:
   m_ObjectHideFlags: 0

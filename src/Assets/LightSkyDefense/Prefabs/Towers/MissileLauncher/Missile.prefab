@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletDamage: 20
   TimeBeforeDestroy: 10
+  KnockBackAmount: 0.5
 --- !u!96 &7801479159624637851
 TrailRenderer:
   serializedVersion: 2
