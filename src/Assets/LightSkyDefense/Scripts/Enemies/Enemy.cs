@@ -15,9 +15,6 @@ public class Enemy : MonoBehaviour
     public AudioClip ExplodeSound;
     public AudioClip TeleportSound;
 
-    public Credit Credit;
-    public int CreditValue = 5;
-
     public float ChargeSpeed = 0.1f;
     public float DischargeSpeed = 0.1f;
 
@@ -143,15 +140,6 @@ public class Enemy : MonoBehaviour
 
         // Kill enemy (if Explode() called when the enemy was still alive)
         Destroy(gameObject);
-
-        // Spawn Credit
-        Credit.Value = CreditValue;
-
-        Instantiate(
-            Credit,
-            gameObject.transform.position,
-            gameObject.transform.rotation
-        );
 
         GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
     }
