@@ -26,10 +26,10 @@ public class PathFollower : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 f = Vector3.MoveTowards(transform.position, _path.PathPoints[PathPointIndex], 0.002f);
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, _path.PathPoints[PathPointIndex], 0.002f);
 
         PreviousPosition = transform.position;
-        transform.position = f;
+        transform.position = newPosition;
 
         if (Vector3.Distance(transform.position, _path.PathPoints[PathPointIndex]) < _distance)
         {
