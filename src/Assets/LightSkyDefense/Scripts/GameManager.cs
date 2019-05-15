@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 {
     [HideInInspector]
     public GameObject WayPointPrefab;
+
     public string GameOverText = "Wasted!";
     public float FontQuality = 250;
+    public bool Lost = false;
 
     private static bool _initializing = false;
     private readonly Type _defaultGameState = typeof(Waves);
@@ -92,22 +94,32 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
     public void OnGameLoss()
     {
+        if(Lost)
+            return;
+        Lost = true;
         var camera = Camera.main;
 
         if (camera == null)
             return;
 
+
+
         var gameLossDisplayObject = new GameObject();
         gameLossDisplayObject.name = "Game Over screen";
+
+        gameLossDisplayObject.transform.position = Player.instance.headCollider.transform.position +
+                                                   (Player.instance.headCollider.transform.rotation *
+                                                    new Vector3(0, 0, 1.5f));
+
+        gameLossDisplayObject.transform.rotation = Player.instance.headCollider.transform.rotation ;
+
         var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
         mesh.text = GameOverText;
         mesh.fontSize = Mathf.FloorToInt(FontQuality);
         mesh.color = Color.red;
+        mesh.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
 
-        gameLossDisplayObject.transform.parent = camera.transform;
-        gameLossDisplayObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-        gameLossDisplayObject.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
-        gameLossDisplayObject.transform.localPosition = new Vector3(-2, 0.5f, 2f);
+
 
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
@@ -146,3 +158,4 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
     }
 }
+
