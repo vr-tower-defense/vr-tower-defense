@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Scoreboard : MonoBehaviour, IOnGameLossTarget
+public class Scoreboard : MonoBehaviour, IOnGameLoseTarget
 {
     public AudioClip BossSpawnedClip;
     public float Score;
@@ -36,7 +36,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
     private PlayerStatistics _player;
 
     //When the player loses
-    public void OnGameLoss()
+    public void OnGameLose()
     {
         _remaininglives = _player.Lives;
         _lives.text = $"Lives: {_remaininglives}";
@@ -191,7 +191,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _livesClone.text = _lives.text;
 
         //Credit update
-        _playercredits = _player.Credits;
+        _playercredits = _player.Funds;
         _credits.text = $"Credits: {_playercredits}";
         _creditsClone.text = _credits.text;
     }

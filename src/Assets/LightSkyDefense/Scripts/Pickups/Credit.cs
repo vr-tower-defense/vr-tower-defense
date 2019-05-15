@@ -17,11 +17,11 @@ public class Credit : MonoBehaviour
     /// <param name="hand"></param>
     private void OnHandHoverBegin(Hand hand)
     {
-        var platerStatistics = Player.instance.gameObject.GetComponent<PlayerStatistics>();
+        var platerStatistics = Player
+            .instance
+            .GetComponent<PlayerStatistics>();
 
-        if (platerStatistics == null) return;
-       
-        platerStatistics.Credits += Value;
+        platerStatistics?.UpdateFunds(Value);
 
         SoundUtil.PlayClipAtPointWithRandomPitch(
             PickupSound, 

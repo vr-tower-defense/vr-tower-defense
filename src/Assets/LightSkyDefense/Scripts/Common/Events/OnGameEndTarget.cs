@@ -6,7 +6,7 @@ interface IOnGameWinTarget : IEventSystemHandler
     void OnGameWin();
 }
 
-interface IOnGameLossTarget : IEventSystemHandler
+interface IOnGameLoseTarget : IEventSystemHandler
 {
-    void OnGameLoss();
+    void OnGameLose();
 }

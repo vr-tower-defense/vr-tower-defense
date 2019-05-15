@@ -4,38 +4,67 @@ using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
-    private int _lives;
+    [SerializeField]
+    private readonly int InitialLives = 5;
 
-    public int StartLives = 5;
-    public int StartCredits = 20;
+    [SerializeField]
+    private readonly int InitialFunds = 20;
 
-    public float Credits { get; set; } = 20;
+    [HideInInspector]
+    public int Lives { get; private set; }
 
-    public int Lives
-    {
-        get => _lives;
-        set
-        {
-            _lives = value;
+    [HideInInspector]
+    public float Funds { get; private set; }
 
-            if (_lives > 0)
-                return;
-
-            GameObject[] targets = gameObject.scene.GetRootGameObjects();
-
-            targets.ForEach(target => 
-                ExecuteEvents.Execute<IOnGameLossTarget>(
-                    target,
-                    null, 
-                    (handler, _) => handler.OnGameLoss()
-                )
-            );
-        }
-    }
-
+    /// <summary>
+    /// Set the initial values
+    /// </summary>
     public void Start()
     {
-        Lives = StartLives;
-        Credits = StartCredits;
+        Lives = InitialLives;
+        Funds = InitialFunds;
+    }
+
+    /// <summary>
+    /// Updates the players' funds
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns>Boolean indicating whether action was successful or not</returns>
+    public bool UpdateFunds(float amount)
+    {
+        var tempFunds = Funds + amount;
+
+        if(tempFunds < 0)
+        {
+            return false;
+        }
+
+        Funds = tempFunds;
+        return true;
+    }
+
+    /// <summary>
+    /// Update the players' lives
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UpdateLives(int amount)
+    {
+        Lives += amount;
+
+        if (Lives > 0)
+        {
+            return;
+        }
+
+        gameObject
+            .scene
+            .GetRootGameObjects()
+            .ForEach(target =>
+                ExecuteEvents.Execute<IOnGameLoseTarget>(
+                    target,
+                    null,
+                    (handler, _) => handler.OnGameLose()
+                )
+            );
     }
 }

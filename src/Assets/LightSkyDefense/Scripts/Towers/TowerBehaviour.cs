@@ -8,7 +8,7 @@ namespace Assets
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]
-    public class TowerBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarget
+    public class TowerBehaviour : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
     {
         public int Cost;
         public float ProjectileSpeed = 10;
@@ -172,7 +172,7 @@ namespace Assets
         /// <summary>
         /// Remove the tower when the player loses
         /// </summary>
-        public void OnGameLoss()
+        public void OnGameLose()
         {
             Destroy(gameObject);
         }

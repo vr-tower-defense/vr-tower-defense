@@ -30,7 +30,7 @@ class Damagable : MonoBehaviour
     /// <param name="amount"></param>
     public void UpdateHealth(float amount)
     {
-        Health = Mathf.Clamp(Health + amount, 0, MaxHealth);
+        Health = Mathf.Max(Health + amount, MaxHealth);
 
         if(Health <= 0)
         {

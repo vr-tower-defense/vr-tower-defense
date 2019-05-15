@@ -35,8 +35,6 @@ public class Enemy : MonoBehaviour
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
 
-    private bool _isQuitting = false;
-
     private void Awake()
     {
         PathFollower = new GameObject("PathFollower").AddComponent<PathFollower>();
@@ -184,12 +182,11 @@ public class Enemy : MonoBehaviour
         );
 
         // Damage player
-        var playerStatistics = Player.instance?.gameObject?.GetComponent<PlayerStatistics>();
+        var playerStatistics = Player
+            .instance
+            .GetComponent<PlayerStatistics>();
 
-        if (playerStatistics != null)
-        {
-            playerStatistics.Lives--;
-        }
+        playerStatistics?.UpdateLives(-1);
 
         // Teleport enemy
         Destroy(gameObject);
@@ -266,19 +263,16 @@ public class Enemy : MonoBehaviour
     }
 
 
-    void OnApplicationQuit()
-    {
-        _isQuitting = true;
-    }
-
     /// <summary>
     /// Delete PathFollower when enemy is destroyed
     /// </summary>
     void OnDestroy()
     {
-        if (!_isQuitting)
+        if (!Application.isPlaying)
         {
-            Destroy(PathFollower.gameObject);
+            return;
         }
+
+        Destroy(PathFollower.gameObject);
     }
 }
