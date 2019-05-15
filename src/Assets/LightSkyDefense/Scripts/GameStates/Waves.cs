@@ -18,7 +18,7 @@ public class Wave1 : MonoBehaviour, IWave
         for (var i = 10; i > 0; i--)
         {
             // Spawn more enemies
-            Instantiate(enemyPrefab);
+            Instantiate(enemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
 
@@ -35,7 +35,7 @@ public class Wave2 : MonoBehaviour, IWave
 
         for (var i = 10; i > 0; i--)
         {
-            Instantiate(enemyPrefab);
+            Instantiate(enemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
     }
