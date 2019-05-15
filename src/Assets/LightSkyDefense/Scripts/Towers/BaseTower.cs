@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTower : MonoBehaviour
+public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
 {
     #region states
 
@@ -48,20 +48,20 @@ public class BaseTower : MonoBehaviour
     }
 
     /// <summary>
-    /// Update the tower state when the player lost
-    /// </summary>
-    public void OnGameLoss()
-    {
-        var currentState = gameObject.GetComponent<TowerState>();
-        currentState.SetTowerState(CondemnState);
-    }
-
-    /// <summary>
     /// Update the tower state when the player wins
     /// </summary>
     public void OnGameWin()
     {
         var currentState = gameObject.GetComponent<TowerState>();
         currentState.SetTowerState(CelebrationState);
+    }
+
+    /// <summary>
+    /// Update the tower state when the player lost
+    /// </summary>
+    public void OnGameLose()
+    {
+        var currentState = gameObject.GetComponent<TowerState>();
+        currentState.SetTowerState(CondemnState);
     }
 }
