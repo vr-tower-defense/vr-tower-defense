@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: missile_launcher
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d6da3f87c5fc8914da25866242059e95, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d6da3f87c5fc8914da25866242059e95, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
