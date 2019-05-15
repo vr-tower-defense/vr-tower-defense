@@ -2,17 +2,22 @@
 
 public class IdleRotationState : TowerState
 {
-    public float RotationSpeed = 3;
-
+    [SerializeField]
+    private float _rotationSpeed = .75f;
     private Quaternion _currentTarget;
+
+    private void Start()
+    {
+        _currentTarget = Random.rotation;
+    }
 
     private void FixedUpdate()
     {
-        if(transform.rotation == _currentTarget)
+        if(Quaternion.Angle(transform.rotation, _currentTarget) < 10)
         {
             _currentTarget = Random.rotation;
         }
 
-        Quaternion.RotateTowards(transform.rotation, _currentTarget, RotationSpeed);
+        transform.rotation = Quaternion.LerpUnclamped(transform.rotation, _currentTarget, _rotationSpeed * Time.deltaTime);
     }
 }
