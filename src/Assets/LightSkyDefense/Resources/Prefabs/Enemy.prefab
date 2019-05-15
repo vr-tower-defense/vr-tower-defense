@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3619709108155021460}
   - component: {fileID: 10967276864640786}
   - component: {fileID: 2599132469148774452}
+  - component: {fileID: 1527273287116694936}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -151,6 +152,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeed: 1
+--- !u!114 &1527273287116694936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986396300896956474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1
+  InitialHealth: 1
 --- !u!1 &8775435558714434898
 GameObject:
   m_ObjectHideFlags: 0

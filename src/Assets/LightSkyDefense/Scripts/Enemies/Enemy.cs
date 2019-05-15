@@ -192,7 +192,7 @@ public class Enemy : MonoBehaviour
 
         if (_energyCharge <= 0)
         {
-            OnDestroy();
+            Destroy(gameObject);
         }
     }
 
@@ -248,9 +248,8 @@ public class Enemy : MonoBehaviour
                 ?.PointGain(PointValue);
 
             Explode();
-            Destroy(PathFollower);
         }
 
-        Destroy(PathFollower.gameObject);
+        Destroy(PathFollower?.gameObject);
     }
 }
