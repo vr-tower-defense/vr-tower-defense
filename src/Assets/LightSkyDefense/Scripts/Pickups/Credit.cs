@@ -5,7 +5,8 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(Interactable))]
 public class Credit : MonoBehaviour
 {
-    public float Value = 5;
+    [HideInInspector]
+    public float Value;
 
     public AudioClip PickupSound;
     public Tuple<float, float> PitchRange = new Tuple<float, float>(.8f, 1.2f);
@@ -25,7 +26,7 @@ public class Credit : MonoBehaviour
         SoundUtil.PlayClipAtPointWithRandomPitch(
             PickupSound, 
             gameObject.transform.position, 
-            PitchRange.Item1, 
+            PitchRange.Item1,
             PitchRange.Item2
         );
 
