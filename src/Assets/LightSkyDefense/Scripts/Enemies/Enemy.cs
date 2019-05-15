@@ -43,11 +43,12 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        Rigidbody = GetComponent<Rigidbody>();
+
         _energyCharge = EnergyCapacity;
         _pathPoints = GameManager.Instance.Path.PathPoints;
 
-        Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex].Position;
+        transform.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex].Position;
     }
 
     private void FixedUpdate()
@@ -247,7 +248,7 @@ public class Enemy : MonoBehaviour
             var lookAngle = Quaternion.LookRotation(translationVector);
 
             //Alternative if performance becomes an issue: _rigidbody.rotation = lookAngle;
-            Rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
         }
     }
 
