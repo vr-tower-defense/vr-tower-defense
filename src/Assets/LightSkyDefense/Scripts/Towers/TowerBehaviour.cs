@@ -138,8 +138,8 @@ namespace Assets
 
             // Update new active target
             _activeTarget = targetTransform;
-
-            // Find first target in list
+            
+            // Don't rotate when target does not exist
             if (!hasTarget) return;
 
             var targetDistance = Vector3.Distance(transform.position, _activeTarget.position);
