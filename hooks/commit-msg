@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+
+INPUT_FILE=$1
+START_LINE=`head -n1 $INPUT_FILE`
+
+# Regex patterns
+COMMIT_PATTERN="^[A-Z][A-Za-z0-9[:space:]-]\{10,50\}[[:space:]]#[0-9]\{1,3\}$"
+MERGE_PATTERN="^Merge[[:space:]]branch.\+"
+
+# Colors
+RED='\033[1;31m'
+CYAN='\033[1;36m'
+NO_COLOR='\033[0m'
+
+if !(
+  grep -q -o $COMMIT_PATTERN <<< $START_LINE ||
+  grep -q -o $MERGE_PATTERN <<< $START_LINE
+); then
+  printf $RED
+  printf "\n\t ###############################"
+  printf "\n\t ####  Bad commit message!  ####"
+  printf "\n\t ###############################"
+  printf $NO_COLOR
+  printf "\n"
+  printf "\n\t - First letter of a sentence should be capitalized"
+  printf "\n\t - Ticket number (#999) should be included at the end of the first line"
+  printf "\n\t - First line should be at least 20 characters long"
+  printf "\n\t - First line should not be longer than 50 characters"
+  printf "\n"
+  printf "\n\t Or"
+  printf "\n"
+  printf "\n\t - Commit message is not a merge commit"
+  printf "\n"
+  printf "\n"
+  printf $CYAN
+  printf "\n\t Examples:"
+  printf $NO_COLOR
+  printf "\n"
+  printf "\n\t Update enemy model #12"
+  printf "\n\t Add idle tower rotation #14"
+  printf "\n\t Merge \"develop\" into \"feature/#14-tower-idle-rotation\""
+  printf "\n"
+  printf "\n"
+
+  # Commit message invalid
+  exit 1
+fi
+
+# Commit message valid
+exit 0
