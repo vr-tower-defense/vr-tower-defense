@@ -5,29 +5,17 @@ using System.Collections.Generic;
 [RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
 {
-    public class PathPoint
-    {
-        // Tail
-        public Vector3 Position;
-
-        // Translation Vector
-        public Vector3 DirectionVector;
-
-        public PathPoint(Vector3 position, Vector3 directionVector)
-        {
-            Position = position;
-            DirectionVector = directionVector;
-        }
-    }
-
     [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
     [Tooltip("Smootheness of rendered line")]
     public int LineDivision = 100;
 
+    [Tooltip("Smootheness factor of Steering Behaviours using path")]
+    public int PathPointDivider = 1;
+
     [HideInInspector]
-    public PathPoint[] PathPoints;
+    public Vector3[] PathPoints;
 
     void Start()
     {
@@ -35,29 +23,26 @@ public class Path : MonoBehaviour
 
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
 
-        PathPoints = new PathPoint[pathVectors.Length];
+        PathPoints = new Vector3[pathVectors.Length / PathPointDivider];
 
         GameObject point = null;
 
-        for (int i = 0; i < pathVectors.Length - 1; i++)
+        for (int i = 0; i < pathVectors.Length / PathPointDivider; i++)
         {
-            var pathPoint = transform.TransformPoint(pathVectors[i]);
-            var nextPathPoint = transform.TransformPoint(pathVectors[i + 1]);
+            var transformedPoint = transform.TransformPoint(pathVectors[i * PathPointDivider]);
 
             point = Instantiate(
                 GameManager.Instance.WayPointPrefab,
-                pathPoint,
+                transformedPoint,
                 Quaternion.identity,
                 transform
             );
             point.name = "Way" + i;
 
-            PathPoints[i] = new PathPoint(pathPoint, nextPathPoint - pathPoint);
+            PathPoints[i] = transformedPoint;
         }
 
         point.transform.localScale *= 5;
-
-        PathPoints[pathVectors.Length - 1] = new PathPoint(pathVectors[pathVectors.Length - 1], PathPoints[pathVectors.Length - 2].DirectionVector);
 
         DrawPath(pathVectors);
     }
