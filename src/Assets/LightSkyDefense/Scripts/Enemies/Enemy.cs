@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour
     private Vector3[] _pathPoints;
 
     private float _energyCharge = 0;
-    private float _health = 100f;
     private float _potentialEnergy = 1f;
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
@@ -55,41 +54,6 @@ public class Enemy : MonoBehaviour
         EnergyBehaviour();
 
         RotateToVelocityDirection();
-    }
-
-    public float GetHealth()
-    {
-        return _health;
-    }
-
-    /// <summary>
-    /// This function will remove the specified dmgAmount from the enemy's health
-    /// </summary>
-    /// <param name="amount"></param>
-    public void Damage(float amount)
-    {
-        _health -= amount;
-
-        if (_health > 0)
-        {
-            return;
-        }
-
-        Explode();
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// This function will add the specified healtAmount to the enemy's health
-    /// </summary>
-    /// <param name="amount"></param>
-    public void Heal(float amount)
-    {
-        _health = Mathf.Clamp(
-            _health + amount,
-            0,
-            MaxHealth
-        );
     }
 
     /// <summary>
@@ -141,9 +105,6 @@ public class Enemy : MonoBehaviour
             _explodeEffectInstance.main.duration + _explodeEffectInstance.main.startLifetime.constantMax
         );
 
-        // Kill enemy (if Explode() called when the enemy was still alive)
-        Destroy(gameObject);
-
         // Spawn Credit
         Credit.Value = CreditValue;
 
@@ -152,10 +113,6 @@ public class Enemy : MonoBehaviour
             gameObject.transform.position,
             gameObject.transform.rotation
         );
-
-        GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
-
-        Destroy(PathFollower);
     }
 
     /// <summary>
@@ -233,9 +190,9 @@ public class Enemy : MonoBehaviour
             Discharge(DischargeSpeed);
         }
 
-        if (_energyCharge < 0)
+        if (_energyCharge <= 0)
         {
-            Explode();
+            OnDestroy();
         }
     }
 
@@ -243,23 +200,33 @@ public class Enemy : MonoBehaviour
     {
         var translationVector = PathFollower.transform.position - PathFollower.PreviousPosition;
 
-        if (translationVector != Vector3.zero)
+        if (translationVector == Vector3.zero)
         {
-            var lookAngle = Quaternion.LookRotation(translationVector);
-
-            //Alternative if performance becomes an issue: _rigidbody.rotation = lookAngle;
-            Rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
+            return;
         }
+
+        var lookAngle = Quaternion.LookRotation(translationVector);
+
+        Rigidbody.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            lookAngle, 
+            _rotationSpeed
+        );
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
+        var other = collision
+            .gameObject
+            .GetComponent<Damagable>();
 
-        if (towerScript == null) return;
+        if (other == null) return;
 
-        towerScript.Damage(CollisionDamage);
-        Explode();
+        // If other is enemy ignore the rest of this function
+        if (other.GetComponent<Enemy>()) return;
+
+        other.UpdateHealth(-CollisionDamage);
+        Destroy(gameObject);
     }
 
 
@@ -268,9 +235,20 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        if (!Application.isPlaying)
+        if (GameManager.IsQuitting)
         {
             return;
+        }
+
+        // When health is <= 0 explode enemy
+        if(GetComponent<Damagable>().Health <= 0)
+        {
+            GameObject.Find("Scoreboard")
+                ?.GetComponent<Scoreboard>()
+                ?.PointGain(PointValue);
+
+            Explode();
+            Destroy(PathFollower);
         }
 
         Destroy(PathFollower.gameObject);

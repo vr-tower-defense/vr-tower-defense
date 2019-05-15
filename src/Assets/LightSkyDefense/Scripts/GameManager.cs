@@ -5,6 +5,11 @@ using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour, IOnGameLoseTarget
 {
+    /// <summary>
+    /// Boolean indicating whether the application is about to quit
+    /// </summary>
+    public static bool IsQuitting { get; private set; } = false;
+
     [HideInInspector]
     public GameObject WayPointPrefab;
 
@@ -61,6 +66,15 @@ public class GameManager : MonoBehaviour, IOnGameLoseTarget
     private void Start()
     {
         SetGameState(_defaultGameState);
+    }
+
+    /// <summary>
+    /// Invoked when the application is about to quit. We set 
+    /// the IsQuitting variable to true, to avoid missing references errors in OnDestroy methods.
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        IsQuitting = true;
     }
 
     /// <summary>

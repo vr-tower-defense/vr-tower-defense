@@ -8,9 +8,8 @@ namespace Assets
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]
-    public class TowerBehaviour : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
+    public class TowerBehaviour : MonoBehaviour
     {
-        public int Cost;
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
         public float ShootInterval = 3;
@@ -33,12 +32,7 @@ namespace Assets
         /// </summary>
         private void Start()
         {
-            var creditOwner = Player.instance.GetComponent<PlayerStatistics>();
-            creditOwner.Credits -= Cost;
-
-
             AudioSource?.PlayOneShotWithRandomPitch(BuildSound, 0.5f, 1.5f);
-            creditOwner.Credits -= Cost;
 
             // Start new coroutine to shoot projectiles
             _coroutine = ShootWithInterval(ShootInterval);
@@ -142,9 +136,12 @@ namespace Assets
             // Don't rotate when target does not exist
             if (!hasTarget) return;
 
-            var targetDistance = Vector3.Distance(transform.position, _activeTarget.position);
-            var travelTime = targetDistance / ProjectileSpeed;
+            var targetDistance = Vector3.Distance(
+                transform.position,
+                _activeTarget.position
+            );
 
+            var travelTime = targetDistance / ProjectileSpeed;
             var targetDisplacement = _activeTarget.velocity * travelTime;
 
             var predictedlookRotation = Quaternion.LookRotation(
@@ -153,40 +150,11 @@ namespace Assets
             );
 
             // Rotate our transform a step closer to the target's.
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, predictedlookRotation, RotationSpeed);
-        }
-
-        /// <summary>
-        /// Inflict damage onto tower when enemy collides with it
-        /// </summary>
-        /// <param name="damageAmount"></param>
-        public void Damage(float damageAmount)
-        {
-            _health -= damageAmount;
-
-            if (_health > 0) return;
-
-            Destroy(gameObject);
-        }
-
-        /// <summary>
-        /// Remove the tower when the player loses
-        /// </summary>
-        public void OnGameLose()
-        {
-            Destroy(gameObject);
-        }
-
-        /// <summary>
-        /// Start the tower celebration behaviour
-        /// </summary>
-        public void OnGameWin()
-        {
-            gameObject.AddComponent<TowerCelebrationBehaviour>();
-
-            // Remove current game component because it will 
-            // conflict with the celebration behaviour
-            Destroy(this);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                predictedlookRotation, 
+                RotationSpeed
+            );
         }
     }
 }

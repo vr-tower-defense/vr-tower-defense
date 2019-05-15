@@ -10,7 +10,7 @@ public class SpawnCreditOnDestroy : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        if (!Application.isPlaying)
+        if (GameManager.IsQuitting)
         {
             return;
         }
