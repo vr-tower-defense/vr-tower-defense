@@ -2,40 +2,72 @@
 using System.Collections;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
+using System.Collections.Generic;
+using System.Linq;
 
-interface IWave
+public abstract class Wave : MonoBehaviour
 {
-    IEnumerator Play(MonoBehaviour monoBehaviour);
+    private static GameObject _enemyPrefab;
+    public static GameObject EnemyPrefab
+    {
+        get
+        {
+            return _enemyPrefab ?? (_enemyPrefab = (GameObject)Resources.Load("Prefabs/Enemy"));
+        }
+    }
+
+    protected List<GameObject> _spawnedEnemies = new List<GameObject>();
+
+    public abstract IEnumerator Play(MonoBehaviour monoBehaviour);
+
+    protected IEnumerator waitForLastEnemy()
+    {
+        bool allDead = false;
+
+        while (!allDead)
+        {
+            yield return new WaitForSeconds(4);
+
+            allDead = true;
+            for (int i = 0; i < _spawnedEnemies.Count; i++)
+            {
+                if (_spawnedEnemies[i] != null)
+                {
+                    allDead = false;
+                    break;
+                }
+            }
+        }
+    }
 }
 
-public class Wave1 : MonoBehaviour, IWave
+public class Wave1 : Wave
 {
-    public IEnumerator Play(MonoBehaviour monoBehaviour)
+    public override IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemy");
+        // Extra wait in the first wave so the player has some time to look around.
+        yield return new WaitForSeconds(5);
 
-        // Create a new enemy every 20 seconds
-        for (var i = 10; i > 0; i--)
-        {
-            // Spawn more enemies
-            Instantiate(enemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
-        }
+        // Spawn single enemy.
+        _spawnedEnemies.Add(Instantiate(EnemyPrefab));
+
+        // Wait until all enemies killed.
+        yield return StartCoroutine(waitForLastEnemy());
 
         // Cooldown timeout
         yield return new WaitForSeconds(5);
     }
+
+
 }
 
-public class Wave2 : MonoBehaviour, IWave
+public class Wave2 : Wave
 {
-    public IEnumerator Play(MonoBehaviour monoBehaviour)
+    public override IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemy");
-
         for (var i = 10; i > 0; i--)
         {
-            Instantiate(enemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+            Instantiate(EnemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
     }
@@ -69,7 +101,7 @@ public class Waves : MonoBehaviour, IGameState
         {
             waveCounter++;
 
-            var wave = (IWave)gameObject.AddComponent(waveType);
+            var wave = (Wave)gameObject.AddComponent(waveType);
 
             // We need to wait one tick to make sure that the component has initialized properly
             yield return new WaitForFixedUpdate();
