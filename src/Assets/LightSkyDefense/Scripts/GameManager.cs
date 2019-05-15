@@ -158,3 +158,4 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
     }
 }
+
