@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
         var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
         mesh.text = GameOverText;
-        mesh.fontSize = Mathf.FloorToInt(f: FontQuality);
+        mesh.fontSize = Mathf.FloorToInt(FontQuality);
         mesh.color = Color.red;
         mesh.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
 
