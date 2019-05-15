@@ -24,13 +24,15 @@ public class Enemy : MonoBehaviour
     private ParticleSystem _explodeEffectInstance = null;
     private ParticleSystem _teleportEffectInstance = null;
 
-    private Path.PathPoint[] _pathPoints;
+    private Vector3[] _pathPoints;
 
     private float _energyCharge = 0;
     private float _health = 100f;
     private float _potentialEnergy = 1f;
     private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
+
+    private bool _isQuitting = false;
 
     private void Awake()
     {
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour
         _pathPoints = GameManager.Instance.Path.PathPoints;
 
         Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex].Position;
+        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
     }
 
     private void FixedUpdate()
@@ -142,6 +144,8 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
 
         GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
+
+        Destroy(PathFollower);
     }
 
     /// <summary>
@@ -199,7 +203,7 @@ public class Enemy : MonoBehaviour
 
         if (foundIndex > PathFollower.PathPointIndex)
         {
-            PathFollower.PathPointIndex = foundIndex;
+            PathFollower.UpdatePathPointIndex(foundIndex);
         }
     }
 
@@ -209,7 +213,7 @@ public class Enemy : MonoBehaviour
     private void EnergyBehaviour()
     {
         // Calculate energy potential
-        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[PathFollower.PathPointIndex].Position);
+        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[PathFollower.PathPointIndex]);
 
         if (_potentialEnergy >= 0)
         {
@@ -247,5 +251,22 @@ public class Enemy : MonoBehaviour
 
         towerScript.Damage(CollisionDamage);
         Explode();
+    }
+
+
+    void OnApplicationQuit()
+    {
+        _isQuitting = true;
+    }
+
+    /// <summary>
+    /// Delete PathFollower when enemy is destroyed
+    /// </summary>
+    void OnDestroy()
+    {
+        if (!_isQuitting)
+        {
+            Destroy(PathFollower.gameObject);
+        }
     }
 }
