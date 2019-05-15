@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
         gameLossDisplayObject.transform.position = Player.instance.headCollider.transform.position +
                                                    (Player.instance.headCollider.transform.rotation *
-                                                    new Vector3(x: 0, y: 0, z: 1.5f));
+                                                    new Vector3(0, 0, 1.5f));
 
         gameLossDisplayObject.transform.rotation = Player.instance.headCollider.transform.rotation ;
 
