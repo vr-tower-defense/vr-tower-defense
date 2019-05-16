@@ -4,6 +4,7 @@ using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
+
     private int _lives;
 
     public int StartLives = 5;
@@ -18,9 +19,10 @@ public class PlayerStatistics : MonoBehaviour
         {
             _lives = value;
 
-            if (_lives > 0)
+            if (_lives > 0 || _lost)
                 return;
 
+            _lost = true;
             GameObject[] targets = gameObject.scene.GetRootGameObjects();
 
             targets.ForEach(target => 
@@ -32,6 +34,8 @@ public class PlayerStatistics : MonoBehaviour
             );
         }
     }
+
+    private bool _lost = false;
 
     public void Start()
     {
