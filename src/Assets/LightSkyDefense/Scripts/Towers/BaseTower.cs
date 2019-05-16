@@ -2,31 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
 {
     #region states
 
-    public Type IdleState { get; protected set; }
-    public Type ActiveState { get; protected set; }
-    public Type CelebrationState { get; protected set; }
-    public Type CondemnState { get; protected set; }
+    public MonoBehaviour IdleState;
+    public MonoBehaviour ActiveState;
+    public MonoBehaviour CelebrationState;
+    public MonoBehaviour CondemnState;
 
     #endregion
 
     [HideInInspector]
-    public List<GameObject> TargetsInRange { get; } = new List<GameObject>();
+    public HashSet<Enemy> TargetsInRange { get; } = new HashSet<Enemy>();
 
     /// <summary>
     /// Set initial state
     /// </summary>
     private void Start()
     {
-        if(IdleState == null)
-        {
-            throw new NullReferenceException();
-        }
-
-        gameObject.AddComponent(IdleState);
+        IdleState.enabled = true;
+        ActiveState.enabled = false;
+        CelebrationState.enabled = false;
+        CondemnState.enabled = false;
     }
 
     /// <summary>
@@ -35,7 +34,14 @@ public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        TargetsInRange.Add(other.gameObject);
+        var enemy = other.GetComponent<Enemy>();
+
+        if(enemy == null)
+        {
+            return;
+        }
+
+        TargetsInRange.Add(enemy);
     }
 
     /// <summary>
@@ -44,7 +50,14 @@ public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
     /// <param name="other"></param>
     private void OnTriggerLeave(Collider other)
     {
-        TargetsInRange.Remove(other.gameObject);
+        var enemy = other.GetComponent<Enemy>();
+
+        if(enemy == null)
+        {
+            return;
+        }
+
+        TargetsInRange.Remove(enemy);
     }
 
     /// <summary>

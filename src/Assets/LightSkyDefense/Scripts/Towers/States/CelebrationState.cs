@@ -1,48 +1,108 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class CelebrationState : TowerState
+interface IStep
 {
-    /// <summary>
-    /// Up rotation angle
-    /// </summary>
-    private Quaternion _aimAngle = Quaternion.LookRotation(Vector3.up);
+    void FixedUpdate();
+}
 
-    private bool _rotationFinished = false;
+public class RotateUp : IStep
+{
+    private readonly CelebrationState _celebrationState;
+    private readonly Quaternion _aimRotation;
 
-    /// <summary>
-    /// Rotates the tower towards _aimAngle, when rotation has finished 
-    /// start celebration and keep rotating slowly on the Y axis
-    /// </summary>
-    void FixedUpdate()
+    public RotateUp(CelebrationState celebrationState)
     {
-        if (_rotationFinished)
+        _celebrationState = celebrationState;
+        _aimRotation = Quaternion.LookRotation(celebrationState.AimDirection);
+    }
+
+    public void FixedUpdate()
+    {
+        if (Quaternion.Angle(_celebrationState.transform.rotation, _aimRotation) > 1)
         {
-            transform.Rotate(new Vector3(0, 0, 0.2f));
+            _celebrationState.transform.rotation = Quaternion.Slerp(
+                _celebrationState.transform.rotation,
+                _aimRotation, 
+                _celebrationState.RotationSpeed * Time.deltaTime
+            );
+
             return;
         }
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, _aimAngle, 2);
+        _celebrationState.SetStep(typeof(Idle));
+    }
+}
 
-        if (Quaternion.Angle(transform.rotation, _aimAngle) <= 0.01f)
+public class Idle : IStep
+{
+    private readonly CelebrationState _celebrationState;
+
+    public Idle(CelebrationState celebrationState)
+    {
+        // Create new firework particle system instances and start the celebration
+        for (int i = 0; i < celebrationState.ParticleSystemSpawns.Length; i++)
         {
-            _rotationFinished = true;
-            PlayCelebration();
+            celebrationState.ParticleSystemInstances[i] = MonoBehaviour.Instantiate(
+                celebrationState.CelebrationEffect,
+                celebrationState.ParticleSystemSpawns[i].transform.position,
+                celebrationState.ParticleSystemSpawns[i].transform.rotation
+            );
+
+            celebrationState.ParticleSystemInstances[i].Play();
+        }
+
+        _celebrationState = celebrationState;
+    }
+
+    public void FixedUpdate()
+    {
+        _celebrationState.transform.Rotate(_celebrationState.RotationAxis * _celebrationState.RotationSpeed);
+    }
+}
+
+public class CelebrationState : TowerState
+{
+    public ParticleSystem CelebrationEffect;
+    public Transform[] ParticleSystemSpawns;
+
+    public Vector3 AimDirection = Vector3.up;
+    public Vector3 RotationAxis = Vector3.up;
+    public float RotationSpeed = 0.2f;
+
+    private IStep _currentStep;
+
+    /// <summary>
+    /// Up rotation angle
+    /// </summary>
+    [HideInInspector]
+    public ParticleSystem[] ParticleSystemInstances;
+
+    /// <summary>
+    /// Stop fireworks when state is disabled
+    /// </summary>
+    private void OnDisable()
+    {
+        foreach(var instance in ParticleSystemInstances)
+        {
+            Destroy(instance);
         }
     }
 
-    /// <summary>
-    /// Create a new firework particle system instance and start the celebration
-    /// </summary>
-    private void PlayCelebration()
+    private void OnEnable()
     {
-        var celebrationParticle = Resources.Load<ParticleSystem>("Effects/FireworkParticleSystem");
+        _currentStep = new RotateUp(this);
 
-        var celebrationInstance = Instantiate(
-            celebrationParticle,
-            transform.position,
-            transform.rotation
-        );
+        ParticleSystemInstances = new ParticleSystem[ParticleSystemSpawns.Length];
+    }
 
-        celebrationInstance.Play();
+    void FixedUpdate()
+    {
+        _currentStep.FixedUpdate();
+    }
+
+    public void SetStep(Type type)
+    {
+        _currentStep = (IStep) Activator.CreateInstance(type, new object[] { this });
     }
 }

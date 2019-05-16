@@ -3,14 +3,12 @@ using UnityEngine;
 
 public abstract class TowerState : MonoBehaviour
 {
-    public void SetTowerState(Type towerState)
+    public void SetTowerState(MonoBehaviour monoBehaviour)
     {
-        if(towerState == null)
-        {
-            throw new NullReferenceException();
-        }
+        // Enable current behaviour
+        enabled = false;
 
-        gameObject.AddComponent(towerState);
-        Destroy(this);
+        // Enable given behaviour
+        monoBehaviour.enabled = true;
     }
 }

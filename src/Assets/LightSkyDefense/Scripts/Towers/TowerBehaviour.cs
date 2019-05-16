@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 
 namespace Assets
 {
-    [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]
     public class TowerBehaviour : MonoBehaviour
@@ -52,9 +51,6 @@ namespace Assets
             _enemySet.Add(target);
         }
 
-        /// <summary>
-        /// Called when a colliding gameobject leaves the tower's detection radius
-        /// </summary>
         private void OnTriggerExit(Collider target)
         {
             var enemyScript = target.gameObject.GetComponent<Enemy>();

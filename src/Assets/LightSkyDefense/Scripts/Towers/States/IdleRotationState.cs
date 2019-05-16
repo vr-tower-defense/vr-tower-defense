@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class IdleRotationState : TowerState
 {
@@ -6,14 +7,14 @@ public class IdleRotationState : TowerState
     private float _rotationSpeed = .75f;
     private Quaternion _currentTarget;
 
-    private void Start()
+    private void OnEnable()
     {
         _currentTarget = Random.rotation;
     }
 
     private void FixedUpdate()
     {
-        if(Quaternion.Angle(transform.rotation, _currentTarget) < 10)
+        if(Quaternion.Angle(transform.rotation, _currentTarget) < 1)
         {
             _currentTarget = Random.rotation;
         }
