@@ -4,7 +4,7 @@ using Valve.VR.InteractionSystem;
 class PlacementCost : MonoBehaviour
 {
     [Min(0)]
-    public float Cost;
+    public float Cost = 0;
 
     private void Start()
     {
