@@ -74,32 +74,32 @@ public class FallbackController : MonoBehaviour
     /// </para>
     /// <para>
     /// ex:
-    /// (dailOptionBuilder): [first option], [second option]
-    /// (dailIndexBuilder) :       1                2     
+    /// (dialOptionBuilder): [first option], [second option]
+    /// (dialIndexBuilder) :       1                2     
     ///                    :
     /// </para>
     /// </summary>
     private string CreateDialOptionString(SpawnDialOption[] dialOptions)
     {
-        var dailOptionBuilder = new StringBuilder();
-        var dailIndexBuilder = new StringBuilder();
+        var dialOptionBuilder = new StringBuilder();
+        var dialIndexBuilder = new StringBuilder();
 
         for (int i = 0; i < dialOptions.Length; i++)
         {
-            dailOptionBuilder.Append("[");
-            dailOptionBuilder.Append(dialOptions[i].name);
-            dailOptionBuilder.Append("], ");
+            dialOptionBuilder.Append("[");
+            dialOptionBuilder.Append(dialOptions[i].name);
+            dialOptionBuilder.Append("], ");
 
-            dailIndexBuilder.Insert(dailIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 1);
-            dailIndexBuilder.Append(i + 1);
-            dailIndexBuilder.Insert(dailIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 3);
+            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 1);
+            dialIndexBuilder.Append(i + 1);
+            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 3);
         }
 
-        dailOptionBuilder.Remove(dailOptionBuilder.Length - 2, 2);
-        dailOptionBuilder.Append("\n");
-        dailOptionBuilder.AppendLine(dailIndexBuilder.ToString());
-        dailOptionBuilder.Append("\n");
+        dialOptionBuilder.Remove(dialOptionBuilder.Length - 2, 2);
+        dialOptionBuilder.Append("\n");
+        dialOptionBuilder.AppendLine(dialIndexBuilder.ToString());
+        dialOptionBuilder.Append("\n");
 
-        return dailOptionBuilder.ToString();
+        return dialOptionBuilder.ToString();
     }
 }
