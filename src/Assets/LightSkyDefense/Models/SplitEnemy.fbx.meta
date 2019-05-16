@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: 8789089727766a6409b1d841ccf0923f
+guid: e6e0dec140ca76c40b69a07b1864078c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: black
-    2100002: light
+    2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
@@ -14,13 +13,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: black
-    second: {fileID: 2100000, guid: 9b01d7c0e4dfa854eb5dfe2624e27c0f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: light
-    second: {fileID: 2100000, guid: 3ecf57bd185c086479604dd23d24d0aa, type: 2}
+      name: No Name
+    second: {fileID: 2100000, guid: 1d6ca012e23dfd3429f5f8bbc224464e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -12,7 +12,7 @@ public class Wave1 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemy");
+        var enemyPrefab = Resources.Load("Prefabs/Enemies/Enemy");
 
         // Create a new enemy every 20 seconds
         for (var i = 10; i > 0; i--)
@@ -31,7 +31,7 @@ public class Wave2 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemy");
+        var enemyPrefab = Resources.Load("Prefabs/Enemies/SplitEnemy");
 
         for (var i = 10; i > 0; i--)
         {

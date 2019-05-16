@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 7931271043986453863}
   - component: {fileID: 8990576781921237752}
   - component: {fileID: 1656773769016101122}
-  - component: {fileID: 6661918404003991537}
+  - component: {fileID: 4249416532324771586}
+  - component: {fileID: 457358750962366771}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -111,7 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6661918404003991537
+--- !u!114 &4249416532324771586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,22 +121,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 699514196522333331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62367b71292e62f4793ecfbac8d945c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 20
-  MovementSpeed: 5
-  EnergyCapacity: 10
+  MaxHealth: 100
+  EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
     type: 3}
-  ExplodeSound: {fileID: 8300000, guid: 65aa875554300d948a99e3e44393932e, type: 3}
+  ExplodeSound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
   TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
-  Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
-  CreditValue: 5
+  ChargeSpeed: 0.1
+  DischargeSpeed: 0.1
+--- !u!114 &457358750962366771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699514196522333331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2628c71693e1544ba17db18fafff5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2235064821612968614
 GameObject:
   m_ObjectHideFlags: 0
