@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
-public class GameManager : MonoBehaviour, IOnGameLossTarget
+public class GameManager : MonoBehaviour
 {
     [HideInInspector]
     public GameObject WayPointPrefab;
@@ -117,11 +117,6 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
 
         GameObject[] targets = gameObject.scene.GetRootGameObjects();
         targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
-    }
-
-    public void OnGameLoss()
-    {
-        
     }
 }
 
