@@ -6,14 +6,9 @@ using Valve.VR.InteractionSystem;
 public class GameOver : MonoBehaviour, IOnGameLossTarget
 {
     public GameObject GameOverPrefab;
-    public bool Lost = false;
-
 
     public void OnGameLoss()
     {
-        if (Lost)
-            return;
-        Lost = true;
         var camera = Camera.main;
 
         if (camera == null)
