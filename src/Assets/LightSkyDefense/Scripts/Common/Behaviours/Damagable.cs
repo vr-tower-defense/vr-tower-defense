@@ -32,9 +32,10 @@ class Damagable : MonoBehaviour
     {
         Health = Mathf.Max(Health + amount, MaxHealth);
 
-        if(Health <= 0)
+        if (Health <= 0)
         {
             Destroy(gameObject);
+            return;
         }
 
         gameObject.BroadcastMessage(
