@@ -7,7 +7,7 @@ namespace Assets
 {
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(AudioSource))]
-    public class TowerBehaviour : MonoBehaviour
+    public class Turret : BaseTower
     {
         public float ProjectileSpeed = 10;
         public float RotationSpeed = 1;
@@ -21,10 +21,26 @@ namespace Assets
         public Transform ProjectileSpawn;
 
         private IEnumerator _coroutine;
-        private float _health;
-
-        private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
         private Rigidbody _activeTarget;
+
+                /// <summary>
+        /// Finds first target in list
+        /// </summary>
+        /// <returns></returns>
+        private bool FindTarget(out Rigidbody targetTransform)
+        {
+            // Checks for the enemy that came in closest after his last Target.
+            foreach (var enemy in TargetsInRange)
+            {
+                if (enemy == null) continue;
+
+                targetTransform = enemy.GetComponent<Rigidbody>();
+                return true;
+            }
+
+            targetTransform = null;
+            return false;
+        }
 
         /// <summary>
         /// Use this for initialization
@@ -37,30 +53,6 @@ namespace Assets
             _coroutine = ShootWithInterval(ShootInterval);
             StartCoroutine(_coroutine);
         }
-
-        /// <summary>
-        /// Called whenever a colliding gameobject enters the tower's detection radius
-        /// </summary>
-        private void OnTriggerEnter(Collider target)
-        {
-            var enemyScript = target.gameObject.GetComponent<Enemy>();
-
-            // If it's not an enemy, then there's no reason to keep going
-            if (enemyScript == null) return;
-
-            _enemySet.Add(target);
-        }
-
-        private void OnTriggerExit(Collider target)
-        {
-            var enemyScript = target.gameObject.GetComponent<Enemy>();
-
-            // If it's not an enemy, then there's no reason to keep going
-            if (enemyScript == null) return;
-
-            _enemySet.Remove(target);
-        }
-
 
         /// <summary>
         /// Called every 16 ms.
@@ -80,25 +72,6 @@ namespace Assets
                 ShootProjectile();
                 yield return new WaitForSeconds(waitTime);
             }
-        }
-
-        /// <summary>
-        /// Finds first target in list
-        /// </summary>
-        /// <returns></returns>
-        private bool FindTarget(out Rigidbody targetTransform)
-        {
-            // Checks for the enemy that came in closest after his last Target.
-            foreach (var targetCollider in _enemySet)
-            {
-                if (targetCollider == null) continue;
-
-                targetTransform = targetCollider.GetComponent<Rigidbody>();
-                return true;
-            }
-
-            targetTransform = null;
-            return false;
         }
 
         /// <summary>

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
+public class BaseTower : MonoBehaviour
 {
     #region states
 
-    public MonoBehaviour IdleState;
-    public MonoBehaviour ActiveState;
-    public MonoBehaviour CelebrationState;
-    public MonoBehaviour CondemnState;
+    public TowerState IdleState;
+    public TowerState ActiveState;
+    public TowerState CelebrationState;
+    public TowerState CondemnState;
+
+    public TowerState CurrentState;
 
     #endregion
 
@@ -22,6 +24,8 @@ public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
     /// </summary>
     private void Start()
     {
+        CurrentState = IdleState;
+
         IdleState.enabled = true;
         ActiveState.enabled = false;
         CelebrationState.enabled = false;
@@ -42,6 +46,8 @@ public class BaseTower : MonoBehaviour, IOnGameLoseTarget, IOnGameWinTarget
         }
 
         TargetsInRange.Add(enemy);
+
+        CurrentState.SetTowerState
     }
 
     /// <summary>
