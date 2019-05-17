@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
-public class GameManager : MonoBehaviour, IOnGameLoseTarget
+public class GameManager : MonoBehaviour
 {
     /// <summary>
     /// Boolean indicating whether the application is about to quit
@@ -168,8 +168,11 @@ public class GameManager : MonoBehaviour, IOnGameLoseTarget
         if (_lastWaveEnemiesAmount != 0)
             return;
 
-        GameObject[] targets = gameObject.scene.GetRootGameObjects();
-        targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
+        // Emit OnResumeGame message to all game objects
+        foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
+        {
+            go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
 

@@ -56,15 +56,10 @@ public class PlayerStatistics : MonoBehaviour
             return;
         }
 
-        gameObject
-            .scene
-            .GetRootGameObjects()
-            .ForEach(target =>
-                ExecuteEvents.Execute<IOnGameLoseTarget>(
-                    target,
-                    null,
-                    (handler, _) => handler.OnGameLose()
-                )
-            );
+        // Emit OnResumeGame message to all game objects
+        foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
+        {
+            go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }

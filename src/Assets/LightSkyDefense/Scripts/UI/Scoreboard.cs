@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class Scoreboard : MonoBehaviour, IOnGameLoseTarget
+public class Scoreboard : MonoBehaviour
 {
     public AudioClip BossSpawnedClip;
     public float Score;
