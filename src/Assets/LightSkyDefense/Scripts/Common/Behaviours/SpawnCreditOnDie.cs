@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpawnCreditOnDestroy : MonoBehaviour
+public class SpawnCreditOnDie : MonoBehaviour
 {
     public Credit Credit;
     public float Value;
@@ -8,16 +8,11 @@ public class SpawnCreditOnDestroy : MonoBehaviour
     /// <summary>
     /// Spawn money when its gameObject is destroyed.
     /// </summary>
-    void OnDestroy()
+    void OnDie()
     {
-        if (GameManager.IsQuitting)
-        {
-            return;
-        }
-
         var clone = Instantiate(
-            Credit, 
-            gameObject.transform.position, 
+            Credit,
+            gameObject.transform.position,
             gameObject.transform.rotation
         );
 

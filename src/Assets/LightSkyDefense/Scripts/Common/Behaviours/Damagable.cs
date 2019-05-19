@@ -34,6 +34,12 @@ class Damagable : MonoBehaviour
 
         if (Health <= 0)
         {
+            gameObject.BroadcastMessage(
+                "OnDie",
+                null,
+                SendMessageOptions.DontRequireReceiver
+            );
+
             Destroy(gameObject);
             return;
         }

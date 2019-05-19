@@ -40,14 +40,14 @@ public class BaseTower : MonoBehaviour
     {
         var enemy = other.GetComponent<Enemy>();
 
-        if(enemy == null)
+        if (enemy == null)
         {
             return;
         }
 
         TargetsInRange.Add(enemy);
 
-        CurrentState.SetTowerState
+        CurrentState.SetTowerState(this.ActiveState);
     }
 
     /// <summary>
@@ -58,12 +58,17 @@ public class BaseTower : MonoBehaviour
     {
         var enemy = other.GetComponent<Enemy>();
 
-        if(enemy == null)
+        if (enemy == null)
         {
             return;
         }
 
         TargetsInRange.Remove(enemy);
+
+        if (TargetsInRange.Count < 1)
+        {
+            CurrentState.SetTowerState(this.IdleState);
+        }
     }
 
     /// <summary>

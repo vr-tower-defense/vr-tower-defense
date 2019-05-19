@@ -2,6 +2,8 @@ using Assets;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+[RequireComponent(typeof(Damagable))]
+[RequireComponent(typeof(SpawnCreditOnDie))]
 public class Enemy : MonoBehaviour
 {
     public float MaxHealth = 100f;
@@ -24,7 +26,6 @@ public class Enemy : MonoBehaviour
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
 
-    private ParticleSystem _explodeEffectInstance = null;
     private ParticleSystem _teleportEffectInstance = null;
 
     private Vector3[] _pathPoints;
@@ -79,39 +80,32 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// This function kills the enemy and starts the explosion particle system and sound effect
+    /// This kills the enemy and starts the explosion particle system and sound effect
     /// </summary>
-    public void Explode()
+    public void OnDie()
     {
         // If not in the world, instantiate
-        if (_explodeEffectInstance == null)
-        {
-            _explodeEffectInstance = Instantiate(
-                ExplodeEffect,
-                transform.position,
-                new Quaternion()
-            );
-        }
+        var explodeEffectInstance = Instantiate(
+            ExplodeEffect,
+            transform.position,
+            new Quaternion()
+        );
 
         // Play effect
-        _explodeEffectInstance.Play();
+        explodeEffectInstance.Play();
 
         // Play sound effect
-        SoundUtil.PlayClipAtPointWithRandomPitch(ExplodeSound, this.gameObject.transform.position, 0.5f, 1.5f);
+        SoundUtil.PlayClipAtPointWithRandomPitch(
+            ExplodeSound,
+            this.gameObject.transform.position,
+            0.5f,
+            1.5f
+        );
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
-            _explodeEffectInstance.gameObject,
-            _explodeEffectInstance.main.duration + _explodeEffectInstance.main.startLifetime.constantMax
-        );
-
-        // Spawn Credit
-        Credit.Value = CreditValue;
-
-        Instantiate(
-            Credit,
-            gameObject.transform.position,
-            gameObject.transform.rotation
+            explodeEffectInstance.gameObject,
+            explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
     }
 
@@ -209,7 +203,7 @@ public class Enemy : MonoBehaviour
 
         Rigidbody.rotation = Quaternion.RotateTowards(
             transform.rotation,
-            lookAngle, 
+            lookAngle,
             _rotationSpeed
         );
     }
@@ -238,16 +232,6 @@ public class Enemy : MonoBehaviour
         if (GameManager.IsQuitting)
         {
             return;
-        }
-
-        // When health is <= 0 explode enemy
-        if(GetComponent<Damagable>().Health <= 0)
-        {
-            GameObject.Find("Scoreboard")
-                ?.GetComponent<Scoreboard>()
-                ?.PointGain(PointValue);
-
-            Explode();
         }
 
         Destroy(PathFollower?.gameObject);
