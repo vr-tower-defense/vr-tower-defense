@@ -12,14 +12,23 @@ public class Wave1 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var enemyPrefab = Resources.Load("Prefabs/Enemies/Enemy");
+        var AoeEnemy = Resources.Load("Prefabs/Enemies/AoEHealEnemy");
+        var Enemy = Resources.Load("Prefabs/Enemies/Enemy");
 
         // Create a new enemy every 20 seconds
         for (var i = 10; i > 0; i--)
         {
             // Spawn more enemies
-            Instantiate(enemyPrefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
-            yield return new WaitForSeconds(0.5f);
+            if (i % 2 == 0)
+            {
+                Instantiate(Enemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                Instantiate(AoeEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
 
         // Cooldown timeout
