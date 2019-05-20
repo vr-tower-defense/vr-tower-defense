@@ -3,14 +3,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
-public class GameManager : MonoBehaviour, IOnGameLossTarget
+public class GameManager : MonoBehaviour
 {
     [HideInInspector]
     public GameObject WayPointPrefab;
-
-    public string GameOverText = "Wasted!";
-    public float FontQuality = 250;
-    public bool Lost = false;
 
     private static bool _initializing = false;
     private readonly Type _defaultGameState = typeof(Waves);
@@ -92,42 +88,7 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
     }
 
-    public void OnGameLoss()
-    {
-        if(Lost)
-            return;
-        Lost = true;
-        var camera = Camera.main;
 
-        if (camera == null)
-            return;
-
-
-
-        var gameLossDisplayObject = new GameObject();
-        gameLossDisplayObject.name = "Game Over screen";
-
-        gameLossDisplayObject.transform.position = Player.instance.headCollider.transform.position +
-                                                   (Player.instance.headCollider.transform.rotation *
-                                                    new Vector3(0, 0, 1.5f));
-
-        gameLossDisplayObject.transform.rotation = Player.instance.headCollider.transform.rotation ;
-
-        var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
-        mesh.text = GameOverText;
-        mesh.fontSize = Mathf.FloorToInt(FontQuality);
-        mesh.color = Color.red;
-        mesh.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
-
-
-
-        var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
-
-        if (greyScale == null)
-            return;
-
-        greyScale.Active = true;
-    }
 
     /// <summary>
     /// Adds a destroy dispatcher to all enemies that are left in the game.
