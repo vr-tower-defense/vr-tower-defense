@@ -14,15 +14,13 @@ public class GameOver : MonoBehaviour, IOnGameLossTarget
         if (camera == null)
             return;
 
-        var a = Instantiate(
+        var gameOverScreen = Instantiate(
             GameOverPrefab,
             Player.instance.headCollider.transform.position + (Player.instance.headCollider.transform.rotation * new Vector3(0, 0, 1.5f)),
             Player.instance.headCollider.transform.rotation
         );
-        a.name = "game over screen";
-
-
-
+        gameOverScreen.name = "game over screen";
+        
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
         if (greyScale == null)
