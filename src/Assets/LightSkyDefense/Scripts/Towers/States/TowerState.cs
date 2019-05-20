@@ -5,13 +5,10 @@ public abstract class TowerState : MonoBehaviour
 {
     private BaseTower _tower;
 
-    private void Start()
-    {
-        _tower = GetComponent<BaseTower>();
-    }
-
     public void SetTowerState(TowerState towerState)
     {
+        _tower = GetComponent<BaseTower>();
+
         if (towerState == null)
         {
             return;

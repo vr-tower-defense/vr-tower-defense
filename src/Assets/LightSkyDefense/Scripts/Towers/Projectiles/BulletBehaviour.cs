@@ -8,12 +8,14 @@ public class BulletBehaviour : MonoBehaviour
     [Tooltip("The time before a bullet is removed from the scene")]
     public float TimeAlive = 3;
 
-    [Tooltip("A higher mass will increase the knockback amount")]
-    public float Mass = 1;
+    // The bullets own rigidbody
+    public Rigidbody _rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
+
         Destroy(gameObject, TimeAlive);
     }
 
@@ -29,12 +31,6 @@ public class BulletBehaviour : MonoBehaviour
 
         // Decrease target health
         damagable?.UpdateHealth(-BulletDamage);
-
-        // Apply knockback effect to enemy
-        rigidbody?.AddForce(
-            -collision.GetContact(0).normal * Mass, 
-            ForceMode.Impulse
-        );
 
         Destroy(gameObject);
     }
