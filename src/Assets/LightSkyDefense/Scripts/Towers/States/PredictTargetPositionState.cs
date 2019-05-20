@@ -15,6 +15,9 @@ public class PredictTargetPositionState : TowerState
     public float ProjectileSpeed = 4f;
     public float ShootInterval = .25f;
 
+    [Tooltip("Angle in degrees in which an enemy should be from the shooting direction")]
+    public float AngleTreshold = 5;
+
     public AudioSource AudioSource;
     public AudioClip ShootSound;
 
@@ -42,7 +45,20 @@ public class PredictTargetPositionState : TowerState
     /// </summary>
     private void ShootProjectile()
     {
-        if (_activeTarget == null) return;
+        if (_activeTarget == null)
+        {
+            return;
+        }
+
+        var targetDirection = Vector3.Angle(
+            _activeTarget.position - transform.position,
+            transform.forward
+        );
+
+        if (targetDirection > AngleTreshold)
+        {
+            return;
+        }
 
         var newProjectile = Instantiate(
             Projectile,
