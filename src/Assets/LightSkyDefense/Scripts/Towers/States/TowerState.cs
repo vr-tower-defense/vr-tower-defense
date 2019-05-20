@@ -12,6 +12,11 @@ public abstract class TowerState : MonoBehaviour
 
     public void SetTowerState(TowerState towerState)
     {
+        if (towerState == null)
+        {
+            return;
+        }
+
         // Enable current behaviour
         enabled = false;
 

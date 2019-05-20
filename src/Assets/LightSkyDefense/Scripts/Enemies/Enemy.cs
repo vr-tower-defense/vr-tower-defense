@@ -214,10 +214,8 @@ public class Enemy : MonoBehaviour
             .gameObject
             .GetComponent<Damagable>();
 
-        if (other == null) return;
-
-        // If other is enemy ignore the rest of this function
-        if (other.GetComponent<Enemy>()) return;
+        // If other is null or enemy we stop this function
+        if (other == null || other.GetComponent<Enemy>()) return;
 
         other.UpdateHealth(-CollisionDamage);
         Destroy(gameObject);

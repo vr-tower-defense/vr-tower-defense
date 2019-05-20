@@ -7,11 +7,17 @@ public class BaseTower : MonoBehaviour
 {
     #region states
 
+    [Header("States")]
     public TowerState IdleState;
     public TowerState ActiveState;
     public TowerState CelebrationState;
     public TowerState CondemnState;
 
+    [Header("Setup")]
+    [Tooltip("The first state that is applied to the enemy")]
+    public TowerState InitialState;
+
+    [HideInInspector]
     public TowerState CurrentState;
 
     #endregion
@@ -24,12 +30,21 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        CurrentState = IdleState;
+        if (InitialState == null)
+        {
+            throw new ArgumentNullException();
+        }
 
-        IdleState.enabled = true;
-        ActiveState.enabled = false;
-        CelebrationState.enabled = false;
-        CondemnState.enabled = false;
+        // Save intial state reference to current state field
+        CurrentState = InitialState;
+
+        // Disable all states and enable the current state
+        foreach (var state in GetComponents<TowerState>())
+        {
+            state.enabled = false;
+        }
+
+        CurrentState.enabled = true;
     }
 
     /// <summary>
@@ -47,7 +62,7 @@ public class BaseTower : MonoBehaviour
 
         TargetsInRange.Add(enemy);
 
-        CurrentState.SetTowerState(this.ActiveState);
+        CurrentState.SetTowerState(ActiveState);
     }
 
     /// <summary>
