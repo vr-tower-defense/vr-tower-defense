@@ -16,6 +16,7 @@ public class EnemyAoEHeal : MonoBehaviour
         _coroutine = AoEHealWithInterval(HealInterval);
         StartCoroutine(_coroutine);
     }
+
     private void OnTriggerEnter(Collider target)
     {
         var enemyScript = target.gameObject.GetComponent<Enemy>();
