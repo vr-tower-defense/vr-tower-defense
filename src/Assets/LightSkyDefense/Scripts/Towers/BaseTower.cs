@@ -69,7 +69,7 @@ public class BaseTower : MonoBehaviour
     /// Removes target from list when target is withing tower's range
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerLeave(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         var enemy = other.GetComponent<Enemy>();
 
@@ -82,7 +82,7 @@ public class BaseTower : MonoBehaviour
 
         if (TargetsInRange.Count < 1)
         {
-            CurrentState.SetTowerState(this.IdleState);
+            CurrentState.SetTowerState(IdleState);
         }
     }
 

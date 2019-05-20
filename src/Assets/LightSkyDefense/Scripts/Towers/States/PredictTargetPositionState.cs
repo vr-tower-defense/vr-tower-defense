@@ -18,13 +18,10 @@ public class PredictTargetPositionState : TowerState
     public AudioSource AudioSource;
     public AudioClip ShootSound;
 
-    private BaseTower _tower;
     private Rigidbody _activeTarget;
 
     private void Start()
     {
-        _tower = GetComponent<BaseTower>();
-
         StartCoroutine(ShootWithInterval());
     }
 
@@ -62,19 +59,17 @@ public class PredictTargetPositionState : TowerState
     /// Finds first target in list
     /// </summary>
     /// <returns></returns>
-    private bool FindTarget(out Rigidbody targetTransform)
+    private Rigidbody FindTarget()
     {
         // Checks for the enemy that came in closest after his last Target.
-        foreach (var enemy in _tower.TargetsInRange)
+        foreach (var enemy in Tower.TargetsInRange)
         {
             if (enemy == null) continue;
 
-            targetTransform = enemy.GetComponent<Rigidbody>();
-            return true;
+            return enemy.GetComponent<Rigidbody>();
         }
 
-        targetTransform = null;
-        return false;
+        return null;
     }
 
     /// <summary>
@@ -83,10 +78,10 @@ public class PredictTargetPositionState : TowerState
     /// </summary>
     private void FixedUpdate()
     {
-        var hasTarget = FindTarget(out _activeTarget);
+        _activeTarget = FindTarget();
 
         // Don't rotate when target does not exist
-        if (!hasTarget) return;
+        if (_activeTarget == null) return;
 
         var targetDistance = Vector3.Distance(
             transform.position,
