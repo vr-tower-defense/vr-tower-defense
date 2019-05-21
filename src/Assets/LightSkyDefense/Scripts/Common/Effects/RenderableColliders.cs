@@ -77,29 +77,26 @@ public class RenderableColliders : MonoBehaviour
 
             meshRenderer.material = ColliderMat;
 
-            if (collider.GetType() == typeof(MeshCollider))
+            switch(collider)
             {
-                meshFilter.mesh = ((MeshCollider)collider).sharedMesh;
-                meshGameObject.transform.localScale = collider.transform.localScale;
-            }
-            else if (collider.GetType() == typeof(BoxCollider))
-            {
-                meshFilter.mesh = CubeMesh;
-                meshGameObject.transform.localScale = ((BoxCollider)collider).size;
-            }
-            else if (collider.GetType() == typeof(SphereCollider))
-            {
-                meshFilter.mesh = SphereMesh;
-
-                var largestLocalScaleComponent = Mathf.Max(Mathf.Max(transform.localScale.x, transform.localScale.y), transform.localScale.z);
-                var worldSpaceScale = ((SphereCollider)collider).radius * 2 * largestLocalScaleComponent;
-
-                meshGameObject.transform.localScale = new Vector3(worldSpaceScale / transform.localScale.x, worldSpaceScale / transform.localScale.y, worldSpaceScale / transform.localScale.z);
-            }
-            else if (collider.GetType() == typeof(CapsuleCollider))
-            {
-                meshFilter.mesh = CapsuleMesh;
-                meshGameObject.transform.localScale = new Vector3(((CapsuleCollider)collider).radius * 2, ((CapsuleCollider)collider).height / 2, ((CapsuleCollider)collider).radius * 2);
+                case MeshCollider meshCollider:
+                    meshFilter.mesh = meshCollider.sharedMesh;
+                    meshGameObject.transform.localScale = collider.transform.localScale;
+                    break;
+                case BoxCollider boxCollider:
+                    meshFilter.mesh = CubeMesh;
+                    meshGameObject.transform.localScale = boxCollider.size;
+                    break;
+                case SphereCollider sphereCollider:
+                    meshFilter.mesh = SphereMesh;
+                    var largestLocalScaleComponent = Mathf.Max(Mathf.Max(transform.localScale.x, transform.localScale.y), transform.localScale.z);
+                    var worldSpaceScale = sphereCollider.radius * 2 * largestLocalScaleComponent;
+                    meshGameObject.transform.localScale = new Vector3(worldSpaceScale / transform.localScale.x, worldSpaceScale / transform.localScale.y, worldSpaceScale / transform.localScale.z);
+                    break;
+                case CapsuleCollider capsuleCollider:
+                    meshFilter.mesh = CapsuleMesh;
+                    meshGameObject.transform.localScale = new Vector3(capsuleCollider.radius * 2, capsuleCollider.height / 2, capsuleCollider.radius * 2);
+                    break;
             }
 
             meshGameObject.transform.SetParent(transform, false);
