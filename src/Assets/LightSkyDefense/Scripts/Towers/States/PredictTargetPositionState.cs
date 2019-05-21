@@ -45,11 +45,6 @@ public class PredictTargetPositionState : TowerState
     /// </summary>
     private void ShootProjectile()
     {
-        if (_activeTarget == null)
-        {
-            return;
-        }
-
         var targetDirection = Vector3.Angle(
             _activeTarget.position - transform.position,
             transform.forward
@@ -97,7 +92,11 @@ public class PredictTargetPositionState : TowerState
         _activeTarget = FindTarget();
 
         // Don't rotate when target does not exist
-        if (_activeTarget == null) return;
+        if (_activeTarget == null)
+        {
+            SetTowerState(Tower.IdleState);
+            return;
+        }
 
         var targetDistance = Vector3.Distance(
             transform.position,

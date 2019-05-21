@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 4837722594524183046}
   - component: {fileID: 8333722719474973916}
   - component: {fileID: 3065672760387673316}
+  - component: {fileID: 7333901501657528080}
   m_Layer: 8
   m_Name: missile_launcher
   m_TagString: Untagged
@@ -392,6 +393,7 @@ MonoBehaviour:
   ActiveState: {fileID: 3065672760387673316}
   CelebrationState: {fileID: 4837722594524183046}
   CondemnState: {fileID: 0}
+  JamState: {fileID: 7333901501657528080}
   InitialState: {fileID: 8333722719474973916}
   CurrentState: {fileID: 0}
 --- !u!114 &4837722594524183046
@@ -449,5 +451,19 @@ MonoBehaviour:
   ProjectileSpawn: {fileID: 3984326557187089192}
   ProjectileSpeed: 4
   ShootInterval: 0.25
+  AngleTreshold: 5
   AudioSource: {fileID: 1700333904029867142}
   ShootSound: {fileID: 8300000, guid: e9f497b3c8d534849ab1f6eb8b6ea2d4, type: 3}
+--- !u!114 &7333901501657528080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423346778408870849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01a6c7d6f03fa14b93b226bfc76e87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JamTime: 4

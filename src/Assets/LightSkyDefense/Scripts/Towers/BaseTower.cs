@@ -12,6 +12,7 @@ public class BaseTower : MonoBehaviour
     public TowerState ActiveState;
     public TowerState CelebrationState;
     public TowerState CondemnState;
+    public JamState JamState;
 
     [Header("Setup")]
     [Tooltip("The first state that is applied to the enemy")]
@@ -61,8 +62,6 @@ public class BaseTower : MonoBehaviour
         }
 
         TargetsInRange.Add(enemy);
-
-        CurrentState.SetTowerState(ActiveState);
     }
 
     /// <summary>
@@ -79,11 +78,6 @@ public class BaseTower : MonoBehaviour
         }
 
         TargetsInRange.Remove(enemy);
-
-        if (TargetsInRange.Count < 1)
-        {
-            CurrentState.SetTowerState(IdleState);
-        }
     }
 
     /// <summary>
@@ -91,8 +85,7 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     public void OnGameWin()
     {
-        var currentState = gameObject.GetComponent<TowerState>();
-        currentState.SetTowerState(CelebrationState);
+        CurrentState.SetTowerState(CelebrationState);
     }
 
     /// <summary>
@@ -100,7 +93,12 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     public void OnGameLose()
     {
-        var currentState = gameObject.GetComponent<TowerState>();
-        currentState.SetTowerState(CondemnState);
+        CurrentState.SetTowerState(CondemnState);
+    }
+
+    public void OnJam(float jamTime)
+    {
+        JamState.JamTime = jamTime;
+        CurrentState.SetTowerState(JamState);
     }
 }

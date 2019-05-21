@@ -17,6 +17,7 @@ public class Wave1 : MonoBehaviour, IWave
         var ShooterEnemy = Resources.Load("Prefabs/Enemies/ShooterEnemy");
         var SelfHealEnemy = Resources.Load("Prefabs/Enemies/SelfHealEnemy");
         var SplitEnemy = Resources.Load("Prefabs/Enemies/SplitEnemy");
+        var JamEnemy = Resources.Load("Prefabs/Enemies/JammerEnemy");
 
         // Create a new enemy every 20 seconds
         for (var i = 10; i > 0; i--)
@@ -24,12 +25,12 @@ public class Wave1 : MonoBehaviour, IWave
             // Spawn more enemies
             if (i % 2 == 0)
             {
-                Instantiate(SelfHealEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                Instantiate(JamEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
                 yield return new WaitForSeconds(0.5f);
             }
             else
             {
-                Instantiate(SelfHealEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                Instantiate(ShooterEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
                 yield return new WaitForSeconds(0.5f);
             }
         }

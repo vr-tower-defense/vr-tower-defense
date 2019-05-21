@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IdleRotationState : TowerState
 {
@@ -19,6 +18,16 @@ public class IdleRotationState : TowerState
             _currentTarget = Random.rotation;
         }
 
-        transform.rotation = Quaternion.LerpUnclamped(transform.rotation, _currentTarget, _rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.LerpUnclamped(
+            transform.rotation, 
+            _currentTarget,
+            _rotationSpeed * Time.deltaTime
+        );
+
+        // Start shooting when an enemy is in range
+        if (Tower.TargetsInRange.Count > 0)
+        {
+            SetTowerState(Tower.ActiveState);
+        }
     }
 }

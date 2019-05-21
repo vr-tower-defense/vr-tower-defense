@@ -103,6 +103,8 @@ public class Enemy : MonoBehaviour
             explodeEffectInstance.gameObject,
             explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
+
+        GameObject.Find("Scoreboard").GetComponent<Scoreboard>().PointGain(PointValue);
     }
 
     /// <summary>
