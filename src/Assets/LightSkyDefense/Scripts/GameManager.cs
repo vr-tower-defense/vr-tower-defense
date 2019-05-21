@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
             return;
 
         // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
         }
