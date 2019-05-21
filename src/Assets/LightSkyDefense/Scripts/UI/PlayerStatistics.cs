@@ -61,7 +61,7 @@ public class PlayerStatistics : MonoBehaviour
         _isGameOver = true;
 
         // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
         }
