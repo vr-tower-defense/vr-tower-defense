@@ -3,7 +3,7 @@ using Valve.VR;
 
 public abstract class DialOption : MonoBehaviour
 {
-    [Tooltip("Value between 0 and 1")]
+    [Tooltip("RandomBetween between 0 and 1")]
     public float InactiveTransparency = .5f;
 
     [HideInInspector]
