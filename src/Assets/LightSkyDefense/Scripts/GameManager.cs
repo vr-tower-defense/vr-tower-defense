@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private readonly Type _defaultGameState = typeof(Waves);
     private MonoBehaviour _gameState { get; set; }
     private int _lastWaveEnemiesAmount = 0;
+    private bool _isGameOver = false;
 
     private Path _path;
     public Path Path
@@ -102,6 +103,11 @@ public class GameManager : MonoBehaviour
         _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
     }
 
+    public void OnGameLose()
+    {
+        _isGameOver = true;
+    }
+
     /// <summary>
     /// Adds a destroy dispatcher to all enemies that are left in the game.
     /// </summary>
@@ -124,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         _lastWaveEnemiesAmount--;
 
-        if (_lastWaveEnemiesAmount != 0)
+        if (_lastWaveEnemiesAmount != 0 || _isGameOver)
             return;
 
         // Emit OnResumeGame message to all game objects
