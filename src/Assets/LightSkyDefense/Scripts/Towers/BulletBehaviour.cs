@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets;
+using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -15,12 +16,19 @@ public class BulletBehaviour : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Enemy enemyScript = collision.gameObject.GetComponent<Enemy>();
+        TowerBehaviour towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
 
         if (enemyScript != null)
         {
             enemyScript.Damage(BulletDamage);
             enemyScript.Rigidbody.AddForce(-collision.GetContact(0).normal * KnockBackAmount, ForceMode.Impulse);
         }
+
+        if (towerScript != null)
+        {
+            towerScript.Damage(BulletDamage);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -12,7 +12,7 @@ public class Wave1 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var AoeEnemy = Resources.Load("Prefabs/Enemies/AoEHealEnemy");
+        var AoeEnemy = Resources.Load("Prefabs/Enemies/ShooterEnemy");
         var Enemy = Resources.Load("Prefabs/Enemies/Enemy");
 
         // Create a new enemy every 20 seconds

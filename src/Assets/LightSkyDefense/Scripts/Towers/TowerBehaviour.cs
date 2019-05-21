@@ -23,7 +23,7 @@ namespace Assets
         public Transform ProjectileSpawn;
 
         private IEnumerator _coroutine;
-        private float _health;
+        private float _health = 100f;
 
         private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
         private Rigidbody _activeTarget;
@@ -163,7 +163,7 @@ namespace Assets
         public void Damage(float damageAmount)
         {
             _health -= damageAmount;
-
+            
             if (_health > 0) return;
 
             Destroy(gameObject);
