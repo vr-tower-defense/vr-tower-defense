@@ -13,7 +13,7 @@ public class RenderableColliders : MonoBehaviour
         {
             if (_cubeMesh == null)
             {
-                GameObject primativeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                var primativeObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 _cubeMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
@@ -29,7 +29,7 @@ public class RenderableColliders : MonoBehaviour
         {
             if (_sphereMesh == null)
             {
-                GameObject primativeObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                var primativeObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 _sphereMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
@@ -45,7 +45,7 @@ public class RenderableColliders : MonoBehaviour
         {
             if (_capsuleMesh == null)
             {
-                GameObject primativeObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                var primativeObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
                 _capsuleMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
