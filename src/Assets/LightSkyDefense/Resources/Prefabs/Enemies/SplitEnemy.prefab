@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewEnemy: {fileID: 7810914671228617691, guid: 440eeb7143a551e499de86e326a320c3,
     type: 3}
+  SplitAmount: 2
+--- !u!114 &6926109388960113180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8695885477200556864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1
+  InitialHealth: 1
 --- !u!1001 &1497460373597221019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Height
       value: 0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759947185552773464, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: Value
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440eeb7143a551e499de86e326a320c3, type: 3}

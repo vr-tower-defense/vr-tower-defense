@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 4098851781701205185, guid: b3b9826145dabd34d9c5f369de7939be,
     type: 3}
-  ShotDamage: 15
   ShootInterval: 6
 --- !u!1 &7987586923745020818
 GameObject:
@@ -27,7 +26,7 @@ GameObject:
   - component: {fileID: 7183339785698280360}
   - component: {fileID: 906520368861267260}
   m_Layer: 14
-  m_Name: GameObject
+  m_Name: TowerChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,11 +71,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShooterEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7073890643881863432, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 725a189459c4cda4aae4b1e2c73af07c, type: 2}
     - target: {fileID: 4986396300897381402, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -132,6 +126,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7073890643881863432, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 725a189459c4cda4aae4b1e2c73af07c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
 --- !u!1 &1715808640459732906 stripped

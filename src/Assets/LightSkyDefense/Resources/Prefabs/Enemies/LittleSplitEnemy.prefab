@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3680871987011421582}
   - component: {fileID: 4578827990358494832}
   - component: {fileID: 6977451625590007825}
+  - component: {fileID: 239233248778471490}
   - component: {fileID: 9030962081397487450}
   - component: {fileID: 8759947185552773464}
   m_Layer: 9
@@ -124,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
@@ -136,6 +136,20 @@ MonoBehaviour:
   TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
   ChargeSpeed: 0.1
   DischargeSpeed: 0.1
+--- !u!114 &239233248778471490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810914671228617691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1
+  InitialHealth: 1
 --- !u!114 &9030962081397487450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +172,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7810914671228617691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4d9db1fd34f91418b62f36ad84612a, type: 3}
+  m_Script: {fileID: 11500000, guid: 90720bde2c1c3f9458b6f2ba0d8d6e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
-  Value: 10
+  Value: 5

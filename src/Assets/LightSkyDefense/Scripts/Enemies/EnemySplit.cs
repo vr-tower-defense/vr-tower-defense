@@ -15,7 +15,7 @@ public class EnemySplit : MonoBehaviour
                 Random.rotation
             );
 
-            //TODO: set split enemy health to half of the original (Damageable script)
+            leftSplitEnemy.gameObject.GetComponent<Damageable>().UpdateHealth(-0.6f);
         }
     }
 }
