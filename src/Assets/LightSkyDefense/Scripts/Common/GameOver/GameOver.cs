@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class GameOver : MonoBehaviour, IOnGameLossTarget
+public class GameOver : MonoBehaviour
 {
     public GameObject GameOverPrefab;
 
-    public void OnGameLoss()
+    public void OnGameLose()
     {
         var camera = Camera.main;
 
@@ -19,6 +17,7 @@ public class GameOver : MonoBehaviour, IOnGameLossTarget
             Player.instance.headCollider.transform.position + (Player.instance.headCollider.transform.rotation * new Vector3(0, 0, 1.5f)),
             Player.instance.headCollider.transform.rotation
         );
+
         gameOverScreen.name = "game over screen";
         
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
