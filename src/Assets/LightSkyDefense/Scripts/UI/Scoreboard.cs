@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
 
-public class Scoreboard : MonoBehaviour, IOnGameLossTarget
+public class Scoreboard : MonoBehaviour
 {
     public AudioClip BossSpawnedClip;
     public float Score;
@@ -36,7 +36,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
     private Text _wavesValueBack;
 
     //When the player loses
-    public void OnGameLoss()
+    public void OnGameLose()
     {
         _livesValue.text = _player.Lives.ToString();
         _livesValueBack.text = _livesValue.text;
@@ -59,14 +59,14 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _livesValue = gameObject.transform.Find("PlayerTextCanvas").Find("LivesValueText").gameObject
             .GetComponent<Text>();
 
-        //Right side
+        // Right side
         _timerValue = gameObject.transform.Find("GameTextCanvas").Find("TimerValueText").gameObject
             .GetComponent<Text>();
         _nextWaveTimerValue = gameObject.transform.Find("GameTextCanvas").Find("TimeToNextWaveValueText").gameObject
             .GetComponent<Text>();
         _wavesValue = gameObject.transform.Find("GameTextCanvas").Find("WaveValueText").gameObject.GetComponent<Text>();
 
-        //Back
+        // Back
         _scoreValueBack = gameObject.transform.Find("PlayerTextBackCanvas").Find("ScoreValueBackText").gameObject
             .GetComponent<Text>();
         _creditsValueBack = gameObject.transform.Find("PlayerTextBackCanvas").Find("CreditsValueBackText").gameObject
@@ -74,7 +74,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _livesValueBack = gameObject.transform.Find("PlayerTextBackCanvas").Find("LivesValueBackText").gameObject
             .GetComponent<Text>();
 
-        //Left side
+        // Left side
         _timerValueBack = gameObject.transform.Find("GameTextBackCanvas").Find("TimerValueBackText").gameObject
             .GetComponent<Text>();
         _nextWaveTimerValueBack = gameObject.transform.Find("GameTextBackCanvas").Find("TimeToNextWaveValueBackText")
@@ -93,15 +93,15 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _livesValue.text = $"{_player.Lives}";
         _livesValueBack.text = _livesValue.text;
 
-        _creditsValue.text = $"{_player.Credits}";
+        _creditsValue.text = $"{_player.Funds}";
         _creditsValueBack.text = _creditsValue.text;
 
-        //Timer Update
+        // Timer Update
         Timer += Time.deltaTime;
         var minutes = Mathf.Floor(Timer / 60).ToString("00");
         var seconds = Mathf.Floor(Timer % 60).ToString("00");
 
-        //Time until next wave
+        // Time until next wave
         if (WaveNumber != TotalNumberOfWaves)
         {
             _timeToNextWave -= Time.deltaTime;
@@ -109,10 +109,15 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
             if (_timeToNextWave <= 0.0f)
             {
                 WaveNumber++;
+
                 if (WaveNumber % 5 == 0)
+                {
                     _source?.PlayOneShot(BossSpawnedClip);
+                }
                 else
+                {
                     _source?.Play();
+                }
 
                 if (WaveNumber == TotalNumberOfWaves)
                 {
@@ -131,7 +136,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
             _nextWaveTimerValueBack.text = _nextWaveTimerValue.text;
         }
 
-        //Gametext Update
+        // Gametext Update
 
         _timerValue.text = $"{minutes}:{seconds}";
         _timerValueBack.text = _timerValue.text;
@@ -140,7 +145,7 @@ public class Scoreboard : MonoBehaviour, IOnGameLossTarget
         _wavesValueBack.text = _wavesValue.text;
     }
 
-    //Points gained when enemy dies
+    // Points gained when enemy dies
     public void PointGain(float points)
     {
         Score += points;
