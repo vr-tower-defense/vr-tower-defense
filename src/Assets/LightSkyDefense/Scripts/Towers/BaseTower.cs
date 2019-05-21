@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(SphereCollider))]
 public class BaseTower : MonoBehaviour
@@ -91,8 +92,8 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     public void OnGameWin()
     {
-        var currentState = gameObject.GetComponent<TowerState>();
-        currentState.SetTowerState(CelebrationState);
+        var currentState = gameObject.GetComponents<TowerState>();
+        currentState.ForEach(st =>  st.SetTowerState(CelebrationState));
     }
 
     /// <summary>
@@ -100,7 +101,7 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     public void OnGameLose()
     {
-        var currentState = gameObject.GetComponent<TowerState>();
-        currentState.SetTowerState(CondemnState);
+        var currentState = gameObject.GetComponents<TowerState>();
+        currentState.ForEach(st => st.SetTowerState(CelebrationState));
     }
 }

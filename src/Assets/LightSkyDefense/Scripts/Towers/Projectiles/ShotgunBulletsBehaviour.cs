@@ -30,6 +30,6 @@ public class ShotgunBulletsBehaviour : MonoBehaviour
 
 
         damagable.UpdateHealth(-BulletDamage);
-        Destroy(gameObject);
+        Destroy(this);
     }
 }

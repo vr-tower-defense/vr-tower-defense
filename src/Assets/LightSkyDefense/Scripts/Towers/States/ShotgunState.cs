@@ -18,7 +18,7 @@ public class ShotgunState : TowerState
     public int Damage = 1;
 
     [Tooltip("This is the total amount of seconds between shots")]
-    public float ShootInterval = 0.3f;
+    public float ShootInterval = 1;
 
     [Tooltip("The shell to be shot")]
     public Rigidbody Projectile;
