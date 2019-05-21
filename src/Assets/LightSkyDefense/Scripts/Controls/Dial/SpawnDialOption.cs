@@ -42,12 +42,12 @@ public class SpawnDialOption : DialOption
     // Applies an upwards force to all rigidbodies that enter the trigger.
     void OnTriggerStay(Collider collider)
     {
-        Debug.Log("bAammm collision" + collider.name);
+        //Debug.Log("bAammm collision" + collider.name);
     }
 
     // Applies an upwards force to all rigidbodies that enter the trigger.
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("bAammm collision enter" + collider.name);
+        //Debug.Log("bAammm collision enter" + collider.name);
     }
 }

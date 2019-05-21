@@ -2,11 +2,10 @@ using Assets;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-[RequireComponent(typeof(Damagable))]
+[RequireComponent(typeof(Damageable))]
 [RequireComponent(typeof(SpawnCreditOnDie))]
 public class Enemy : MonoBehaviour
 {
-    public float MaxHealth = 100f;
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
     public float PointValue = 10f;
@@ -16,9 +15,6 @@ public class Enemy : MonoBehaviour
 
     public AudioClip ExplodeSound;
     public AudioClip TeleportSound;
-
-    public Credit Credit;
-    public int CreditValue = 5;
 
     public float ChargeSpeed = 0.1f;
     public float DischargeSpeed = 0.1f;
@@ -207,20 +203,6 @@ public class Enemy : MonoBehaviour
             _rotationSpeed
         );
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        var other = collision
-            .gameObject
-            .GetComponent<Damagable>();
-
-        // If other is null or enemy we stop this function
-        if (other == null || other.GetComponent<Enemy>()) return;
-
-        other.UpdateHealth(-CollisionDamage);
-        Destroy(gameObject);
-    }
-
 
     /// <summary>
     /// Delete PathFollower when enemy is destroyed

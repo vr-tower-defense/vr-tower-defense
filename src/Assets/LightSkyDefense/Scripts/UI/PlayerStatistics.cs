@@ -16,6 +16,8 @@ public class PlayerStatistics : MonoBehaviour
     [HideInInspector]
     public float Funds { get; private set; }
 
+    private bool _isGameOver = false;
+
     /// <summary>
     /// Set the initial values
     /// </summary>
@@ -34,7 +36,7 @@ public class PlayerStatistics : MonoBehaviour
     {
         var tempFunds = Funds + amount;
 
-        if(tempFunds < 0)
+        if (tempFunds < 0)
         {
             return false;
         }
@@ -51,13 +53,15 @@ public class PlayerStatistics : MonoBehaviour
     {
         Lives += amount;
 
-        if (Lives > 0)
+        if (Lives > 0 || _isGameOver)
         {
             return;
         }
 
+        _isGameOver = true;
+
         // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
         }

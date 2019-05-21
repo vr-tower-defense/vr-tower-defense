@@ -1,13 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class TowerState : MonoBehaviour
 {
-    private BaseTower _tower;
+    protected BaseTower Tower;
 
-    private void Start()
+    /// <summary>
+    /// Get BaseTower for later use
+    /// </summary>
+    private void Awake()
     {
-        _tower = GetComponent<BaseTower>();
+        Tower = GetComponent<BaseTower>();
     }
 
     public void SetTowerState(TowerState towerState)
@@ -17,12 +19,9 @@ public abstract class TowerState : MonoBehaviour
             return;
         }
 
-        // Enable current behaviour
         enabled = false;
-
-        // Enable given behaviour
         towerState.enabled = true;
 
-        _tower.CurrentState = towerState;
+        Tower.CurrentState = towerState;
     }
 }

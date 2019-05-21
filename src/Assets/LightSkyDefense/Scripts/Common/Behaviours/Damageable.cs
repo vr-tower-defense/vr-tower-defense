@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class Damagable : MonoBehaviour
+class Damageable : MonoBehaviour
 {
     [SerializeField]
     [Min(0)]
@@ -30,7 +30,7 @@ class Damagable : MonoBehaviour
     /// <param name="amount"></param>
     public void UpdateHealth(float amount)
     {
-        Health = Mathf.Max(Health + amount, MaxHealth);
+        Health = Mathf.Min(Health + amount, MaxHealth);
 
         if (Health <= 0)
         {
