@@ -16,9 +16,6 @@ public class Enemy : MonoBehaviour
     public AudioClip ExplodeSound;
     public AudioClip TeleportSound;
 
-    public Credit Credit;
-    public int CreditValue = 5;
-
     public float ChargeSpeed = 0.1f;
     public float DischargeSpeed = 0.1f;
 

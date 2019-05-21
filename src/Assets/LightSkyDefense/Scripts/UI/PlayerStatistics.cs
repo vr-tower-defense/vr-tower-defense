@@ -34,7 +34,7 @@ public class PlayerStatistics : MonoBehaviour
     {
         var tempFunds = Funds + amount;
 
-        if(tempFunds < 0)
+        if (tempFunds < 0)
         {
             return false;
         }

@@ -13,7 +13,7 @@ public class Dial : MonoBehaviour
     public float DialOptionRadius = .1f;
 
     [Tooltip("Options that can are placed onto the Dial")]
-    public GameObject[] DialOptions;
+    public SpawnDialOption[] DialOptions;
 
     // Field used to check whether user is in process of clicking touchpad
     private DialOption _pressedDial;
@@ -36,7 +36,7 @@ public class Dial : MonoBehaviour
         // Create dial option instances
         for (int i = 0; i < DialOptions.Length; i++)
         {
-            _dialOptions[i] = Instantiate(DialOptions[i], gameObject.transform);
+            _dialOptions[i] = Instantiate(DialOptions[i].gameObject, gameObject.transform);
 
             var segmentAngle = (365 / _dialOptions.Length);
             var segmentAngleCenter = segmentAngle / 2;
