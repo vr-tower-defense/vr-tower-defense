@@ -6,32 +6,32 @@ public class EnemySelfHeal : MonoBehaviour
 {
     public float HealInterval = 10;
     public float HealAmount = 30;
-    private IEnumerator _coroutine;
-    private Enemy _currentEnemy;
+
+    private Damageable _damageable;
 
     // Start is called before the first frame update
     void Start()
     {
-        _coroutine = HealWithInterval(HealInterval);
-        StartCoroutine(_coroutine);
+        _damageable = gameObject.GetComponent<Damageable>();
+
+        HealWithInterval();
     }
 
-    private IEnumerator HealWithInterval(float interval)
+    private void HealWithInterval()
     {
-        _currentEnemy = gameObject.GetComponent<Enemy>();
-        while (true)
+        if (_damageable.Health < _damageable.MaxHealth - HealAmount)
         {
-            if (_currentEnemy.GetHealth() < _currentEnemy.MaxHealth - HealAmount)
-            {
-                HealEnemy(HealAmount);
-                yield return new WaitForSeconds(interval);
-            }
-            yield return new WaitForSeconds(1);
+            HealEnemy(HealAmount);
+
+            Invoke("HealWithInterval", 10);
+            return;
         }
+
+        Invoke("HealWithInterval", 1);
     }
 
     private void HealEnemy(float healValue)
     {
-        _currentEnemy.Heal(healValue);
+        _damageable.UpdateHealth(healValue);
     }
 }

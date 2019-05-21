@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets;
 using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
@@ -13,24 +12,23 @@ public class EnemyShoot : MonoBehaviour
     private readonly List<Collider> _towerSet = new List<Collider>();
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _coroutine = Shoot(ShootInterval);
     }
 
     private void OnTriggerEnter(Collider target)
     {
-        var towerScript = target.gameObject.GetComponent<TowerBehaviour>();
+        var towerScript = target.gameObject.GetComponent<BaseTower>();
 
         if (towerScript == null) return;
 
         _towerSet.Add(target);
 
-        if (_towerSet.Count > 0 && !_shootActive)
-        {
-            _shootActive = true;
-            StartCoroutine(_coroutine);
-        }
+        if (_towerSet.Count <= 0 || _shootActive) return;
+
+        _shootActive = true;
+        StartCoroutine(_coroutine);
     }
 
     private void OnTriggerExit(Collider target)
@@ -41,11 +39,10 @@ public class EnemyShoot : MonoBehaviour
 
         _towerSet.Remove(target);
 
-        if (_towerSet.Count == 0 && _shootActive)
-        {
-            _shootActive = false;
-            StopCoroutine(_coroutine);
-        }
+        if (_towerSet.Count != 0 || !_shootActive) return;
+
+        _shootActive = false;
+        StopCoroutine(_coroutine);
     }
 
     private IEnumerator Shoot(float interval)

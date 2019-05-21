@@ -7,14 +7,12 @@ public class EnemyAoEHeal : MonoBehaviour
     public float HealInterval = 3;
     public float HealAmount = 10;
 
-    private IEnumerator _coroutine;
     private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
 
     // Start is called before the first frame update
     void Start()
     {
-        _coroutine = AoEHealWithInterval(HealInterval);
-        StartCoroutine(_coroutine);
+        AoEHealWithInterval();
     }
 
     private void OnTriggerEnter(Collider target)
@@ -35,20 +33,19 @@ public class EnemyAoEHeal : MonoBehaviour
         _enemySet.Remove(target);
     }
 
-    private IEnumerator AoEHealWithInterval(float interval)
+    private void AoEHealWithInterval()
     {
-        while (true)
-        {
-                HealEnemies(HealAmount);
-                yield return new WaitForSeconds(interval);
-        }
+        HealEnemies(HealAmount);
+        Invoke("AoEHealWithInterval", HealInterval);
     }
 
-    private void HealEnemies(float healValue)
+    private void HealEnemies(float amount)
     {
         foreach (var enemy in _enemySet)
         {
-            enemy.gameObject.GetComponent<Enemy>().Heal(healValue);
+            var damageable = enemy.gameObject.GetComponent<Damageable>();
+
+            damageable.UpdateHealth(amount);
         }
     }
 }
