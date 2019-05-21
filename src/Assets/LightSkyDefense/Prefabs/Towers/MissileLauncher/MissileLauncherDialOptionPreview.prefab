@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5889446234684480002}
   - component: {fileID: 145033006442977781}
   - component: {fileID: 5885393046664702789}
+  - component: {fileID: 7267823276558648787}
   m_Layer: 11
   m_Name: MissileLauncherDialOptionPreview
   m_TagString: Untagged
@@ -66,6 +67,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7267823276558648787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311665180749323574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3eaa859b84450e4f9d925607aa1ef6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1031297018254188174
 PrefabInstance:
   m_ObjectHideFlags: 0
