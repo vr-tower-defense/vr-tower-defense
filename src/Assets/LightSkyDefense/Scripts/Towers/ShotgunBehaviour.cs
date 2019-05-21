@@ -61,6 +61,7 @@ public class ShotgunBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarg
     private void FixedUpdate()
     {
         RotateTowardsEnemy();
+        //ShootProjectile();
     }
 
     /// <summary>
@@ -108,8 +109,6 @@ public class ShotgunBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarg
         int spawnpoint = 0;
         for (int i = 0; i < Bullets; i++)
         {
-            spawnpoint = i;
-            if (spawnpoint >= _spawnpoints.Length) spawnpoint = 0;
 
             var newProjectile = Instantiate(
                 Projectile,
@@ -118,6 +117,8 @@ public class ShotgunBehaviour : MonoBehaviour, IOnGameLossTarget, IOnGameWinTarg
             );
             newProjectile.velocity = transform.forward * ProjectileSpeed;
 
+            spawnpoint++;
+            if (spawnpoint >= _spawnpoints.Length) spawnpoint = 0;
         }
     }
 
