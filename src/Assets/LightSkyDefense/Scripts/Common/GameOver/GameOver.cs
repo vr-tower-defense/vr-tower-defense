@@ -5,7 +5,7 @@ public class GameOver : MonoBehaviour
 {
     public GameObject GameOverPrefab;
 
-    public void OnGameLoss()
+    public void OnGameLose()
     {
         var camera = Camera.main;
 
