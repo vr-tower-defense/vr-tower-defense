@@ -17,7 +17,7 @@ class Damageable : MonoBehaviour
     /// <summary>
     /// Set initial health to health value
     /// </summary>
-    void Start()
+    void Awake()
     {
         Health = InitialHealth;
     }

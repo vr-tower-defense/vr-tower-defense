@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAoEHeal : MonoBehaviour
 {
     public float HealInterval = 3;
-    public float HealAmount = 10;
+    public float HealAmount = 0.1f;
 
     private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
 

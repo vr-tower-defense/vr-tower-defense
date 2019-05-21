@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySelfHeal : MonoBehaviour
 {
     public float HealInterval = 10;
-    public float HealAmount = 30;
+    public float HealAmount = 0.3f;
 
     private Damageable _damageable;
 

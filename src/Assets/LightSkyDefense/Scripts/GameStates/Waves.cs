@@ -12,8 +12,11 @@ public class Wave1 : MonoBehaviour, IWave
 {
     public IEnumerator Play(MonoBehaviour monoBehaviour)
     {
-        var AoeEnemy = Resources.Load("Prefabs/Enemies/ShooterEnemy");
-        var Enemy = Resources.Load("Prefabs/Enemies/Enemy");
+        var AoeEnemy = Resources.Load("Prefabs/Enemies/AoEHealEnemy");
+        var RegularEnemy = Resources.Load("Prefabs/Enemies/Enemy");
+        var ShooterEnemy = Resources.Load("Prefabs/Enemies/ShooterEnemy");
+        var SelfHealEnemy = Resources.Load("Prefabs/Enemies/SelfHealEnemy");
+        var SplitEnemy = Resources.Load("Prefabs/Enemies/SplitEnemy");
 
         // Create a new enemy every 20 seconds
         for (var i = 10; i > 0; i--)
@@ -21,12 +24,12 @@ public class Wave1 : MonoBehaviour, IWave
             // Spawn more enemies
             if (i % 2 == 0)
             {
-                Instantiate(Enemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                Instantiate(SelfHealEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
                 yield return new WaitForSeconds(0.5f);
             }
             else
             {
-                Instantiate(AoeEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
+                Instantiate(SelfHealEnemy, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
                 yield return new WaitForSeconds(0.5f);
             }
         }
