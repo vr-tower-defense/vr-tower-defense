@@ -4,42 +4,66 @@ using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
+    [SerializeField]
+    private readonly int InitialLives = 5;
 
-    private int _lives;
+    [SerializeField]
+    private readonly int InitialFunds = 20;
 
-    public int StartLives = 5;
-    public int StartCredits = 20;
+    [HideInInspector]
+    public int Lives { get; private set; }
 
-    public float Credits { get; set; } = 20;
+    [HideInInspector]
+    public float Funds { get; private set; }
 
-    public int Lives
-    {
-        get => _lives;
-        set
-        {
-            _lives = value;
+    private bool _isGameOver = false;
 
-            if (_lives > 0 || _lost)
-                return;
-
-            _lost = true;
-            GameObject[] targets = gameObject.scene.GetRootGameObjects();
-
-            targets.ForEach(target => 
-                ExecuteEvents.Execute<IOnGameLossTarget>(
-                    target,
-                    null, 
-                    (handler, _) => handler.OnGameLoss()
-                )
-            );
-        }
-    }
-
-    private bool _lost = false;
-
+    /// <summary>
+    /// Set the initial values
+    /// </summary>
     public void Start()
     {
-        Lives = StartLives;
-        Credits = StartCredits;
+        Lives = InitialLives;
+        Funds = InitialFunds;
+    }
+
+    /// <summary>
+    /// Updates the players' funds
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns>Boolean indicating whether action was successful or not</returns>
+    public bool UpdateFunds(float amount)
+    {
+        var tempFunds = Funds + amount;
+
+        if (tempFunds < 0)
+        {
+            return false;
+        }
+
+        Funds = tempFunds;
+        return true;
+    }
+
+    /// <summary>
+    /// Update the players' lives
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UpdateLives(int amount)
+    {
+        Lives += amount;
+
+        if (Lives > 0 || _isGameOver)
+        {
+            return;
+        }
+
+        _isGameOver = true;
+
+        // Emit OnResumeGame message to all game objects
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
+        {
+            go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
