@@ -34,28 +34,26 @@ public class Ejected : IMissileState
     /// </summary>
     public void FixedUpdate()
     {
-        if(_target != null)
+        if (_target == null)
         {
-            var direction = Vector3.Normalize(
-                _target.transform.position - _missile.transform.position
+            var collider = FindClosestTarget(
+                _missile.transform.position,
+                _missile.DetectionRange,
+                LayerMask.Enemies
             );
 
-            // Make missile overshoot
-            var force = direction * _missile.MaxSpeed;
-
-            _rigidbody.AddForce(force, ForceMode.Acceleration);
-            _missile.transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
-
-            return;
+            _target = collider?.transform;
         }
 
-        var collider = FindClosestTarget(
-            _missile.transform.position,
-            _missile.DetectionRange,
-            LayerMask.Enemies
-        );
+        var direction = _target != null
+            ? Vector3.Normalize(_target.transform.position - _missile.transform.position)
+            : _rigidbody.transform.forward;
 
-        _target = collider?.transform;
+        // Make missile overshoot
+        var force = direction * _missile.MaxSpeed;
+
+        _rigidbody.AddForce(force, ForceMode.Acceleration);
+        _missile.transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
     }
 
     /// <summary>
