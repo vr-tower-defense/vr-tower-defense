@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShootMissileState : TowerState
 {
     [Header("Appearance properties")]
-    public float RotationSpeed = 1;
+    public float RotationSpeed = 35;
 
     [Header("Shooting properties")]
     public GameObject Projectile;
@@ -16,6 +16,8 @@ public class ShootMissileState : TowerState
     public LayerMask DetectionLayerMask = LayerMask.Enemies;
 
     private Quaternion _randomRotation;
+    private Collider[] _colliders = new Collider[0];
+
     private Coroutine _coroutine;
 
     /// <summary>
@@ -34,19 +36,33 @@ public class ShootMissileState : TowerState
     /// </summary>
     private void OnDisable()
     {
+        if (_coroutine == null)
+        {
+            return;
+        }
+        
         StopCoroutine(_coroutine);
     }
 
     private void FixedUpdate()
     {
-        if(transform.rotation == _randomRotation)
+        Vector3 lookDirection = Vector3.zero;
+
+        foreach(var collider in _colliders)
         {
-            _randomRotation = Random.rotation;
+            if(collider == null)
+            {
+                continue;
+            }
+
+            lookDirection += collider.transform.position;
         }
 
-        Quaternion.RotateTowards(
-            transform.rotation, 
-            _randomRotation, 
+        lookDirection /= _colliders.Length;
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.LookRotation(lookDirection),
             RotationSpeed * Time.deltaTime
         );
     }
@@ -56,8 +72,14 @@ public class ShootMissileState : TowerState
     /// </summary>
     private IEnumerator ShootMissiles()
     {
+        _colliders = Physics.OverlapSphere(
+            transform.position,
+            DetectionRadius,
+            (int)DetectionLayerMask
+        );
+
         // Check if there are any enemies to shoot at
-        if(!Physics.CheckSphere(transform.position, DetectionRadius, (int) DetectionLayerMask))
+        if (_colliders.Length < 1)
         {
             SetTowerState(Tower.IdleState);
             yield break;

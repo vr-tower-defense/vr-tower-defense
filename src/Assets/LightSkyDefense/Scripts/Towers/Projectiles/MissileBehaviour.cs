@@ -81,7 +81,7 @@ public class Ejected : IMissileState
 
             damagable?.UpdateHealth(
                 // Calculate the damage that should be applied to the enemy
-                _missile.DamageCurve.Evaluate(enemyDistance)
+                -_missile.DamageCurve.Evaluate(enemyDistance)
             );
         }
 
@@ -99,7 +99,7 @@ public class Ejected : IMissileState
         {
             var distance = Vector3.Distance(position, collider.transform.position);
 
-            if(distance < minimalDistance)
+            if (distance < minimalDistance)
             {
                 minimalDistance = distance;
                 targetCollider = collider;
