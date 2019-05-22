@@ -1,4 +1,4 @@
-﻿public enum LayerMask
+﻿public enum Layers
 {
     // Built-in layers
     Default = 1 << 0,
