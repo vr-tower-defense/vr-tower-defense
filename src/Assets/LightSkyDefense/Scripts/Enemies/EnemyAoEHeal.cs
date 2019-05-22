@@ -25,9 +25,9 @@ public class EnemyAoEHeal : MonoBehaviour
 
         for (var i = 0; i < enemiesInRange.Length; i++)
         {
-            if (enemiesInRange[i].gameObject.GetComponent<Damageable>() != null)
+            if (enemiesInRange[i].GetComponent<Damageable>() != null)
             {
-                enemiesInRange[i].gameObject.GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
+                enemiesInRange[i].GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
             }
         }
     }
