@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New CycleWave", menuName = "New CycleWave", order = 1)]
-public class CycleWave : Wave
+[CreateAssetMenu(fileName = "New CycleWaves", menuName = "New CycleWaves", order = 1)]
+public class CycleWaves : Wave
 {
     public Wave[] SubWaves;
 

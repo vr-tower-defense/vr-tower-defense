@@ -12,5 +12,5 @@ public abstract class Wave : ScriptableObject
 
     [Tooltip("The time, in seconds, between each spawn of this wave")]
     [Min(0)]
-    public float Delay = 1;
+    public float Cooldown = 1;
 }
