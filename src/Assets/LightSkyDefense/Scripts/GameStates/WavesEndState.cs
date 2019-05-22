@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class WavesEnd : GameState
+class WavesEndState : GameState
 {
     int _leftOverEnemies;
 
@@ -27,6 +27,8 @@ class WavesEnd : GameState
         {
             go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
         }
+
+        SetGameState(typeof(WinState));
     }
 
 }

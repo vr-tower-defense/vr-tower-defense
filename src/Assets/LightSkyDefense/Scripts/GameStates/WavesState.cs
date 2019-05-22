@@ -41,14 +41,9 @@ public class Wave2 : MonoBehaviour, IWave
     }
 }
 
-public class Waves : GameState
+public class WavesState : GameState
 {
     Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
-
-    public Waves()
-    {
-        Debug.Log($"GameState: {GetType()}");
-    }
 
     public void Start()
     {

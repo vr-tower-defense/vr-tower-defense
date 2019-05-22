@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-class Win : GameState
+class InfinityState : GameState
 {
-    public Win()
+
+    public InfinityState()
     {
         Debug.Log($"GameState: {GetType()}");
     }

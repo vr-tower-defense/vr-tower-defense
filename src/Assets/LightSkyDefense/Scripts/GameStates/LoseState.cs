@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-class Lose : GameState
+class LoseState : GameState
 {
     private void Awake()
     {
