@@ -99,7 +99,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765026518164491751}
-  - component: {fileID: 5227123707104676121}
   m_Layer: 0
   m_Name: MissileLauncher
   m_TagString: Untagged
@@ -122,21 +121,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5227123707104676121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6626728996559669971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b6e62e83ea684c4eb569fa1be13cc84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectCollider: {fileID: 2658780042421631708}
-  isVisual: 0
-  InvalidColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
 --- !u!1 &7880970267528367531
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,8 +169,7 @@ GameObject:
   - component: {fileID: 6950725025787894344}
   - component: {fileID: 4837722594524183046}
   - component: {fileID: 8333722719474973916}
-  - component: {fileID: 3065672760387673316}
-  - component: {fileID: 6775865927643582128}
+  - component: {fileID: 6511463652328809273}
   m_Layer: 8
   m_Name: missile_launcher
   m_TagString: Untagged
@@ -406,11 +389,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleState: {fileID: 8333722719474973916}
-  ActiveState: {fileID: 3065672760387673316}
+  ActiveState: {fileID: 6511463652328809273}
   CelebrationState: {fileID: 4837722594524183046}
   CondemnState: {fileID: 0}
   InitialState: {fileID: 8333722719474973916}
   CurrentState: {fileID: 0}
+  ProjectileSpawns:
+  - {fileID: 3984326557187089192}
+  - {fileID: 8537441929906329032}
+  - {fileID: 5428556423452228348}
+  - {fileID: 4073706048562053402}
 --- !u!114 &4837722594524183046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,8 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eb2959579d7554da445040fc1db6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 0.75
---- !u!114 &3065672760387673316
+  RotationSpeed: 35
+--- !u!114 &6511463652328809273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,29 +444,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8423346778408870849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84fbe5e201231e4194ce66976ffb7ec, type: 3}
+  m_Script: {fileID: 11500000, guid: a084af24685d33b46ac06708e5638b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Upwards: {x: 0, y: 0, z: 1}
-  RotationSpeed: 1
-  Projectile: {fileID: 2096758969451732159, guid: 43940cfd1478e2342b0d88366c87b3bb,
+  RotationSpeed: 35
+  Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
-  ProjectileSpawn: {fileID: 3984326557187089192}
-  ProjectileSpeed: 4
-  ShootInterval: 0.25
-  AngleTreshold: 5
-  AudioSource: {fileID: 1700333904029867142}
-  ShootSound: {fileID: 8300000, guid: e9f497b3c8d534849ab1f6eb8b6ea2d4, type: 3}
---- !u!114 &6775865927643582128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423346778408870849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d72fa40e2eda4b9893372a7bacfc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cost: 10
+  ShootCooldown: 4
+  EjectInterval: 1
+  DetectionRadius: 0.5
+  DetectionLayerMask: 512
