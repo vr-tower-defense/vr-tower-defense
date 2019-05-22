@@ -15,6 +15,9 @@ class WavesEndState : GameState
         }
     }
 
+    /// <summary>
+    /// Gets called when an Enemy is destroyed in this gameState 
+    /// </summary>
     public void CheckAllEnemiesDestroyed()
     {
         _leftOverEnemies--;

@@ -5,7 +5,7 @@ using Valve.VR.InteractionSystem;
 public class PlayerStatistics : MonoBehaviour
 {
     [SerializeField]
-    private readonly int InitialLives = 1;
+    private readonly int InitialLives = 5;
 
     [SerializeField]
     private readonly int InitialFunds = 20;
