@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -82,12 +83,12 @@ public class ShotgunState : TowerState
         int spawnpoint = 0;
         for (int i = 0; i < Bullets; i++)
         {
+            var (ranX, ranY) = (Random.Range(-Spread, Spread), Random.Range(-Spread, Spread));
             var offset = Quaternion.Euler(
-                Random.Range(-Spread, Spread),
-                Random.Range(-Spread, Spread),
+                ranX,
+                ranY,
                 1 
             );
-
             var rotation = lookRotation * offset;
 
             var newProjectile = Instantiate(

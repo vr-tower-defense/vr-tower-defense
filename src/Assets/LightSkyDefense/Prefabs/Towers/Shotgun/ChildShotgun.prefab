@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullets: 4
-  Spread: 15
+  Spread: 45
   Damage: 4
   ShootInterval: 1
   Projectile: {fileID: 9073337372988659883, guid: 1886119667e68d84d82b48bd0e2b4303,
