@@ -22,6 +22,8 @@ public class BaseTower : MonoBehaviour
 
     #endregion
 
+    public Transform[] ProjectileSpawns;
+
     [HideInInspector]
     public HashSet<Enemy> TargetsInRange { get; } = new HashSet<Enemy>();
 
@@ -61,8 +63,6 @@ public class BaseTower : MonoBehaviour
         }
 
         TargetsInRange.Add(enemy);
-
-        CurrentState.SetTowerState(ActiveState);
     }
 
     /// <summary>
@@ -79,11 +79,6 @@ public class BaseTower : MonoBehaviour
         }
 
         TargetsInRange.Remove(enemy);
-
-        if (TargetsInRange.Count < 1)
-        {
-            CurrentState.SetTowerState(IdleState);
-        }
     }
 
     /// <summary>

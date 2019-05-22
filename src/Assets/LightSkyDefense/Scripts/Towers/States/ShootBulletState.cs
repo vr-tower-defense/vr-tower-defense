@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PredictTargetPositionState : TowerState
+public class ShootBulletState : TowerState
 {
     [Header("Rotations")]
     [Tooltip("The speed at wich a projectile flies")]

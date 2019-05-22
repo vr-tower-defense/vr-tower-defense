@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1945967994869956103}
   - component: {fileID: 2614879476725174190}
   - component: {fileID: 6130869729085579564}
-  - component: {fileID: 3225043650925669176}
   - component: {fileID: 7801479159624637851}
+  - component: {fileID: 2065851134992329813}
   m_Layer: 12
   m_Name: Missile
   m_TagString: Projectile
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2750454542051786134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 287345814034722605}
   m_Father: {fileID: 0}
@@ -45,8 +45,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.008
-  m_Height: 0.04
+  m_Radius: 0.003
+  m_Height: 0.02
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6130869729085579564
@@ -57,29 +57,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2750454542051786134}
   serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 5
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &3225043650925669176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2750454542051786134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064a7d1e06d6e5847ad8205f8171a9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletDamage: 20
-  TimeBeforeDestroy: 10
-  KnockBackAmount: 0.5
+  m_CollisionDetection: 1
 --- !u!96 &7801479159624637851
 TrailRenderer:
   serializedVersion: 2
@@ -184,6 +169,48 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2065851134992329813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750454542051786134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8abf2d121ae224b905b5ba01850d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.5
+      inSlope: -5.3505387
+      outSlope: -5.3505387
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.51746035
+    - serializedVersion: 3
+      time: 0.2
+      value: 0
+      inSlope: -0.20443924
+      outSlope: -4.2057004
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AreaOfEffectRadius: 0.2
+  DetectionRange: 0.5
+  MaxSpeed: 0.5
+  CollisionLayerMask: 512
+  TimeAlive: 8
+  EjectForce: 3
 --- !u!1001 &287345814034593197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,15 +268,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.25
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
