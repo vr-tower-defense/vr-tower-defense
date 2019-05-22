@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         //todo if player doesn't exist, create new gameobject Player?
         var instance = FindObjectOfType<GameManager>() ?? GameObject.Find("Player").AddComponent<GameManager>();
 
-        instance.WayPointPrefab = Resources.Load("Prefabs/PathWayPoint") as GameObject;
+        instance.WayPointPrefab = Resources.Load<GameObject>("Prefabs/PathWayPoint");
 
         _instance = instance;
         _initializing = false;
