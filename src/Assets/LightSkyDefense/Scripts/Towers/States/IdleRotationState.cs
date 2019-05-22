@@ -31,9 +31,9 @@ public class IdleRotationState : TowerState
             _randomRotation, 
             RotationSpeed * Time.deltaTime
         );
-
+        
         // Set active state when enemies are in range
-        if (Tower.TargetsInRange.Count > 0)
+        if (Tower.TargetsInRange.Length > 0)
         {
             SetTowerState(Tower.ActiveState);
         }

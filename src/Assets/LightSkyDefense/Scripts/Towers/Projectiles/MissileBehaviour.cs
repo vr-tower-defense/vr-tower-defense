@@ -39,7 +39,7 @@ public class Ejected : IMissileState
             var collider = FindClosestTarget(
                 _missile.transform.position,
                 _missile.DetectionRange,
-                LayerMask.Enemies
+                Layers.Enemies
             );
 
             _target = collider?.transform;
@@ -88,7 +88,7 @@ public class Ejected : IMissileState
         MonoBehaviour.Destroy(_missile.gameObject);
     }
 
-    private Collider FindClosestTarget(Vector3 position, float radius, LayerMask layerMask = LayerMask.Default)
+    private Collider FindClosestTarget(Vector3 position, float radius, Layers layerMask = Layers.Default)
     {
         var colliders = Physics.OverlapSphere(position, radius, (int) layerMask);
 
@@ -123,7 +123,7 @@ public class MissileBehaviour : MonoBehaviour
     public float MaxSpeed = .5f;
 
     [Tooltip("The layers that should be considered when checking for collisions")]
-    public LayerMask CollisionLayerMask = LayerMask.Enemies;
+    public Layers CollisionLayerMask = Layers.Enemies;
 
     [Tooltip("The time before a bullet is removed from the scene")]
     public float TimeAlive = 8;

@@ -13,7 +13,7 @@ public class ShootMissileState : TowerState
 
     [Header("Detecion properties")]
     public float DetectionRadius = .5f;
-    public LayerMask DetectionLayerMask = LayerMask.Enemies;
+    public Layers DetectionLayerMask = Layers.Enemies;
 
     private Quaternion _randomRotation;
     private Collider[] _colliders = new Collider[0];
@@ -72,14 +72,8 @@ public class ShootMissileState : TowerState
     /// </summary>
     private IEnumerator ShootMissiles()
     {
-        _colliders = Physics.OverlapSphere(
-            transform.position,
-            DetectionRadius,
-            (int)DetectionLayerMask
-        );
-
         // Check if there are any enemies to shoot at
-        if (_colliders.Length < 1)
+        if (Tower.TargetsInRange.Length < 1)
         {
             SetTowerState(Tower.IdleState);
             yield break;
