@@ -3,18 +3,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SpawnEnemy : MonoBehaviour, IWaveH
+public class SpawnWave : WaveH
 {
+    public WaveH Wave;
 
-    public Object _prefab;
-    public int Delay = 500;
-    public int Repeat = 1;
-
-    public IEnumerator Spawn()
+    public override IEnumerator Spawn()
     {
         for (int i = 0; i < Repeat; i++)
         {
-            Instantiate(_prefab);
+            yield return Wave.Spawn();
             yield return new WaitForSeconds(Delay);
         }
     }

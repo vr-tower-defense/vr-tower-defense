@@ -2,13 +2,11 @@
 
 public class RootWave : MonoBehaviour
 {
-    public MonoBehaviour Root;
+    public WaveH Root;
     private Coroutine _spawn;
     public void Start()
     {
-        if (Root is IWaveH Wave) 
-            _spawn = StartCoroutine(Wave.Spawn());
-        
+        _spawn = StartCoroutine(Root.Spawn());
     }
 }
 
