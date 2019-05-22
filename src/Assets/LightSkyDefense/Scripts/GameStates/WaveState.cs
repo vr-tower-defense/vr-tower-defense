@@ -14,6 +14,7 @@ public class WaveState : MonoBehaviour, IGameState
 
     public IEnumerator Play()
     {
+        yield return new WaitForFixedUpdate();
         foreach (var wave in Waves)
         {
             FindObjectsOfType<GameObject>()
