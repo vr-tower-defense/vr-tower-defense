@@ -7,7 +7,7 @@ public class EnemyDestroyDispatcher : MonoBehaviour
     {
         if (GameManager.IsQuitting) return;
 
-        // Emit OnResumeGame message to all game objects
+        // Not very clean?
         foreach (GameObject go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("CheckAllEnemiesDestroyed", SendMessageOptions.DontRequireReceiver);
