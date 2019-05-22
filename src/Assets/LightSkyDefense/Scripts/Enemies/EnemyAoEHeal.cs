@@ -1,51 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyAoEHeal : MonoBehaviour
 {
-    public float HealInterval = 3;
     public float HealAmount = 0.1f;
-
-    private readonly HashSet<Collider> _enemySet = new HashSet<Collider>();
+    public float HealInterval = 3;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         AoEHealWithInterval();
     }
 
-    private void OnTriggerEnter(Collider target)
-    {
-        var enemyScript = target.gameObject.GetComponent<Enemy>();
-
-        if (enemyScript == null) return;
-
-        _enemySet.Add(target);
-    }
-
-    private void OnTriggerExit(Collider target)
-    {
-        var enemyScript = target.gameObject.GetComponent<Enemy>();
-
-        if (enemyScript == null) return;
-
-        _enemySet.Remove(target);
-    }
-
     private void AoEHealWithInterval()
     {
-        HealEnemies(HealAmount);
+        HealEnemies(transform.position, 0.15f, HealAmount);
         Invoke("AoEHealWithInterval", HealInterval);
     }
 
-    private void HealEnemies(float amount)
+    private void HealEnemies(Vector3 center, float radius, float amount)
     {
-        foreach (var enemy in _enemySet)
-        {
-            var damageable = enemy.gameObject.GetComponent<Damageable>();
+        var enemiesInRange = Physics.OverlapSphere(center, radius);
 
-            damageable.UpdateHealth(amount);
-        }
+        if (enemiesInRange.Length < 1) return;
+
+        var i = 0;
+
+        while (i < enemiesInRange.Length)
+            if (enemiesInRange[i].gameObject.GetComponent<Damageable>() != null)
+            {
+                enemiesInRange[i].gameObject.GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
+                i++;
+            }
+            else
+                i++;
     }
 }
