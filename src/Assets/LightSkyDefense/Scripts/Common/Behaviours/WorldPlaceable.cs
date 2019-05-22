@@ -14,22 +14,20 @@ public class WorldPlaceable : MonoBehaviour
     /// </summary>
     private Material _originalPrefabMat;
 
-    private static LayerMask _layerMask = 0;
+    private static Layers _layerMask = Layers.Path|Layers.Enemies|Layers.Towers;
 
     void Awake()
     {
-        if (!isVisual && Physics.CheckBox(ObjectCollider.transform.position, ObjectCollider.size / 2f, transform.rotation, _layerMask.value))
+        if (!isVisual)
         {
-            Destroy(gameObject);
-            return;
-        }
-    }
-
-    void Start()
-    {
-        if (_layerMask == 0)
-        {
-            _layerMask = LayerMask.GetMask("Path", "Enemies");
+            foreach (Collider collider in Physics.OverlapBox(ObjectCollider.transform.position, ObjectCollider.size / 2f, transform.rotation, (int)_layerMask))
+            {
+                if(collider.transform != ObjectCollider.transform)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+            }
         }
     }
 
@@ -38,7 +36,7 @@ public class WorldPlaceable : MonoBehaviour
         if (ObjectCollider == null)
             return;
 
-        if (Physics.CheckBox(ObjectCollider.transform.position, ObjectCollider.size / 2f, transform.rotation, _layerMask.value))
+        if (Physics.CheckBox(ObjectCollider.transform.position, ObjectCollider.size / 2f, transform.rotation, (int)_layerMask))
         {
             if (_originalPrefabMat == null)
             {
