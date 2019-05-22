@@ -23,6 +23,8 @@ public class BaseTower : MonoBehaviour
 
     #endregion
 
+    public Transform[] ProjectileSpawns;
+
     [HideInInspector]
     public HashSet<Enemy> TargetsInRange { get; } = new HashSet<Enemy>();
 
