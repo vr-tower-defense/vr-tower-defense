@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public GameObject WayPointPrefab;
 
     private static bool _initializing = false;
-    private readonly Type _defaultGameState = typeof(Waves);
     private MonoBehaviour _gameState { get; set; }
     private int _lastWaveEnemiesAmount = 0;
 
@@ -61,7 +60,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        SetGameState(_defaultGameState);
     }
 
     /// <summary>

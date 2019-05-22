@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New CycleWave", menuName = "New CycleWave", order = 1)]
-public class CycleWave : WaveH
+public class CycleWave : Wave
 {
-    public WaveH[] SubWaves;
+    public Wave[] SubWaves;
 
     public override IEnumerator Spawn()
     {

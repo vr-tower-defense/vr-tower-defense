@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New SpawnEnemies", menuName = "New SpawnEnemies", order = 1)]
-public class SpawnEnemy :  WaveH
+public class SpawnEnemy :  Wave
 {
     public GameObject Prefab;
 

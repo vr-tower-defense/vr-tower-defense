@@ -3,7 +3,7 @@
 
 public class RootWave : MonoBehaviour
 {
-    public WaveH Root;
+    public Wave Root;
     private Coroutine _spawn;
 
     public void Start()

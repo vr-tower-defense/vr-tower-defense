@@ -2,9 +2,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New SpawnWave", menuName = "New SpawnWave", order = 1)]
-public class SpawnWave : WaveH
+public class SpawnWave : Wave
 {
-    public WaveH Wave;
+    public Wave Wave;
 
     public override IEnumerator Spawn()
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public abstract class WaveH : ScriptableObject
+public abstract class Wave : ScriptableObject
 {
     public abstract IEnumerator Spawn();
 
