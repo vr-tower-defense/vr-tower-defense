@@ -32,7 +32,7 @@ public class ShotgunState : TowerState
     [Tooltip("speed of the shot bullets")]
     public float ProjectileSpeed = 1;
 
-    private Vector3[] _spawnpoints;
+    public Transform[] Spawnpoints;
 
     private Vector3 _center;
 
@@ -44,13 +44,8 @@ public class ShotgunState : TowerState
 
     private void Start()
     {
-        _spawnpoints = gameObject.transform.GetComponentsInChildren<Transform>()
-            .Where(t => t.gameObject.name == "Spawnpoint")
-            .Select(tra => tra.position)
-            .ToArray();
 
-        
-        if (Bullets == 0 || _spawnpoints.Length == 0 || Projectile == null)
+        if (Bullets == 0 || Spawnpoints.Length == 0 || Projectile == null)
         {
             enabled = false;
             return;
@@ -97,14 +92,14 @@ public class ShotgunState : TowerState
 
             var newProjectile = Instantiate(
                 Projectile,
-                _spawnpoints[spawnpoint],
+                Spawnpoints[spawnpoint].position,
                 rotation
             );
 
             newProjectile.AddForce((rotation * transform.forward ) * ProjectileSpeed, ForceMode.VelocityChange);
 
             spawnpoint++;
-            if (spawnpoint >= _spawnpoints.Length) spawnpoint = 0;
+            if (spawnpoint >= Spawnpoints.Length) spawnpoint = 0;
         }
     }
     
@@ -155,6 +150,5 @@ public class ShotgunState : TowerState
             predictedlookRotation,
             RotationSpeed
         );
-        _center = _spawnpoints.AverageBy(Vector3.zero, (v, w) => v + w, (v, count) => v / count);
     }
 }

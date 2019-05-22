@@ -35,8 +35,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4174669680700718743}
   - {fileID: 7445406145931020746}
+  - {fileID: 4174669680700718743}
   - {fileID: 8208946357414935062}
   - {fileID: 6977661174083818328}
   m_Father: {fileID: 0}
@@ -189,6 +189,11 @@ MonoBehaviour:
   Upwards: {x: 0, y: 0, z: 1}
   RotationSpeed: 1
   ProjectileSpeed: 1
+  Spawnpoints:
+  - {fileID: 7445406145931020746}
+  - {fileID: 4174669680700718743}
+  - {fileID: 8208946357414935062}
+  - {fileID: 6977661174083818328}
 --- !u!1 &2571776541770419481
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8208946357414935062}
   m_Layer: 0
-  m_Name: Spawnpoint
+  m_Name: SpawnpointL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6977661174083818328}
   m_Layer: 0
-  m_Name: Spawnpoint
+  m_Name: SpawnpointR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7445406145931020746}
   m_Layer: 0
-  m_Name: Spawnpoint
+  m_Name: SpawnpointC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 591665672617657965}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7589647598250548394
 GameObject:
@@ -289,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4174669680700718743}
   m_Layer: 0
-  m_Name: Spawnpoint
+  m_Name: SpawnpointT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,5 +312,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 591665672617657965}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
