@@ -17,17 +17,15 @@ public class EnemyAoEHeal : MonoBehaviour
         Invoke("AoEHealWithInterval", HealInterval);
     }
 
-    private void HealEnemies(Vector3 center, float radius, float amount)
+    private static void HealEnemies(Vector3 center, float radius, float amount)
     {
         var enemiesInRange = Physics.OverlapSphere(center, radius);
 
-        if (enemiesInRange.Length < 1) return;
-
-        for (var i = 0; i < enemiesInRange.Length; i++)
+        foreach (Collider enemy in enemiesInRange)
         {
-            if (enemiesInRange[i].GetComponent<Damageable>() != null)
+            if (enemy.GetComponent<Damageable>() != null)
             {
-                enemiesInRange[i].GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
+                enemy.GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
             }
         }
     }

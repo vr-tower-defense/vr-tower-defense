@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
 
     private Vector3[] _pathPoints;
 
+    private Scoreboard _scoreboard;
+
     private float _energyCharge = 0;
     private float _potentialEnergy = 1f;
     private readonly float _rotationSpeed = 2f;
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
     {
         _energyCharge = EnergyCapacity;
         _pathPoints = GameManager.Instance.Path.PathPoints;
+        _scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
@@ -104,7 +107,7 @@ public class Enemy : MonoBehaviour
             explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
 
-        GameObject.Find("Scoreboard").GetComponent<Scoreboard>().PointGain(PointValue);
+        _scoreboard.SendMessage("PointGain", PointValue, SendMessageOptions.RequireReceiver);
     }
 
     /// <summary>

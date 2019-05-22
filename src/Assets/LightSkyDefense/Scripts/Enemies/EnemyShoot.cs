@@ -1,45 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
     public Rigidbody Projectile;
     public float ShootInterval = 6;
+    public float LoadUpTime = 5;
 
     private bool _shootActive = false;
     private IEnumerator _coroutine;
-    private readonly List<Collider> _towerSet = new List<Collider>();
+    private List<Collider> _objectsInRange;
+    private readonly List<Collider> _towersInRange = new List<Collider>();
 
     // Start is called before the first frame update
     private void Start()
     {
         _coroutine = Shoot(ShootInterval);
+        CheckForTowers(transform.position, 0.2f);
     }
 
-    private void OnTriggerEnter(Collider target)
+    void FixedUpdate()
     {
-        var towerScript = target.gameObject.GetComponent<BaseTower>();
-
-        if (towerScript == null) return;
-
-        _towerSet.Add(target);
-
-        if (_towerSet.Count <= 0 || _shootActive) return;
-
-        _shootActive = true;
-        StartCoroutine(_coroutine);
+        CheckForTowers(transform.position, 0.2f);
     }
 
-    private void OnTriggerExit(Collider target)
+    private void CheckForTowers(Vector3 center, float radius)
     {
-        var towerScript = target.gameObject.GetComponent<Enemy>();
+        _objectsInRange = Physics.OverlapSphere(center, radius).ToList();
 
-        if (towerScript == null) return;
+        for (var i = 0; i < _objectsInRange.Count; i++)
+        {
+            if (_objectsInRange[i].GetComponent<BaseTower>() != null && !_towersInRange.Contains(_objectsInRange[i]))
+                _towersInRange.Add(_objectsInRange[i]);
+        }
 
-        _towerSet.Remove(target);
+        for (var j = 0; j < _towersInRange.Count; j++)
+        {
+            if (!_objectsInRange.Contains(_towersInRange[j]))
+                _towersInRange.Remove(_towersInRange[j]);
+        }
 
-        if (_towerSet.Count != 0 || !_shootActive) return;
+        if (_towersInRange.Count >= 1 && _shootActive) return;
+
+        if (_towersInRange.Count >= 1)
+        {
+            _shootActive = true;
+            StartCoroutine(_coroutine);
+            return;
+        }
 
         _shootActive = false;
         StopCoroutine(_coroutine);
@@ -47,7 +57,8 @@ public class EnemyShoot : MonoBehaviour
 
     private IEnumerator Shoot(float interval)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(LoadUpTime);
+
         while (true)
         {
             ShootAtTower();
@@ -57,8 +68,8 @@ public class EnemyShoot : MonoBehaviour
 
     private void ShootAtTower()
     {
-        var rand = Random.Range(0, _towerSet.Count);
-        var tower = _towerSet[rand];
+        var rand = Random.Range(0, _towersInRange.Count);
+        var tower = _towersInRange[rand];
         var target = tower.transform.position;
 
         var newProjectile = Instantiate(

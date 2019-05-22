@@ -96,6 +96,9 @@ public class BaseTower : MonoBehaviour
         CurrentState.SetTowerState(CondemnState);
     }
 
+    /// <summary>
+    /// Update the tower state when the tower gets hit by a jammer
+    /// </summary>
     public void OnJam(float jamTime)
     {
         JamState.JamTime = jamTime;

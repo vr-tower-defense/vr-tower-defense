@@ -9,13 +9,13 @@ public class EnemySplit : MonoBehaviour
     {
         for (int i = 0; i < SplitAmount; i++)
         {
-            var splitEnemy = Instantiate(
+            var newEnemy = Instantiate(
                 NewEnemy,
                 transform.position,
                 Random.rotation
             );
 
-            splitEnemy.GetComponent<Damageable>().UpdateHealth(-0.6f);
+            newEnemy.GetComponent<Damageable>().UpdateHealth(-0.6f);
         }
     }
 }
