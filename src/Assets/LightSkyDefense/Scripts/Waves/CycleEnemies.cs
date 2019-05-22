@@ -12,7 +12,7 @@ public class CycleEnemies : Wave
         {
             foreach (var prefab in Enemies)
             {
-                Instantiate(prefab);
+                Instantiate(prefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
                 yield return new WaitForSeconds(Delay);
             }
         }
