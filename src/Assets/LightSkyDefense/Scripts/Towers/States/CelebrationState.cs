@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 interface IStep
@@ -37,27 +38,43 @@ public class RotateUp : IStep
 public class Idle : IStep
 {
     private readonly CelebrationState _celebrationState;
+    private int _spawnIndex = 0;
 
     public Idle(CelebrationState celebrationState)
     {
-        // Create new firework particle system instances and start the celebration
-        for (int i = 0; i < celebrationState.ParticleSystemSpawns.Length; i++)
-        {
-            celebrationState.ParticleSystemInstances[i] = MonoBehaviour.Instantiate(
-                celebrationState.CelebrationEffect,
-                celebrationState.ParticleSystemSpawns[i].transform.position,
-                celebrationState.ParticleSystemSpawns[i].transform.rotation
-            );
-
-            celebrationState.ParticleSystemInstances[i].Play();
-        }
-
         _celebrationState = celebrationState;
+
+        // Create new firework particle system instances and start the celebration
+        _celebrationState.ParticleSystemInstance = MonoBehaviour.Instantiate(
+            _celebrationState.CelebrationEffect,
+            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.position,
+            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.rotation
+        );
+
+        _celebrationState.ParticleSystemInstance.Play();
+
     }
 
     public void FixedUpdate()
     {
         _celebrationState.transform.Rotate(_celebrationState.RotationAxis * _celebrationState.RotationSpeed);
+
+        if(_celebrationState.ParticleSystemInstance.isStopped)
+        {
+            SetCelebrationToNextSpawn();
+        }
+    }
+
+    private void SetCelebrationToNextSpawn()
+    {
+        _spawnIndex++;
+        if (_spawnIndex == _celebrationState.ParticleSystemSpawns.Length)
+            _spawnIndex = 0;
+
+        _celebrationState.ParticleSystemInstance.transform.position = 
+            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.position;
+
+        _celebrationState.ParticleSystemInstance.Play();
     }
 }
 
@@ -68,7 +85,7 @@ public class CelebrationState : TowerState
 
     public Vector3 AimDirection = Vector3.up;
     public Vector3 RotationAxis = Vector3.up;
-    public float RotationSpeed = 0.2f;
+    public float RotationSpeed = 0.1f;
 
     private IStep _currentStep;
 
@@ -76,24 +93,21 @@ public class CelebrationState : TowerState
     /// Up rotation angle
     /// </summary>
     [HideInInspector]
-    public ParticleSystem[] ParticleSystemInstances;
+    public ParticleSystem ParticleSystemInstance;
 
     /// <summary>
     /// Stop fireworks when state is disabled
     /// </summary>
     private void OnDisable()
     {
-        foreach(var instance in ParticleSystemInstances)
-        {
-            Destroy(instance);
-        }
+        Destroy(ParticleSystemInstance);
     }
 
     private void OnEnable()
     {
         _currentStep = new RotateUp(this);
 
-        ParticleSystemInstances = new ParticleSystem[ParticleSystemSpawns.Length];
+        ParticleSystemInstance = new ParticleSystem();
     }
 
     void FixedUpdate()
