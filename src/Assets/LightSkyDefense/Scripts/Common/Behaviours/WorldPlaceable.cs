@@ -28,6 +28,7 @@ public class WorldPlaceable : MonoBehaviour
                     return;
                 }
             }
+            Destroy(this);
         }
     }
 
