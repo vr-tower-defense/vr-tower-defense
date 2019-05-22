@@ -100,12 +100,12 @@ public class GameManager : MonoBehaviour
         Destroy(_gameState);
 
         // Create new game state
-        _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
+        _gameState = (GameState)gameObject.AddComponent(gameState);
     }
 
     public void OnGameLose()
     {
-        _isGameOver = true;
+        SetGameState(typeof(Lose));
     }
 
     /// <summary>

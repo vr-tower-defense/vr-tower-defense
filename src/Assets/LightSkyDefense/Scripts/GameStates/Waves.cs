@@ -41,7 +41,7 @@ public class Wave2 : MonoBehaviour, IWave
     }
 }
 
-public class Waves : MonoBehaviour, IGameState
+public class Waves : GameState
 {
     Type[] PreconfiguredWaves { get; } = { typeof(Wave1), typeof(Wave2) };
 
@@ -85,8 +85,7 @@ public class Waves : MonoBehaviour, IGameState
             // If last wave
             if (waveAmount == waveCounter)
             {
-                var gameManager = Player.instance.GetComponent<GameManager>();
-                gameManager.LastEnemiesTrigger();
+                SetGameState(typeof(WavesEnd));
             }
 
             Destroy((MonoBehaviour)wave);

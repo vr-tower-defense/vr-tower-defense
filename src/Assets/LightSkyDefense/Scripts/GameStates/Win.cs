@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-class Lobby : MonoBehaviour, IGameState
+class Win : GameState
 {
-    public Lobby()
+    public Win()
     {
         Debug.Log($"GameState: {GetType()}");
     }
