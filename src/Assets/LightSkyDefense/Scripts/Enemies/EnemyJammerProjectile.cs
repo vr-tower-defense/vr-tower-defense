@@ -21,11 +21,14 @@ public class EnemyJammerProjectile : MonoBehaviour
             .gameObject
             .GetComponent<BaseTower>();
 
-        tower.SendMessage(
-            "OnJam",
-            JamTime,
-            SendMessageOptions.RequireReceiver
-        );
+        if (tower != null)
+        {
+            tower.SendMessage(
+                "OnJam",
+                JamTime,
+                SendMessageOptions.RequireReceiver
+            );
+        }
 
         Destroy(gameObject);
     }

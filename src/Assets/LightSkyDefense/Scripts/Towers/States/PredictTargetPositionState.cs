@@ -45,6 +45,8 @@ public class PredictTargetPositionState : TowerState
     /// </summary>
     private void ShootProjectile()
     {
+        if (_activeTarget == null) return;
+
         var targetDirection = Vector3.Angle(
             _activeTarget.position - transform.position,
             transform.forward
