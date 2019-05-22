@@ -3,7 +3,7 @@ using Valve.VR.InteractionSystem;
 
 class LoseState : GameState
 {
-    private void Awake()
+    private void Start()
     {
         var camera = Camera.main;   
 

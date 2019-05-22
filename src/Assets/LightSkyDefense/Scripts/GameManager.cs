@@ -14,10 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject WayPointPrefab;
 
     private static bool _initializing = false;
-    private readonly Type _defaultGameState = typeof(Waves);
+    private readonly Type _defaultGameState = typeof(WavesState);
     private MonoBehaviour _gameState { get; set; }
-    private int _lastWaveEnemiesAmount = 0;
-    private bool _isGameOver = false;
 
     private Path _path;
     public Path Path
@@ -105,7 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGameLose()
     {
-        SetGameState(typeof(Lose));
+        SetGameState(typeof(LoseState));
     }
 }
 

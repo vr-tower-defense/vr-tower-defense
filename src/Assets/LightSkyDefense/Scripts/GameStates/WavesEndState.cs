@@ -4,7 +4,7 @@ class WavesEndState : GameState
 {
     int _leftOverEnemies;
 
-    private void Awake()
+    private void Start()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 

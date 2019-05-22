@@ -80,7 +80,7 @@ public class WavesState : GameState
             // If last wave
             if (waveAmount == waveCounter)
             {
-                SetGameState(typeof(WavesEnd));
+                SetGameState(typeof(WavesEndState));
             }
 
             Destroy((MonoBehaviour)wave);
