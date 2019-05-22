@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-interface IWave
+public interface IWave
 {
     IEnumerator Play(MonoBehaviour monoBehaviour);
 }
@@ -52,7 +52,7 @@ public class Waves : MonoBehaviour, IGameState
 
     public void Start()
     {
-        StartCoroutine(WavesRoutine());
+        //StartCoroutine(WavesRoutine());
     }
 
     /// <summary>
