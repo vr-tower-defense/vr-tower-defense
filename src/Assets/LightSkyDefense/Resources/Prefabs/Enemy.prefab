@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2599132469148774452}
   - component: {fileID: 1527273287116694936}
   - component: {fileID: 1295532292891702988}
-  - component: {fileID: 6628665331162153446}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -127,7 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
