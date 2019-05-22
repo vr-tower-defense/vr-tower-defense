@@ -30,5 +30,4 @@ class WavesEndState : GameState
 
         SetGameState(typeof(WinState));
     }
-
 }
