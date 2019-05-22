@@ -9,9 +9,4 @@ public abstract class GameState : MonoBehaviour
     {
         _gameManager = GetComponent<GameManager>();
     }
-
-    public void SetGameState(Type gameState)
-    {
-        _gameManager.SetGameState(gameState);
-    }
 }

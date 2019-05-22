@@ -28,6 +28,6 @@ class WavesEndState : GameState
             go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
         }
 
-        SetGameState(typeof(WinState));
+        _gameManager.SetGameState(typeof(WinState));
     }
 }
