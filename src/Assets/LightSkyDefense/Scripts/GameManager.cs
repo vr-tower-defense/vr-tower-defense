@@ -107,37 +107,5 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(typeof(Lose));
     }
-
-    /// <summary>
-    /// Adds a destroy dispatcher to all enemies that are left in the game.
-    /// </summary>
-    public void LastEnemiesTrigger()
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            _lastWaveEnemiesAmount++;
-            enemy.AddComponent<EnemyDestroyDispatcher>();
-        }
-    }
-
-    /// <summary>
-    /// Checks if all enemies are dead, 
-    /// this function only gets triggerd when a enemy dies on last Wave.
-    /// </summary>
-    public void CheckAllEnemiesDestroyed()
-    {
-        _lastWaveEnemiesAmount--;
-
-        if (_lastWaveEnemiesAmount != 0 || _isGameOver)
-            return;
-
-        // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType<GameObject>())
-        {
-            go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
-        }
-    }
 }
 

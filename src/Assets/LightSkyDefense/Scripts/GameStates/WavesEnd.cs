@@ -17,7 +17,6 @@ class WavesEnd : GameState
 
     public void CheckAllEnemiesDestroyed()
     {
-        Debug.Log(_leftOverEnemies + " : Enemies");
         _leftOverEnemies--;
 
         if (_leftOverEnemies != 0)
