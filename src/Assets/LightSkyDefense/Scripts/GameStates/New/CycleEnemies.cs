@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Collections;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class CycleEnemies : WaveH
 {
@@ -23,4 +17,3 @@ public class CycleEnemies : WaveH
         }
     }
 }
-

@@ -9,4 +9,3 @@ public class RootWave : MonoBehaviour
         _spawn = StartCoroutine(Root.Spawn());
     }
 }
-
