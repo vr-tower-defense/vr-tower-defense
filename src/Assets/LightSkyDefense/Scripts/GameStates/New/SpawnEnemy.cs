@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New SpawnEnemies", menuName = "New SpawnEnemies", order = 1)]
 public class SpawnEnemy :  WaveH
 {
     public GameObject Prefab;

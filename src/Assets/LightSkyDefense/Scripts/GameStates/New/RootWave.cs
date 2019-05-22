@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class RootWave : MonoBehaviour
 {
     public WaveH Root;

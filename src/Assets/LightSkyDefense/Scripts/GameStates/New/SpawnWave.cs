@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New SpawnWave", menuName = "New SpawnWave", order = 1)]
 public class SpawnWave : WaveH
 {
     public WaveH Wave;

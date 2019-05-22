@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New CycleWave", menuName = "New CycleWave", order = 1)]
 public class CycleWave : WaveH
 {
     public WaveH[] SubWaves;
@@ -11,10 +12,8 @@ public class CycleWave : WaveH
         {
             foreach (var wave in SubWaves)
             {
-
                 yield return wave.Spawn();
                 yield return new WaitForSeconds(Delay);
-
             }
         }
     }

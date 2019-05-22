@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New CycleEnemies", menuName = "New CycleEnemies", order = 1)]
 public class CycleEnemies : WaveH
 {
     public GameObject[] Enemies;
