@@ -13,7 +13,7 @@ public class SpawnCreditOnDie : MonoBehaviour
         var clone = Instantiate(
             Credit,
             gameObject.transform.position,
-            gameObject.transform.rotation
+            Quaternion.identity
         );
 
         clone.Value = Value;
