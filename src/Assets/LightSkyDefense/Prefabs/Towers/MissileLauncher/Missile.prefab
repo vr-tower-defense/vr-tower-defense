@@ -205,12 +205,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AreaOfEffectRadius: 0.2
+  ExplosionPower: 10
+  ExplosionRange: 0.15
   DetectionRange: 0.5
-  MaxSpeed: 0.5
   CollisionLayerMask: 512
   TimeAlive: 8
   EjectForce: 1
+  MaxSpeed: 0.5
 --- !u!1001 &287345814034593197
 PrefabInstance:
   m_ObjectHideFlags: 0
