@@ -56,11 +56,13 @@ public class WorldPlaceable : MonoBehaviour
         {
             GetComponentInChildren<Renderer>().material = _grayMaterial;
             isPlaceValid = false;
-            return;
+        }
+        else
+        {
+            GetComponentInChildren<Renderer>().material = _originalPrefabMat;
+            isPlaceValid = true;
         }
 
-        GetComponentInChildren<Renderer>().material = _originalPrefabMat;
-        isPlaceValid = true;
     }
 
     void FixedUpdate()
@@ -68,20 +70,15 @@ public class WorldPlaceable : MonoBehaviour
         if (ObjectCollider == null)
             return;
 
-        if (Physics.CheckSphere(ObjectCollider.transform.position, ObjectCollider.radius, (int)_layerMask))
+        if (Physics.CheckSphere(ObjectCollider.transform.position, ObjectCollider.radius, (int)_layerMask) && isPlaceValid)
         {
-            if(isPlaceValid)
-            {
-                GetComponentInChildren<Renderer>().material = _grayMaterial;
-            }
+            GetComponentInChildren<Renderer>().material = _grayMaterial;
             isPlaceValid = false;
-            return;
         }
-
-        if(!isPlaceValid)
+        else if(!isPlaceValid)
         {
             GetComponentInChildren<Renderer>().material = _originalPrefabMat;
+            isPlaceValid = true;
         }
-        isPlaceValid = true;
     }
 }
