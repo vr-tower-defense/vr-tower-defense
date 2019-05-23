@@ -9,7 +9,7 @@ public class WorldPlaceable : MonoBehaviour
 
     public Color InvalidColor = new Color(0.2f, 0.2f, 0.2f);
 
-    public bool isPlaceValid { get; private set; }
+    public bool _isObstructed { get; private set; }
 
     /// <summary>
     /// Keep track of the original material so we can revert to it.
@@ -20,6 +20,8 @@ public class WorldPlaceable : MonoBehaviour
     /// Store the gray material so we don't have to recreate it every time we need it.
     /// </summary>
     private Material _grayMaterial;
+
+    private Renderer _renderer;
 
     private static Layers _layerMask = Layers.Path|Layers.Enemies|Layers.Towers;
 
@@ -42,27 +44,21 @@ public class WorldPlaceable : MonoBehaviour
     void Start()
     {
         // Store original material
+        _renderer = GetComponentInChildren<Renderer>();
+
+        // Create material instances
         _originalPrefabMat = GetComponentInChildren<Renderer>().material;
-
-        // Clone original material
         _grayMaterial = new Material(_originalPrefabMat);
-
-        // Set color to gray
         _grayMaterial.color = InvalidColor;
 
         //Do the check once to initialize isPlaceValid correctly
+        var isObstructed = Physics.CheckSphere(
+            ObjectCollider.transform.position,
+            ObjectCollider.radius,
+            (int)_layerMask
+        );
 
-        if (Physics.CheckSphere(ObjectCollider.transform.position, ObjectCollider.radius, (int)_layerMask))
-        {
-            GetComponentInChildren<Renderer>().material = _grayMaterial;
-            isPlaceValid = false;
-        }
-        else
-        {
-            GetComponentInChildren<Renderer>().material = _originalPrefabMat;
-            isPlaceValid = true;
-        }
-
+        _renderer.material = isObstructed ? _grayMaterial : _originalPrefabMat;
     }
 
     void FixedUpdate()
@@ -70,15 +66,17 @@ public class WorldPlaceable : MonoBehaviour
         if (ObjectCollider == null)
             return;
 
-        if (Physics.CheckSphere(ObjectCollider.transform.position, ObjectCollider.radius, (int)_layerMask) && isPlaceValid)
-        {
-            GetComponentInChildren<Renderer>().material = _grayMaterial;
-            isPlaceValid = false;
-        }
-        else if(!isPlaceValid)
-        {
-            GetComponentInChildren<Renderer>().material = _originalPrefabMat;
-            isPlaceValid = true;
-        }
+        var isObstructed = Physics.CheckSphere(
+            ObjectCollider.transform.position,
+            ObjectCollider.radius,
+            (int)_layerMask
+        );
+
+        if (_isObstructed == isObstructed)
+            return;
+
+        _renderer.material = isObstructed ? _grayMaterial : _originalPrefabMat;
+
+        _isObstructed = isObstructed;
     }
 }

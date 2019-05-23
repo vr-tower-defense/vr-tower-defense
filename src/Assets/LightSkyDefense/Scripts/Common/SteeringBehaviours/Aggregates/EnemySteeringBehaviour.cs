@@ -26,6 +26,9 @@ public class EnemySteeringBehaviour : MonoBehaviour
 
         _enemy.Rigidbody.AddForce(steeringForce);
 
+        if (_enemy.Rigidbody.velocity == Vector3.zero)
+            return;
+
         var deltaRotation = Quaternion.LookRotation(
             _enemy.Rigidbody.velocity * Time.deltaTime
         );
