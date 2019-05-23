@@ -11,7 +11,7 @@ public class SpawnEnemy :  Wave
         for (int i = 0; i < Repeat; i++)
         {
             Instantiate(Prefab, GameManager.Instance.Path.PathPoints[0], Quaternion.identity);
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(Cooldown);
         }
     }
 }

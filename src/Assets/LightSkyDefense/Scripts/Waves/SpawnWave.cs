@@ -11,7 +11,7 @@ public class SpawnWave : Wave
         for (int i = 0; i < Repeat; i++)
         {
             yield return Wave.Spawn();
-            yield return new WaitForSeconds(Delay);
+            yield return new WaitForSeconds(Cooldown);
         }
     }
 }
