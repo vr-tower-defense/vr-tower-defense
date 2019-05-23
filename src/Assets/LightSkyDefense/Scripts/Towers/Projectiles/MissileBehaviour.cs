@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public interface IMissileState
 {
@@ -176,4 +176,22 @@ public class MissileBehaviour : MonoBehaviour
     {
         _missileState = new Ejected(this);
     }
+
+    #region debugging
+
+    /// <summary>
+    /// Display the range when selected
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        // Draw detection range helper
+        Gizmos.color = new Color(1, 1, 0, 0.1f);
+        Gizmos.DrawSphere(transform.position, DetectionRange);
+
+        // Draw explosion range helper
+        Gizmos.color = new Color(1, 0, 0, 0.1f);
+        Gizmos.DrawSphere(transform.position, ExplosionRange);
+    }
+
+    #endregion
 }
