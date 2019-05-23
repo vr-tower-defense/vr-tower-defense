@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _gameState = FindObjectOfType<WavesState>();
-        if (_gameState == null) _gameState = gameObject.AddComponent<InfinityState>();
+        _gameState = _gameState == null ? _gameState : gameObject.AddComponent<InfinityState>();
     }
 
     /// <summary>
