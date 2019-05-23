@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+/// <summary>
+/// Seek offset
+/// </summary>
 public class ScoreboardSteeringBehaviour : MonoBehaviour
 {
     public Vector3 Offset = new Vector3(-.5f, .25f, 1.5f);
