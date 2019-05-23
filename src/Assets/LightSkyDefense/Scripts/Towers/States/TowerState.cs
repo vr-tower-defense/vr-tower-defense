@@ -19,9 +19,12 @@ public abstract class TowerState : MonoBehaviour
             return;
         }
 
-        enabled = false;
-        towerState.enabled = true;
+        foreach(var state in Tower.TowerStates)
+        {
+            state.enabled = false;
+        }
 
+        towerState.enabled = true;
         Tower.CurrentState = towerState;
     }
 }
