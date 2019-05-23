@@ -380,13 +380,14 @@ MonoBehaviour:
   CondemnState: {fileID: 0}
   InitialState: {fileID: 8333722719474973916}
   CurrentState: {fileID: 0}
+  TowerStates: []
   ProjectileSpawns:
   - {fileID: 3984326557187089192}
   - {fileID: 8537441929906329032}
   - {fileID: 5428556423452228348}
   - {fileID: 4073706048562053402}
   DetectionLayerMask: 512
-  Range: 0.25
+  Range: 0.5
 --- !u!114 &4837722594524183046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,5 +440,5 @@ MonoBehaviour:
     type: 3}
   ShootCooldown: 4
   EjectInterval: 1
-  DetectionRadius: 0.5
+  DetectionRadius: 1
   DetectionLayerMask: 512
