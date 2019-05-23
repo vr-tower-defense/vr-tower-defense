@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        _gameState = FindObjectOfType<WaveState>();
+        if (_gameState == null) _gameState = gameObject.AddComponent<Lobby>();
     }
 
     /// <summary>
