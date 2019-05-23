@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class BaseTower : MonoBehaviour
 {
     #region states
@@ -22,8 +20,17 @@ public class BaseTower : MonoBehaviour
 
     #endregion
 
+    [Tooltip("Transform objects that are used to spawn new projectiles")]
+    public Transform[] ProjectileSpawns;
+
+    [Tooltip("The layers that should be considered when checking for collisions")]
+    public Layers DetectionLayerMask = Layers.Enemies;
+
+    [Tooltip("The range in meter which used to check for collisions")]
+    public float Range = .25f;
+
     [HideInInspector]
-    public HashSet<Enemy> TargetsInRange { get; } = new HashSet<Enemy>();
+    public Collider[] TargetsInRange { get; private set; } = new Collider[0];
 
     /// <summary>
     /// Set initial state
@@ -47,43 +54,13 @@ public class BaseTower : MonoBehaviour
         CurrentState.enabled = true;
     }
 
-    /// <summary>
-    /// Adds target to list when target is withing tower's range
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    private void FixedUpdate()
     {
-        var enemy = other.GetComponent<Enemy>();
-
-        if (enemy == null)
-        {
-            return;
-        }
-
-        TargetsInRange.Add(enemy);
-
-        CurrentState.SetTowerState(ActiveState);
-    }
-
-    /// <summary>
-    /// Removes target from list when target is withing tower's range
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerExit(Collider other)
-    {
-        var enemy = other.GetComponent<Enemy>();
-
-        if (enemy == null)
-        {
-            return;
-        }
-
-        TargetsInRange.Remove(enemy);
-
-        if (TargetsInRange.Count < 1)
-        {
-            CurrentState.SetTowerState(IdleState);
-        }
+        TargetsInRange = Physics.OverlapSphere(
+            transform.position,
+            Range,
+            (int) DetectionLayerMask
+        );
     }
 
     /// <summary>

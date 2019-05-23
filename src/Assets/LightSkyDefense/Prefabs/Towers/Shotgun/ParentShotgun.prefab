@@ -13,19 +13,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.019323923, y: 0.017345143, z: 0.015016326}
   m_Center: {x: -0.006723546, y: 0.004269964, z: 0.005044386}
---- !u!135 &1179292063649310969
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923074724086768391}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.006723546, y: 0.004269964, z: 0.005044386}
 --- !u!82 &8488428536028239636
 AudioSource:
   m_ObjectHideFlags: 0
@@ -134,17 +121,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca710548a00e6744ab052437ecce0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 0
+  IdleState: {fileID: 0}
+  ActiveState: {fileID: 0}
+  CelebrationState: {fileID: 0}
+  CondemnState: {fileID: 0}
+  InitialState: {fileID: 0}
+  CurrentState: {fileID: 0}
+  ProjectileSpawns: []
+  DetectionLayerMask: 512
+  Range: 0.25
   ProjectileSpeed: 10
   RotationSpeed: 1
   ShootInterval: 3
   MaxHealth: 100
   AudioSource: {fileID: 0}
-  BuildSound: {fileID: 8300000, guid: b509b096ba4e6f9458743a20631695c0, type: 3}
-  ShootSound: {fileID: 0}
-  Projectile: {fileID: 0}
-  ProjectileSpawn: {fileID: 1945967994869956103, guid: fc5d0aacb27aceb4392758cd2fc7976b,
-    type: 3}
 --- !u!1 &3398401856314588572
 GameObject:
   m_ObjectHideFlags: 0
