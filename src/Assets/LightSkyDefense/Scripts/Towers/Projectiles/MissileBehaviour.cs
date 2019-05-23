@@ -23,7 +23,10 @@ public class Ejected : IMissileState
         _missile.transform.parent = null;
 
         // Eject missile from missile launcher
-        _rigidbody.AddForce(new Vector3(0, 0, _missile.EjectForce), ForceMode.Impulse);
+        _rigidbody.AddForce(
+            _missile.transform.forward * _missile.EjectForce,
+            ForceMode.Impulse
+        );
 
         // Always destroy the missile when it doesn't explode within a certain time
         MonoBehaviour.Destroy(_missile.gameObject, _missile.TimeAlive);
