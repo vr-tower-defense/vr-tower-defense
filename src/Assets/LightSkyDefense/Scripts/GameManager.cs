@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     private static bool _initializing = false;
     private MonoBehaviour _gameState { get; set; }
-    private int _lastWaveEnemiesAmount = 0;
 
     private Path _path;
     public Path Path
@@ -60,8 +59,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _gameState = FindObjectOfType<WaveState>();
-        if (_gameState == null) _gameState = gameObject.AddComponent<Lobby>();
+        _gameState = FindObjectOfType<WavesState>();
+        if (_gameState == null) _gameState = gameObject.AddComponent<InfinityState>();
     }
 
     /// <summary>
@@ -99,39 +98,12 @@ public class GameManager : MonoBehaviour
         Destroy(_gameState);
 
         // Create new game state
-        _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
+        _gameState = (GameState)gameObject.AddComponent(gameState);
     }
 
-    /// <summary>
-    /// Adds a destroy dispatcher to all enemies that are left in the game.
-    /// </summary>
-    public void LastEnemiesTrigger()
+    public void OnGameLose()
     {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            _lastWaveEnemiesAmount++;
-            enemy.AddComponent<EnemyDestroyDispatcher>();
-        }
-    }
-
-    /// <summary>
-    /// Checks if all enemies are dead, 
-    /// this function only gets triggerd when a enemy dies on last Wave.
-    /// </summary>
-    public void CheckAllEnemiesDestroyed()
-    {
-        _lastWaveEnemiesAmount--;
-
-        if (_lastWaveEnemiesAmount != 0)
-            return;
-
-        // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType<GameObject>())
-        {
-            go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
-        }
+        SetGameState(typeof(LoseState));
     }
 }
 

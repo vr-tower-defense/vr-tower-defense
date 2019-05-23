@@ -2,7 +2,7 @@
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class WaveState : MonoBehaviour, IGameState
+public class WavesState : GameState
 {
     public Wave[] Waves;
     private Coroutine _spawn;
@@ -25,5 +25,6 @@ public class WaveState : MonoBehaviour, IGameState
 
             yield return wave.Spawn();
         }
+        _gameManager.SetGameState(typeof(WavesEndState));
     }
 }
