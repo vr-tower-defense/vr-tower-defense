@@ -14,10 +14,22 @@ public class EnemySteeringBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        var targetPosition = _enemy.PathFollower.transform.position + _enemy.PathFollower.offsetTranslation;
+        var targetPosition = 
+            _enemy.PathFollower.transform.position + _enemy.PathFollower.offsetTranslation;
 
-        var steeringForce = Arrive.Calculate(transform.position, _enemy.Rigidbody.velocity, targetPosition, MaxSpeed);
+        var steeringForce = Arrive.Calculate(
+            transform.position,
+            _enemy.Rigidbody.velocity,
+            targetPosition,
+            MaxSpeed
+        );
 
-        _enemy.Rigidbody.AddForce(steeringForce, ForceMode.Acceleration);
+        _enemy.Rigidbody.AddForce(steeringForce);
+
+        var deltaRotation = Quaternion.LookRotation(
+            _enemy.Rigidbody.velocity * Time.deltaTime
+        );
+
+        _enemy.Rigidbody.MoveRotation(deltaRotation);
     }
 }

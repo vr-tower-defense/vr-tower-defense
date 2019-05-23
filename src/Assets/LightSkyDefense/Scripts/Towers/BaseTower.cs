@@ -17,6 +17,9 @@ public class BaseTower : MonoBehaviour
 
     [HideInInspector]
     public TowerState CurrentState;
+    
+    [HideInInspector]
+    public TowerState[] TowerStates;
 
     #endregion
 
@@ -44,9 +47,10 @@ public class BaseTower : MonoBehaviour
 
         // Save intial state reference to current state field
         CurrentState = InitialState;
+        TowerStates = GetComponents<TowerState>();
 
         // Disable all states and enable the current state
-        foreach (var state in GetComponents<TowerState>())
+        foreach (var state in TowerStates)
         {
             state.enabled = false;
         }
