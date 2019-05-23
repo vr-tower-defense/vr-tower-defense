@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-class Infinity : MonoBehaviour, IGameState
+class WinState : GameState
 {
-    public Infinity()
+    public WinState()
     {
         Debug.Log($"GameState: {GetType()}");
     }

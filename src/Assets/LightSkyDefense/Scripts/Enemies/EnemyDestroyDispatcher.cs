@@ -7,8 +7,11 @@ public class EnemyDestroyDispatcher : MonoBehaviour
     {
         if (GameManager.IsQuitting) return;
 
-        var gameManager = Player.instance.GetComponent<GameManager>();
-        gameManager.CheckAllEnemiesDestroyed();
+        // Not very clean?
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
+        {
+            go.SendMessage("CheckAllEnemiesDestroyed", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
 
