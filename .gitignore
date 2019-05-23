@@ -26,10 +26,10 @@ ExportedObj/
 
 # Unity3D generated meta files
 *.pidb.meta
-*.pdb.meta
+*.pdb.meta 
 
 # Unity3D Generated File On Crash Reports
-sysinfo.txt
+sysinfo.txt 
 
 # Builds
 *.apk
@@ -37,3 +37,7 @@ sysinfo.txt
 
 # Blender backup files
 *.blend1
+
+# Temp scenes directory
+src/Assets/LightSkyDefense/Scenes/Test/*
+src/Assets/LightSkyDefense/Scenes/Test.meta
