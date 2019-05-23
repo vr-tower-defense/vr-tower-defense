@@ -9,7 +9,8 @@ public class WavesState : GameState
     public void Start()
     {
         _spawn = StartCoroutine(Play());
-
+        _gameManager = GameManager.Instance;
+        
     }
 
     public IEnumerator Play()
