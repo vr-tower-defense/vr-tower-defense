@@ -21,9 +21,9 @@ public class RotateUp : IStep
     {
         if (Quaternion.Angle(_celebrationState.transform.rotation, _aimRotation) > 1)
         {
-            _celebrationState.transform.rotation = Quaternion.Slerp(
+            _celebrationState.transform.rotation = Quaternion.RotateTowards(
                 _celebrationState.transform.rotation,
-                _aimRotation, 
+                _aimRotation,
                 _celebrationState.RotationSpeed * Time.deltaTime
             );
 
@@ -85,10 +85,11 @@ public class Idle : IStep
     public void FixedUpdate()
     {
         _celebrationState.transform.Rotate(
-            _celebrationState.RotationAxis * _celebrationState.RotationSpeed
+            _celebrationState.RotationAxis,
+            _celebrationState.RotationSpeed * Time.deltaTime
         );
 
-        if(_particleSystemInstance.isStopped)
+        if (_particleSystemInstance.isStopped)
         {
             SetCelebrationToNextSpawn();
         }
@@ -133,6 +134,6 @@ public class CelebrationState : TowerState
 
     public void SetStep(Type type)
     {
-        _currentStep = (IStep) Activator.CreateInstance(type, new object[] { this });
+        _currentStep = (IStep)Activator.CreateInstance(type, new object[] { this });
     }
 }

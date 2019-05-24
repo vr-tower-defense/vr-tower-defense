@@ -300,9 +300,9 @@ MonoBehaviour:
   - {fileID: 8537441929906329032}
   - {fileID: 5428556423452228348}
   - {fileID: 4073706048562053402}
-  AimDirection: {x: 0, y: 0, z: 1}
-  RotationAxis: {x: 0, y: 1, z: 0}
-  RotationSpeed: 2
+  AimDirection: {x: 0, y: 1, z: 0}
+  RotationAxis: {x: 0, y: 0, z: 1}
+  RotationSpeed: 35
 --- !u!1 &5398354811386336430
 GameObject:
   m_ObjectHideFlags: 0
