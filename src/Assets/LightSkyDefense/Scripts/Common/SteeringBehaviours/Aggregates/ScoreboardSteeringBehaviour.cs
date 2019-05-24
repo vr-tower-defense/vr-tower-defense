@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+/// <summary>
+/// Seek offset
+/// </summary>
 public class ScoreboardSteeringBehaviour : MonoBehaviour
 {
     public Vector3 Offset = new Vector3(-.5f, .25f, 1.5f);
     public float RotationSpeed = .3f;
-    public float Mass = 1;
-    public float MaxSpeed = 1;
 
     private Renderer _renderer;
+    private Rigidbody _rigidbody; 
     private Transform _headsetTransform;
 
     private Vector3 _velocity;
@@ -17,6 +19,8 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
     void Start()
     {
         _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+
         _headsetTransform = Player.instance.headCollider.transform;
     }
 
@@ -31,13 +35,10 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
             _headsetTransform.position.y + .2f
         );
 
-        var steeringForce = Seek.Calculate(transform.position, targetPosition, MaxSpeed);
-
-        // Calculate velocity
-        _velocity = Vector3.ClampMagnitude(steeringForce / Mass * Time.fixedDeltaTime, MaxSpeed);
-
-        // Add velocity to position
-        transform.position += _velocity;
+        _rigidbody.AddForce(
+            Seek.Calculate(transform.position, targetPosition),
+            ForceMode.Acceleration
+        );
 
         // Add continuous rotation
         transform.eulerAngles = new Vector3(
