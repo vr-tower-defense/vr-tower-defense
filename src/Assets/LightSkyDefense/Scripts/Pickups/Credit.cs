@@ -11,6 +11,13 @@ public class Credit : MonoBehaviour
     public AudioClip PickupSound;
     public Tuple<float, float> PitchRange = new Tuple<float, float>(.8f, 1.2f);
 
+    public float RotationSpeed = 35;
+
+    public void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
+    }
+
     /// <summary>
     /// When the credit touches the hand, the credit gets added to the players total credit count
     /// </summary>
