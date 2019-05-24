@@ -85,4 +85,17 @@ public class BaseTower : MonoBehaviour
         var currentState = gameObject.GetComponents<TowerState>();
         currentState.ForEach(st => st.SetTowerState(CelebrationState));
     }
+
+    #region debugging
+
+    /// <summary>
+    /// Display the range when selected
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.1f);
+        Gizmos.DrawSphere(transform.position, Range);
+    }
+
+    #endregion
 }
