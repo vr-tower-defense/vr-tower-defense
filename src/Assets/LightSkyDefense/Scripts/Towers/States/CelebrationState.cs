@@ -52,8 +52,9 @@ public class Idle : IStep
 {
     private readonly CelebrationState _celebrationState;
 
+    private readonly ParticleSystem _particleSystemInstance;
+
     private int _spawnIndex = 0;
-    private ParticleSystem _particleSystemInstance;
 
     /// <summary>
     /// 
@@ -63,11 +64,14 @@ public class Idle : IStep
     {
         _celebrationState = celebrationState;
 
+        // Get initial spawn reference
+        var spawn = _celebrationState.Tower.ProjectileSpawns[_spawnIndex].transform;
+
         // Create new firework particle system instances and start the celebration
         _particleSystemInstance = MonoBehaviour.Instantiate(
             _celebrationState.CelebrationEffect,
-            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.position,
-            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.rotation
+            spawn.position,
+            spawn.rotation
         );
 
         _particleSystemInstance.Play();
@@ -97,20 +101,22 @@ public class Idle : IStep
 
     private void SetCelebrationToNextSpawn()
     {
-        _spawnIndex = (_spawnIndex + 1) % _celebrationState.ParticleSystemSpawns.Length;
+        _spawnIndex = (_spawnIndex + 1) % _celebrationState.Tower.ProjectileSpawns.Length;
 
-        _particleSystemInstance.transform.position =
-            _celebrationState.ParticleSystemSpawns[_spawnIndex].transform.position;
+        // Get new spawn reference
+        var spawn = _celebrationState.Tower.ProjectileSpawns[_spawnIndex].transform;
 
+        _particleSystemInstance.transform.position = spawn.position;
         _particleSystemInstance.Play();
     }
 }
 
 public class CelebrationState : TowerState
 {
+    [Header("Appearance")]
     public ParticleSystem CelebrationEffect;
-    public Transform[] ParticleSystemSpawns;
 
+    [Header("Rotation")]
     public Vector3 AimDirection = Vector3.up;
     public Vector3 RotationAxis = Vector3.up;
     public float RotationSpeed = 0.1f;

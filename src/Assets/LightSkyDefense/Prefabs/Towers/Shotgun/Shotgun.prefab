@@ -31,6 +31,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6659999359235534943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7880322160880605640}
+  m_Layer: 0
+  m_Name: ProjectileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7880322160880605640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6659999359235534943}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0404, y: -0.0001, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3465909292431469480}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7557825872742837531
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +70,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3465909292431469480}
+  - component: {fileID: 1255906544965369209}
+  - component: {fileID: 7808292921767877036}
+  - component: {fileID: 6761159393942093783}
+  - component: {fileID: 1946579409257498863}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -59,9 +93,85 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6679377619623169025}
+  - {fileID: 7880322160880605640}
   m_Father: {fileID: 2061900235511988810}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1255906544965369209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557825872742837531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced20bfeeb4ccc04080e4c607428ed64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleState: {fileID: 7808292921767877036}
+  ActiveState: {fileID: 1946579409257498863}
+  CelebrationState: {fileID: 6761159393942093783}
+  CondemnState: {fileID: 0}
+  InitialState: {fileID: 7808292921767877036}
+  CurrentState: {fileID: 0}
+  TowerStates: []
+  ProjectileSpawns:
+  - {fileID: 7880322160880605640}
+  DetectionLayerMask: 512
+  Range: 0.5
+--- !u!114 &7808292921767877036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557825872742837531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65eb2959579d7554da445040fc1db6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tower: {fileID: 0}
+  RotationSpeed: 35
+--- !u!114 &6761159393942093783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557825872742837531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4d178b6e85d784da374e6db8a4c1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tower: {fileID: 0}
+  CelebrationEffect: {fileID: 3338588312708880379, guid: 6b259e700bf10754a97bb8ebdb25efb9,
+    type: 3}
+  AimDirection: {x: 0, y: 1, z: 0}
+  RotationAxis: {x: 0, y: 0, z: 1}
+  RotationSpeed: 0.1
+--- !u!114 &1946579409257498863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557825872742837531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae747297926610040938d84d8f401038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tower: {fileID: 0}
+  Bullets: 20
+  Spread: 30
+  Cooldown: 2
+  RotationSpeed: 35
+  ProjectileSpeed: 1
+  Projectile: {fileID: 9073337372988659883, guid: 1886119667e68d84d82b48bd0e2b4303,
+    type: 3}
 --- !u!1001 &6679377619623040641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -99,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_RootOrder
@@ -111,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

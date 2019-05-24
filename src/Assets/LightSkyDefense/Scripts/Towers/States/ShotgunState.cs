@@ -9,101 +9,119 @@ public class ShotgunState : TowerState
 {
 
     [Tooltip("The amount of bullets to be shot by each spawn point")]
-    public int Bullets = 1;
+    public int Bullets = 5;
 
     [Tooltip("The bullet spread in degrees")]
     [Range(0, 45)]
     public int Spread;
 
-    [Tooltip("This is the total damage this tower would do if every bullet hit an enemy")]
-    public int Damage = 1;
+    [Tooltip("This amount of seconds between shots")]
+    public float Cooldown = 1;
 
-    [Tooltip("This is the total amount of seconds between shots")]
-    public float ShootInterval = 1;
-
-    [Tooltip("The shell to be shot")]
-    public Rigidbody Projectile;
-
-    [Tooltip("The up direction")]
-    public Vector3 Upwards = Vector3.forward;
-
-    [Tooltip("Speed at which the tower rotates")]
-    public float RotationSpeed = 1;
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    public float RotationSpeed = 35;
 
     [Tooltip("speed of the shot bullets")]
     public float ProjectileSpeed = 1;
 
-    public Transform[] Spawnpoints;
 
-    private Vector3 _center;
+    [Tooltip("The projectile that should be instantiate")]
+    public Rigidbody Projectile;
 
-    private Rigidbody _activeTarget;
+    private Coroutine _coroutine;
 
-    private HashSet<Collider> _enemySet;
+    #region lifecycle methods
 
-    private IEnumerator _coroutine;
-
-    private void Start()
+    /// <summary>
+    /// Start shooting
+    /// </summary>
+    private void OnEnable()
     {
+        _coroutine = StartCoroutine(ShootProjectiles());
+    }
 
-        if (Bullets == 0 || Spawnpoints.Length == 0 || Projectile == null)
+    /// <summary>
+    /// Stop shooting
+    /// </summary>
+    private void OnDisable()
+    {
+        if (_coroutine == null)
         {
-            enabled = false;
             return;
         }
 
-        var projectile = Projectile.GetComponent<ShotgunBulletsBehaviour>();
-        if (projectile != null) projectile.BulletDamage = (float)Damage / (float)Bullets;
-        StartCoroutine(ShootWithInterval());
+        StopCoroutine(_coroutine);
     }
 
     /// <summary>
-    /// While the tower is alive and there are enemies nearby, the tower will aim, shoot and then wait for a small period of time.
+    /// Used to rotate towards an enemy. This works like an offset pursuit steering behaviour, 
+    /// but we only use the target position for the rotation.
     /// </summary>
-    private IEnumerator ShootWithInterval()
+    private void FixedUpdate()
     {
-        while (true)
+        // Check if there are any enemies to shoot at
+        if (Tower.TargetsInRange.Length < 1)
         {
-            ShootProjectile();
-            yield return new WaitForSeconds(ShootInterval);
+            SetTowerState(Tower.IdleState);
+            return;
         }
-    }
-   
-    /// <summary>
-    /// If there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
-    /// </summary>
-    private void ShootProjectile()
-    {
-        if (_activeTarget == null) return;
-        var lookRotation = Quaternion.LookRotation(
-            (_activeTarget.position) - transform.position,
-            Upwards
-        );
 
-        int spawnpoint = 0;
+        Vector3 lookDirection = Vector3.zero;
+
+        foreach (var collider in Tower.TargetsInRange)
+        {
+            lookDirection += collider.transform.position;
+        }
+
+        lookDirection /= Tower.TargetsInRange.Length;
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.LookRotation(lookDirection - transform.position),
+            RotationSpeed * Time.deltaTime
+        );
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Shoot at the target and play the sound effect.
+    /// </summary>
+    private IEnumerator ShootProjectiles()
+    {
         for (int i = 0; i < Bullets; i++)
         {
-            var (ranX, ranY) = (Random.Range(-Spread, Spread), Random.Range(-Spread, Spread));
-            var offset = Quaternion.Euler(
-                ranX,
-                ranY,
-                1 
-            );
-            var rotation = lookRotation * offset;
+            var currentSpawn = Tower.ProjectileSpawns[i % Tower.ProjectileSpawns.Length];
 
-            var newProjectile = Instantiate(
+            // Instatiate new projectile
+            var projectile = Instantiate(
                 Projectile,
-                Spawnpoints[spawnpoint].position,
-                rotation
+                currentSpawn.position,
+                currentSpawn.rotation
             );
 
-            newProjectile.AddForce((rotation * transform.forward ) * ProjectileSpeed, ForceMode.VelocityChange);
+            // Create random local rotation
+            var localRotation = Quaternion.Euler(
+                Random.Range(-Spread, Spread),
+                Random.Range(-Spread, Spread),
+                1
+            );
 
-            spawnpoint++;
-            if (spawnpoint >= Spawnpoints.Length) spawnpoint = 0;
+            // Multiply random rotation with spawn direction to create shoot direction
+            var shootDirection = localRotation * currentSpawn.forward;
+
+            // Apply force to projectile in shoot direction
+            projectile.AddForce(
+                shootDirection * ProjectileSpeed,
+                ForceMode.VelocityChange
+            );
         }
+
+        // Invoke this method again after given cooldown
+        yield return new WaitForSeconds(Cooldown);
+        yield return ShootProjectiles();
     }
-    
+
     /// <summary>
     /// Finds first target in list
     /// </summary>
@@ -119,37 +137,5 @@ public class ShotgunState : TowerState
         }
 
         return null;
-    }
-
-    /// <summary>
-    /// Used to rotate towards an enemy. This works like an offset pursuit steering behaviour, 
-    /// but we only use the target position for the rotation.
-    /// </summary>
-    private void FixedUpdate()
-    {
-        _activeTarget = FindTarget();
-
-        // Don't rotate when target does not exist
-        if (_activeTarget == null) return;
-
-        var targetDistance = Vector3.Distance(
-            transform.position,
-            _activeTarget.position
-        );
-
-        var travelTime = targetDistance / ProjectileSpeed;
-        var targetDisplacement = _activeTarget.velocity * travelTime;
-
-        var predictedlookRotation = Quaternion.LookRotation(
-            (_activeTarget.position + targetDisplacement) - transform.position,
-            Upwards
-        );
-
-        // Rotate our transform a step closer to the target's.
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            predictedlookRotation,
-            RotationSpeed
-        );
     }
 }

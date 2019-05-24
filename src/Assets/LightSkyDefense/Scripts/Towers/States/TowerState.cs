@@ -2,7 +2,8 @@
 
 public abstract class TowerState : MonoBehaviour
 {
-    protected BaseTower Tower;
+    [HideInInspector]
+    public BaseTower Tower;
 
     /// <summary>
     /// Get BaseTower for later use
@@ -19,7 +20,7 @@ public abstract class TowerState : MonoBehaviour
             return;
         }
 
-        foreach(var state in Tower.TowerStates)
+        foreach (var state in Tower.TowerStates)
         {
             state.enabled = false;
         }

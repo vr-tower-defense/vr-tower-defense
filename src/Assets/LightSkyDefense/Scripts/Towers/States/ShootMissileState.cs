@@ -8,7 +8,7 @@ public class ShootMissileState : TowerState
 
     [Header("Shooting properties")]
     public GameObject Projectile;
-    public float ShootCooldown = 2;
+    public float Cooldown = 2;
     public float EjectInterval = .25f;
 
     private Coroutine _coroutine;
@@ -76,9 +76,10 @@ public class ShootMissileState : TowerState
             yield return new WaitForSeconds(EjectInterval);
         }
 
+        // Reload and invoke this method again after given cooldown
         Reload();
 
-        yield return new WaitForSeconds(ShootCooldown);
+        yield return new WaitForSeconds(Cooldown);
         yield return ShootMissiles();
     }
 
