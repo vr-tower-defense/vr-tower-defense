@@ -4,11 +4,13 @@ using UnityEngine;
 public class ShootBulletState : TowerState
 {
     [Header("Rotation")]
-    [Tooltip("The speed at wich a projectile flies")]
-    public float RotationSpeed = 1;
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    [Range(0, 360)]
+    public float RotationSpeed = 60;
 
     [Tooltip("Angle in degrees in which an enemy should be from the shooting direction")]
-    public float AngleTreshold = 5;
+    [Range(0, 180)]
+    public float AngleTreshold = 10;
 
     [Header("Shooting")]
     public Rigidbody Projectile;
@@ -17,32 +19,16 @@ public class ShootBulletState : TowerState
 
     private Rigidbody _activeTarget;
 
-    private Coroutine _coroutine;
+    private IEnumerator _coroutine;
 
     #region lifecycle methods
-
-    /// <summary>
-    /// Start shooting missiles
-    /// </summary>
-    private void OnEnable()
-    {
-        // Make sure that the target is not empty
-        _activeTarget = FindTarget();
-
-        _coroutine = StartCoroutine(ShootProjectile());
-    }
 
     /// <summary>
     /// Stop shooting missiles
     /// </summary>
     private void OnDisable()
     {
-        if (_coroutine == null)
-        {
-            return;
-        }
-
-        StopCoroutine(_coroutine);
+        StopAllCoroutines();
     }
 
     /// <summary>
@@ -51,8 +37,34 @@ public class ShootBulletState : TowerState
     /// </summary>
     private void FixedUpdate()
     {
+        // Check if there are any enemies to shoot at
+        if (Tower.TargetsInRange.Length < 1)
+        {
+            SetTowerState(Tower.IdleState);
+            return;
+        }
+
         _activeTarget = FindTarget();
 
+        // Angle between target and center of tower
+        var targetAngle = Vector3.Angle(
+            _activeTarget.position - transform.position,
+            transform.forward
+        );
+
+        // Only start shooting when enemy is in front of tower, stop shooting otherwise
+        if (targetAngle <= AngleTreshold && _coroutine == null)
+        {
+            _coroutine = ShootProjectile();
+            StartCoroutine(_coroutine);
+        }
+        else if (targetAngle > AngleTreshold && _coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
+
+        // Calculate the predicted target position
         var targetDistance = Vector3.Distance(
             transform.position,
             _activeTarget.position
@@ -80,25 +92,6 @@ public class ShootBulletState : TowerState
     /// </summary>
     private IEnumerator ShootProjectile()
     {
-        // Check if there are any enemies to shoot at
-        if (Tower.TargetsInRange.Length < 1)
-        {
-            SetTowerState(Tower.IdleState);
-            yield break;
-        }
-
-        var targetDirection = Vector3.Angle(
-            _activeTarget.position - transform.position,
-            transform.forward
-        );
-
-        // Check if enemy is in front of tower
-        if (targetDirection > AngleTreshold)
-        {
-            yield return new WaitForSeconds(Cooldown);
-            yield return ShootProjectile();
-        }
-
         foreach (var spawn in Tower.ProjectileSpawns)
         {
             var newProjectile = Instantiate(

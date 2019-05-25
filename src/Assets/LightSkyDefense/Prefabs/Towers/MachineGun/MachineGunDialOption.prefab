@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef068ad8ded15e45823fd5ead07d966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InactiveTransparency: 0.5
+  InactiveMaterial: {fileID: 2100000, guid: b41d1116a101a84499296ce28d16e6b9, type: 2}
+  ActiveMaterial: {fileID: 2100000, guid: 9000d944e01b5ea4fb832513fa987a4b, type: 2}
+  TargetMesh: {fileID: 1010666426485062969}
   IsSelected: 0
   Preview: {fileID: 5787846512612252572, guid: c3d49c508315dce4184356e2187e2577, type: 3}
   Final: {fileID: 7127235948388862705, guid: 83f3e599ec3d85c4cb8c33e9e10ef80d, type: 3}

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tower: {fileID: 0}
-  RotationSpeed: 35
+  RotationSpeed: 30
 --- !u!114 &8895199500170574430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     type: 3}
   AimDirection: {x: 0, y: 1, z: 0}
   RotationAxis: {x: 0, y: 0, z: 1}
-  RotationSpeed: 35
+  RotationSpeed: 30
 --- !u!114 &7519128812960130836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tower: {fileID: 0}
-  RotationSpeed: 35
+  RotationSpeed: 60
   AngleTreshold: 15
   Projectile: {fileID: 2096758969451732159, guid: 43940cfd1478e2342b0d88366c87b3bb,
     type: 3}

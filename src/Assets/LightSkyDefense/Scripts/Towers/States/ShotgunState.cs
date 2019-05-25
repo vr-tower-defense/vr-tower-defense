@@ -7,6 +7,16 @@ using UnityEngine.Animations;
 
 public class ShotgunState : TowerState
 {
+    [Header("Behaviour")]
+    [Tooltip("speed of the shot bullets")]
+    public float ProjectileSpeed = 1;
+
+    [Tooltip("Speed varation to create a more realistic shotgun")]
+    [Range(0, .3f)]
+    public float ProjectileSpeedVariationRatio = .3f;
+
+    [Tooltip("The projectile that should be instantiate")]
+    public Rigidbody Projectile;
 
     [Tooltip("The amount of bullets to be shot by each spawn point")]
     public int Bullets = 5;
@@ -18,15 +28,14 @@ public class ShotgunState : TowerState
     [Tooltip("This amount of seconds between shots")]
     public float Cooldown = 1;
 
+    [Header("Aiming")]
     [Tooltip("Speed at which the tower rotates in degrees")]
-    public float RotationSpeed = 35;
+    [Range(0, 360)]
+    public float RotationSpeed = 60;
 
-    [Tooltip("speed of the shot bullets")]
-    public float ProjectileSpeed = 1;
-
-
-    [Tooltip("The projectile that should be instantiate")]
-    public Rigidbody Projectile;
+    [Tooltip("Angle in degrees in which an enemy should be from the shooting direction")]
+    [Range(0, 180)]
+    public float AngleTreshold = 10;
 
     private Coroutine _coroutine;
 
@@ -54,8 +63,7 @@ public class ShotgunState : TowerState
     }
 
     /// <summary>
-    /// Used to rotate towards an enemy. This works like an offset pursuit steering behaviour, 
-    /// but we only use the target position for the rotation.
+    /// Aim at average of all targets in range
     /// </summary>
     private void FixedUpdate()
     {
@@ -93,7 +101,7 @@ public class ShotgunState : TowerState
         {
             var currentSpawn = Tower.ProjectileSpawns[i % Tower.ProjectileSpawns.Length];
 
-            // Instatiate new projectile
+            // Instantiate new projectile
             var projectile = Instantiate(
                 Projectile,
                 currentSpawn.position,
@@ -109,10 +117,11 @@ public class ShotgunState : TowerState
 
             // Multiply random rotation with spawn direction to create shoot direction
             var shootDirection = localRotation * currentSpawn.forward;
+            var speedVariation = Random.Range(-ProjectileSpeedVariationRatio, ProjectileSpeedVariationRatio);
 
             // Apply force to projectile in shoot direction
             projectile.AddForce(
-                shootDirection * ProjectileSpeed,
+                shootDirection * (ProjectileSpeed + speedVariation),
                 ForceMode.VelocityChange
             );
         }

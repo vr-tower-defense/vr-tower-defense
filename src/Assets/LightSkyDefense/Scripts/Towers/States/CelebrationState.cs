@@ -119,7 +119,10 @@ public class CelebrationState : TowerState
     [Header("Rotation")]
     public Vector3 AimDirection = Vector3.up;
     public Vector3 RotationAxis = Vector3.up;
-    public float RotationSpeed = 0.1f;
+
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    [Range(0, 360)]
+    public float RotationSpeed = 30;
 
     private IStep _currentStep;
 

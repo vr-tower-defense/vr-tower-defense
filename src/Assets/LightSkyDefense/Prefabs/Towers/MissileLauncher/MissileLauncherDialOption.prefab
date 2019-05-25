@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef068ad8ded15e45823fd5ead07d966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InactiveMaterial: {fileID: 2100000, guid: 53be14fdf0760dd4bb7c784c778c6f12, type: 2}
-  ActiveMaterial: {fileID: 2100000, guid: 3eeb833b049bb274e83d4c96b5640f67, type: 2}
+  InactiveMaterial: {fileID: 2100000, guid: 3eeb833b049bb274e83d4c96b5640f67, type: 2}
+  ActiveMaterial: {fileID: 2100000, guid: 53be14fdf0760dd4bb7c784c778c6f12, type: 2}
   TargetMesh: {fileID: 2173905736439329116}
   IsSelected: 0
   Preview: {fileID: 1311665180749323574, guid: d847f73594b66d64e86ed4a771f159d2, type: 3}
@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 328725824779257011}
     m_Modifications:
+    - target: {fileID: 2300000, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53be14fdf0760dd4bb7c784c778c6f12, type: 2}
     - target: {fileID: 400000, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3
@@ -170,10 +174,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 53be14fdf0760dd4bb7c784c778c6f12, type: 2}
     - target: {fileID: 100004, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
       propertyPath: m_Name
       value: missile_launcher

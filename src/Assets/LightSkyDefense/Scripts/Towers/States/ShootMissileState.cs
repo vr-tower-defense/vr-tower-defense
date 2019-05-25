@@ -4,7 +4,9 @@ using UnityEngine;
 public class ShootMissileState : TowerState
 {
     [Header("Appearance properties")]
-    public float RotationSpeed = 35;
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    [Range(0, 360)]
+    public float RotationSpeed = 60;
 
     [Header("Shooting properties")]
     public GameObject Projectile;
