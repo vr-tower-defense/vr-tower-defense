@@ -66,6 +66,16 @@ public class BaseTower : MonoBehaviour
             Range,
             (int)DetectionLayerMask
         );
+
+        if (TargetsInRange.Length < 1 && CurrentState == ActiveState)
+        {
+            CurrentState.SetTowerState(IdleState);
+        }
+
+        if (TargetsInRange.Length > 0 && CurrentState == IdleState)
+        {
+            CurrentState.SetTowerState(ActiveState);
+        }
     }
 
     /// <summary>

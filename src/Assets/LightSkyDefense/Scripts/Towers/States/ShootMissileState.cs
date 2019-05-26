@@ -30,12 +30,7 @@ public class ShootMissileState : TowerState
     /// </summary>
     private void OnDisable()
     {
-        if (_coroutine == null)
-        {
-            return;
-        }
-
-        StopCoroutine(_coroutine);
+        StopAllCoroutines();
     }
 
     private void FixedUpdate()
@@ -61,13 +56,6 @@ public class ShootMissileState : TowerState
     /// </summary>
     private IEnumerator ShootMissiles()
     {
-        // Check if there are any enemies to shoot at
-        if (Tower.TargetsInRange.Length < 1)
-        {
-            SetTowerState(Tower.IdleState);
-            yield break;
-        }
-
         for (int i = 0; i < Tower.ProjectileSpawns.Length; i++)
         {
             // First child in projectile spawn will be missile game object

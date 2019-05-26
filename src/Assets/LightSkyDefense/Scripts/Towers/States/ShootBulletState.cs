@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class ShootBulletState : TowerState
@@ -17,14 +18,14 @@ public class ShootBulletState : TowerState
     public float ProjectileSpeed = 4f;
     public float Cooldown = .25f;
 
-    private Rigidbody _activeTarget;
+    private Rigidbody _target;
 
     private IEnumerator _coroutine;
 
     #region lifecycle methods
 
     /// <summary>
-    /// Stop shooting missiles
+    /// Stop shooting
     /// </summary>
     private void OnDisable()
     {
@@ -32,86 +33,26 @@ public class ShootBulletState : TowerState
     }
 
     /// <summary>
-    /// Used to rotate towards an enemy. This works like an offset pursuit steering behaviour, 
-    /// but we only use the target position for the rotation.
+    /// - Finds new target when not locked onto one yet
+    /// - Finds new target when current target is our of range
+    /// - Update tower rotation
+    /// - Start/stop shooting when target enters/leaves field of view
     /// </summary>
     private void FixedUpdate()
     {
-        // Check if there are any enemies to shoot at
-        if (Tower.TargetsInRange.Length < 1)
+        if (
+            _target == null ||
+            Vector3.Distance(_target.position, transform.position) > Tower.Range
+        )
         {
-            SetTowerState(Tower.IdleState);
-            return;
+            _target = FindTarget();
         }
 
-        _activeTarget = FindTarget();
-
-        // Angle between target and center of tower
-        var targetAngle = Vector3.Angle(
-            _activeTarget.position - transform.position,
-            transform.forward
-        );
-
-        // Only start shooting when enemy is in front of tower, stop shooting otherwise
-        if (targetAngle <= AngleTreshold && _coroutine == null)
-        {
-            _coroutine = ShootProjectile();
-            StartCoroutine(_coroutine);
-        }
-        else if (targetAngle > AngleTreshold && _coroutine != null)
-        {
-            StopCoroutine(_coroutine);
-            _coroutine = null;
-        }
-
-        // Calculate the predicted target position
-        var targetDistance = Vector3.Distance(
-            transform.position,
-            _activeTarget.position
-        );
-
-        var travelTime = targetDistance / ProjectileSpeed;
-        var targetDisplacement = _activeTarget.velocity * travelTime;
-
-        var predictedlookRotation = Quaternion.LookRotation(
-            (_activeTarget.position + targetDisplacement) - transform.position
-        );
-
-        // Rotate our transform a step closer to the target's.
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            predictedlookRotation,
-            RotationSpeed * Time.deltaTime
-        );
+        UpdateRotation();
+        EnableShootRoutineWhenTargetIsInFov();
     }
 
     #endregion
-
-    /// <summary>
-    /// If there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
-    /// </summary>
-    private IEnumerator ShootProjectile()
-    {
-        foreach (var spawn in Tower.ProjectileSpawns)
-        {
-            var newProjectile = Instantiate(
-                Projectile,
-                spawn.position,
-                spawn.rotation
-            );
-
-            newProjectile.AddForce(
-                transform.forward * ProjectileSpeed,
-                ForceMode.VelocityChange
-            );
-
-            // Wait before shooting again shot
-            yield return new WaitForSeconds(Cooldown);
-        }
-
-        // Invoke this method recursively
-        yield return ShootProjectile();
-    }
 
     /// <summary>
     /// Finds first target in list
@@ -128,5 +69,78 @@ public class ShootBulletState : TowerState
         }
 
         return null;
+    }
+
+    private void EnableShootRoutineWhenTargetIsInFov()
+    {
+        // Angle between target and center of tower
+        var targetAngle = Vector3.Angle(
+            _target.position - transform.position,
+            transform.forward
+        );
+
+        // Only start shooting when enemy is in front of tower, stop shooting otherwise
+        if (targetAngle <= AngleTreshold && _coroutine == null)
+        {
+            _coroutine = ShootProjectile();
+            StartCoroutine(_coroutine);
+        }
+        else if (targetAngle > AngleTreshold && _coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
+    }
+
+    /// <summary>
+    /// Used to rotate towards an enemy. This works like an offset pursuit steering behaviour,
+    /// but we only use the target position for the rotation.
+    /// </summary>
+    private void UpdateRotation()
+    {
+        var targetDistance = Vector3.Distance(
+            transform.position,
+            _target.position
+        );
+
+        var travelTime = targetDistance / ProjectileSpeed;
+        var targetDisplacement = _target.velocity * travelTime;
+
+        var predictedlookRotation = Quaternion.LookRotation(
+            (_target.position + targetDisplacement) - transform.position
+        );
+
+        // Rotate our transform a step closer to the target's.
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            predictedlookRotation,
+            RotationSpeed * Time.deltaTime
+        );
+    }
+
+    /// <summary>
+    /// Calculate the predicted target positionIf there's no target, don't shoot, else, aim and shoot at the target (and play the sound effect).
+    /// </summary>
+    protected virtual IEnumerator ShootProjectile()
+    {
+        // Wait before we start shooting
+        yield return new WaitForSeconds(Cooldown);
+
+        foreach (var spawn in Tower.ProjectileSpawns)
+        {
+            var newProjectile = Instantiate(
+                Projectile,
+                spawn.position,
+                spawn.rotation
+            );
+
+            newProjectile.AddForce(
+                transform.forward * ProjectileSpeed,
+                ForceMode.VelocityChange
+            );
+        }
+
+        // Invoke this method recursively
+        yield return ShootProjectile();
     }
 }
