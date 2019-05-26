@@ -201,10 +201,10 @@ MonoBehaviour:
   Tower: {fileID: 0}
   ProjectileSpeed: 1
   ProjectileSpeedVariationRatio: 0.3
-  Projectile: {fileID: 9073337372988659883, guid: 1886119667e68d84d82b48bd0e2b4303,
+  Projectile: {fileID: 2096758969451732159, guid: b18f774bd33be4741a832e9819b47014,
     type: 3}
   Bullets: 5
-  Spread: 10
+  Spread: 20
   Cooldown: 1
   RotationSpeed: 60
   AngleTreshold: 10
