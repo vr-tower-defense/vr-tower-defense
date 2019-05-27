@@ -1,4 +1,6 @@
-using Assets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -6,6 +8,22 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(SpawnCreditOnDie))]
 public class Enemy : MonoBehaviour
 {
+
+    #region states
+
+    [Header("States")]
+    public EnemyState IdleState;
+    public EnemyState ShootState;
+
+    [Header("Setup")]
+    [Tooltip("The first state that is applied to the enemy")]
+    public EnemyState InitialState;
+
+    [HideInInspector]
+    public EnemyState CurrentState;
+
+    #endregion
+
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
     public float PointValue = 10f;
@@ -21,6 +39,10 @@ public class Enemy : MonoBehaviour
 
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
+
+    public List<Collider> TowersInRange { get; } = new List<Collider>();
+
+    private List<Collider> _objectsInRange;
 
     private ParticleSystem _teleportEffectInstance = null;
 
@@ -47,6 +69,19 @@ public class Enemy : MonoBehaviour
 
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
+
+        // Save intial state reference to current state field
+        CurrentState = InitialState;
+
+        // Disable all states and enable the current state
+        foreach (var state in GetComponents<TowerState>())
+        {
+            state.enabled = false;
+        }
+
+        CurrentState.enabled = true;
+
+        CheckForTowers(transform.position, 0.2f);
     }
 
     private void FixedUpdate()
@@ -54,6 +89,8 @@ public class Enemy : MonoBehaviour
         EnergyBehaviour();
 
         RotateToVelocityDirection();
+
+        CheckForTowers(transform.position, 0.2f);
     }
 
     /// <summary>
@@ -76,6 +113,36 @@ public class Enemy : MonoBehaviour
     public void Discharge(float amount)
     {
         _energyCharge -= amount;
+    }
+
+    private void CheckForTowers(Vector3 center, float radius)
+    {
+        _objectsInRange = Physics.OverlapSphere(center, radius).ToList();
+
+        for (var i = 0; i < _objectsInRange.Count; i++)
+        {
+            if (_objectsInRange[i].GetComponent<BaseTower>() != null && !TowersInRange.Contains(_objectsInRange[i]))
+                TowersInRange.Add(_objectsInRange[i]);
+        }
+
+        for (var j = 0; j < TowersInRange.Count; j++)
+        {
+            if (!_objectsInRange.Contains(TowersInRange[j]))
+                TowersInRange.Remove(TowersInRange[j]);
+        }
+
+        if (CurrentState != null)
+        {
+            if (TowersInRange.Count >= 1 && CurrentState == IdleState)
+            {
+                CurrentState.SetEnemyState(ShootState);
+            }
+
+            if (TowersInRange.Count < 1 && CurrentState == ShootState)
+            {
+                CurrentState.SetEnemyState(IdleState);
+            }
+        }
     }
 
     /// <summary>

@@ -196,7 +196,8 @@ GameObject:
   - component: {fileID: 1316096747367865943}
   - component: {fileID: 2550084979105975291}
   - component: {fileID: 2857791184191363247}
-  - component: {fileID: 3707888214954651401}
+  - component: {fileID: 7123295974294470392}
+  - component: {fileID: 7848530919884732001}
   m_Layer: 9
   m_Name: JammerEnemy
   m_TagString: Enemy
@@ -307,6 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleState: {fileID: 7123295974294470392}
+  ShootState: {fileID: 7848530919884732001}
+  InitialState: {fileID: 7123295974294470392}
+  CurrentState: {fileID: 0}
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
@@ -359,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   Value: 5
---- !u!114 &3707888214954651401
+--- !u!114 &7123295974294470392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,9 +373,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8314053059502906969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36cf014c4437908488e1b00957577057, type: 3}
+  m_Script: {fileID: 11500000, guid: b4381a5b7ab0e264aa5c948709086170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7848530919884732001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8314053059502906969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604473756de6873478f282544027a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 7923765360067624421, guid: 0c88034581168044fa629020ff5595bf,
     type: 3}
   ShootInterval: 6
+  LoadUpTime: 5

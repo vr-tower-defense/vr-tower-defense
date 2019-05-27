@@ -126,6 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleState: {fileID: 0}
+  ShootState: {fileID: 0}
+  InitialState: {fileID: 0}
+  CurrentState: {fileID: 0}
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10

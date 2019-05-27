@@ -18,12 +18,10 @@ public class EnemyShoot : MonoBehaviour
     private void Start()
     {
         _coroutine = Shoot(ShootInterval);
-        CheckForTowers(transform.position, 0.2f);
     }
 
     void FixedUpdate()
     {
-        CheckForTowers(transform.position, 0.2f);
     }
 
     private void CheckForTowers(Vector3 center, float radius)
