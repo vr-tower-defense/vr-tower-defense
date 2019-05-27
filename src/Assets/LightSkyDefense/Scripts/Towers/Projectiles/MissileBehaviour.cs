@@ -23,7 +23,10 @@ public class Ejected : IMissileState
         _missile.transform.parent = null;
 
         // Eject missile from missile launcher
-        _rigidbody.AddForce(new Vector3(0, 0, _missile.EjectForce), ForceMode.Impulse);
+        _rigidbody.AddForce(
+            _missile.transform.forward * _missile.EjectForce,
+            ForceMode.Impulse
+        );
 
         // Always destroy the missile when it doesn't explode within a certain time
         MonoBehaviour.Destroy(_missile.gameObject, _missile.TimeAlive);
@@ -39,7 +42,7 @@ public class Ejected : IMissileState
             var collider = FindClosestTarget(
                 _missile.transform.position,
                 _missile.DetectionRange,
-                LayerMask.Enemies
+                Layers.Enemies
             );
 
             _target = collider?.transform;
@@ -64,15 +67,17 @@ public class Ejected : IMissileState
     {
         Collider[] colliders = Physics.OverlapSphere(
             _missile.transform.position,
-            _missile.AreaOfEffectRadius,
+            _missile.ExplosionRange,
             (int) _missile.CollisionLayerMask
         );
 
         foreach (var collider in colliders)
         {
             var damagable = collider
-               .gameObject
                .GetComponent<Damageable>();
+
+            var rigidbody = collider
+               .GetComponent<Rigidbody>();
 
             var enemyDistance = Vector3.Distance(
                 _missile.transform.position,
@@ -83,12 +88,18 @@ public class Ejected : IMissileState
                 // Calculate the damage that should be applied to the enemy
                 -_missile.DamageCurve.Evaluate(enemyDistance)
             );
+
+            rigidbody.AddExplosionForce(
+                _missile.ExplosionPower,
+                _missile.transform.position,
+                _missile.ExplosionRange
+            );
         }
 
         MonoBehaviour.Destroy(_missile.gameObject);
     }
 
-    private Collider FindClosestTarget(Vector3 position, float radius, LayerMask layerMask = LayerMask.Default)
+    private Collider FindClosestTarget(Vector3 position, float radius, Layers layerMask = Layers.Default)
     {
         var colliders = Physics.OverlapSphere(position, radius, (int) layerMask);
 
@@ -112,24 +123,31 @@ public class Ejected : IMissileState
 
 public class MissileBehaviour : MonoBehaviour
 {
+    [Header("Explosion properties")]
     [Tooltip("The amount of damage that is applied to a target that collides with this gameObject")]
     public AnimationCurve DamageCurve;
 
-    [Tooltip("The radius in which enemies should be to be affected")]
-    public float AreaOfEffectRadius = 0.1f;
+    [Tooltip("The power that an explosion will have")]
+    public float ExplosionPower = 10f;
 
+    [Tooltip("The radius in which enemies should be to be affected")]
+    public float ExplosionRange = .2f;
+
+    [Header("Behaviour properties")]
     [Tooltip("The range in which an enemy should be in")]
     public float DetectionRange = .25f;
-    public float MaxSpeed = .5f;
 
     [Tooltip("The layers that should be considered when checking for collisions")]
-    public LayerMask CollisionLayerMask = LayerMask.Enemies;
+    public Layers CollisionLayerMask = Layers.Enemies;
 
     [Tooltip("The time before a bullet is removed from the scene")]
     public float TimeAlive = 8;
 
     [Tooltip("The force that is applied to eject the missile from the tower")]
     public float EjectForce = 1;
+
+    [Tooltip("The speed at which the missile will fly")]
+    public float MaxSpeed = .5f;
 
     //
     private IMissileState _missileState;
@@ -158,4 +176,22 @@ public class MissileBehaviour : MonoBehaviour
     {
         _missileState = new Ejected(this);
     }
+
+    #region debugging
+
+    /// <summary>
+    /// Display the range when selected
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        // Draw detection range helper
+        Gizmos.color = new Color(1, 1, 0, 0.1f);
+        Gizmos.DrawSphere(transform.position, DetectionRange);
+
+        // Draw explosion range helper
+        Gizmos.color = new Color(1, 0, 0, 0.1f);
+        Gizmos.DrawSphere(transform.position, ExplosionRange);
+    }
+
+    #endregion
 }

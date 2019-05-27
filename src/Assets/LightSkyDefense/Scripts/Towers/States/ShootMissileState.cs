@@ -11,13 +11,6 @@ public class ShootMissileState : TowerState
     public float ShootCooldown = 2;
     public float EjectInterval = .25f;
 
-    [Header("Detecion properties")]
-    public float DetectionRadius = .5f;
-    public LayerMask DetectionLayerMask = LayerMask.Enemies;
-
-    private Quaternion _randomRotation;
-    private Collider[] _colliders = new Collider[0];
-
     private Coroutine _coroutine;
 
     /// <summary>
@@ -28,7 +21,6 @@ public class ShootMissileState : TowerState
         Reload();
 
         _coroutine = StartCoroutine(ShootMissiles());
-        _randomRotation = Random.rotation;
     }
 
     /// <summary>
@@ -40,7 +32,7 @@ public class ShootMissileState : TowerState
         {
             return;
         }
-        
+
         StopCoroutine(_coroutine);
     }
 
@@ -48,21 +40,16 @@ public class ShootMissileState : TowerState
     {
         Vector3 lookDirection = Vector3.zero;
 
-        foreach(var collider in _colliders)
+        foreach (var collider in Tower.TargetsInRange)
         {
-            if(collider == null)
-            {
-                continue;
-            }
-
             lookDirection += collider.transform.position;
         }
 
-        lookDirection /= _colliders.Length;
+        lookDirection /= Tower.TargetsInRange.Length;
 
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
-            Quaternion.LookRotation(lookDirection),
+            Quaternion.LookRotation(lookDirection - transform.position),
             RotationSpeed * Time.deltaTime
         );
     }
@@ -72,14 +59,8 @@ public class ShootMissileState : TowerState
     /// </summary>
     private IEnumerator ShootMissiles()
     {
-        _colliders = Physics.OverlapSphere(
-            transform.position,
-            DetectionRadius,
-            (int)DetectionLayerMask
-        );
-
         // Check if there are any enemies to shoot at
-        if (_colliders.Length < 1)
+        if (Tower.TargetsInRange.Length < 1)
         {
             SetTowerState(Tower.IdleState);
             yield break;
@@ -106,7 +87,7 @@ public class ShootMissileState : TowerState
     /// </summary>
     private void Reload()
     {
-        foreach(var spawn in Tower.ProjectileSpawns)
+        foreach (var spawn in Tower.ProjectileSpawns)
         {
             if (spawn.childCount > 0)
             {

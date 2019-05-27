@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class GameOver : MonoBehaviour
+class LoseState : GameState
 {
-    public GameObject GameOverPrefab;
-
-    public void OnGameLose()
+    private void Start()
     {
-        var camera = Camera.main;
+        var camera = Camera.main;   
 
         if (camera == null)
             return;
 
+        GameObject gameOverPrefab = (GameObject)Resources.Load("GameOverText", typeof(GameObject));
+
         var gameOverScreen = Instantiate(
-            GameOverPrefab,
+            gameOverPrefab,
             Player.instance.headCollider.transform.position + (Player.instance.headCollider.transform.rotation * new Vector3(0, 0, 1.5f)),
             Player.instance.headCollider.transform.rotation
         );
 
         gameOverScreen.name = "game over screen";
-        
+
         var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
 
         if (greyScale == null)

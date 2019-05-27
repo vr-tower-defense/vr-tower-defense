@@ -1,15 +1,26 @@
 fileFormatVersion: 2
-guid: ebcc4fa1381d9db49ac467bb1bdafb79
+guid: 8789089727766a6409b1d841ccf0923f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material
+    2100000: black
+    2100002: light
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Body
-  externalObjects: {}
+    4300000: Cube
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black
+    second: {fileID: 2100000, guid: 9b01d7c0e4dfa854eb5dfe2624e27c0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light
+    second: {fileID: 2100000, guid: 3ecf57bd185c086479604dd23d24d0aa, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,8 +57,8 @@ ModelImporter:
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

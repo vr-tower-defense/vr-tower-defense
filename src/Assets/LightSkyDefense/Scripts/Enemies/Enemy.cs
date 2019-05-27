@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour
 
     private float _energyCharge = 0;
     private float _potentialEnergy = 1f;
-    private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
 
     private void Awake()
@@ -256,24 +255,6 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void RotateToVelocityDirection()
-    {
-        var translationVector = PathFollower.transform.position - PathFollower.PreviousPosition;
-
-        if (translationVector == Vector3.zero)
-        {
-            return;
-        }
-
-        var lookAngle = Quaternion.LookRotation(translationVector);
-
-        Rigidbody.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            lookAngle,
-            _rotationSpeed
-        );
     }
 
     /// <summary>
