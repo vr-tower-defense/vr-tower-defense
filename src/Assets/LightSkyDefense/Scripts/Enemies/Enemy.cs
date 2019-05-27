@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     [Header("States")]
     public EnemyState IdleState;
+
     public EnemyState ShootState;
 
     [Header("Setup")]
@@ -21,6 +22,9 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public EnemyState CurrentState;
+
+    [HideInInspector]
+    public EnemyState[] EnemyStates;
 
     #endregion
 
@@ -71,6 +75,7 @@ public class Enemy : MonoBehaviour
 
         // Save intial state reference to current state field
         CurrentState = InitialState;
+        EnemyStates = GetComponents<EnemyState>();
 
         // Disable all states and enable the current state
         foreach (var state in GetComponents<TowerState>())
@@ -86,8 +91,6 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         EnergyBehaviour();
-
-        RotateToVelocityDirection();
 
         CheckForTowers(transform.position, 0.2f);
     }

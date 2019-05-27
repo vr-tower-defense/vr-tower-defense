@@ -21,7 +21,10 @@ public class EnemyState : MonoBehaviour
             return;
         }
 
-        enabled = false;
+        foreach (var state in Enemy.EnemyStates)
+        {
+            state.enabled = false;
+        }
         enemyState.enabled = true;
 
         Enemy.CurrentState = enemyState;

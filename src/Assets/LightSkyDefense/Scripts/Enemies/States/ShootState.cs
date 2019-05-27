@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ShootState : EnemyState
@@ -13,10 +11,6 @@ public class ShootState : EnemyState
     private void Start()
     {
         StartCoroutine(Shoot(ShootInterval));
-    }
-
-    private void FixedUpdate()
-    { 
     }
 
     private void OnDisable()
