@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Waves/Wave", order = 1)]
 public class Wave : ScriptableObject
@@ -9,17 +8,19 @@ public class Wave : ScriptableObject
 
     public IEnumerator Start()
     {
-        FindObjectsOfType<GameObject>()
-                .ForEach(obj => obj.BroadcastMessage(
-                    "OnWaveStarted",
-                    SendMessageOptions.DontRequireReceiver
-                ));
+        foreach (var gameObject in FindObjectsOfType<GameObject>())
+        {
+            gameObject.BroadcastMessage(
+                "OnWaveStarted",
+                SendMessageOptions.DontRequireReceiver
+            );
+        }
 
         foreach (var step in Steps)
         {
-            if (step.GetType() == typeof(WaveCooldown))
+            if (step is CooldownStep)
             {
-                yield return ((WaveCooldown)step).Wait();
+                yield return ((CooldownStep)step).Wait();
                 continue;
             }
 
