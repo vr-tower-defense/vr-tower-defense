@@ -2,68 +2,78 @@
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-
 [RequireComponent(typeof(Interactable))]
 public class Deletable : MonoBehaviour
 {
-    private static GameObject _currentHover;
-    private bool _eventSet = false;
-
-
     public AudioClip DestroySound;
+
+    [Tooltip("The time in seconds that the button should be pressed down before the game object is deleted")]
+    public float DeleteCooldown = .7f;
+
+    [Header("Action properties")]
     public SteamVR_Action_Boolean TriggerClickAction = SteamVR_Input.GetBooleanAction("TriggerClick");
 
-    /// <summary>
-    /// Valdiate properties
-    /// </summary>
-    public void Start()
-    {
-        // Validate actions
-        if (TriggerClickAction == null)
-            Debug.LogError("`TriggerClick` action has not been set on this component.");
+    public SteamVR_Input_Sources InputSource = SteamVR_Input_Sources.RightHand;
 
-        //used to check if we need to add to the event
-        else if (!_eventSet)
+    [Header("Haptic properties")]
+    [Tooltip("Duration in seconds")]
+    [Range(0, 1)]
+    public float Duration = .1f;
+
+    public AnimationCurve AmplitudeOverCooldown;
+
+    [Tooltip("The vibration frequency over time, should max out at DeleteCooldown")]
+    public AnimationCurve FrequencyOverCooldown;
+
+    // The time the button is pressed down
+    private float _pressDownStartTime;
+
+    /// <summary>
+    /// Emit OnDelete message when button is pressed for given cooldown.
+    /// Provide haptic feedback when button is pressed.
+    /// </summary>
+    private void HandHoverUpdate(Hand hand)
+    {
+        var pressedDown = TriggerClickAction.GetState(InputSource);
+
+        // Ignore this function if button is not pressed down
+        if (!pressedDown)
         {
-            TriggerClickAction.onStateDown += delegate { DestroyCurrentHover(); };
-            _eventSet = true;
+            // Reset timer when trigger is not pressed down
+            _pressDownStartTime = 0;
+
+            return;
+        }
+
+        if (_pressDownStartTime == 0)
+        {
+            _pressDownStartTime = Time.time;
+        }
+
+        // Calculate the press down duration
+        var pressDownDuration = Time.time - _pressDownStartTime;
+
+        hand.TriggerHapticPulse(
+            Duration,
+            FrequencyOverCooldown.Evaluate(pressDownDuration),
+            AmplitudeOverCooldown.Evaluate(pressDownDuration)
+        );
+
+        // Delete the gameObject after the cooldown
+        if (pressDownDuration > DeleteCooldown)
+        {
+            gameObject.BroadcastMessage("OnDelete", SendMessageOptions.RequireReceiver);
+
+            // Reset timer
+            _pressDownStartTime = 0;
         }
     }
 
-    private void DestroyCurrentHover()
-    {
-        if (_currentHover != null)
-        {
-            AudioSource.PlayClipAtPoint(DestroySound, this.gameObject.transform.position);
-            Destroy(_currentHover);
-        }
-    }
-
     /// <summary>
-    /// If Hovering begins, and the TriggerClickAction State is true, the tower gets destroyed
-    /// Otherwise it becomes the _currentHover object
+    /// Reset timer on hover end
     /// </summary>
-    /// <param name="hand"></param>
-    private void OnHandHoverBegin(Hand hand)
+    private void OnHandHoverEnd()
     {
-        if (TriggerClickAction.state)
-        {
-            AudioSource.PlayClipAtPoint(DestroySound, this.gameObject.transform.position);
-            Destroy(this.gameObject);
-        }
-        else
-            _currentHover = this.gameObject;
-        
+        _pressDownStartTime = 0;
     }
-
-    /// <summary>
-    /// IF the _currentHover is the gameObject, remove it.
-    /// </summary>
-    /// <param name="hand"></param>
-    private void OnHandHoverEnd(Hand hand)
-    {
-        if (_currentHover == this.gameObject)
-            _currentHover = null;
-    }
-
 }
