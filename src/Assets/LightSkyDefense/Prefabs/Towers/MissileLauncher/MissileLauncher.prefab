@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4073706048562053402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
   m_Children: []
   m_Father: {fileID: 1845970331614774386}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3076001541026187718
 GameObject:
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3984326557187089192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,81 +95,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8423346778408648673}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7880970267528367531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8537441929906329032}
-  m_Layer: 0
-  m_Name: ProjectileSpawn (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8537441929906329032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7880970267528367531}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0036333334, y: 0.006, z: -0.0037333346}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8423346778408648673}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &8423346778408870849
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8423346778408648673}
-  - component: {fileID: 8423346778405748673}
-  - component: {fileID: 8423346778406878465}
-  - component: {fileID: 1700333904029867142}
-  - component: {fileID: 2658780042421631708}
-  - component: {fileID: 4610570417296958622}
-  - component: {fileID: 2280962132958081107}
-  - component: {fileID: 6950725025787894344}
-  - component: {fileID: 4837722594524183046}
-  - component: {fileID: 8333722719474973916}
-  - component: {fileID: 6511463652328809273}
-  - component: {fileID: 1535700810061078329}
-  m_Layer: 8
-  m_Name: missile_launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8423346778408648673
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423346778408870849}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children:
   - {fileID: 3984326557187089192}
-  - {fileID: 8537441929906329032}
-  - {fileID: 5428556423452228348}
   - {fileID: 4073706048562053402}
+  - {fileID: 5428556423452228348}
+  - {fileID: 8537441929906329032}
   m_Father: {fileID: 1765026518164491751}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -312,7 +241,7 @@ MonoBehaviour:
   ActiveState: {fileID: 781588593663424357}
   CelebrationState: {fileID: 6244242722572371592}
   CondemnState: {fileID: 0}
-  JamState: {fileID: 1535700810061078329}
+  JamState: {fileID: 0}
   InitialState: {fileID: 396999235543309342}
   CurrentState: {fileID: 0}
   TowerStates: []
@@ -382,7 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5428556423452228348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765026518164491751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8537441929906329032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +391,7 @@ Transform:
   m_LocalScale: {x: 2.1, y: 2.1, z: 2.1}
   m_Children: []
   m_Father: {fileID: 1845970331614774386}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8423346778408870849
 GameObject:
@@ -512,11 +441,6 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8423346778408870849}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01a6c7d6f03fa14b93b226bfc76e87f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  JamTime: 4
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

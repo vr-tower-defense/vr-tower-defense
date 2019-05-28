@@ -24,20 +24,17 @@ public class IdleState : EnemyState
         while (_running)
         {
             Enemy.TowersInRange = new List<Collider>(Physics.OverlapSphere(transform.position, radius, (int)Layers.Towers));
-
-            if (Enemy.CurrentState != null)
-            {
-                if (Enemy.TowersInRange.Count >= 1 && Enemy.CurrentState == Enemy.IdleState)
-                {
-                    Enemy.CurrentState.SetEnemyState(Enemy.ShootState);
-                }
-
-                if (Enemy.TowersInRange.Count < 1 && Enemy.CurrentState == Enemy.ShootState)
-                {
-                    Enemy.CurrentState.SetEnemyState(Enemy.IdleState);
-                }
-            }
             
+            if (Enemy.TowersInRange.Count >= 1 && Enemy.CurrentState == Enemy.IdleState)
+            {
+                Enemy.CurrentState.SetEnemyState(Enemy.ShootState);
+            }
+
+            if (Enemy.TowersInRange.Count < 1 && Enemy.CurrentState == Enemy.ShootState)
+            {
+                Enemy.CurrentState.SetEnemyState(Enemy.IdleState);
+            }
+
             yield return new WaitForSeconds(1/90f);
         }
         _running = false;

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
-  m_Name: Spawn
+  m_Name: SpawnSplitter
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 0}
+  Enemy: {fileID: 8695885477200556864, guid: a56a506fbdb4eb440835b4aa1f0c1eac, type: 3}
