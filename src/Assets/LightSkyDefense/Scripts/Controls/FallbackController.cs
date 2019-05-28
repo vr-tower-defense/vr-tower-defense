@@ -23,7 +23,7 @@ public class FallbackController : MonoBehaviour
             enabled = false;
             return;
         }
-        
+
         // No HDM found, put options in fallback overlay
 
         var overlayCanvasText = _player.GetComponentInChildren<Text>();
@@ -60,8 +60,22 @@ public class FallbackController : MonoBehaviour
                 // Destroy clone and replace with "real" instance
                 _fallbackHand.DetachObject(_preview);
 
+                var buildable = _preview.GetComponent<Buildable>();
+
+                // Create final instance when position is valid
+                if (!buildable.IsPositionValid)
+                {
+                    return;
+                }
+
+                buildable.SendMessage(
+                    "OnBuild",
+                    Player.instance.rightHand.transform,
+                    SendMessageOptions.RequireReceiver
+                );
+
+                // Destroy clone and replace with "real" instance
                 Destroy(_preview);
-                Instantiate(_dialOptions[i].Final, _fallbackHand.hoverSphereTransform.position, _fallbackHand.hoverSphereTransform.rotation);
             }
         }
     }
@@ -75,7 +89,7 @@ public class FallbackController : MonoBehaviour
     /// <para>
     /// ex:
     /// (dialOptionBuilder): [first option], [second option]
-    /// (dialIndexBuilder) :       1                2     
+    /// (dialIndexBuilder) :       1                2
     ///                    :
     /// </para>
     /// </summary>

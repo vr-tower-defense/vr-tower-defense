@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3981083931633831066}
   - component: {fileID: 273567283433228576}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PathWayPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
