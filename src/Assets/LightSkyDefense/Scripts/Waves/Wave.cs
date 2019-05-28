@@ -11,7 +11,7 @@ public class Wave : ScriptableObject
         foreach (var gameObject in FindObjectsOfType<GameObject>())
         {
             gameObject.BroadcastMessage(
-                "OnWaveStarted",
+                "OnWaveStart",
                 SendMessageOptions.DontRequireReceiver
             );
         }

@@ -45,7 +45,7 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             Quaternion.Euler(0, targetRotation.eulerAngles.y, 0),
-            RotationSpeed
+            RotationSpeed * Time.deltaTime
         );
     }
 }

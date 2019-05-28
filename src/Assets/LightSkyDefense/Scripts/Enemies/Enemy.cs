@@ -1,4 +1,3 @@
-using Assets;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
