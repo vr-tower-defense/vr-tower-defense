@@ -1253,6 +1253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940944955}
   - component: {fileID: 1940944956}
+  - component: {fileID: 1940944957}
   m_Layer: 0
   m_Name: Dial
   m_TagString: Untagged
@@ -1298,6 +1299,20 @@ MonoBehaviour:
   - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
   - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
   - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
+--- !u!114 &1940944957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940944954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentCreditText: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
+    type: 3}
 --- !u!1 &1965818191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 110716, guid: dc06161b6d97feb419f45f03b62e14b9,
