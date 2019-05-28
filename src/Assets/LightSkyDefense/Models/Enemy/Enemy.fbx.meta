@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Enemy
+    4300000: Enemy_Default
   externalObjects: {}
   materials:
     importMaterials: 1
