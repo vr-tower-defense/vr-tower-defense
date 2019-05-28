@@ -3,6 +3,8 @@ using Valve.VR.InteractionSystem;
 
 class WinState : GameState
 {
+    private readonly Vector3 _ofset = new Vector3(0, 0, 1.5f);
+
     public void Start()
     {
         var camera = Camera.main;
@@ -11,13 +13,14 @@ class WinState : GameState
             return;
 
         GameObject gameWinPrefab = (GameObject)Resources.Load("Text/GameWinText", typeof(GameObject));
-
+        var playerTransform = Player.instance.headCollider.transform;
         var gameOverScreen = Instantiate(
             gameWinPrefab,
-            Player.instance.headCollider.transform.position + (Player.instance.headCollider.transform.rotation * new Vector3(0, 0, 1.5f)),
-            Player.instance.headCollider.transform.rotation
-        );
+            playerTransform.position + (playerTransform.rotation * _ofset),
+            Quaternion.Euler(new Vector3(0, camera.gameObject.transform.rotation.y, 0))
+            );
+        
 
-        gameOverScreen.name = "game over screen";
+        gameOverScreen.name = "win screen";
     }
 }
