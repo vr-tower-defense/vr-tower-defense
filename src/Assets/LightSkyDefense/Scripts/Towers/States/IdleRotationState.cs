@@ -2,9 +2,9 @@
 
 public class IdleRotationState : TowerState
 {
-    [SerializeField]
-    [Tooltip("Degrees rotated per second")]
-    public float RotationSpeed = 35f;
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    [Range(0, 360)]
+    public float RotationSpeed = 30;
 
     private Quaternion _randomRotation;
 
@@ -28,14 +28,8 @@ public class IdleRotationState : TowerState
 
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
-            _randomRotation, 
+            _randomRotation,
             RotationSpeed * Time.deltaTime
         );
-        
-        // Set active state when enemies are in range
-        if (Tower.TargetsInRange.Length > 0)
-        {
-            SetTowerState(Tower.ActiveState);
-        }
     }
 }

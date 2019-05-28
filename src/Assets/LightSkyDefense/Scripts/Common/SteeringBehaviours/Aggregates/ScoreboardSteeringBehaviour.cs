@@ -7,18 +7,15 @@ using Valve.VR.InteractionSystem;
 public class ScoreboardSteeringBehaviour : MonoBehaviour
 {
     public Vector3 Offset = new Vector3(-.5f, .25f, 1.5f);
-    public float RotationSpeed = .3f;
+    public float RotationSpeed = 30f;
 
-    private Renderer _renderer;
-    private Rigidbody _rigidbody; 
+    private Rigidbody _rigidbody;
     private Transform _headsetTransform;
 
-    private Vector3 _velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        _renderer = GetComponent<Renderer>();
         _rigidbody = GetComponent<Rigidbody>();
 
         _headsetTransform = Player.instance.headCollider.transform;
@@ -40,11 +37,15 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
             ForceMode.Acceleration
         );
 
-        // Add continuous rotation
-        transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            transform.eulerAngles.y + RotationSpeed,
-            transform.eulerAngles.z
+        var targetRotation = Quaternion.LookRotation(
+            _headsetTransform.position - transform.position
+        );
+
+        // Make scoreboard look towards player
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.Euler(0, targetRotation.eulerAngles.y, 0),
+            RotationSpeed * Time.deltaTime
         );
     }
 }
