@@ -50,6 +50,9 @@ MonoBehaviour:
   IsSelected: 0
   Preview: {fileID: 1311665180749323574, guid: d847f73594b66d64e86ed4a771f159d2, type: 3}
   Final: {fileID: 6626728996559669971, guid: c9dc7c728ff86fb40b69c960577f791f, type: 3}
+  Cost: 10
+  DialCostText: {fileID: 1145892129914187409, guid: 7bc9c30ea7e5a324c976e09b29c9bafb,
+    type: 3}
 --- !u!1001 &1862214707439696810
 PrefabInstance:
   m_ObjectHideFlags: 0

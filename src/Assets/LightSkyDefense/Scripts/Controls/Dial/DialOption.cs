@@ -30,7 +30,6 @@ public abstract class DialOption : MonoBehaviour
     public virtual void OnPressStart(SteamVR_Action_Vector2 action)
     { }
 
-
     private void Update()
     {
         TargetMesh.material = IsSelected

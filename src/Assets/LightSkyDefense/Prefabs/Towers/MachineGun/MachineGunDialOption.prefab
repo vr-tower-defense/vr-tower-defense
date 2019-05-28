@@ -44,12 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef068ad8ded15e45823fd5ead07d966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InactiveMaterial: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583, type: 2}
+  InactiveMaterial: {fileID: 2100000, guid: 3eeb833b049bb274e83d4c96b5640f67, type: 2}
   ActiveMaterial: {fileID: 2100000, guid: 9000d944e01b5ea4fb832513fa987a4b, type: 2}
   TargetMesh: {fileID: 0}
   IsSelected: 0
   Preview: {fileID: 5787846512612252572, guid: c3d49c508315dce4184356e2187e2577, type: 3}
   Final: {fileID: 7127235948388862705, guid: 83f3e599ec3d85c4cb8c33e9e10ef80d, type: 3}
+  Cost: 5
+  DialCostText: {fileID: 1145892129914187409, guid: 7bc9c30ea7e5a324c976e09b29c9bafb,
+    type: 3}
 --- !u!1001 &8867307546544437345
 PrefabInstance:
   m_ObjectHideFlags: 0

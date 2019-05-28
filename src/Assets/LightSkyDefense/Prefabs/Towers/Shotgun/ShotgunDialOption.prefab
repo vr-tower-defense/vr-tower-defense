@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1529337563571085310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2201546626987279083}
   m_Father: {fileID: 0}
@@ -50,6 +50,9 @@ MonoBehaviour:
   IsSelected: 0
   Preview: {fileID: 1529337563571085310}
   Final: {fileID: 4989372949544130928, guid: 8ac4e6f0768e85a428245365da52bbc1, type: 3}
+  Cost: 20
+  DialCostText: {fileID: 1145892129914187409, guid: 7bc9c30ea7e5a324c976e09b29c9bafb,
+    type: 3}
 --- !u!1001 &2201546626987677803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,15 +110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
