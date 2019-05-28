@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Wave Cooldown
+  m_Name: WaveCooldown
   m_EditorClassIdentifier: Assembly-CSharp::WaveCooldown
-  Cooldown: 5
+  Cooldown: 7.5
