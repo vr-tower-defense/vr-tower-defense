@@ -79,7 +79,7 @@ TextMesh:
   m_GameObject: {fileID: 4842219207135686761}
   m_Text: 'Currency: '
   m_OffsetZ: 0
-  m_CharacterSize: 0.007
+  m_CharacterSize: 0.005
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
