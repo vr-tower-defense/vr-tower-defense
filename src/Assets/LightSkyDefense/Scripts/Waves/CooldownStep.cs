@@ -2,12 +2,12 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CooldownStep", menuName = "Waves/CooldownStep", order = 1)]
-public class CooldownStep : ScriptableObject
+public class CooldownStep : WaveStep
 {
     [Min(0)]
     public float TimeInSeconds = 1;
 
-    public IEnumerator Wait()
+    public override IEnumerator Run()
     {
         yield return new WaitForSeconds(TimeInSeconds);
     }
