@@ -139,8 +139,6 @@ public class Enemy : MonoBehaviour
             explodeEffectInstance.gameObject,
             explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
-
-        _scoreboard.SendMessage("PointGain", PointValue, SendMessageOptions.RequireReceiver);
     }
 
     /// <summary>

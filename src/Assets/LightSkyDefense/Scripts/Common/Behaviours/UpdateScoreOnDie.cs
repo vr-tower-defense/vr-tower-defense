@@ -5,7 +5,9 @@ public class UpdateScoreOnDie : MonoBehaviour
 {
     public float Score = 0;
 
-    // Update is called once per frame
+    /// <summary>
+    /// grant player points on dead
+    /// </summary>
     void OnDie()
     {
         var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
