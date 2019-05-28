@@ -70,7 +70,7 @@ public class FallbackController : MonoBehaviour
 
                 buildable.SendMessage(
                     "OnBuild",
-                    Player.instance.rightHand.transform,
+                    _fallbackHand.transform,
                     SendMessageOptions.RequireReceiver
                 );
 
