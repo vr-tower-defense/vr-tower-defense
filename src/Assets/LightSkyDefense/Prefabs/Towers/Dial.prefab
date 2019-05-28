@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3447203352102839665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3447203352102839664}
+  - component: {fileID: 3447203352102839671}
+  m_Layer: 0
+  m_Name: Dial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3447203352102839664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447203352102839665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3447203352102839671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447203352102839665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7c0bb85aeacf34bbbbc082f18f775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialAction:
+    actionPath: /actions/default/in/Dial
+    needsReinit: 0
+  DialClickAction:
+    actionPath: /actions/default/in/DialClick
+    needsReinit: 0
+  DialRotationOffset: 90
+  DialOptionRadius: 0.1
+  DialOptions:
+  - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
+  - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
+  - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
