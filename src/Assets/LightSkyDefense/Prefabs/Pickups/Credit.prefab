@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7855033329141177592}
+  - component: {fileID: 9133426486142341555}
   - component: {fileID: 4378280900032468661}
   - component: {fileID: 1343675722329424218}
-  - component: {fileID: 9133426486142341555}
   m_Layer: 13
   m_Name: Credit
   m_TagString: Untagged
@@ -34,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &9133426486142341555
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283117647348080252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4378280900032468661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,19 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Value: 5
   PickupSound: {fileID: 8300000, guid: 006ec1c69b7ce544d85e93f013eb7adc, type: 3}
---- !u!135 &9133426486142341555
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2283117647348080252}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.01
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4624740032519074762
 PrefabInstance:
   m_ObjectHideFlags: 0

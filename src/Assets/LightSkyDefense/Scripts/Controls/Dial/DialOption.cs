@@ -1,23 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Valve.VR;
 
 public abstract class DialOption : MonoBehaviour
 {
-    [Tooltip("Value between 0 and 1")]
-    public float InactiveTransparency = .5f;
+    public Material InactiveMaterial;
+    public Material ActiveMaterial;
+
+    public MeshRenderer TargetMesh;
 
     [HideInInspector]
     public bool IsSelected;
-
-    /// <summary>
-    /// Render program that is used to render the dial preview
-    /// </summary>
-    private Renderer[] _renderers;
-
-    private void Start()
-    {
-        _renderers = gameObject.GetComponentsInChildren<Renderer>();
-    }
 
     /// <summary>
     /// Method that is invoked when the player presses down on the touchpad
@@ -40,14 +33,8 @@ public abstract class DialOption : MonoBehaviour
 
     private void Update()
     {
-        foreach(var renderer in _renderers)
-        {
-            renderer.material.color = new Color(
-                renderer.material.color.r,
-                renderer.material.color.g,
-                renderer.material.color.b,
-                IsSelected ? .5f : InactiveTransparency
-            );
-        }
+        TargetMesh.material = IsSelected
+            ? ActiveMaterial
+            : InactiveMaterial;
     }
 }

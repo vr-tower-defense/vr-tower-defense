@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour
+public class LinearBulletBehaviour : MonoBehaviour
 {
     [Tooltip("The amount of damage that is applied to a target that collides with this gameObject")]
     public float BulletDamage = 1;

@@ -4,11 +4,13 @@ using UnityEngine;
 public class ShootMissileState : TowerState
 {
     [Header("Appearance properties")]
-    public float RotationSpeed = 35;
+    [Tooltip("Speed at which the tower rotates in degrees")]
+    [Range(0, 360)]
+    public float RotationSpeed = 60;
 
     [Header("Shooting properties")]
     public GameObject Projectile;
-    public float ShootCooldown = 2;
+    public float Cooldown = 2;
     public float EjectInterval = .25f;
 
     private Coroutine _coroutine;
@@ -28,12 +30,7 @@ public class ShootMissileState : TowerState
     /// </summary>
     private void OnDisable()
     {
-        if (_coroutine == null)
-        {
-            return;
-        }
-
-        StopCoroutine(_coroutine);
+        StopAllCoroutines();
     }
 
     private void FixedUpdate()
@@ -59,13 +56,6 @@ public class ShootMissileState : TowerState
     /// </summary>
     private IEnumerator ShootMissiles()
     {
-        // Check if there are any enemies to shoot at
-        if (Tower.TargetsInRange.Length < 1)
-        {
-            SetTowerState(Tower.IdleState);
-            yield break;
-        }
-
         for (int i = 0; i < Tower.ProjectileSpawns.Length; i++)
         {
             // First child in projectile spawn will be missile game object
@@ -76,9 +66,10 @@ public class ShootMissileState : TowerState
             yield return new WaitForSeconds(EjectInterval);
         }
 
+        // Reload and invoke this method again after given cooldown
         Reload();
 
-        yield return new WaitForSeconds(ShootCooldown);
+        yield return new WaitForSeconds(Cooldown);
         yield return ShootMissiles();
     }
 
