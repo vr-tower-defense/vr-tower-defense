@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 239233248778471490}
   - component: {fileID: 9030962081397487450}
   - component: {fileID: 8759947185552773464}
+  - component: {fileID: 5874685391786350411}
   m_Layer: 9
   m_Name: LittleSplitEnemy
   m_TagString: Enemy
@@ -125,6 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleState: {fileID: 5874685391786350411}
+  ShootState: {fileID: 5874685391786350411}
+  InitialState: {fileID: 5874685391786350411}
+  CurrentState: {fileID: 0}
+  EnemyStates: []
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
@@ -177,3 +183,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   Value: 5
+--- !u!114 &5874685391786350411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810914671228617691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4381a5b7ab0e264aa5c948709086170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShootRange: 0.5
