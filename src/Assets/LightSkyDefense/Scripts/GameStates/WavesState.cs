@@ -5,27 +5,24 @@ using Valve.VR.InteractionSystem;
 public class WavesState : GameState
 {
     public Wave[] Waves;
-    private Coroutine _spawn;
+
     public void Start()
     {
-        _spawn = StartCoroutine(Play());
         _gameManager = GameManager.Instance;
-        
+
+        StartCoroutine(CycleWaves());
     }
 
-    public IEnumerator Play()
+    /// <summary>
+    /// Cycles through each wave
+    /// </summary>
+    public IEnumerator CycleWaves()
     {
-        yield return new WaitForFixedUpdate();
         foreach (var wave in Waves)
         {
-            FindObjectsOfType<GameObject>()
-                .ForEach(obj => obj.BroadcastMessage(
-                    "OnWaveStarted",
-                    SendMessageOptions.DontRequireReceiver
-                ));
-
-            yield return wave.Spawn();
+            yield return wave.Start();
         }
+
         _gameManager.SetGameState(typeof(WavesEndState));
     }
 }

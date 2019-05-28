@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
-  m_Name: PrimitiveSpawnEnemy
-  m_EditorClassIdentifier: 
-  Repeat: 10
-  Delay: 2
-  Prefab: {fileID: 4986396300896956474, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
+  m_Script: {fileID: 0}
+  m_Name: Wave Cooldown
+  m_EditorClassIdentifier: Assembly-CSharp::WaveCooldown
+  Cooldown: 5

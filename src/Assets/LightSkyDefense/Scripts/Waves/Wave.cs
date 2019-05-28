@@ -1,16 +1,33 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
-
-public abstract class Wave : ScriptableObject
+[CreateAssetMenu(fileName = "Wave", menuName = "Waves/Wave", order = 1)]
+public class Wave : ScriptableObject
 {
-    public abstract IEnumerator Spawn();
+    public UnityEngine.Object[] Steps;
 
-    [Tooltip("The Amount of times this wave will repeat")]
-    [Min(0)]
-    public int Repeat = 1;
+    public IEnumerator Start()
+    {
+        FindObjectsOfType<GameObject>()
+                .ForEach(obj => obj.BroadcastMessage(
+                    "OnWaveStarted",
+                    SendMessageOptions.DontRequireReceiver
+                ));
 
-    [Tooltip("The time, in seconds, between each spawn of this wave")]
-    [Min(0)]
-    public float Cooldown = 1;
+        foreach (var step in Steps)
+        {
+            if (step.GetType() == typeof(WaveCooldown))
+            {
+                yield return ((WaveCooldown)step).Wait();
+                continue;
+            }
+
+            Instantiate(
+                step,
+                GameManager.Instance.Path.PathPoints[0],
+                Quaternion.identity
+            );
+        }
+    }
 }
