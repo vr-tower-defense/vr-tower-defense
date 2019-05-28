@@ -70,9 +70,10 @@
 
 				fixed4 glowColor = _GlowColor * intersect;
 
-				fixed4 col = _Color * _Color.a + glowColor;
+				fixed4 col = (_Color * _Color.a * screenDepth) + glowColor;
 
-				col.a = _Color.a;
+				col.a -= vpos.z-0.2;
+				col.a = clamp(col.a, 0.0f, 1.0f);
 				return col;
 			}
 			ENDCG
