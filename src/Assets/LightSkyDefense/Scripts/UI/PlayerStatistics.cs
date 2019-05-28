@@ -4,17 +4,20 @@ using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
-    [SerializeField]
-    private readonly int InitialLives = 5;
+    public GameObject[] Subscribers;
 
-    [SerializeField]
-    private readonly int InitialFunds = 20;
+    public int InitialLives = 5;
+
+    public int InitialFunds = 20;
 
     [HideInInspector]
     public int Lives { get; private set; }
 
     [HideInInspector]
     public float Funds { get; private set; }
+
+    [HideInInspector]
+    public float Score { get; private set; }
 
     private bool _isGameOver = false;
 
@@ -25,6 +28,8 @@ public class PlayerStatistics : MonoBehaviour
     {
         Lives = InitialLives;
         Funds = InitialFunds;
+
+        EmitChangeEvent();
     }
 
     /// <summary>
@@ -42,6 +47,9 @@ public class PlayerStatistics : MonoBehaviour
         }
 
         Funds = tempFunds;
+
+        EmitChangeEvent();
+
         return true;
     }
 
@@ -52,6 +60,8 @@ public class PlayerStatistics : MonoBehaviour
     public void UpdateLives(int amount)
     {
         Lives += amount;
+
+        EmitChangeEvent();
 
         if (Lives > 0 || _isGameOver)
         {
@@ -64,6 +74,29 @@ public class PlayerStatistics : MonoBehaviour
         foreach (GameObject go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
+    /// <summary>
+    /// Update the players' score
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UpdateScore(float amount)
+    {
+        Score += amount;
+
+        EmitChangeEvent();
+    }
+
+    private void EmitChangeEvent()
+    {
+        foreach (var subscriber in Subscribers)
+        {
+            subscriber.BroadcastMessage(
+                "OnPlayerStatisticsUpdate",
+                this,
+                SendMessageOptions.DontRequireReceiver
+            );
         }
     }
 }

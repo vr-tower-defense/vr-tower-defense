@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject WayPointPrefab;
 
     private static bool _initializing = false;
-    private readonly Type _defaultGameState = typeof(WavesState);
+
     private MonoBehaviour _gameState { get; set; }
 
     private Path _path;
@@ -37,6 +37,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region lifecyle functions
+
+    /// <summary>
+    /// Invoked when the application is about to quit. We set 
+    /// the IsQuitting variable to true, to avoid missing references errors in OnDestroy methods.
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        IsQuitting = true;
+    }
+
+    #endregion
+
     public static void Initialize()
     {
         if (_instance != null || _initializing)
@@ -55,22 +68,6 @@ public class GameManager : MonoBehaviour
         _initializing = false;
     }
 
-    /// <summary>
-    /// Start is called before the first frame update
-    /// </summary>
-    private void Start()
-    {
-        SetGameState(_defaultGameState);
-    }
-
-    /// <summary>
-    /// Invoked when the application is about to quit. We set 
-    /// the IsQuitting variable to true, to avoid missing references errors in OnDestroy methods.
-    /// </summary>
-    private void OnApplicationQuit()
-    {
-        IsQuitting = true;
-    }
 
     /// <summary>
     /// Used to pause the game
