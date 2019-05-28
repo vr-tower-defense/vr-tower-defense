@@ -335,7 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65eb2959579d7554da445040fc1db6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 35
+  Tower: {fileID: 0}
+  RotationSpeed: 30
 --- !u!114 &781588593663424357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,10 +349,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a084af24685d33b46ac06708e5638b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 35
+  Tower: {fileID: 0}
+  RotationSpeed: 60
   Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
-  ShootCooldown: 1
+  Cooldown: 2
   EjectInterval: 1
 --- !u!114 &6244242722572371592
 MonoBehaviour:
@@ -365,16 +367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4d178b6e85d784da374e6db8a4c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tower: {fileID: 0}
   CelebrationEffect: {fileID: 3338588312708880379, guid: 6b259e700bf10754a97bb8ebdb25efb9,
     type: 3}
-  ParticleSystemSpawns:
-  - {fileID: 3984326557187089192}
-  - {fileID: 8537441929906329032}
-  - {fileID: 5428556423452228348}
-  - {fileID: 4073706048562053402}
   AimDirection: {x: 0, y: 1, z: 0}
   RotationAxis: {x: 0, y: 0, z: 1}
-  RotationSpeed: 35
+  RotationSpeed: 30
 --- !u!1 &5398354811386336430
 GameObject:
   m_ObjectHideFlags: 0

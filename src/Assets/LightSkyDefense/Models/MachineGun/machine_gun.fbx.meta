@@ -1,15 +1,20 @@
 fileFormatVersion: 2
-guid: 9ccfaceb29405c1478dcb6d9ba59c6c6
+guid: 9ac5f80c84907234e9201ffc503a6386
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Shotgun.001
+    2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder.000
-  externalObjects: {}
+    4300000: Icosphere
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 92aec490c8597084b8ada8803a6afd93, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

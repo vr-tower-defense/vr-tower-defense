@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class BaseTower : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class BaseTower : MonoBehaviour
 
     [HideInInspector]
     public TowerState CurrentState;
-    
+
     [HideInInspector]
     public TowerState[] TowerStates;
 
@@ -30,8 +31,8 @@ public class BaseTower : MonoBehaviour
     [Tooltip("The layers that should be considered when checking for collisions")]
     public Layers DetectionLayerMask = Layers.Enemies;
 
-    [Tooltip("The range in meter which used to check for collisions")]
-    public float Range = .25f;
+    [Tooltip("The range in meters which is used to check for collisions")]
+    public float Range = .5f;
 
     [HideInInspector]
     public Collider[] TargetsInRange { get; private set; } = new Collider[0];
@@ -64,8 +65,18 @@ public class BaseTower : MonoBehaviour
         TargetsInRange = Physics.OverlapSphere(
             transform.position,
             Range,
-            (int) DetectionLayerMask
+            (int)DetectionLayerMask
         );
+
+        if (TargetsInRange.Length < 1 && CurrentState == ActiveState)
+        {
+            CurrentState.SetTowerState(IdleState);
+        }
+
+        if (TargetsInRange.Length > 0 && CurrentState == IdleState)
+        {
+            CurrentState.SetTowerState(ActiveState);
+        }
     }
 
     /// <summary>
