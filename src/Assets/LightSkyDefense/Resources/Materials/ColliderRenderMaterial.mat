@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ColliderRenderMat
+  m_Name: ColliderRenderMaterial
   m_Shader: {fileID: 4800000, guid: ec3643a38cc14dc4aac61eacd3153926, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
