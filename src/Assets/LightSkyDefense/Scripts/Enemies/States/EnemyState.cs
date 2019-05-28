@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour
@@ -25,6 +26,7 @@ public class EnemyState : MonoBehaviour
         {
             state.enabled = false;
         }
+
         enemyState.enabled = true;
 
         Enemy.CurrentState = enemyState;

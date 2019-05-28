@@ -8,7 +8,7 @@ public class ShootState : EnemyState
     public float LoadUpTime = 5;
 
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(Shoot(ShootInterval));
     }

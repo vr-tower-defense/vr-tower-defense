@@ -133,6 +133,7 @@ MonoBehaviour:
   ShootState: {fileID: 7578898661776837359}
   InitialState: {fileID: 3987967371124779197}
   CurrentState: {fileID: 0}
+  EnemyStates: []
   EnergyCapacity: 40
   CollisionDamage: 35
   PointValue: 10
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4381a5b7ab0e264aa5c948709086170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootRange: 0.5
 --- !u!114 &7578898661776837359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,11 +206,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715808640459732906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 604473756de6873478f282544027a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootRange: 0.5
   Projectile: {fileID: 4098851781701205185, guid: b3b9826145dabd34d9c5f369de7939be,
     type: 3}
   ShootInterval: 6
@@ -358,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7183339785698280360}
   - component: {fileID: 906520368861267260}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: EnemyGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
