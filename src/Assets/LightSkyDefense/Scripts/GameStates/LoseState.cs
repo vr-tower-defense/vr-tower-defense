@@ -10,7 +10,7 @@ class LoseState : GameState
         if (camera == null)
             return;
 
-        GameObject gameOverPrefab = (GameObject)Resources.Load("GameOverText", typeof(GameObject));
+        GameObject gameOverPrefab = (GameObject)Resources.Load("Text/GameOverText", typeof(GameObject));
 
         var gameOverScreen = Instantiate(
             gameOverPrefab,
