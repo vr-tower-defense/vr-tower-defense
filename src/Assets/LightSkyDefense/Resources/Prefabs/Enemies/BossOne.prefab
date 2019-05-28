@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 24193491518195256}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BossOne
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 1741101280247566027}
   - component: {fileID: 7101127853269033708}
   - component: {fileID: 7353935691735839631}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BigEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604473756de6873478f282544027a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 710606204343009343, guid: 1133934e87f169147ba130f0b4361719,
+    type: 3}
   ShootInterval: 4
   LoadUpTime: 3
 --- !u!114 &877364528508019235
@@ -213,8 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90720bde2c1c3f9458b6f2ba0d8d6e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Credit: {fileID: 0}
-  Value: 0
+  Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
+  Value: 50
 --- !u!136 &7101127853269033708
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ GameObject:
   - component: {fileID: 3608230979192266118}
   - component: {fileID: 3608230979193593254}
   - component: {fileID: 3608230979194691430}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7377605398031671120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MissileSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
