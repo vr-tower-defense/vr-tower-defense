@@ -865,6 +865,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1233241760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6525375265295226052, guid: 98646ba0344f5cf4e884609d4030a879,
+    type: 3}
+  m_PrefabInstance: {fileID: 295409933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1251646214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91842cb940430a48adc1e9ecd1d9525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Subscribers: []
+  Subscribers:
+  - {fileID: 1233241760}
   InitialLives: 5
   InitialFunds: 20
 --- !u!4 &1620514274 stripped
