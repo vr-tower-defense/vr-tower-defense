@@ -54,7 +54,7 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnPressUp(SteamVR_Action_Vector2 action)
     {
-        if (_playerStatistics.UpdateFunds(Cost) == false)
+        if (_preview == null)
         {
             return;
         }
