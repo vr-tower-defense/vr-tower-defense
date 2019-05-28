@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 
 public class CurrentCreditsDisplay : MonoBehaviour
 {
-
     [Tooltip("Credit text prefab")]
     public GameObject CurrentCreditText;
 
@@ -16,8 +15,9 @@ public class CurrentCreditsDisplay : MonoBehaviour
         var costMesh = CurrentCreditText.GetComponent<TextMesh>();
         costMesh.text = "Currency:";
 
-        var offset = gameObject.transform.position + new Vector3(0, 0, -0.2f);
-        _textMesh = Instantiate(CurrentCreditText, offset, gameObject.transform.rotation);
+        _textMesh = Instantiate(CurrentCreditText,
+            gameObject.transform.position + new Vector3(0, 0, -0.2f), // Small offset towards wrist
+            gameObject.transform.rotation);
     }
 
     void Update()
