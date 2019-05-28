@@ -7,7 +7,6 @@ public class IdleState : EnemyState
 {
     public float ShootRange = 0.5f;
 
-    private List<Collider> _objectsInRange;
     private bool _running = false;
 
     // Start is called before the first frame update
@@ -24,20 +23,7 @@ public class IdleState : EnemyState
         _running = true;
         while (_running)
         {
-            _objectsInRange = Physics.OverlapSphere(transform.position, radius).ToList();
-
-            for (var i = 0; i < _objectsInRange.Count; i++)
-            {
-                if (_objectsInRange[i].GetComponent<BaseTower>() != null &&
-                    !Enemy.TowersInRange.Contains(_objectsInRange[i]))
-                    Enemy.TowersInRange.Add(_objectsInRange[i]);
-            }
-
-            for (var j = 0; j < Enemy.TowersInRange.Count; j++)
-            {
-                if (!_objectsInRange.Contains(Enemy.TowersInRange[j]))
-                    Enemy.TowersInRange.Remove(Enemy.TowersInRange[j]);
-            }
+            Enemy.TowersInRange = new List<Collider>(Physics.OverlapSphere(transform.position, radius, (int)Layers.Towers));
 
             if (Enemy.CurrentState != null)
             {
@@ -51,6 +37,7 @@ public class IdleState : EnemyState
                     Enemy.CurrentState.SetEnemyState(Enemy.IdleState);
                 }
             }
+            
             yield return new WaitForSeconds(1/90f);
         }
         _running = false;

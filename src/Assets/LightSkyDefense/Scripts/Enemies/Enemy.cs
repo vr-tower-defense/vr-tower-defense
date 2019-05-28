@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
 
-    public List<Collider> TowersInRange { get; } = new List<Collider>();
+    public List<Collider> TowersInRange { get; set; } = new List<Collider>();
 
     private ParticleSystem _teleportEffectInstance = null;
 
