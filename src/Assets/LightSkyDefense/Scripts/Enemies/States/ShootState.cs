@@ -31,6 +31,9 @@ public class ShootState : EnemyState
 
     private void ShootAtTower()
     {
+        if (Enemy.TowersInRange.Count <= 0)
+            return;
+
         var rand = Random.Range(0, Enemy.TowersInRange.Count);
         var tower = Enemy.TowersInRange[rand];
         var target = tower.transform.position;
