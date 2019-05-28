@@ -23,8 +23,6 @@ public class Enemy : MonoBehaviour
 
     private ParticleSystem _teleportEffectInstance = null;
 
-    private Vector3[] _pathPoints;
-
     private float _energyCharge = 0;
     private float _potentialEnergy = 1f;
     private readonly float _potentialEnergyRange = 0.8f;
@@ -38,10 +36,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         _energyCharge = EnergyCapacity;
-        _pathPoints = GameManager.Instance.Path.PathPoints;
-
         Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
+        Rigidbody.position = Path.Instance[PathFollower.PathPointIndex];
     }
 
     private void FixedUpdate()
@@ -148,7 +144,7 @@ public class Enemy : MonoBehaviour
 
         var foundIndex = int.Parse(collider.gameObject.name.Substring(3));
 
-        if (foundIndex == (_pathPoints.Length - 2))
+        if (foundIndex == (Path.Instance.PointCount - 2))
         {
             Finish();
         }
@@ -164,8 +160,13 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void EnergyBehaviour()
     {
+        var distanceFromPath = Vector3.Distance(
+            transform.position,
+            Path.Instance[PathFollower.PathPointIndex]
+        );
+
         // Calculate energy potential
-        _potentialEnergy = _potentialEnergyRange - Vector3.Distance(transform.position, _pathPoints[PathFollower.PathPointIndex]);
+        _potentialEnergy = _potentialEnergyRange - distanceFromPath;
 
         if (_potentialEnergy >= 0)
         {

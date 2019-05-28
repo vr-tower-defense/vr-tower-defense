@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RenderableColliders : MonoBehaviour
 {
-    private Collider[] _colliders;
+    public Material ColliderMaterial;
 
     private static Mesh _cubeMesh;
     private Mesh CubeMesh
@@ -17,8 +17,10 @@ public class RenderableColliders : MonoBehaviour
                 _cubeMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
+
             return _cubeMesh;
         }
+
         set => _cubeMesh = value;
     }
 
@@ -33,8 +35,10 @@ public class RenderableColliders : MonoBehaviour
                 _sphereMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
+
             return _sphereMesh;
         }
+
         set => _sphereMesh = value;
     }
 
@@ -49,53 +53,64 @@ public class RenderableColliders : MonoBehaviour
                 _capsuleMesh = primativeObject.GetComponent<MeshFilter>().sharedMesh;
                 Destroy(primativeObject);
             }
+
             return _capsuleMesh;
         }
+
         set => _capsuleMesh = value;
     }
 
-    private static Material _colliderMat;
-    public static Material ColliderMat
-    {
-        get
-        {
-            return _colliderMat ?? (_colliderMat = Resources.Load<Material>("Materials/ColliderRenderMat"));
-        }
-        set => _colliderMat = value;
-    }
-  
     void Start()
     {
-        _colliders = GetComponentsInChildren<Collider>();
-
-        foreach(Collider collider in _colliders)
+        foreach (var collider in GetComponentsInChildren<Collider>())
         {
             var meshGameObject = new GameObject(collider.ToString());
 
             var meshFilter = meshGameObject.AddComponent<MeshFilter>();
             var meshRenderer = meshGameObject.AddComponent<MeshRenderer>();
 
-            meshRenderer.material = ColliderMat;
+            meshRenderer.material = ColliderMaterial;
 
-            switch(collider)
+            switch (collider)
             {
                 case MeshCollider meshCollider:
                     meshFilter.mesh = meshCollider.sharedMesh;
                     meshGameObject.transform.localScale = collider.transform.localScale;
+
                     break;
+
                 case BoxCollider boxCollider:
                     meshFilter.mesh = CubeMesh;
                     meshGameObject.transform.localScale = boxCollider.size;
+
                     break;
+
                 case SphereCollider sphereCollider:
                     meshFilter.mesh = SphereMesh;
-                    var largestLocalScaleComponent = Mathf.Max(Mathf.Max(transform.localScale.x, transform.localScale.y), transform.localScale.z);
+
+                    var largestLocalScaleComponent = Mathf.Max(
+                        Mathf.Max(transform.localScale.x, transform.localScale.y),
+                        transform.localScale.z
+                    );
+
                     var worldSpaceScale = sphereCollider.radius * 2 * largestLocalScaleComponent;
-                    meshGameObject.transform.localScale = new Vector3(worldSpaceScale / transform.localScale.x, worldSpaceScale / transform.localScale.y, worldSpaceScale / transform.localScale.z);
+
+                    meshGameObject.transform.localScale = new Vector3(
+                        worldSpaceScale / transform.localScale.x,
+                        worldSpaceScale / transform.localScale.y,
+                        worldSpaceScale / transform.localScale.z
+                    );
+
                     break;
+
                 case CapsuleCollider capsuleCollider:
                     meshFilter.mesh = CapsuleMesh;
-                    meshGameObject.transform.localScale = new Vector3(capsuleCollider.radius * 2, capsuleCollider.height / 2, capsuleCollider.radius * 2);
+                    meshGameObject.transform.localScale = new Vector3(
+                        capsuleCollider.radius * 2,
+                        capsuleCollider.height / 2,
+                        capsuleCollider.radius * 2
+                    );
+
                     break;
             }
 

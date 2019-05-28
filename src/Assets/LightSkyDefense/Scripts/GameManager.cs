@@ -1,46 +1,63 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
 {
+    #region singleton
+
+    // Reference to path
+    private static GameManager _gameManager;
+
+    // GameManager singleton
+    [HideInInspector]
+    public static GameManager Instance => _gameManager ?? (_gameManager = FindObjectOfType<GameManager>());
+
+    #endregion
+
     /// <summary>
     /// Boolean indicating whether the application is about to quit
     /// </summary>
+    [HideInInspector]
     public static bool IsQuitting { get; private set; } = false;
 
+    #region game states
+
     [HideInInspector]
-    public GameObject WayPointPrefab;
+    public GameState[] GameStates;
 
-    private static bool _initializing = false;
+    [HideInInspector]
+    public GameState CurrentState;
 
-    private MonoBehaviour _gameState { get; set; }
+    /// <summary>
+    /// The first game state that is added to the game managers' game object
+    /// </summary>
+    public GameState InitialState;
+    public GameState LoseState;
 
-    private Path _path;
-    public Path Path
-    {
-        get => _path ?? (_path = FindObjectOfType<Path>());
-    }
-
-    private static GameManager _instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                Initialize();
-            }
-
-            return _instance;
-        }
-    }
+    #endregion
 
     #region lifecyle functions
 
     /// <summary>
-    /// Invoked when the application is about to quit. We set 
+    /// Initialze the game state
+    /// </summary>
+    public void Awake()
+    {
+        // Save intial state reference to current state field
+        CurrentState = InitialState;
+        GameStates = GetComponents<GameState>();
+
+        // Disable all states and enable the current state
+        foreach (var state in GameStates)
+        {
+            state.enabled = false;
+        }
+
+        CurrentState.enabled = true;
+    }
+
+    /// <summary>
+    /// Invoked when the application is about to quit. We set
     /// the IsQuitting variable to true, to avoid missing references errors in OnDestroy methods.
     /// </summary>
     private void OnApplicationQuit()
@@ -50,57 +67,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public static void Initialize()
-    {
-        if (_instance != null || _initializing)
-        {
-            return;
-        }
-
-        _initializing = true;
-
-        //todo if player doesn't exist, create new gameobject Player?
-        var instance = FindObjectOfType<GameManager>() ?? GameObject.Find("Player").AddComponent<GameManager>();
-
-        instance.WayPointPrefab = Resources.Load<GameObject>("Prefabs/PathWayPoint");
-
-        _instance = instance;
-        _initializing = false;
-    }
-
-
     /// <summary>
-    /// Used to pause the game
+    /// Sets game state to LoseState
     /// </summary>
-    public void Pause()
-    {
-        _gameState.enabled = false;
-    }
-
-    /// <summary>
-    /// Used to resume the game
-    /// </summary>
-    public void Resume()
-    {
-        _gameState.enabled = true;
-    }
-
-    /// <summary>
-    /// Used to switch between game states
-    /// </summary>
-    /// <param name="gameState"></param>
-    public void SetGameState(Type gameState)
-    {
-        // Remove old game state
-        Destroy(_gameState);
-
-        // Create new game state
-        _gameState = (GameState)gameObject.AddComponent(gameState);
-    }
-
     public void OnGameLose()
     {
-        SetGameState(typeof(LoseState));
+        CurrentState.SetGameState(LoseState);
     }
 }
 

@@ -14,8 +14,8 @@ public class EnemySteeringBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        var targetPosition = 
-            _enemy.PathFollower.transform.position + _enemy.PathFollower.offsetTranslation;
+        var targetPosition =
+            _enemy.PathFollower.transform.position + _enemy.PathFollower.OffsetTranslation;
 
         var steeringForce = Arrive.Calculate(
             transform.position,

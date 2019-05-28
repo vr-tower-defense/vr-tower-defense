@@ -8,6 +8,9 @@ public class Path : MonoBehaviour
     [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
+    [Tooltip("Object that is used as waypoints along the path")]
+    public GameObject WayPoint;
+
     [Tooltip("Smootheness of rendered line")]
     public int LineDivision = 100;
 
@@ -15,15 +18,44 @@ public class Path : MonoBehaviour
     public int PathPointDivider = 1;
 
     [HideInInspector]
-    public Vector3[] PathPoints;
+    public Vector3[] _points;
+
+    // Reference to path
+    private static Path _path;
+
+    // Path singleton
+    [HideInInspector]
+    public static Path Instance => _path ?? (_path = FindObjectOfType<Path>());
+
+    /// <summary>
+    /// Array operator overloading to path
+    ///
+    /// Path.Instance[0] <- returns first point in path
+    /// </summary>
+    public Vector3 this[int i]
+    {
+        get
+        {
+            if (_points.Length > 0)
+            {
+                return _points[i];
+            }
+
+            return Vector3.zero;
+        }
+    }
+
+    /// <summary>
+    /// Returns the amount of points in the path
+    /// </summary>
+    public int PointCount => _points.Length;
 
     void Start()
     {
         // Get the path points, convert the coordinates to world space and spawn WayPointPrefab in the world
-
         var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
 
-        PathPoints = new Vector3[pathVectors.Length / PathPointDivider];
+        _points = new Vector3[pathVectors.Length / PathPointDivider];
 
         GameObject point = null;
 
@@ -32,14 +64,14 @@ public class Path : MonoBehaviour
             var transformedPoint = transform.TransformPoint(pathVectors[i * PathPointDivider]);
 
             point = Instantiate(
-                GameManager.Instance.WayPointPrefab,
+                WayPoint,
                 transformedPoint,
                 Quaternion.identity,
                 transform
             );
             point.name = "Way" + i;
 
-            PathPoints[i] = transformedPoint;
+            _points[i] = transformedPoint;
         }
 
         point.transform.localScale *= 5;

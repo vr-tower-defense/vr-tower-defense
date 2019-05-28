@@ -2,35 +2,15 @@
 
 class WavesEndState : GameState
 {
-    int _leftOverEnemies;
+    public GameState WinState;
 
-    private void Start()
+    private void FixedUpdate()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach (GameObject enemy in enemies)
+        if (enemies.Length < 1)
         {
-            _leftOverEnemies++;
-            enemy.AddComponent<EnemyDestroyDispatcher>();
+            SetGameState(WinState);
         }
-    }
-
-    /// <summary>
-    /// Gets called when an Enemy is destroyed in this gameState 
-    /// </summary>
-    public void CheckAllEnemiesDestroyed()
-    {
-        _leftOverEnemies--;
-
-        if (_leftOverEnemies != 0)
-            return;
-
-        // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType<GameObject>())
-        {
-            go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
-        }
-
-        _gameManager.SetGameState(typeof(WinState));
     }
 }

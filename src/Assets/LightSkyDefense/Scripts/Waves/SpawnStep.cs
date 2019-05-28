@@ -10,7 +10,7 @@ public class SpawnStep : WaveStep
     {
         yield return Instantiate(
             Enemy,
-            GameManager.Instance.Path.PathPoints[0],
+            Path.Instance[0],
             Quaternion.identity
         );
     }
