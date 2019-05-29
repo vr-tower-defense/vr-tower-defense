@@ -22,7 +22,7 @@ public class CurrentCreditsDisplay : MonoBehaviour
             gameObject.transform
         );
 
-        _textMesh = prefabInstance.GetComponent<TextMesh>();
+        _textMesh = prefabInstance.GetComponentInChildren<TextMesh>();
     }
 
     void OnPlayerStatisticsUpdate(PlayerStatistics playerStatistics)

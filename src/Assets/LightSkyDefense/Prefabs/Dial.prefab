@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504230871247721510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.05}
+  m_LocalPosition: {x: 0, y: 0.025, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,12 +50,13 @@ MonoBehaviour:
   DialClickAction:
     actionPath: /actions/default/in/DialClick
     needsReinit: 0
-  DialRotationOffset: 90
-  DialOptionRadius: 0.1
+  DialRotationOffset: 0
+  DialOptionRadius: 0.05
   DialOptions:
   - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
   - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
   - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
+  DialOptionInstances: []
 --- !u!114 &4319183537671922878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,4 +71,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CreditTextPrefab: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
     type: 3}
-  CreditsDialOffset: {x: 0, y: 0, z: -0.175}
+  CreditsDialOffset: {x: 0, y: 0, z: 0.175}
