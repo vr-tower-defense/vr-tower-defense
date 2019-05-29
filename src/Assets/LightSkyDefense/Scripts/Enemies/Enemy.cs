@@ -68,7 +68,11 @@ public class Enemy : MonoBehaviour
         _pathPoints = GameManager.Instance.Path.PathPoints;
 
         Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
+
+        if(Rigidbody.position == new Vector3(0, 0, 0))
+        {
+            Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
+        }
 
         // Save intial state reference to current state field
         CurrentState = InitialState;

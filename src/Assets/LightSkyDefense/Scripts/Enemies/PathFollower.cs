@@ -21,12 +21,20 @@ public class PathFollower : MonoBehaviour
         transform.parent = null;
 
         transform.position = _path.PathPoints[0];
-        offsetTranslation = new Vector3(Random.Range(-_pathThickness, _pathThickness), Random.Range(-_pathThickness, _pathThickness), Random.Range(-_pathThickness, _pathThickness));
+        offsetTranslation = new Vector3(Random.Range(
+            -_pathThickness, _pathThickness), 
+            Random.Range(-_pathThickness, _pathThickness), 
+            Random.Range(-_pathThickness, _pathThickness)
+        );
     }
 
     void FixedUpdate()
     {
-        var newPosition = Vector3.MoveTowards(transform.position, _path.PathPoints[PathPointIndex], 0.002f);
+        var newPosition = Vector3.MoveTowards(
+            transform.position,
+            _path.PathPoints[PathPointIndex],
+            0.002f
+        );
 
         PreviousPosition = transform.position;
         transform.position = newPosition;
