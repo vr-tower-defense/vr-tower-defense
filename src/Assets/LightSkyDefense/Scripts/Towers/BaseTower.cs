@@ -11,6 +11,7 @@ public class BaseTower : MonoBehaviour
     public TowerState ActiveState;
     public TowerState CelebrationState;
     public TowerState CondemnState;
+    public JamState JamState;
 
     [Header("Setup")]
     [Tooltip("The first state that is applied to the enemy")]
@@ -94,6 +95,21 @@ public class BaseTower : MonoBehaviour
         CurrentState.SetTowerState(CondemnState);
     }
 
+    /// <summary>
+    /// Update the tower state when the tower gets hit by a jammer
+    /// </summary>
+    public void OnJam(float jamTime)
+    {
+        JamState.JamTime = jamTime;
+        CurrentState.SetTowerState(JamState);
+    }
+    /// <summary>
+    /// Invoked by Damageable when the tower hits 0 hp
+    /// </summary>
+    public void OnDie()
+    {
+        Destroy(gameObject);
+    }
     /// <summary>
     /// Invoked by Deletable when the player holds down the trigger
     /// </summary>
