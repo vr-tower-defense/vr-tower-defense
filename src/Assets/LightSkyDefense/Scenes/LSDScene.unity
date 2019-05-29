@@ -606,7 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameStates: []
   CurrentState: {fileID: 0}
-  InitialState: {fileID: 1274171494}
+  InitialState: {fileID: 1274171500}
   LoseState: {fileID: 1274171498}
 --- !u!4 &1274171496
 Transform:
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WinState: {fileID: 1274171497}
+  CheckInterval: 1
 --- !u!114 &1274171500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac587446183a8934db66ac17a407c159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 4986396300896956474, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
+  Enemy: {fileID: 4986396300896956474, guid: 790defe641dc86e44a1a00a1546f64a5, type: 3}
 --- !u!114 &1457053392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2241259548283897855, guid: dc06161b6d97feb419f45f03b62e14b9,
