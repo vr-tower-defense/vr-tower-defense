@@ -49,6 +49,9 @@ MonoBehaviour:
   TargetMesh: {fileID: 2201546626989572107}
   IsSelected: 0
   Preview: {fileID: 1529337563571085310, guid: 25fb36786f01e9d458225409fbc32b46, type: 3}
+  Cost: 20
+  DialCostText: {fileID: 1145892129914187409, guid: 7bc9c30ea7e5a324c976e09b29c9bafb,
+    type: 3}
 --- !u!1001 &2201546626987677803
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -112,6 +112,76 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &219976324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 219976327}
+  - component: {fileID: 219976326}
+  - component: {fileID: 219976325}
+  m_Layer: 0
+  m_Name: Dial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &219976325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219976324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentCreditText: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
+    type: 3}
+--- !u!114 &219976326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219976324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7c0bb85aeacf34bbbbc082f18f775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialAction:
+    actionPath: /actions/default/in/Dial
+    needsReinit: 0
+  DialClickAction:
+    actionPath: /actions/default/in/DialClick
+    needsReinit: 0
+  DialRotationOffset: 90
+  DialOptionRadius: 0.1
+  DialOptions:
+  - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
+  - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
+  - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
+--- !u!4 &219976327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219976324}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 1, z: -0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &295409933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,6 +271,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98646ba0344f5cf4e884609d4030a879, type: 3}
+--- !u!1 &758815655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2241259548283897849, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620514271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781720500
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,12 +1025,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1620514271}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1620514275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2241259548283897849, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1620514271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1620514276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,7 +1056,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620514275}
+  m_GameObject: {fileID: 758815655}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
