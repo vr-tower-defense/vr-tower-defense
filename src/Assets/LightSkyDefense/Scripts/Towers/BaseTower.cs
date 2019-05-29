@@ -103,6 +103,13 @@ public class BaseTower : MonoBehaviour
         JamState.JamTime = jamTime;
         CurrentState.SetTowerState(JamState);
     }
+    
+    /// Invoked by Deletable when the player holds down the trigger
+    /// </summary>
+    public void OnDelete()
+    {
+        Destroy(gameObject);
+    }
 
     #region debugging
 
