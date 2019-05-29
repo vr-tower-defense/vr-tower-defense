@@ -15,7 +15,7 @@ public class ShootState : EnemyState
 
     private void OnDisable()
     {
-        StopCoroutine(Shoot(ShootInterval));
+        StopAllCoroutines();
     }
 
     private IEnumerator Shoot(float interval)
