@@ -8,13 +8,18 @@ public class CurrentCreditsDisplay : MonoBehaviour
     [Tooltip("Credit text prefab")]
     public GameObject CreditTextPrefab;
 
+    [Tooltip("Small offset towards wrist, from middle of dial")]
+    public float CreditsDialOffset = -0.2f;
+
     private GameObject _creditsText;
 
     void Start()
     {
-        _creditsText = Instantiate(CreditTextPrefab,
-            gameObject.transform.position + new Vector3(0, 0, -0.2f), // Small offset towards wrist
-            gameObject.transform.rotation);
+        _creditsText = Instantiate(
+            CreditTextPrefab,
+            gameObject.transform.position + new Vector3(0, 0, CreditsDialOffset),
+            gameObject.transform.rotation
+        );
     }
 
     void Update()
