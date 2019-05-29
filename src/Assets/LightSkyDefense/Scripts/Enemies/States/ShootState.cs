@@ -35,8 +35,7 @@ public class ShootState : EnemyState
             return;
 
         var rand = Random.Range(0, Enemy.TowersInRange.Count);
-        var tower = Enemy.TowersInRange[rand];
-        var target = tower.transform.position;
+        var target = Enemy.TowersInRange[rand].transform.position;
 
         var newProjectile = Instantiate(
             Projectile,
