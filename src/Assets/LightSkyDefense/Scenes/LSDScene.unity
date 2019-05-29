@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -586,7 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abf5df2234414742a8dd3bba1292ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   Waves:
   - {fileID: 11400000, guid: 54535abfca567a9498748e0d5ab42add, type: 2}
   - {fileID: 11400000, guid: 54535abfca567a9498748e0d5ab42add, type: 2}
@@ -607,7 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameStates: []
   CurrentState: {fileID: 0}
-  InitialState: {fileID: 1274171500}
+  InitialState: {fileID: 1274171494}
   LoseState: {fileID: 1274171498}
 --- !u!4 &1274171496
 Transform:
@@ -635,7 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabc55b12e2d5014ebfd9efa8c6dd70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   Prefab: {fileID: 7349925014777929286, guid: 6d25848b04d949646ada977840767c7a, type: 3}
   Offset: {x: 0, y: 0, z: 1.5}
 --- !u!114 &1274171498
@@ -650,7 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7e6e81544387b49a35a6d4c5243045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   Prefab: {fileID: 19609544620317030, guid: d242757dd10afd443a3448f94c3e8232, type: 3}
   Offset: {x: 0, y: 0, z: 1.5}
 --- !u!114 &1274171499
@@ -665,7 +662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b1fdd85516945448363300c2e3d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   WinState: {fileID: 1274171497}
 --- !u!114 &1274171500
 MonoBehaviour:
@@ -679,8 +675,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac587446183a8934db66ac17a407c159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
   Enemy: {fileID: 4986396300896956474, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
+--- !u!114 &1457053392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2241259548283897855, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620514271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7c0bb85aeacf34bbbbc082f18f775c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1620514271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,6 +763,11 @@ PrefabInstance:
       propertyPath: Subscribers.Array.data[0]
       value: 
       objectReference: {fileID: 1233241760}
+    - target: {fileID: 6323601231596261319, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: Dial
+      value: 
+      objectReference: {fileID: 1457053392}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
 --- !u!1 &1841069982
