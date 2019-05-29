@@ -32,10 +32,10 @@ public class ShootState : EnemyState
 
     private void ShootAtTower()
     {
-        if (Enemy.TowersInRange.Count <= 0)
+        if (Enemy.TowersInRange.Length <= 0)
             return;
 
-        var rand = Random.Range(0, Enemy.TowersInRange.Count);
+        var rand = Random.Range(0, Enemy.TowersInRange.Length);
         var target = Enemy.TowersInRange[rand].transform.position;
 
         var newProjectile = Instantiate(

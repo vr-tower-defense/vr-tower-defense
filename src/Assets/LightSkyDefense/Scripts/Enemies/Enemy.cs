@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     #region states
 
+    public float ShootRange = 0.5f;
+
     [Header("States")]
     public EnemyState IdleState;
 
@@ -44,7 +46,7 @@ public class Enemy : MonoBehaviour
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
 
-    public List<Collider> TowersInRange { get; set; } = new List<Collider>();
+    public Collider[] TowersInRange { get; private set; } = new Collider[0];
 
     private ParticleSystem _teleportEffectInstance = null;
 
@@ -84,6 +86,17 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         EnergyBehaviour();
+
+        TowersInRange = Physics.OverlapSphere(transform.position, ShootRange, (int)Layers.Towers);
+
+        if (TowersInRange.Length >= 1 && CurrentState == IdleState)
+        {
+            CurrentState.SetEnemyState(ShootState);
+        }
+        else if ( CurrentState == ShootState)
+        {
+            CurrentState.SetEnemyState(IdleState);
+        }
     }
 
     /// <summary>
