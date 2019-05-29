@@ -19,7 +19,7 @@ public class EnemyAoEHeal : MonoBehaviour
 
     private static void HealEnemies(Vector3 center, float radius, float amount)
     {
-        var enemiesInRange = Physics.OverlapSphere(center, radius);
+        var enemiesInRange = Physics.OverlapSphere(center, radius, (int)Layers.Enemies);
 
         foreach (Collider enemy in enemiesInRange)
         {
