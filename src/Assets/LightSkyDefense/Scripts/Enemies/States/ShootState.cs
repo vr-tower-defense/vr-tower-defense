@@ -7,15 +7,16 @@ public class ShootState : EnemyState
     public float ShootInterval = 6;
     public float LoadUpTime = 5;
 
+    private Coroutine _coroutine;
     // Start is called before the first frame update
     private void OnEnable()
     {
-        StartCoroutine(Shoot(ShootInterval));
+        _coroutine = StartCoroutine(Shoot(ShootInterval));
     }
 
     private void OnDisable()
     {
-        StopCoroutine(Shoot(ShootInterval));
+        StopCoroutine(_coroutine);
     }
 
     private IEnumerator Shoot(float interval)
@@ -31,9 +32,11 @@ public class ShootState : EnemyState
 
     private void ShootAtTower()
     {
-        var rand = Random.Range(0, Enemy.TowersInRange.Count);
-        var tower = Enemy.TowersInRange[rand];
-        var target = tower.transform.position;
+        if (Enemy.TowersInRange.Length <= 0)
+            return;
+
+        var rand = Random.Range(0, Enemy.TowersInRange.Length);
+        var target = Enemy.TowersInRange[rand].transform.position;
 
         var newProjectile = Instantiate(
             Projectile,

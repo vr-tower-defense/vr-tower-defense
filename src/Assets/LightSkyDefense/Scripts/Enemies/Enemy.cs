@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     #region states
 
+    public float ShootRange = 0.5f;
+
     [Header("States")]
     public EnemyState IdleState;
 
@@ -44,13 +46,11 @@ public class Enemy : MonoBehaviour
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
 
-    public List<Collider> TowersInRange { get; } = new List<Collider>();
+    public Collider[] TowersInRange { get; private set; } = new Collider[0];
 
     private ParticleSystem _teleportEffectInstance = null;
 
     private Vector3[] _pathPoints;
-
-    private Scoreboard _scoreboard;
 
     private float _energyCharge = 0;
     private float _potentialEnergy = 1f;
@@ -66,7 +66,6 @@ public class Enemy : MonoBehaviour
     {
         _energyCharge = EnergyCapacity;
         _pathPoints = GameManager.Instance.Path.PathPoints;
-        _scoreboard = GameObject.Find("Scoreboard").GetComponent<Scoreboard>();
 
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
@@ -87,6 +86,17 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         EnergyBehaviour();
+
+        TowersInRange = Physics.OverlapSphere(transform.position, ShootRange, (int)Layers.Towers);
+
+        if (TowersInRange.Length >= 1 && CurrentState == IdleState)
+        {
+            CurrentState.SetEnemyState(ShootState);
+        }
+        if (TowersInRange.Length <= 0 &&  CurrentState == ShootState)
+        {
+            CurrentState.SetEnemyState(IdleState);
+        }
     }
 
     /// <summary>
@@ -139,8 +149,6 @@ public class Enemy : MonoBehaviour
             explodeEffectInstance.gameObject,
             explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
-
-        _scoreboard.SendMessage("PointGain", PointValue, SendMessageOptions.RequireReceiver);
     }
 
     /// <summary>
