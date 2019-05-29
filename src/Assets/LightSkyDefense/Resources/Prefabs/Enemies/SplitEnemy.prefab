@@ -37,6 +37,36 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 239233248778471490, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 239233248778471490, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: m_Direction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: m_Height
+      value: 0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 8759947185552773464, guid: 440eeb7143a551e499de86e326a320c3,
+        type: 3}
+      propertyPath: Value
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7810914671229116411, guid: 440eeb7143a551e499de86e326a320c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -106,26 +136,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
-        type: 3}
-      propertyPath: m_Direction
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0.007
-      objectReference: {fileID: 0}
-    - target: {fileID: 3680871987011421582, guid: 440eeb7143a551e499de86e326a320c3,
-        type: 3}
-      propertyPath: m_Height
-      value: 0.031
-      objectReference: {fileID: 0}
-    - target: {fileID: 8759947185552773464, guid: 440eeb7143a551e499de86e326a320c3,
-        type: 3}
-      propertyPath: Value
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440eeb7143a551e499de86e326a320c3, type: 3}

@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootRange: 0.5
   IdleState: {fileID: 5874685391786350411}
   ShootState: {fileID: 5874685391786350411}
   InitialState: {fileID: 5874685391786350411}
@@ -154,8 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
-  InitialHealth: 1
+  MaxHealth: 0.4
+  InitialHealth: 0.4
 --- !u!114 &9030962081397487450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,4 +196,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4381a5b7ab0e264aa5c948709086170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootRange: 0.5
