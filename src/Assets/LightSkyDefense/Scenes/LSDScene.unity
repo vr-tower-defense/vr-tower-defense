@@ -947,6 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Subscribers:
   - {fileID: 1233241760}
+  - {fileID: 758815655}
   InitialLives: 5
   InitialFunds: 20
 --- !u!4 &1620514274 stripped
@@ -992,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentCreditText: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
+  CreditTextPrefab: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
     type: 3}
 --- !u!43 &1791110683
 Mesh:

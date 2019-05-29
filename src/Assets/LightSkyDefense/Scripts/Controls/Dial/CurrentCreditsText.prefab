@@ -77,7 +77,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4842219207135686761}
-  m_Text: 'Currency:'
+  m_Text: 'Currency:
+
+'
   m_OffsetZ: 0
   m_CharacterSize: 0.002
   m_LineSpacing: 1
