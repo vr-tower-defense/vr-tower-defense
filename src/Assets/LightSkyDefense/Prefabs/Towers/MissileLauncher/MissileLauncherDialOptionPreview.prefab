@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5889446234684480002}
   - component: {fileID: 5885393046664702789}
   - component: {fileID: 7267823276558648787}
+  - component: {fileID: 415456668932566361}
   m_Layer: 11
   m_Name: MissileLauncherDialOptionPreview
   m_TagString: Untagged
@@ -58,6 +59,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3eaa859b84450e4f9d925607aa1ef6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &415456668932566361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311665180749323574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2143c5f95f91046aee0711944e594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Price: 1
+  Prefab: {fileID: 6626728996559669971, guid: c9dc7c728ff86fb40b69c960577f791f, type: 3}
+  InvalidPositionMaterial: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583,
+    type: 2}
+  Margin: 0.2
+  IsPositionValid: 0
 --- !u!1001 &1125578312723423588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,6 +84,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5889446234684480002}
     m_Modifications:
+    - target: {fileID: 100000, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: ebcc4fa1381d9db49ac467bb1bdafb79, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
