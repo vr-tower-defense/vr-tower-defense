@@ -3,27 +3,27 @@
 public class EnemyAoEHeal : MonoBehaviour
 {
     public float HealAmount = 0.1f;
+    public float HealRange = 0.2f;
     public float HealInterval = 3;
 
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
-        AoEHealWithInterval();
+        InvokeRepeating("HealEnemies", 0, HealInterval);
     }
 
-    private void AoEHealWithInterval()
+    private void OnDisable()
     {
-        HealEnemies(transform.position, 0.15f, HealAmount);
-        Invoke("AoEHealWithInterval", HealInterval);
+        CancelInvoke();
     }
 
-    private static void HealEnemies(Vector3 center, float radius, float amount)
+    private void HealEnemies()
     {
-        var enemiesInRange = Physics.OverlapSphere(center, radius, (int)Layers.Enemies);
+        var enemiesInRange = Physics.OverlapSphere(transform.position, HealRange, (int)Layers.Enemies);
 
         foreach (Collider enemy in enemiesInRange)
         {
-            enemy.GetComponent<Damageable>()?.SendMessage("UpdateHealth", amount);
+            enemy.GetComponent<Damageable>()?.SendMessage("UpdateHealth", HealAmount);
         }
     }
 }
