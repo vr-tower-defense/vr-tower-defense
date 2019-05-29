@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Damageable))]
 public class EnemySelfHeal : MonoBehaviour
 {
-    public float HealInterval = 10;
+    public float HealCooldown = 5;
     public float HealAmount = 0.3f;
+
+    private const float _checkTimer = 1;
 
     private Damageable _damageable;
 
@@ -23,11 +27,11 @@ public class EnemySelfHeal : MonoBehaviour
         {
             HealEnemy(HealAmount);
 
-            Invoke("HealWithInterval", 10);
+            Invoke("HealWithInterval", HealCooldown);
             return;
         }
 
-        Invoke("HealWithInterval", 1);
+        Invoke("HealWithInterval", _checkTimer);
     }
 
     private void HealEnemy(float healValue)
