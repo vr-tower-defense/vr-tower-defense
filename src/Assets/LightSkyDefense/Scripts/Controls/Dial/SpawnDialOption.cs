@@ -44,7 +44,7 @@ public class SpawnDialOption : DialOption
             Preview,
             handTransform.position,
             handTransform.rotation,
-            Player.instance.rightHand.transform
+            handTransform
         );
     }
 
@@ -58,7 +58,6 @@ public class SpawnDialOption : DialOption
             return;
         }
 
-        var handTransform = Player.instance.rightHand.transform;
         var buildable = _preview.GetComponent<Buildable>();
 
         // Destroy clone and replace with "real" instance
