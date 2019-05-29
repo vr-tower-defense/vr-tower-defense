@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1709234251134478342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 3608230979192266116}
   m_Father: {fileID: 0}
@@ -45,13 +45,13 @@ GameObject:
   - component: {fileID: 2817984741812417518}
   - component: {fileID: 719329583271892802}
   - component: {fileID: 3045806633146243423}
-  - component: {fileID: 2399488799751299972}
   - component: {fileID: 877364528508019235}
   - component: {fileID: 1741101280247566027}
+  - component: {fileID: 8527366175893448765}
   - component: {fileID: 7101127853269033708}
   - component: {fileID: 7353935691735839631}
   m_Layer: 9
-  m_Name: BigEnemy
+  m_Name: BossOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,17 +133,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IdleState: {fileID: 3045806633146243423}
-  ShootState: {fileID: 2399488799751299972}
+  ShootState: {fileID: 8527366175893448765}
   InitialState: {fileID: 3045806633146243423}
   CurrentState: {fileID: 0}
   EnemyStates: []
   EnergyCapacity: 100
   CollisionDamage: 10
   PointValue: 200
-  ExplodeEffect: {fileID: 0}
-  TeleportEffect: {fileID: 0}
-  ExplodeSound: {fileID: 0}
-  TeleportSound: {fileID: 0}
+  ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
+    type: 3}
+  TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
+    type: 3}
+  ExplodeSound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
+  TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
   ChargeSpeed: 1
   DischargeSpeed: 1
 --- !u!114 &719329583271892802
@@ -172,22 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootRange: 1.3
---- !u!114 &2399488799751299972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3608230979192684964}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604473756de6873478f282544027a338, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 710606204343009343, guid: 1133934e87f169147ba130f0b4361719,
-    type: 3}
-  ShootInterval: 4
-  LoadUpTime: 3
 --- !u!114 &877364528508019235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +202,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   Value: 50
+--- !u!114 &8527366175893448765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608230979192684964}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b373f09aa93f94b91223d6a4be2b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 710606204343009343, guid: 1133934e87f169147ba130f0b4361719,
+    type: 3}
+  ShootInterval: 4
+  LoadUpTime: 3
 --- !u!136 &7101127853269033708
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -271,14 +273,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3608230979192684966}
-  m_LocalRotation: {x: -0.0000000011437833, y: -8.994951e-11, z: -0.7085522, w: 0.70565844}
-  m_LocalPosition: {x: -0.048, y: 0.22125098, z: 0.0014137268}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0.22125098, z: -0.025}
   m_LocalScale: {x: -0.19957846, y: -2.2161305, z: -0.19947767}
   m_Children:
   - {fileID: 7377605398031671120}
   m_Father: {fileID: 3608230979192266116}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!33 &3608230979193593254
 MeshFilter:
   m_ObjectHideFlags: 0

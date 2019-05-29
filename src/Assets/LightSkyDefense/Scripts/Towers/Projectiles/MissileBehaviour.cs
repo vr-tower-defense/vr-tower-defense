@@ -42,7 +42,7 @@ public class Ejected : IMissileState
             var collider = FindClosestTarget(
                 _missile.transform.position,
                 _missile.DetectionRange,
-                Layers.Enemies
+                _missile.CollisionLayerMask
             );
 
             _target = collider?.transform;

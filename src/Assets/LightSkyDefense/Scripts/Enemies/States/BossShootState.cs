@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ShootState : EnemyState
+public class BossShootState : EnemyState
 {
     public Rigidbody Projectile;
-    public float ShootInterval = 6;
-    public float LoadUpTime = 5;
+    public float ShootInterval = 4;
+    public float LoadUpTime = 3;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -37,11 +37,10 @@ public class ShootState : EnemyState
 
         var newProjectile = Instantiate(
             Projectile,
-            transform.Find("Cylinder").Find("MissileSpawnPoint").position,
+            transform.position,
             transform.rotation
         );
-
-        //newProjectile.velocity = target - transform.position;
-        newProjectile.velocity = transform.forward * 1.25f;
+        newProjectile.SendMessage("OnEject");
+        newProjectile.velocity = target - transform.position;
     }
 }
