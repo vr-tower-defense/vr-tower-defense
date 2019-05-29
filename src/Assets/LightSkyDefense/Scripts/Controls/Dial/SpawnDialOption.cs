@@ -44,7 +44,7 @@ public class SpawnDialOption : DialOption
             Preview,
             handTransform.position,
             handTransform.rotation,
-            Player.instance.rightHand.transform
+            handTransform
         );
     }
 
