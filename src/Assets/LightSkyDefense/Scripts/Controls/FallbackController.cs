@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class FallbackController : MonoBehaviour
@@ -26,38 +27,16 @@ public class FallbackController : MonoBehaviour
     {
         for (int i = 0; i < Dial.DialOptions.Length; i++)
         {
+            var activeScript = Dial.DialOptionInstances[i].GetComponent<SpawnDialOption>();
+
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                _preview = Instantiate(
-                    Dial.DialOptions[i].Preview
-                );
-
-                _preview.AddComponent<Interactable>();
-                // Use AttachObject because otherwise the hand indicator will interfere.
-                _hand.AttachObject(_preview, GrabTypes.None);
+                activeScript.OnPressStart(new SteamVR_Action_Vector2());
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1 + i))
             {
-                // Destroy clone and replace with "real" instance
-                _hand.DetachObject(_preview);
-
-                var buildable = _preview.GetComponent<Buildable>();
-
-                // Destroy clone and replace with "real" instance
-                Destroy(_preview);
-
-                // Create final instance when position is valid
-                if (!buildable.IsPositionValid)
-                {
-                    return;
-                }
-
-                buildable.SendMessage(
-                    "OnBuild",
-                    _hand.transform,
-                    SendMessageOptions.RequireReceiver
-                );
+                activeScript.OnRelease(new SteamVR_Action_Vector2());
             }
         }
     }
@@ -76,25 +55,13 @@ public class FallbackController : MonoBehaviour
     /// </summary>
     private string CreateDialOptionString(SpawnDialOption[] dialOptions)
     {
-        var dialOptionBuilder = new StringBuilder();
-        var dialIndexBuilder = new StringBuilder();
+        var dialInfo = "";
 
         for (int i = 0; i < dialOptions.Length; i++)
         {
-            dialOptionBuilder.Append("[");
-            dialOptionBuilder.Append(dialOptions[i].name);
-            dialOptionBuilder.Append("], ");
-
-            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 1);
-            dialIndexBuilder.Append(i + 1);
-            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 3);
+            dialInfo += $"{dialOptions[i].name}: {i} \n";
         }
 
-        dialOptionBuilder.Remove(dialOptionBuilder.Length - 2, 2);
-        dialOptionBuilder.Append("\n");
-        dialOptionBuilder.AppendLine(dialIndexBuilder.ToString());
-        dialOptionBuilder.Append("\n");
-
-        return dialOptionBuilder.ToString();
+        return dialInfo;
     }
 }

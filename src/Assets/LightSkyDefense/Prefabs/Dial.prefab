@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1504230871247721511}
   - component: {fileID: 1504230871247721504}
+  - component: {fileID: 4319183537671922878}
   m_Layer: 0
   m_Name: Dial
   m_TagString: Untagged
@@ -55,3 +56,18 @@ MonoBehaviour:
   - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
   - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
   - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
+--- !u!114 &4319183537671922878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504230871247721510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreditTextPrefab: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
+    type: 3}
+  CreditsDialOffset: {x: 0, y: 0, z: -0.175}
