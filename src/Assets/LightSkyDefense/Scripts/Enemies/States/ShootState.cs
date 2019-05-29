@@ -7,15 +7,16 @@ public class ShootState : EnemyState
     public float ShootInterval = 6;
     public float LoadUpTime = 5;
 
+    private Coroutine _coroutine;
     // Start is called before the first frame update
     private void OnEnable()
     {
-        StartCoroutine(Shoot(ShootInterval));
+        _coroutine = StartCoroutine(Shoot(ShootInterval));
     }
 
     private void OnDisable()
     {
-        StopAllCoroutines();
+        StopCoroutine(_coroutine);
     }
 
     private IEnumerator Shoot(float interval)
