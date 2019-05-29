@@ -8,57 +8,39 @@ using Valve.VR.InteractionSystem;
 
 public class FallbackController : MonoBehaviour
 {
-    private Player _player;
-    private Hand _fallbackHand;
-    private SpawnDialOption[] _dialOptions;
+    public Dial Dial;
+
+    private Hand _hand;
+
     private GameObject _preview;
 
     void Start()
     {
-        _player = Player.instance;
+        _hand = GetComponent<Hand>();
 
-        if (XRSettings.enabled)
-        {
-            // Disable FallBackController if player is in actual VR
-            enabled = false;
-            return;
-        }
-
-        // No HDM found, put options in fallback overlay
-
-        var overlayCanvasText = _player.GetComponentInChildren<Text>();
-        var playerDial = _player.GetComponentInChildren<Dial>(true);
-
-        _dialOptions = playerDial.DialOptions;
-
-        overlayCanvasText.text = CreateDialOptionString(_dialOptions);
-
-        foreach (Hand hand in _player.GetComponentsInChildren<Hand>())
-        {
-            if (hand.name.Equals("FallbackHand"))
-                _fallbackHand = hand;
-        }
+        var overlayCanvasText = Player.instance.GetComponentInChildren<Text>();
+        overlayCanvasText.text = CreateDialOptionString(Dial.DialOptions);
     }
 
     void Update()
     {
-        for (int i = 0; i < _dialOptions.Length; i++)
+        for (int i = 0; i < Dial.DialOptions.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
                 _preview = Instantiate(
-                    _dialOptions[i].Preview
+                    Dial.DialOptions[i].Preview
                 );
 
                 _preview.AddComponent<Interactable>();
                 // Use AttachObject because otherwise the hand indicator will interfere.
-                _fallbackHand.AttachObject(_preview, GrabTypes.None);
+                _hand.AttachObject(_preview, GrabTypes.None);
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1 + i))
             {
                 // Destroy clone and replace with "real" instance
-                _fallbackHand.DetachObject(_preview);
+                _hand.DetachObject(_preview);
 
                 var buildable = _preview.GetComponent<Buildable>();
 
@@ -70,7 +52,7 @@ public class FallbackController : MonoBehaviour
 
                 buildable.SendMessage(
                     "OnBuild",
-                    _fallbackHand.transform,
+                    _hand.transform,
                     SendMessageOptions.RequireReceiver
                 );
 
