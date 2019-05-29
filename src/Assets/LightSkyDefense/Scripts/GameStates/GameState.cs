@@ -3,17 +3,6 @@ using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
 {
-    [HideInInspector]
-    public GameManager GameManager;
-
-    /// <summary>
-    /// Get GameManager for later use
-    /// </summary>
-    private void Awake()
-    {
-        GameManager = GetComponent<GameManager>();
-    }
-
     /// <summary>
     /// Updates active game state
     /// </summary>
@@ -24,12 +13,12 @@ public abstract class GameState : MonoBehaviour
             return;
         }
 
-        foreach (var state in GameManager.GameStates)
+        foreach (var state in GameManager.Instance.GameStates)
         {
             state.enabled = false;
         }
 
         gameState.enabled = true;
-        GameManager.CurrentState = gameState;
+        GameManager.Instance.CurrentState = gameState;
     }
 }
