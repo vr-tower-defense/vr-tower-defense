@@ -44,6 +44,9 @@ public class FallbackController : MonoBehaviour
 
                 var buildable = _preview.GetComponent<Buildable>();
 
+                // Destroy clone and replace with "real" instance
+                Destroy(_preview);
+
                 // Create final instance when position is valid
                 if (!buildable.IsPositionValid)
                 {
@@ -55,9 +58,6 @@ public class FallbackController : MonoBehaviour
                     _hand.transform,
                     SendMessageOptions.RequireReceiver
                 );
-
-                // Destroy clone and replace with "real" instance
-                Destroy(_preview);
             }
         }
     }
@@ -72,7 +72,6 @@ public class FallbackController : MonoBehaviour
     /// ex:
     /// (dialOptionBuilder): [first option], [second option]
     /// (dialIndexBuilder) :       1                2
-    ///                    :
     /// </para>
     /// </summary>
     private string CreateDialOptionString(SpawnDialOption[] dialOptions)
