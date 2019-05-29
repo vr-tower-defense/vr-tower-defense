@@ -201,75 +201,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98646ba0344f5cf4e884609d4030a879, type: 3}
---- !u!1001 &670800431
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1620514275}
-    m_Modifications:
-    - target: {fileID: 3447203352102839665, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_Name
-      value: Dial
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3447203352102839664, guid: 78c4058c508164f4dbff6385df4f81a8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 78c4058c508164f4dbff6385df4f81a8, type: 3}
+--- !u!1 &758815655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2241259548283897849, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620514271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781720500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,17 +953,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Subscribers:
   - {fileID: 1233241760}
+  - {fileID: 758815655}
   InitialLives: 5
   InitialFunds: 20
 --- !u!4 &1620514274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 429506, guid: dc06161b6d97feb419f45f03b62e14b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1620514271}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1620514275 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 485514, guid: dc06161b6d97feb419f45f03b62e14b9,
     type: 3}
   m_PrefabInstance: {fileID: 1620514271}
   m_PrefabAsset: {fileID: 0}
@@ -1055,6 +987,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689e5e055ba9dde4db338c36aa9f8877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1620514278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758815655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9feb2c236250f40a24d6b6761e1da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreditTextPrefab: {fileID: 4842219207135686761, guid: b32dc0eaaf5e45640b703e84d268c168,
+    type: 3}
 --- !u!43 &1791110683
 Mesh:
   m_ObjectHideFlags: 0
@@ -1291,8 +1237,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Dial
+  m_Shader: {fileID: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -1302,22 +1248,9 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    m_TexEnvs: []
+    m_Floats: []
+    m_Colors: []
 --- !u!1 &1965818191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 110716, guid: dc06161b6d97feb419f45f03b62e14b9,
