@@ -89,11 +89,14 @@ public class Ejected : IMissileState
                 -_missile.DamageCurve.Evaluate(enemyDistance)
             );
 
-            rigidbody.AddExplosionForce(
-                _missile.ExplosionPower,
-                _missile.transform.position,
-                _missile.ExplosionRange
-            );
+            if (_missile.CollisionLayerMask == Layers.Enemies)
+            {
+                rigidbody.AddExplosionForce(
+                    _missile.ExplosionPower,
+                    _missile.transform.position,
+                    _missile.ExplosionRange
+                );
+            }
         }
 
         MonoBehaviour.Destroy(_missile.gameObject);

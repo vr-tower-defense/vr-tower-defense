@@ -31,16 +31,12 @@ public class BossShootState : EnemyState
 
     private void ShootAtTower()
     {
-        var rand = Random.Range(0, Enemy.TowersInRange.Count);
-        var tower = Enemy.TowersInRange[rand];
-        var target = tower.transform.position;
-
         var newProjectile = Instantiate(
             Projectile,
-            transform.position,
+            transform.Find("Cylinder").Find("MissileSpawnPoint").position,
             transform.rotation
         );
         newProjectile.SendMessage("OnEject");
-        newProjectile.velocity = target - transform.position;
+        newProjectile.velocity = transform.forward * 1.25f;
     }
 }

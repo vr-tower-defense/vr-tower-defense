@@ -207,7 +207,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   ExplosionPower: 10
   ExplosionRange: 0.15
-  DetectionRange: 1.5
+  DetectionRange: 2
   CollisionLayerMask: 256
   TimeAlive: 8
   EjectForce: 1

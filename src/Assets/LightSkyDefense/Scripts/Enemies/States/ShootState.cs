@@ -37,11 +37,10 @@ public class ShootState : EnemyState
 
         var newProjectile = Instantiate(
             Projectile,
-            transform.Find("Cylinder").Find("MissileSpawnPoint").position,
+            transform.position,
             transform.rotation
         );
 
-        //newProjectile.velocity = target - transform.position;
-        newProjectile.velocity = transform.forward * 1.25f;
+        newProjectile.velocity = target - transform.position;
     }
 }
