@@ -1,41 +1,100 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
-    private int _lives;
+    public GameObject[] Subscribers;
 
-    public int StartLives = 5;
-    public int StartCredits = 20;
+    public int InitialLives = 5;
 
-    public float Credits { get; set; } = 20;
+    public int InitialFunds = 20;
 
-    public int Lives
+    [HideInInspector]
+    public int Lives { get; private set; }
+
+    [HideInInspector]
+    public float Funds { get; private set; }
+
+    [HideInInspector]
+    public float Score { get; private set; }
+
+    private bool _isGameOver = false;
+
+    /// <summary>
+    /// Set the initial values
+    /// </summary>
+    public void Start()
     {
-        get => _lives;
-        set
+        Lives = InitialLives;
+        Funds = InitialFunds;
+
+        EmitChangeEvent();
+    }
+
+    /// <summary>
+    /// Updates the players' funds
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns>Boolean indicating whether action was successful or not</returns>
+    public bool UpdateFunds(float amount)
+    {
+        var tempFunds = Funds + amount;
+
+        if (tempFunds < 0)
         {
-            _lives = value;
+            return false;
+        }
 
-            if (_lives > 0)
-                return;
+        Funds = tempFunds;
 
-            GameObject[] targets = gameObject.scene.GetRootGameObjects();
+        EmitChangeEvent();
 
-            targets.ForEach(target => 
-                ExecuteEvents.Execute<IOnGameLossTarget>(
-                    target,
-                    null, 
-                    (handler, _) => handler.OnGameLoss()
-                )
-            );
+        return true;
+    }
+
+    /// <summary>
+    /// Update the players' lives
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UpdateLives(int amount)
+    {
+        Lives += amount;
+
+        EmitChangeEvent();
+
+        if (Lives > 0 || _isGameOver)
+        {
+            return;
+        }
+
+        _isGameOver = true;
+
+        // Emit OnResumeGame message to all game objects
+        foreach (var go in FindObjectsOfType<GameObject>())
+        {
+            go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
         }
     }
 
-    public void Start()
+    /// <summary>
+    /// Update the players' score
+    /// </summary>
+    /// <param name="amount"></param>
+    public void UpdateScore(float amount)
     {
-        Lives = StartLives;
-        Credits = StartCredits;
+        Score += amount;
+
+        EmitChangeEvent();
+    }
+
+    private void EmitChangeEvent()
+    {
+        foreach (var subscriber in Subscribers)
+        {
+            subscriber.BroadcastMessage(
+                "OnPlayerStatisticsUpdate",
+                this,
+                SendMessageOptions.DontRequireReceiver
+            );
+        }
     }
 }

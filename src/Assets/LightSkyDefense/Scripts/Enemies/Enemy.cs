@@ -1,10 +1,35 @@
-using Assets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+[RequireComponent(typeof(Damageable))]
+[RequireComponent(typeof(SpawnCreditOnDie))]
 public class Enemy : MonoBehaviour
 {
-    public float MaxHealth = 100f;
+
+    #region states
+
+    public float ShootRange = 0.5f;
+
+    [Header("States")]
+    public EnemyState IdleState;
+
+    public EnemyState ShootState;
+
+    [Header("Setup")]
+    [Tooltip("The first state that is applied to the enemy")]
+    public EnemyState InitialState;
+
+    [HideInInspector]
+    public EnemyState CurrentState;
+
+    [HideInInspector]
+    public EnemyState[] EnemyStates;
+
+    #endregion
+
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
     public float PointValue = 10f;
@@ -15,27 +40,21 @@ public class Enemy : MonoBehaviour
     public AudioClip ExplodeSound;
     public AudioClip TeleportSound;
 
-    public Credit Credit;
-    public int CreditValue = 5;
-
     public float ChargeSpeed = 0.1f;
     public float DischargeSpeed = 0.1f;
 
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
 
-    private ParticleSystem _explodeEffectInstance = null;
+    public Collider[] TowersInRange { get; private set; } = new Collider[0];
+
     private ParticleSystem _teleportEffectInstance = null;
 
     private Vector3[] _pathPoints;
 
     private float _energyCharge = 0;
-    private float _health = 100f;
     private float _potentialEnergy = 1f;
-    private readonly float _rotationSpeed = 2f;
     private readonly float _potentialEnergyRange = 0.8f;
-
-    private bool _isQuitting = false;
 
     private void Awake()
     {
@@ -50,48 +69,34 @@ public class Enemy : MonoBehaviour
 
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.position = GameManager.Instance.Path.PathPoints[PathFollower.PathPointIndex];
+
+        // Save intial state reference to current state field
+        CurrentState = InitialState;
+        EnemyStates = GetComponents<EnemyState>();
+
+        // Disable all states and enable the current state
+        foreach (var state in EnemyStates)
+        {
+            state.enabled = false;
+        }
+
+        CurrentState.enabled = true;
     }
 
     private void FixedUpdate()
     {
         EnergyBehaviour();
 
-        RotateToVelocityDirection();
-    }
+        TowersInRange = Physics.OverlapSphere(transform.position, ShootRange, (int)Layers.Towers);
 
-    public float GetHealth()
-    {
-        return _health;
-    }
-
-    /// <summary>
-    /// This function will remove the specified dmgAmount from the enemy's health
-    /// </summary>
-    /// <param name="amount"></param>
-    public void Damage(float amount)
-    {
-        _health -= amount;
-
-        if (_health > 0)
+        if (TowersInRange.Length >= 1 && CurrentState == IdleState)
         {
-            return;
+            CurrentState.SetEnemyState(ShootState);
         }
-
-        Explode();
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// This function will add the specified healtAmount to the enemy's health
-    /// </summary>
-    /// <param name="amount"></param>
-    public void Heal(float amount)
-    {
-        _health = Mathf.Clamp(
-            _health + amount,
-            0,
-            MaxHealth
-        );
+        if (TowersInRange.Length <= 0 &&  CurrentState == ShootState)
+        {
+            CurrentState.SetEnemyState(IdleState);
+        }
     }
 
     /// <summary>
@@ -117,47 +122,33 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// This function kills the enemy and starts the explosion particle system and sound effect
+    /// This kills the enemy and starts the explosion particle system and sound effect
     /// </summary>
-    public void Explode()
+    public void OnDie()
     {
         // If not in the world, instantiate
-        if (_explodeEffectInstance == null)
-        {
-            _explodeEffectInstance = Instantiate(
-                ExplodeEffect,
-                transform.position,
-                new Quaternion()
-            );
-        }
+        var explodeEffectInstance = Instantiate(
+            ExplodeEffect,
+            transform.position,
+            new Quaternion()
+        );
 
         // Play effect
-        _explodeEffectInstance.Play();
+        explodeEffectInstance.Play();
 
         // Play sound effect
-        SoundUtil.PlayClipAtPointWithRandomPitch(ExplodeSound, this.gameObject.transform.position, 0.5f, 1.5f);
+        SoundUtil.PlayClipAtPointWithRandomPitch(
+            ExplodeSound,
+            this.gameObject.transform.position,
+            0.5f,
+            1.5f
+        );
 
         // Destroy after particle (emit) duration + maximum particle lifetime
         Destroy(
-            _explodeEffectInstance.gameObject,
-            _explodeEffectInstance.main.duration + _explodeEffectInstance.main.startLifetime.constantMax
+            explodeEffectInstance.gameObject,
+            explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
-
-        // Kill enemy (if Explode() called when the enemy was still alive)
-        Destroy(gameObject);
-
-        // Spawn Credit
-        Credit.Value = CreditValue;
-
-        Instantiate(
-            Credit,
-            gameObject.transform.position,
-            gameObject.transform.rotation
-        );
-
-        GameObject.Find("Scoreboard")?.GetComponent<Scoreboard>()?.PointGain(PointValue);
-
-        Destroy(PathFollower);
     }
 
     /// <summary>
@@ -184,12 +175,11 @@ public class Enemy : MonoBehaviour
         );
 
         // Damage player
-        var playerStatistics = Player.instance?.gameObject?.GetComponent<PlayerStatistics>();
+        var playerStatistics = Player
+            .instance
+            .GetComponent<PlayerStatistics>();
 
-        if (playerStatistics != null)
-        {
-            playerStatistics.Lives--;
-        }
+        playerStatistics?.UpdateLives(-1);
 
         // Teleport enemy
         Destroy(gameObject);
@@ -236,39 +226,10 @@ public class Enemy : MonoBehaviour
             Discharge(DischargeSpeed);
         }
 
-        if (_energyCharge < 0)
+        if (_energyCharge <= 0)
         {
-            Explode();
+            Destroy(gameObject);
         }
-    }
-
-    private void RotateToVelocityDirection()
-    {
-        var translationVector = PathFollower.transform.position - PathFollower.PreviousPosition;
-
-        if (translationVector != Vector3.zero)
-        {
-            var lookAngle = Quaternion.LookRotation(translationVector);
-
-            //Alternative if performance becomes an issue: _rigidbody.rotation = lookAngle;
-            Rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, lookAngle, _rotationSpeed);
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        var towerScript = collision.gameObject.GetComponent<TowerBehaviour>();
-
-        if (towerScript == null) return;
-
-        towerScript.Damage(CollisionDamage);
-        Explode();
-    }
-
-
-    void OnApplicationQuit()
-    {
-        _isQuitting = true;
     }
 
     /// <summary>
@@ -276,9 +237,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        if (!_isQuitting)
+        if (GameManager.IsQuitting)
         {
-            Destroy(PathFollower.gameObject);
+            return;
         }
+
+        Destroy(PathFollower?.gameObject);
     }
 }

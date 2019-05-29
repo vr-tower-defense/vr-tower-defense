@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+/// <summary>
+/// Seek offset
+/// </summary>
 public class ScoreboardSteeringBehaviour : MonoBehaviour
 {
     public Vector3 Offset = new Vector3(-.5f, .25f, 1.5f);
-    public float RotationSpeed = .3f;
-    public float Mass = 1;
-    public float MaxSpeed = 1;
+    public float RotationSpeed = 30f;
 
-    private Renderer _renderer;
+    private Rigidbody _rigidbody;
     private Transform _headsetTransform;
 
-    private Vector3 _velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        _renderer = GetComponent<Renderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+
         _headsetTransform = Player.instance.headCollider.transform;
     }
 
@@ -31,19 +32,20 @@ public class ScoreboardSteeringBehaviour : MonoBehaviour
             _headsetTransform.position.y + .2f
         );
 
-        var steeringForce = Seek.Calculate(transform.position, targetPosition, MaxSpeed);
+        _rigidbody.AddForce(
+            Seek.Calculate(transform.position, targetPosition),
+            ForceMode.Acceleration
+        );
 
-        // Calculate velocity
-        _velocity = Vector3.ClampMagnitude(steeringForce / Mass * Time.fixedDeltaTime, MaxSpeed);
+        var targetRotation = Quaternion.LookRotation(
+            _headsetTransform.position - transform.position
+        );
 
-        // Add velocity to position
-        transform.position += _velocity;
-
-        // Add continuous rotation
-        transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            transform.eulerAngles.y + RotationSpeed,
-            transform.eulerAngles.z
+        // Make scoreboard look towards player
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.Euler(0, targetRotation.eulerAngles.y, 0),
+            RotationSpeed * Time.deltaTime
         );
     }
 }

@@ -5,10 +5,13 @@ public class EnemyDestroyDispatcher : MonoBehaviour
 {
     private void OnDestroy()
     {
-        if (!Application.isPlaying) return;
+        if (GameManager.IsQuitting) return;
 
-        var gameManager = Player.instance.GetComponent<GameManager>();
-        gameManager.CheckAllEnemiesDestroyed();
+        // Not very clean?
+        foreach (GameObject go in FindObjectsOfType<GameObject>())
+        {
+            go.SendMessage("CheckAllEnemiesDestroyed", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
 

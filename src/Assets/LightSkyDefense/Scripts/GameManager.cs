@@ -3,19 +3,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR.InteractionSystem;
 
-public class GameManager : MonoBehaviour, IOnGameLossTarget
+public class GameManager : MonoBehaviour
 {
+    /// <summary>
+    /// Boolean indicating whether the application is about to quit
+    /// </summary>
+    public static bool IsQuitting { get; private set; } = false;
+
     [HideInInspector]
     public GameObject WayPointPrefab;
 
-    public string GameOverText = "Wasted!";
-    public float FontQuality = 250;
-    public bool Lost = false;
-
     private static bool _initializing = false;
-    private readonly Type _defaultGameState = typeof(Waves);
+
     private MonoBehaviour _gameState { get; set; }
-    private int _lastWaveEnemiesAmount = 0;
 
     private Path _path;
     public Path Path
@@ -37,6 +37,19 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         }
     }
 
+    #region lifecyle functions
+
+    /// <summary>
+    /// Invoked when the application is about to quit. We set 
+    /// the IsQuitting variable to true, to avoid missing references errors in OnDestroy methods.
+    /// </summary>
+    private void OnApplicationQuit()
+    {
+        IsQuitting = true;
+    }
+
+    #endregion
+
     public static void Initialize()
     {
         if (_instance != null || _initializing)
@@ -49,19 +62,12 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         //todo if player doesn't exist, create new gameobject Player?
         var instance = FindObjectOfType<GameManager>() ?? GameObject.Find("Player").AddComponent<GameManager>();
 
-        instance.WayPointPrefab = Resources.Load("Prefabs/PathWayPoint") as GameObject;
+        instance.WayPointPrefab = Resources.Load<GameObject>("Prefabs/PathWayPoint");
 
         _instance = instance;
         _initializing = false;
     }
 
-    /// <summary>
-    /// Start is called before the first frame update
-    /// </summary>
-    private void Start()
-    {
-        SetGameState(_defaultGameState);
-    }
 
     /// <summary>
     /// Used to pause the game
@@ -89,73 +95,12 @@ public class GameManager : MonoBehaviour, IOnGameLossTarget
         Destroy(_gameState);
 
         // Create new game state
-        _gameState = (MonoBehaviour)gameObject.AddComponent(gameState);
+        _gameState = (GameState)gameObject.AddComponent(gameState);
     }
 
-    public void OnGameLoss()
+    public void OnGameLose()
     {
-        if(Lost)
-            return;
-        Lost = true;
-        var camera = Camera.main;
-
-        if (camera == null)
-            return;
-
-
-
-        var gameLossDisplayObject = new GameObject();
-        gameLossDisplayObject.name = "Game Over screen";
-
-        gameLossDisplayObject.transform.position = Player.instance.headCollider.transform.position +
-                                                   (Player.instance.headCollider.transform.rotation *
-                                                    new Vector3(0, 0, 1.5f));
-
-        gameLossDisplayObject.transform.rotation = Player.instance.headCollider.transform.rotation ;
-
-        var mesh = gameLossDisplayObject.AddComponent<TextMesh>();
-        mesh.text = GameOverText;
-        mesh.fontSize = Mathf.FloorToInt(FontQuality);
-        mesh.color = Color.red;
-        mesh.transform.localScale = new Vector3(10f / FontQuality, 10f / FontQuality);
-
-
-
-        var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
-
-        if (greyScale == null)
-            return;
-
-        greyScale.Active = true;
-    }
-
-    /// <summary>
-    /// Adds a destroy dispatcher to all enemies that are left in the game.
-    /// </summary>
-    public void LastEnemiesTrigger()
-    {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            _lastWaveEnemiesAmount++;
-            enemy.AddComponent<EnemyDestroyDispatcher>();
-        }
-    }
-
-    /// <summary>
-    /// Checks if all enemies are dead, 
-    /// this function only gets triggerd when a enemy dies on last Wave.
-    /// </summary>
-    public void CheckAllEnemiesDestroyed()
-    {
-        _lastWaveEnemiesAmount--;
-
-        if (_lastWaveEnemiesAmount != 0)
-            return;
-
-        GameObject[] targets = gameObject.scene.GetRootGameObjects();
-        targets.ForEach(t => ExecuteEvents.Execute<IOnGameWinTarget>(t, null, ((handler, _) => handler.OnGameWin())));
+        SetGameState(typeof(LoseState));
     }
 }
 

@@ -7,7 +7,7 @@ public static class SoundUtil
         if (clip == null)
             return;
 
-        var pitch = Random.value * (minPitch - maxPitch) + maxPitch;
+        var pitch = Random.Range(minPitch, maxPitch);
 
         var tempGO = new GameObject("TempAudio");
         tempGO.transform.position = pos;
@@ -23,7 +23,8 @@ public static class SoundUtil
         if (source == null || clip == null)
             return;
 
-        var pitch = Random.value * (minPitch - maxPitch) + maxPitch;
+        var pitch = Random.Range(minPitch, maxPitch);
+
         source.pitch = pitch;
         source.PlayOneShot(clip);
     }
@@ -33,7 +34,8 @@ public static class SoundUtil
         if (source == null)
             return;
 
-        var pitch = Random.value * (minPitch - maxPitch) + maxPitch;
+        var pitch = Random.Range(minPitch, maxPitch);
+
         source.pitch = pitch;
         source.Play();
     }

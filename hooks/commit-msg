@@ -5,7 +5,7 @@ INPUT_FILE=$1
 START_LINE=`head -n1 $INPUT_FILE`
 
 # Regex patterns
-COMMIT_PATTERN="^[A-Z][A-Za-z0-9[:space:]-]\{10,50\}[[:space:]]#[0-9]\{1,3\}$"
+COMMIT_PATTERN="^[A-Z].\{10,50\}[[:space:]]#[0-9]\{1,3\}$"
 MERGE_PATTERN="^Merge[[:space:]]branch.\+"
 
 # Colors
