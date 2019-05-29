@@ -23,10 +23,7 @@ public class EnemyAoEHeal : MonoBehaviour
 
         foreach (Collider enemy in enemiesInRange)
         {
-            if (enemy.GetComponent<Damageable>() != null)
-            {
-                enemy.GetComponent<Damageable>().SendMessage("UpdateHealth", amount);
-            }
+            enemy.GetComponent<Damageable>()?.SendMessage("UpdateHealth", amount);
         }
     }
 }
