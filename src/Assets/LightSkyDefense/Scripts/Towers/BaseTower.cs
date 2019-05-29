@@ -103,7 +103,13 @@ public class BaseTower : MonoBehaviour
         JamState.JamTime = jamTime;
         CurrentState.SetTowerState(JamState);
     }
-
+    /// <summary>
+    /// Invoked by Damageable when the tower hits 0 hp
+    /// </summary>
+    public void OnDie()
+    {
+        Destroy(gameObject);
+    }
     /// <summary>
     /// Invoked by Deletable when the player holds down the trigger
     /// </summary>

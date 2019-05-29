@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         {
             CurrentState.SetEnemyState(ShootState);
         }
-        else if ( CurrentState == ShootState)
+        if (TowersInRange.Length <= 0 &&  CurrentState == ShootState)
         {
             CurrentState.SetEnemyState(IdleState);
         }
