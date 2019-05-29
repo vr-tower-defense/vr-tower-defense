@@ -9,7 +9,7 @@ public class CurrentCreditsDisplay : MonoBehaviour
     public GameObject CreditTextPrefab;
 
     [Tooltip("Small offset towards wrist, from middle of dial")]
-    public float CreditsDialOffset = -0.2f;
+    public Vector3 CreditsDialOffset = new Vector3(0, 0, -0.175f);
 
     private GameObject _creditsText;
 
@@ -17,7 +17,7 @@ public class CurrentCreditsDisplay : MonoBehaviour
     {
         _creditsText = Instantiate(
             CreditTextPrefab,
-            gameObject.transform.position + new Vector3(0, 0, CreditsDialOffset),
+            gameObject.transform.position + CreditsDialOffset,
             gameObject.transform.rotation
         );
     }
