@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 public class SpawnDialOption : DialOption
 {
     public GameObject Preview;
-    public GameObject Final;
 
     public float Cost = 0;
     public GameObject DialCostText;
@@ -60,22 +59,22 @@ public class SpawnDialOption : DialOption
         }
 
         var handTransform = Player.instance.rightHand.transform;
+        var buildable = _preview.GetComponent<Buildable>();
 
         // Destroy clone and replace with "real" instance
         Destroy(_preview);
-        Instantiate(Final, handTransform.position, handTransform.rotation);
-    }
 
-    // Applies an upwards force to all rigidbodies that enter the trigger.
-    void OnTriggerStay(Collider collider)
-    {
-        //Debug.Log("bAammm collision" + collider.name);
-    }
+        // Create final instance when position is valid
+        if (!buildable.IsPositionValid)
+        {
+            return;
+        }
 
-    // Applies an upwards force to all rigidbodies that enter the trigger.
-    void OnTriggerEnter(Collider collider)
-    {
-        //Debug.Log("bAammm collision enter" + collider.name);
+        buildable.SendMessage(
+            "OnBuild",
+            Player.instance.rightHand.transform,
+            SendMessageOptions.RequireReceiver
+        );
     }
 
     private void SetTextMesh()

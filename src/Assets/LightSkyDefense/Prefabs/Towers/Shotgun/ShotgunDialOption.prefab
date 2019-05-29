@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709973630796179958}
   - component: {fileID: 5950792470344690874}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShotgunDialOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,11 +48,7 @@ MonoBehaviour:
   ActiveMaterial: {fileID: 2100000, guid: b131f7805286aa845b530e06101b47a5, type: 2}
   TargetMesh: {fileID: 2201546626989572107}
   IsSelected: 0
-  Preview: {fileID: 1529337563571085310}
-  Final: {fileID: 4989372949544130928, guid: 8ac4e6f0768e85a428245365da52bbc1, type: 3}
-  Cost: 20
-  DialCostText: {fileID: 1145892129914187409, guid: 7bc9c30ea7e5a324c976e09b29c9bafb,
-    type: 3}
+  Preview: {fileID: 1529337563571085310, guid: 25fb36786f01e9d458225409fbc32b46, type: 3}
 --- !u!1001 &2201546626987677803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_Name
       value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalPosition.x
