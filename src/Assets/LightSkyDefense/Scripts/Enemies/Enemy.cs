@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -5,6 +8,28 @@ using Valve.VR.InteractionSystem;
 [RequireComponent(typeof(SpawnCreditOnDie))]
 public class Enemy : MonoBehaviour
 {
+
+    #region states
+
+    public float ShootRange = 0.5f;
+
+    [Header("States")]
+    public EnemyState IdleState;
+
+    public EnemyState ShootState;
+
+    [Header("Setup")]
+    [Tooltip("The first state that is applied to the enemy")]
+    public EnemyState InitialState;
+
+    [HideInInspector]
+    public EnemyState CurrentState;
+
+    [HideInInspector]
+    public EnemyState[] EnemyStates;
+
+    #endregion
+
     public float EnergyCapacity = 40f;
     public float CollisionDamage = 35f;
     public float PointValue = 10f;
@@ -20,6 +45,8 @@ public class Enemy : MonoBehaviour
 
     public PathFollower PathFollower { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
+
+    public Collider[] TowersInRange { get; private set; } = new Collider[0];
 
     private ParticleSystem _teleportEffectInstance = null;
 
@@ -38,11 +65,34 @@ public class Enemy : MonoBehaviour
         _energyCharge = EnergyCapacity;
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.position = Path.Instance[PathFollower.PathPointIndex];
+
+        // Save intial state reference to current state field
+        CurrentState = InitialState;
+        EnemyStates = GetComponents<EnemyState>();
+
+        // Disable all states and enable the current state
+        foreach (var state in EnemyStates)
+        {
+            state.enabled = false;
+        }
+
+        CurrentState.enabled = true;
     }
 
     private void FixedUpdate()
     {
         EnergyBehaviour();
+
+        TowersInRange = Physics.OverlapSphere(transform.position, ShootRange, (int)Layers.Towers);
+
+        if (TowersInRange.Length >= 1 && CurrentState == IdleState)
+        {
+            CurrentState.SetEnemyState(ShootState);
+        }
+        if (TowersInRange.Length <= 0 && CurrentState == ShootState)
+        {
+            CurrentState.SetEnemyState(IdleState);
+        }
     }
 
     /// <summary>

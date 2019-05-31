@@ -299,6 +299,7 @@ MonoBehaviour:
   ActiveState: {fileID: 1421314080101391250}
   CelebrationState: {fileID: 9201011055191367473}
   CondemnState: {fileID: 0}
+  JamState: {fileID: 0}
   InitialState: {fileID: 4107018253085489156}
   CurrentState: {fileID: 0}
   TowerStates: []

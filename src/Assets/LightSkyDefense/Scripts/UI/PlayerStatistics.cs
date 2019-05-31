@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using Valve.VR.InteractionSystem;
 
 public class PlayerStatistics : MonoBehaviour
 {
@@ -71,7 +69,7 @@ public class PlayerStatistics : MonoBehaviour
         _isGameOver = true;
 
         // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType<GameObject>())
+        foreach (var go in FindObjectsOfType<GameObject>())
         {
             go.SendMessage("OnGameLose", SendMessageOptions.DontRequireReceiver);
         }
