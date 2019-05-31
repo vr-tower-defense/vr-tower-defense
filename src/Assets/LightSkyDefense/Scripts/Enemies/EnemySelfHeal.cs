@@ -25,17 +25,12 @@ public class EnemySelfHeal : MonoBehaviour
     {
         if (_damageable.Health < _damageable.MaxHealth - HealAmount)
         {
-            HealEnemy(HealAmount);
+            _damageable.UpdateHealth(HealAmount);
 
             Invoke("HealWithInterval", HealCooldown);
             return;
         }
 
         Invoke("HealWithInterval", _checkTimer);
-    }
-
-    private void HealEnemy(float healValue)
-    {
-        _damageable.UpdateHealth(healValue);
     }
 }
