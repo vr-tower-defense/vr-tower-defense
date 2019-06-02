@@ -9,7 +9,7 @@ public class Flocking : ISteering
     public float MaxSpeed = .2f;
 
     [Tooltip("The maximum number of agents that are considered to calculate the forces. A higher number will result in a more precise behaviour but will use more cpu cycles")]
-    public int MaxNeighbours = 5;
+    public int MaxNeighbours = 10;
 
     [Header("Flocking properties")]
     public int FlockingLayerMask = (int)Layers.Enemies;
