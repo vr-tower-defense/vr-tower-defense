@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1504230871247721511}
   - component: {fileID: 1504230871247721504}
   - component: {fileID: 4319183537671922878}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dial
   m_TagString: Untagged
   m_Icon: {fileID: 0}

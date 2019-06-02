@@ -14,10 +14,8 @@ GameObject:
   - component: {fileID: 3263066635793389110}
   - component: {fileID: 6973597090211331844}
   - component: {fileID: 5970099049054244994}
-  - component: {fileID: 8569508895211845540}
   - component: {fileID: 5173806030033101320}
   - component: {fileID: 4829648924752376156}
-  - component: {fileID: 3987967371124779197}
   - component: {fileID: 7578898661776837359}
   m_Layer: 9
   m_Name: ShooterEnemy
@@ -129,36 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94267cd9defe4514dbffc1dd23724fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootRange: 10
-  IdleState: {fileID: 3987967371124779197}
-  ShootState: {fileID: 7578898661776837359}
-  InitialState: {fileID: 3987967371124779197}
-  CurrentState: {fileID: 0}
-  EnemyStates: []
-  EnergyCapacity: 40
-  CollisionDamage: 35
-  PointValue: 10
+  ExplodePitch: 0
+  ExplodePitchVariation: 0
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
-  TeleportEffect: {fileID: 5331612379591445559, guid: 11af0b2ef4c8fbd4fa42d53556b03d00,
-    type: 3}
   ExplodeSound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
-  TeleportSound: {fileID: 8300000, guid: fc024f6888832e24a90c5de638a625d0, type: 3}
-  ChargeSpeed: 0.1
-  DischargeSpeed: 0.1
---- !u!114 &8569508895211845540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715808640459732906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74ff024d693452459c0f6fb87136cb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxSpeed: 1
 --- !u!114 &5173806030033101320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,18 +160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Credit: {fileID: 1343675722329424218, guid: cc86853dbdb1362439595a86370d45d1, type: 3}
   Value: 5
---- !u!114 &3987967371124779197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715808640459732906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4381a5b7ab0e264aa5c948709086170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7578898661776837359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,10 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604473756de6873478f282544027a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FindTarget: {fileID: 0}
   Projectile: {fileID: 4098851781701205185, guid: b3b9826145dabd34d9c5f369de7939be,
     type: 3}
-  ShootInterval: 2
-  LoadUpTime: 2
+  ProjectileSpeed: 0.5
+  Cooldown: 2
+  Target: {fileID: 0}
 --- !u!1 &3113227587869762242
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
-  m_Name: SpawnEnemy
+  m_Script: {fileID: 11500000, guid: a891d614103ff6344abb7160a89b20fe, type: 3}
+  m_Name: EnemyWander
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 4986396300896956474, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
+  WanderRadius: 0.2
+  WanderDistance: 0.3
+  WanderJitter: 1

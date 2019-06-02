@@ -22,15 +22,6 @@ public class PathInspector : Editor
         // Dont go further if path has no curves
         if (_path.Curves == null)
             return;
-
-        var pathVectors = _path.GetVector3sCoordinatesFromPath(100);
-
-        // Transform path points to Path position in WorldSpace
-        for (int i = 0; i < pathVectors.Length; i++)
-            pathVectors[i] = handleTransform.TransformPoint(pathVectors[i]);
-
-        // Draw GUI line
-        Handles.DrawPolyLine(pathVectors);
     }
 
     public override void OnInspectorGUI()

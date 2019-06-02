@@ -13,7 +13,7 @@ public class CurrentCreditsDisplay : MonoBehaviour
 
     private TextMesh _textMesh;
 
-    void Start()
+    void Awake()
     {
         var prefabInstance = Instantiate(
             CreditTextPrefab,
