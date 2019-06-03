@@ -7,16 +7,10 @@ public class PauseMenuBehaviour : MonoBehaviour
     public SteamVR_Action_Boolean DialClickAction = SteamVR_Input.GetBooleanAction("MenuButtonClick");
 
     public GameObject Prefab;
+
     public Vector3 Offset = new Vector3(0, 0, 1.5f);
 
-    private GameObject _menuInstance;
-
-    private Camera _camera;
-    
-    public void Start()
-    {
-        _camera = Camera.main;
-    }
+    private GameObject _instance;
 
     // Update is called once per frame
     void Update()
@@ -26,7 +20,10 @@ public class PauseMenuBehaviour : MonoBehaviour
             return;
         }
 
-        if(_menuInstance != null)
+        Debug.Log("Open");
+
+        // Destroy pause menu when there's already a pause menu instance
+        if (_instance != null)
         {
             // Emit OnResumeGame message to all game objects
             foreach (GameObject go in FindObjectsOfType(typeof(GameObject)))
@@ -36,7 +33,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
             Time.timeScale = 1;
 
-            Destroy(_menuInstance);
+            Destroy(_instance);
             return;
         }
 
@@ -48,11 +45,13 @@ public class PauseMenuBehaviour : MonoBehaviour
 
         Time.timeScale = 0;
 
-        var playerTransform = Player.instance.headCollider.transform;
-        _menuInstance = Instantiate(
+        var camera = Camera.main;
+        var yRotation = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
+
+        _instance = Instantiate(
             Prefab,
-            playerTransform.position + (playerTransform.rotation * Offset),
-            Quaternion.Euler(new Vector3(0, _camera.gameObject.transform.rotation.y, 0))
+            camera.transform.position + (yRotation * Offset),
+            yRotation
         );
     }
 }
