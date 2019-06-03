@@ -21,8 +21,6 @@ public class FollowPath : ISteering
     /// Rigidbody is used to progress along the path using the velocity's magnitude
     /// </summary>
     private Rigidbody _rigidbody;
-    private RigidbodySteering _rigidbodySteering;
-    private bool _lost;
 
     public override void Initialize(GameObject gameObject)
     {
@@ -32,14 +30,13 @@ public class FollowPath : ISteering
         _currentWaypointIndex = waypoint.transform.GetSiblingIndex();
 
         _rigidbody = gameObject.GetComponent<Rigidbody>();
-        _rigidbodySteering = gameObject.GetComponent<RigidbodySteering>();
     }
 
     public override Vector3 Calculate(GameObject gameObject)
     {
         if (_currentWaypointIndex >= Path.Instance.WaypointCount)
         {
-            gameObject.BroadcastMessage("OnReachEndOfPath", SendMessageOptions.DontRequireReceiver);
+            gameObject.BroadcastMessage("OnReachEndOfPath", SendMessageOptions.RequireReceiver);
         }
 
         var magnitudeSquaredFromPathProgressTracker = (
