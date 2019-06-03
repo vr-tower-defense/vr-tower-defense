@@ -1,5 +1,10 @@
-﻿public enum Layers
+﻿using System;
+
+[Flags]
+public enum Layers
 {
+    None = 0,
+
     // Built-in layers
     Default = 1 << 0,
     TransparentFX = 1 << 1,

@@ -1,50 +1,79 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Path : MonoBehaviour
 {
+    #region configurable properties
+
     [Tooltip("List of curves that form a line")]
     public Curve[] Curves;
 
-    [Tooltip("Smootheness of rendered line")]
-    public int LineDivision = 100;
+    [Tooltip("Amount of points to generate that form the line")]
+    public int WaypointCount = 100;
 
-    [Tooltip("Smootheness factor of Steering Behaviours using path")]
-    public int PathPointDivider = 1;
+    [Tooltip("The object that is instantiated as a waypoint")]
+    public GameObject Prefab;
 
+    #endregion
+
+    #region singleton
+
+    // Reference to path
+    private static Path _path;
+
+    // Path singleton
     [HideInInspector]
-    public Vector3[] PathPoints;
+    public static Path Instance => _path ?? (_path = FindObjectOfType<Path>());
 
-    void Start()
+    #endregion
+
+    /// <summary>
+    /// List of waypoints that represent the path
+    /// </summary>
+    private GameObject[] _wayPoints;
+
+    private LineRenderer _lineRenderer;
+
+    void Awake()
     {
-        // Get the path points, convert the coordinates to world space and spawn WayPointPrefab in the world
+        _lineRenderer = GetComponent<LineRenderer>();
 
-        var pathVectors = GetVector3sCoordinatesFromPath(LineDivision);
+        GenerateNewPath();
+    }
 
-        PathPoints = new Vector3[pathVectors.Length / PathPointDivider];
+    /// <summary>
+    /// Generates a new path
+    /// </summary>
+    private void GenerateNewPath()
+    {
+        CreateWaypoints();
+        DrawPath();
+    }
 
-        GameObject point = null;
+    /// <summary>
+    /// Returns waypoint that is closest to given position
+    /// </summary>
+    /// <returns></returns>
+    public GameObject FindClosestWaypoint(Vector3 position)
+    {
+        GameObject closestWaypoint = null;
+        var shortestDistanceSquared = float.MaxValue;
 
-        for (int i = 0; i < pathVectors.Length / PathPointDivider; i++)
+        foreach (var waypoint in _wayPoints)
         {
-            var transformedPoint = transform.TransformPoint(pathVectors[i * PathPointDivider]);
+            var distanceSquared = (position - waypoint.transform.position).sqrMagnitude;
 
-            point = Instantiate(
-                GameManager.Instance.WayPointPrefab,
-                transformedPoint,
-                Quaternion.identity,
-                transform
-            );
-            point.name = "Way" + i;
+            if (distanceSquared > shortestDistanceSquared)
+            {
+                continue;
+            }
 
-            PathPoints[i] = transformedPoint;
+            closestWaypoint = waypoint;
+            shortestDistanceSquared = distanceSquared;
         }
 
-        point.transform.localScale *= 5;
-
-        DrawPath(pathVectors);
+        return closestWaypoint;
     }
 
     /// <summary>
@@ -73,74 +102,95 @@ public class Path : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns a Vector3 array from combined curves
+    /// Returns an array of waypoints representing the bezier curve.
     /// </summary>
-    /// <param name="coordinatesAmountPerCurve"></param>
-    public Vector3[] GetVector3sCoordinatesFromPath(int coordinatesAmountPerCurve)
+    private void CreateWaypoints()
     {
-        var newArray = new List<Vector3>();
+        _wayPoints = new GameObject[WaypointCount];
 
-        for (int i = 0; i < Curves.Length; i++)
+        // The step size between each waypoint
+        // Note: this must be a double because the float type precision isn't precise enough
+        var stepSize = 1d / (WaypointCount / Curves.Length);
+
+        // Current waypoint index
+        var waypointIndex = 0;
+
+        // Loop through each curve to create a full path
+        foreach (var curve in Curves)
         {
-            var points = MakeBezierPoints(
-                Curves[i].Start,
-                Curves[i].StartTangent,
-                Curves[i].EndTangent,
-                Curves[i].End,
-                coordinatesAmountPerCurve
-            );
+            // Calculate points using the 'le castelle' algorithm
+            // Note: this must be a double because the float type precision isn't precise enough
+            for (var interval = 0d; interval <= 1.0d; interval += stepSize)
+            {
+                var floatInterval = (float)interval;
 
-            newArray.AddRange(points);
+                var ap1 = Vector3.Lerp(curve.Start, curve.StartTangent, floatInterval);
+                var ap2 = Vector3.Lerp(curve.StartTangent, curve.EndTangent, floatInterval);
+                var ap3 = Vector3.Lerp(curve.EndTangent, curve.End, floatInterval);
+
+                var bp1 = Vector3.Lerp(ap1, ap2, floatInterval);
+                var bp2 = Vector3.Lerp(ap2, ap3, floatInterval);
+
+                var localPosition = Vector3.Lerp(bp1, bp2, floatInterval);
+
+                // Create new points from intermediate values
+                _wayPoints[waypointIndex] = Instantiate(
+                    Prefab,
+                    transform.position + localPosition,
+                    Quaternion.identity,
+                    transform
+                );
+
+                // We can't set the direction to the current waypoint when we're creating the first waypoint
+                if (waypointIndex == 0)
+                {
+                    waypointIndex++;
+                    continue;
+                }
+
+                // Update rotation of previous waypoint to make it look towards the current one
+                _wayPoints[waypointIndex - 1].transform.LookAt(_wayPoints[waypointIndex].transform);
+
+                // Increment waypoint counter
+                waypointIndex++;
+            }
         }
-
-        return newArray.ToArray();
     }
 
     /// <summary>
     /// Draws the path
     /// </summary>
-    /// <param name="pathCordinates"></param>
-    private void DrawPath(Vector3[] pathCordinates)
+    private void DrawPath()
     {
-        var renderer = GetComponent<LineRenderer>();
+        var positions = new Vector3[_wayPoints.Length];
 
-        renderer.positionCount = pathCordinates.Length;
-        renderer.SetPositions(pathCordinates);
-    }
-
-    /// <summary>
-    /// Retuns an array of points to representing the bezier curve.
-    /// </summary>
-    /// <param name="start"></param>
-    /// <param name="startTangent"></param>
-    /// <param name="endTangent"></param>
-    /// <param name="end"></param>
-    /// <param name="coordinatesAmountPerCurve"></param>
-    /// <returns></returns>
-    private Vector3[] MakeBezierPoints(
-        Vector3 start,
-        Vector3 startTangent,
-        Vector3 endTangent,
-        Vector3 end,
-        int coordinatesAmountPerCurve
-    )
-    {
-        List<Vector3> curve = new List<Vector3>();
-
-        var stepping = 1.0f / coordinatesAmountPerCurve;
-
-        for (var x = 0.0f; x <= 1.0f; x += stepping)
+        for (int i = 0; i < _wayPoints.Length; i++)
         {
-            var ap1 = Vector3.Lerp(start, startTangent, x);
-            var ap2 = Vector3.Lerp(startTangent, endTangent, x);
-            var ap3 = Vector3.Lerp(endTangent, end, x);
-
-            var bp1 = Vector3.Lerp(ap1, ap2, x);
-            var bp2 = Vector3.Lerp(ap2, ap3, x);
-
-            curve.Add(Vector3.Lerp(bp1, bp2, x));
+            positions[i] = _wayPoints[i].transform.position;
         }
 
-        return curve.ToArray();
+        _lineRenderer.positionCount = positions.Length;
+        _lineRenderer.SetPositions(positions);
     }
+
+    #region operator overloading
+
+    /// <summary>
+    /// Array operator overloading to path
+    /// Path.Instance[0] - returns first waypoint in path
+    /// </summary>
+    public GameObject this[int i]
+    {
+        get
+        {
+            if (_wayPoints.Length > 0 && _wayPoints.Length > i)
+            {
+                return _wayPoints[i];
+            }
+
+            return null;
+        }
+    }
+
+    #endregion
 }

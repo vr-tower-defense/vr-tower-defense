@@ -3,24 +3,23 @@ using Valve.VR.InteractionSystem;
 
 class WinState : GameState
 {
-    private readonly Vector3 _ofset = new Vector3(0, 0, 1.5f);
+    public GameObject Prefab = null;
 
-    public void Start()
-    {
-        var camera = Camera.main;
+    public Vector3 Offset = new Vector3(0, 0, 1.5f);
 
-        if (camera == null)
-            return;
+    public void OnEnable()
+    {   
+        foreach (var gameObject in FindObjectsOfType<GameObject>())
+        {
+            gameObject.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
+        }
 
-        GameObject gameWinPrefab = (GameObject)Resources.Load("Text/GameWinText", typeof(GameObject));
-        var playerTransform = Player.instance.headCollider.transform;
-        var gameOverScreen = Instantiate(
-            gameWinPrefab,
-            playerTransform.position + (playerTransform.rotation * _ofset),
-            Quaternion.Euler(new Vector3(0, camera.gameObject.transform.rotation.y, 0))
-            );
-        
+        var player = Player.instance.headCollider.transform;
 
-        gameOverScreen.name = "win screen";
+        Instantiate(
+            Prefab,
+            player.position + (player.rotation * Offset),
+            player.rotation
+        );
     }
 }

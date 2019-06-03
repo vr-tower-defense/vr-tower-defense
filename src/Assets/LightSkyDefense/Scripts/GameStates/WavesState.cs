@@ -6,11 +6,16 @@ public class WavesState : GameState
 {
     public Wave[] Waves;
 
-    public void Start()
-    {
-        _gameManager = GameManager.Instance;
+    public GameState WavesEndState;
 
+    public void OnEnable()
+    {
         StartCoroutine(CycleWaves());
+    }
+
+    public void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     /// <summary>
@@ -23,6 +28,6 @@ public class WavesState : GameState
             yield return wave.Start();
         }
 
-        _gameManager.SetGameState(typeof(WavesEndState));
+        SetGameState(WavesEndState);
     }
 }

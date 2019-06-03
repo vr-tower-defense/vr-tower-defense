@@ -4,80 +4,85 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class FallbackController : MonoBehaviour
 {
-    private Player _player;
-    private Hand _fallbackHand;
-    private SpawnDialOption[] _dialOptions;
+    public Dial Dial;
+
+    private Hand _hand;
+
     private GameObject _preview;
 
     void Start()
     {
-        _player = Player.instance;
+        _hand = GetComponent<Hand>();
 
-        if (XRSettings.enabled)
-        {
-            // Disable FallBackController if player is in actual VR
-            enabled = false;
-            return;
-        }
-
-        // No HDM found, put options in fallback overlay
-
-        var overlayCanvasText = _player.GetComponentInChildren<Text>();
-        var playerDial = _player.GetComponentInChildren<Dial>(true);
-
-        _dialOptions = playerDial.DialOptions;
-
-        overlayCanvasText.text = CreateDialOptionString(_dialOptions);
-
-        foreach (Hand hand in _player.GetComponentsInChildren<Hand>())
-        {
-            if (hand.name.Equals("FallbackHand"))
-                _fallbackHand = hand;
-        }
+        var overlayCanvasText = Player.instance.GetComponentInChildren<Text>();
+        overlayCanvasText.text = CreateDialOptionString(Dial.DialOptions);
     }
 
     void Update()
     {
-        for (int i = 0; i < _dialOptions.Length; i++)
+        for (int i = 0; i < Dial.DialOptions.Length; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                _preview = Instantiate(
-                    _dialOptions[i].Preview
-                );
-
-                _preview.AddComponent<Interactable>();
-                // Use AttachObject because otherwise the hand indicator will interfere.
-                _fallbackHand.AttachObject(_preview, GrabTypes.None);
+                OnPressStart(Dial.DialOptionInstances[i]);
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1 + i))
             {
-                // Destroy clone and replace with "real" instance
-                _fallbackHand.DetachObject(_preview);
-
-                var buildable = _preview.GetComponent<Buildable>();
-
-                // Create final instance when position is valid
-                if (!buildable.IsPositionValid)
-                {
-                    return;
-                }
-
-                buildable.SendMessage(
-                    "OnBuild",
-                    _fallbackHand.transform,
-                    SendMessageOptions.RequireReceiver
-                );
-
-                // Destroy clone and replace with "real" instance
-                Destroy(_preview);
+                OnRelease(Dial.DialOptionInstances[i]);
             }
         }
+    }
+
+    private void OnPressStart(GameObject gameObject)
+    {
+        var spawnDialOption = gameObject.GetComponent<SpawnDialOption>();
+
+        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
+        var fallbackHand = Player.instance.GetHand(0);
+
+        if (playerStatistics.Funds < spawnDialOption.Preview.Price)
+        {
+            return;
+        }
+
+        _preview = Instantiate(
+            spawnDialOption.Preview.gameObject,
+            fallbackHand.transform.position,
+            fallbackHand.transform.rotation
+        );
+
+        fallbackHand.AttachObject(_preview, GrabTypes.Trigger);
+    }
+
+    private void OnRelease(GameObject gameObject)
+    {
+        if (_preview == null)
+        {
+            return;
+        }
+
+        var buildable = _preview.GetComponent<Buildable>();
+
+        // Destroy clone and replace with "real" instance
+        Destroy(_preview);
+
+        // Create final instance when position is valid
+        if (!buildable.IsPositionValid)
+        {
+            return;
+        }
+
+        buildable.SendMessage(
+            "OnBuild",
+            transform,
+            SendMessageOptions.RequireReceiver
+        );
     }
 
     /// <summary>
@@ -90,30 +95,17 @@ public class FallbackController : MonoBehaviour
     /// ex:
     /// (dialOptionBuilder): [first option], [second option]
     /// (dialIndexBuilder) :       1                2
-    ///                    :
     /// </para>
     /// </summary>
     private string CreateDialOptionString(SpawnDialOption[] dialOptions)
     {
-        var dialOptionBuilder = new StringBuilder();
-        var dialIndexBuilder = new StringBuilder();
+        var dialInfo = "";
 
         for (int i = 0; i < dialOptions.Length; i++)
         {
-            dialOptionBuilder.Append("[");
-            dialOptionBuilder.Append(dialOptions[i].name);
-            dialOptionBuilder.Append("], ");
-
-            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 1);
-            dialIndexBuilder.Append(i + 1);
-            dialIndexBuilder.Insert(dialIndexBuilder.Length, " ", dialOptions[i].name.Length / 2 + 3);
+            dialInfo += $"{dialOptions[i].name}: {i} \n";
         }
 
-        dialOptionBuilder.Remove(dialOptionBuilder.Length - 2, 2);
-        dialOptionBuilder.Append("\n");
-        dialOptionBuilder.AppendLine(dialIndexBuilder.ToString());
-        dialOptionBuilder.Append("\n");
-
-        return dialOptionBuilder.ToString();
+        return dialInfo;
     }
 }
