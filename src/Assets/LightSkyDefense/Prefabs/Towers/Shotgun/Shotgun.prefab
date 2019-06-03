@@ -341,7 +341,7 @@ MonoBehaviour:
     type: 3}
   ProjectileSpeed: 1
   Cooldown: 1
-  PelletCount: 5
+  PelletCount: 8
   ProjectileSpeedVariationRatio: 0.3
   Spread: 20
 --- !u!114 &9201011055191367473

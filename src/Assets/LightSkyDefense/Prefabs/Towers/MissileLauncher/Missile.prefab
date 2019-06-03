@@ -205,8 +205,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ExplosionPower: 10
-  ExplosionRange: 0.15
+  ExplosionPower: 5
+  ExplosionRange: 0.3
   DetectionRange: 0.5
   CollisionLayerMask: 512
   TimeAlive: 8

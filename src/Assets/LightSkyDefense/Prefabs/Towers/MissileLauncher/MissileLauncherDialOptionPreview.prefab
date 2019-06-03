@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2143c5f95f91046aee0711944e594b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Price: 50
+  Price: 30
   Prefab: {fileID: 6626728996559669971, guid: c9dc7c728ff86fb40b69c960577f791f, type: 3}
   InvalidPositionMaterial: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583,
     type: 2}
