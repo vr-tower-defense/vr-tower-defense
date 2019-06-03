@@ -65,7 +65,7 @@ public class Ejected : IMissileState
     /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
-        Collider[] colliders = Physics.OverlapSphere(
+        var colliders = Physics.OverlapSphere(
             _missile.transform.position,
             _missile.ExplosionRange,
             (int) _missile.CollisionLayerMask
@@ -73,7 +73,7 @@ public class Ejected : IMissileState
 
         foreach (var collider in colliders)
         {
-            var damagable = collider
+            var damageable = collider
                .GetComponent<Damageable>();
 
             var rigidbody = collider
@@ -84,11 +84,8 @@ public class Ejected : IMissileState
                 collider.transform.position
             );
 
-            damagable?.UpdateHealth(
-                // Calculate the damage that should be applied to the enemy
-                -_missile.DamageCurve.Evaluate(enemyDistance)
-            );
-
+            var damage = _missile.DamageCurve.Evaluate(enemyDistance);
+            damageable?.UpdateHealth(-damage);
             rigidbody.AddExplosionForce(
                 _missile.ExplosionPower,
                 _missile.transform.position,

@@ -403,7 +403,7 @@ MonoBehaviour:
   Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
   Cooldown: 2
-  EjectInterval: 1
+  EjectInterval: 2
 --- !u!114 &6244242722572371592
 MonoBehaviour:
   m_ObjectHideFlags: 0
