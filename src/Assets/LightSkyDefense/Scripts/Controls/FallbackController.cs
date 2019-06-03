@@ -27,18 +27,62 @@ public class FallbackController : MonoBehaviour
     {
         for (int i = 0; i < Dial.DialOptions.Length; i++)
         {
-            var activeScript = Dial.DialOptionInstances[i].GetComponent<SpawnDialOption>();
-
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                activeScript.OnPressStart(new SteamVR_Action_Vector2());
+                OnPressStart(Dial.DialOptionInstances[i]);
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha1 + i))
             {
-                activeScript.OnRelease(new SteamVR_Action_Vector2());
+                OnRelease(Dial.DialOptionInstances[i]);
             }
         }
+    }
+
+    private void OnPressStart(GameObject gameObject)
+    {
+        var spawnDialOption = gameObject.GetComponent<SpawnDialOption>();
+
+        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
+        var fallbackHand = Player.instance.GetHand(0);
+
+        if (playerStatistics.Funds < spawnDialOption.Preview.Price)
+        {
+            return;
+        }
+
+        _preview = Instantiate(
+            spawnDialOption.Preview.gameObject,
+            fallbackHand.transform.position,
+            fallbackHand.transform.rotation
+        );
+
+        fallbackHand.AttachObject(_preview, GrabTypes.Trigger);
+    }
+
+    private void OnRelease(GameObject gameObject)
+    {
+        if (_preview == null)
+        {
+            return;
+        }
+
+        var buildable = _preview.GetComponent<Buildable>();
+
+        // Destroy clone and replace with "real" instance
+        Destroy(_preview);
+
+        // Create final instance when position is valid
+        if (!buildable.IsPositionValid)
+        {
+            return;
+        }
+
+        buildable.SendMessage(
+            "OnBuild",
+            transform,
+            SendMessageOptions.RequireReceiver
+        );
     }
 
     /// <summary>
