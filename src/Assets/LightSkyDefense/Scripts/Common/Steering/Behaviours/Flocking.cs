@@ -49,6 +49,9 @@ public class Flocking : ISteering
         );
 
         // We can't divide by zero so we must check if we have any neighbours
+        //
+        // There needs to be at least 2 neighbours since the current gameObject
+        // is one of the neighbours
         if (neighbours.Length < 2)
         {
             return Vector3.zero;
@@ -86,9 +89,7 @@ public class Flocking : ISteering
             alignmentForce += Vector3.Normalize(toNeighbour);
 
             // Check whether current neighbour should be considered for the separation force
-            if (
-                toNeighbour.sqrMagnitude <= _seperationRadiusSquared
-            )
+            if (toNeighbour.sqrMagnitude <= _seperationRadiusSquared)
             {
                 // Scale the force inversely proportional to the objects distance from its neighbor
                 separationForce += Vector3.Normalize(-toNeighbour) / toNeighbour.magnitude;
