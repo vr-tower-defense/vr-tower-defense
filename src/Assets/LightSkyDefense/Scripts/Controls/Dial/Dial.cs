@@ -15,9 +15,11 @@ public class Dial : MonoBehaviour
     [Tooltip("Options that can are placed onto the Dial")]
     public SpawnDialOption[] DialOptions;
 
+    [HideInInspector]
+    public GameObject[] DialOptionInstances;
+
     // Field used to check whether user is in process of clicking touchpad
     private DialOption _pressedDial;
-    private GameObject[] _dialOptions;
 
     /// <summary>
     /// Valdiate properties and create dial options
@@ -31,14 +33,14 @@ public class Dial : MonoBehaviour
         if (DialClickAction == null)
             Debug.LogError("`DialClick` action has not been set on this component.");
 
-        _dialOptions = new GameObject[DialOptions.Length];
+        DialOptionInstances = new GameObject[DialOptions.Length];
 
         // Create dial option instances
         for (int i = 0; i < DialOptions.Length; i++)
         {
-            _dialOptions[i] = Instantiate(DialOptions[i].gameObject, gameObject.transform);
+            DialOptionInstances[i] = Instantiate(DialOptions[i].gameObject, gameObject.transform);
 
-            var segmentAngle = (365 / _dialOptions.Length);
+            var segmentAngle = (365 / DialOptionInstances.Length);
             var segmentAngleCenter = segmentAngle / 2;
 
             // Update position
@@ -50,7 +52,7 @@ public class Dial : MonoBehaviour
                 (new Vector3(Mathf.Sin(localRotationInRadians), 0, Mathf.Cos(localRotationInRadians)) * DialOptionRadius);
 
             // Update position by adding local position to world position of right hand
-            _dialOptions[i].transform.position = transform.position + localPosition;
+            DialOptionInstances[i].transform.position = transform.position + localPosition;
         }
     }
 
@@ -75,7 +77,7 @@ public class Dial : MonoBehaviour
         // Invoke OnPressUp when dial touchpad click ends
         if (_pressedDial != null && DialClickAction.stateUp)
         {
-            _pressedDial.OnPressUp(DialAction);
+            _pressedDial.OnRelease(DialAction);
             _pressedDial = null;
         }
 
@@ -100,7 +102,7 @@ public class Dial : MonoBehaviour
     private DialOption FindDialOption(Vector2 positionOnTouchpad)
     {
         // We can't find a dial option when there are no options :D
-        if (_dialOptions.Length < 1)
+        if (DialOptionInstances.Length < 1)
         {
             return null;
         }
@@ -114,11 +116,11 @@ public class Dial : MonoBehaviour
             degrees += 360;
         }
 
-        var optionDegreeSpan = 360 / _dialOptions.Length;
+        var optionDegreeSpan = 360 / DialOptionInstances.Length;
         var optionIndex = Mathf.FloorToInt(degrees / optionDegreeSpan);
 
         // Get dial option
-        var dialOption = _dialOptions[optionIndex];
+        var dialOption = DialOptionInstances[optionIndex];
 
         if (dialOption == null)
         {
@@ -144,15 +146,15 @@ public class Dial : MonoBehaviour
     private void UpdateDialOptions()
     {
         // Create dial option instances
-        for (int i = 0; i < _dialOptions.Length; i++)
+        for (int i = 0; i < DialOptionInstances.Length; i++)
         {
-            if (_dialOptions[i] == null)
+            if (DialOptionInstances[i] == null)
             {
                 continue;
             }
 
             // Reset IsSelected property on all DialOptions
-            var dialOptionScript = _dialOptions[i].GetComponent<DialOption>();
+            var dialOptionScript = DialOptionInstances[i].GetComponent<DialOption>();
             if (dialOptionScript != null)
             {
                 dialOptionScript.IsSelected = false;

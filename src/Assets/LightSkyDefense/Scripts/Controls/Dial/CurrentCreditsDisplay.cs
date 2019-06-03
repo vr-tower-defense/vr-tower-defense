@@ -11,25 +11,22 @@ public class CurrentCreditsDisplay : MonoBehaviour
     [Tooltip("Small offset towards wrist, from middle of dial")]
     public Vector3 CreditsDialOffset = new Vector3(0, 0, -0.175f);
 
-    private GameObject _creditsText;
+    private TextMesh _textMesh;
 
-    void Start()
+    void Awake()
     {
-        _creditsText = Instantiate(
+        var prefabInstance = Instantiate(
             CreditTextPrefab,
             gameObject.transform.position + CreditsDialOffset,
-            gameObject.transform.rotation
+            gameObject.transform.rotation,
+            gameObject.transform
         );
-    }
 
-    void Update()
-    {
-        _creditsText.transform.rotation = Player.instance.headCollider.transform.rotation;
+        _textMesh = prefabInstance.GetComponentInChildren<TextMesh>();
     }
 
     void OnPlayerStatisticsUpdate(PlayerStatistics playerStatistics)
     {
-        var textMesh = _creditsText.GetComponent<TextMesh>();
-        textMesh.text = "Currency:\n" + playerStatistics.Funds;
+        _textMesh.text = $"Currency: \n {playerStatistics.Funds}";
     }
 }

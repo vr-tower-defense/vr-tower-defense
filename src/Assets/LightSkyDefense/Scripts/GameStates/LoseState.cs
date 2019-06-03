@@ -3,30 +3,30 @@ using Valve.VR.InteractionSystem;
 
 class LoseState : GameState
 {
-    private readonly Vector3 _ofset = new Vector3(0, 0, 1.5f);
+    public GameObject Prefab;
 
-    private void Start()
+    public Vector3 Offset = new Vector3(0, 0, 1.5f);
+
+    private GreyscaleAfterEffect _greyScaleEffect;
+
+    private void Awake()
     {
-        var camera = Camera.main;   
+        _greyScaleEffect = Camera.main.GetComponent<GreyscaleAfterEffect>();
+    }
 
-        if (camera == null)
-            return;
+    private void OnEnable()
+    {
+        if (_greyScaleEffect != null)
+        {
+            _greyScaleEffect.Active = true;
+        }
 
-        GameObject gameOverPrefab = (GameObject)Resources.Load("Text/GameOverText", typeof(GameObject));
+        var player = Player.instance.headCollider.transform;
 
-        var playerTransform = Player.instance.headCollider.transform;
-        var gameOverScreen = Instantiate(
-            gameOverPrefab, playerTransform.position + (playerTransform.rotation * _ofset),
-            Quaternion.Euler(new Vector3(0, camera.gameObject.transform.rotation.y, 0))
+        Instantiate(
+            Prefab,
+            player.position + (player.rotation * Offset),
+            player.rotation
         );
-
-        gameOverScreen.name = "lose screen";
-
-        var greyScale = camera.gameObject.GetComponent<GreyscaleAfterEffect>();
-
-        if (greyScale == null)
-            return;
-
-        greyScale.Active = true;
     }
 }
