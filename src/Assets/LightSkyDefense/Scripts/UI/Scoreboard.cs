@@ -20,7 +20,7 @@ public class Scoreboard : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        var wavesState = GetComponent<WavesState>();
+        var wavesState = GameManager.Instance.GetComponent<WavesState>();
 
         _audioSource = GetComponent<AudioSource>();
 

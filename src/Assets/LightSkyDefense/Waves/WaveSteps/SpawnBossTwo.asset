@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
   m_Name: SpawnBossTwo
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 6369403213668092304, guid: 07fb797c601c0b147bf5ca17a3deda95, type: 3}
+  Enemy: {fileID: 2891067001920863322, guid: f9b7fcc24631b9b4892930a83a3405ba, type: 3}
   OffsetRadius: 0.2

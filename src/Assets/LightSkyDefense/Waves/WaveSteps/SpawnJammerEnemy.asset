@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
   m_Name: SpawnJammerEnemy
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 8314053059502906969, guid: 4b8718e007555b24385c86bcdc5c5df3, type: 3}
+  Enemy: {fileID: 4258952436743246216, guid: 4b8718e007555b24385c86bcdc5c5df3, type: 3}
+  OffsetRadius: 0.2
