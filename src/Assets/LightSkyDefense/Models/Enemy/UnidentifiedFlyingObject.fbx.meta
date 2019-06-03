@@ -1,30 +1,38 @@
 fileFormatVersion: 2
-guid: d610873c65bad9e4292d0d9e610d692e
+guid: 6326946b8d17e3a47993474fbde3c9f6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cylinder
     400000: //RootNode
-    400002: Cylinder
-    2100000: Material.001
-    2100002: Material.003
-    2100004: Material.002
-    2100006: Material.004
-    2100008: Material.005
+    2100000: UFO side
+    2100002: UFO top
+    2100004: UFO bottom
+    2100006: UFO bright light
     2300000: //RootNode
-    2300002: Cylinder
     3300000: //RootNode
-    3300002: Cylinder
-    4300000: Cube
-    4300002: Cylinder
-    2186277476908879412: ImportLogs
+    4300000: Torus
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 0ccd615240308244db72f0c0c7980190, type: 2}
+      name: UFO bottom
+    second: {fileID: 2100000, guid: a3f400d525f6c8044b22e5fe14af595a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UFO bright light
+    second: {fileID: 2100000, guid: 70a42a9138a405540a0bb85d9b818f2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UFO side
+    second: {fileID: 2100000, guid: 4e24c25e3220c32479a42fd65ea0c225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UFO top
+    second: {fileID: 2100000, guid: ef74eb2997cd04e429154836878d6488, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -61,8 +69,8 @@ ModelImporter:
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

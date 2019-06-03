@@ -42,7 +42,7 @@ public class Ejected : IMissileState
             var collider = FindClosestTarget(
                 _missile.transform.position,
                 _missile.DetectionRange,
-                Layers.Enemies
+                _missile.CollisionLayerMask
             );
 
             _target = collider?.transform;
@@ -86,7 +86,7 @@ public class Ejected : IMissileState
 
             var damage = _missile.DamageCurve.Evaluate(enemyDistance);
             damageable?.UpdateHealth(-damage);
-            rigidbody.AddExplosionForce(
+            rigidbody?.AddExplosionForce(
                 _missile.ExplosionPower,
                 _missile.transform.position,
                 _missile.ExplosionRange

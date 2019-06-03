@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ShootAtTarget : EnableOnTarget
+public class ShootMissileAtTarget : EnableOnTarget
 {
     public FindTarget FindTarget;
 
@@ -9,10 +9,13 @@ public class ShootAtTarget : EnableOnTarget
 
     public Transform ProjectileSpawn;
 
-    public float ProjectileSpeed = .5f;
+    public float ShootSpeed = 1.25f;
 
-    [Tooltip("The time between every shot")]
-    public float Cooldown = 2;
+    [Min(0)]
+    public float ShootInterval = 4;
+
+    [Min(0)]
+    public float LoadUpTime = 3;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -27,6 +30,8 @@ public class ShootAtTarget : EnableOnTarget
 
     private IEnumerator Shoot()
     {
+        yield return new WaitForSeconds(LoadUpTime);
+
         var distanceToTarget = Vector3.Distance(Target.transform.position, transform.position);
 
         // Switch to FindTarget when target does not exist anymore
@@ -37,20 +42,16 @@ public class ShootAtTarget : EnableOnTarget
             yield break;
         }
 
-        var projectile = Instantiate(
+        var newProjectile = Instantiate(
             Projectile,
             ProjectileSpawn.position,
             ProjectileSpawn.rotation
         );
 
-        var direction = Target.transform.position - ProjectileSpawn.position;
+        newProjectile.SendMessage("OnEject", SendMessageOptions.RequireReceiver);
+        newProjectile.velocity = ProjectileSpawn.forward * ShootSpeed;
 
-        projectile.AddForce(
-            Vector3.Normalize(direction) * ProjectileSpeed,
-            ForceMode.VelocityChange
-        );
-
-        yield return new WaitForSeconds(Cooldown);
+        yield return new WaitForSeconds(ShootInterval);
         yield return Shoot();
     }
 }
