@@ -11,10 +11,14 @@ public class FollowPath : ISteering
     [Tooltip("The speed at which the path follower moves forward (every physics update - 16ms)")]
     public float FollowSpeed = .1f;
 
-    // The target position on the path
+    /// <summary>
+    /// The target position on the path
+    /// </summary>
     private Vector3 _progress;
 
-    // The waypoint index to which _progress moves towards
+    /// <summary>
+    /// The waypoint index to which _progress moves towards
+    /// </summary>
     private int _currentWaypointIndex;
 
     /// <summary>
