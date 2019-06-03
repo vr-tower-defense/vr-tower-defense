@@ -12,7 +12,7 @@ public class Flocking : ISteering
     public int MaxNeighbours = 10;
 
     [Header("Flocking properties")]
-    public int FlockingLayerMask = (int)Layers.Enemies;
+    public LayerMask FlockingLayerMask = (int)Layers.Enemies;
 
     [Range(0, 1)]
     public float CohesionRadius = .5f;
