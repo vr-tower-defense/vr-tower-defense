@@ -21,7 +21,7 @@ public abstract class DialOption : MonoBehaviour
     /// <summary>
     /// Method that is invoked once when the player stops pressing on the touchpad
     /// </summary>
-    public virtual void OnPressUp(SteamVR_Action_Vector2 action)
+    public virtual void OnRelease(SteamVR_Action_Vector2 action)
     { }
 
     /// <summary>

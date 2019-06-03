@@ -3,10 +3,22 @@ using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
 {
-    protected GameManager _gameManager;
-
-    private void Awake()
+    /// <summary>
+    /// Updates active game state
+    /// </summary>
+    public void SetGameState(GameState gameState)
     {
-        _gameManager = GetComponent<GameManager>();
+        if (gameState == null)
+        {
+            return;
+        }
+
+        foreach (var state in GameManager.Instance.GameStates)
+        {
+            state.enabled = false;
+        }
+
+        gameState.enabled = true;
+        GameManager.Instance.CurrentState = gameState;
     }
 }

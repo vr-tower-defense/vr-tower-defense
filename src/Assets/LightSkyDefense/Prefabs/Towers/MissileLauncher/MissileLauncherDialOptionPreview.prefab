@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5889446234684480002}
-  - component: {fileID: 5885393046664702789}
+  - component: {fileID: 1406681973053826335}
   - component: {fileID: 7267823276558648787}
   - component: {fileID: 415456668932566361}
   m_Layer: 11
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5885393046664702789
+--- !u!135 &1406681973053826335
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311665180749323574}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7267823276558648787
 MonoBehaviour:
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3eaa859b84450e4f9d925607aa1ef6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColliderMaterial: {fileID: 2100000, guid: ceefb5487f949fe46bddd4c9f217c53b, type: 2}
 --- !u!114 &415456668932566361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2143c5f95f91046aee0711944e594b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Price: 1
+  Price: 50
   Prefab: {fileID: 6626728996559669971, guid: c9dc7c728ff86fb40b69c960577f791f, type: 3}
   InvalidPositionMaterial: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583,
     type: 2}
