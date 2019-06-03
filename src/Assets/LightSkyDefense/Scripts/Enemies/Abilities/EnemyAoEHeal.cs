@@ -2,8 +2,13 @@
 
 public class EnemyAoEHeal : MonoBehaviour
 {
+    [Tooltip("The amount of heal that is added every HealInterval")]
     public float HealAmount = 0.1f;
+
+    [Tooltip("The range in which an enemy should be to receive health")]
     public float HealRadius = 0.2f;
+
+    [Tooltip("The time between each heal")]
     public float HealInterval = 3;
 
     /// <summary>
