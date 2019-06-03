@@ -850,13 +850,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LivesTextNodes:
   - {fileID: 6554161100093399148}
-  - {fileID: 0}
   ScoreTextNodes:
   - {fileID: 5428643547933416843}
-  - {fileID: 0}
   WavesTextNodes:
   - {fileID: 3643981555196850779}
-  - {fileID: 0}
 --- !u!114 &3815202866338680409
 MonoBehaviour:
   m_ObjectHideFlags: 0
