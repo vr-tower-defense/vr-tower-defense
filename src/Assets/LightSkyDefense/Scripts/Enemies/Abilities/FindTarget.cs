@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class FindTarget : MonoBehaviour
 {
-    public ShootAtTarget ShootAtTarget;
+    public EnableOnTarget HasTarget;
 
     [Tooltip("Radius in which a target must be before it is considered a threat")]
     public float Radius;
 
     [Tooltip("Layer bitmask, set to Towers by default")]
-    public int LayerBitMask = (int)Layers.Towers;
+    public LayerMask LayerBitMask = (int)Layers.Towers;
 
     private void Awake()
     {
         // Disable shooting state on awake by default
-        ShootAtTarget.enabled = false;
+        HasTarget.enabled = false;
     }
 
     private void FixedUpdate()
@@ -44,10 +44,10 @@ public class FindTarget : MonoBehaviour
         }
 
         // Set new target
-        ShootAtTarget.Target = nearestTarget;
+        HasTarget.Target = nearestTarget;
 
         // Change active script
-        ShootAtTarget.enabled = true;
+        HasTarget.enabled = true;
         enabled = false;
     }
 }
