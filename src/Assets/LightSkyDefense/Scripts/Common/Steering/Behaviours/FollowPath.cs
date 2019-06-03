@@ -54,7 +54,7 @@ public class FollowPath : ISteering
     /// </summary>
     private void UpdateProgression()
     {
-        if (_currentWaypointIndex >= Path.Instance.WaypointCount - 1)
+        if (_currentWaypointIndex >= Path.Instance.WaypointCount)
         {
             return;
         }

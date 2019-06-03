@@ -15,6 +15,17 @@ public class Enemy : MonoBehaviour
     public ParticleSystem ExplodeEffect;
     public AudioClip ExplodeSound;
 
+    public void OnReachEndOfPath()
+    {
+        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
+
+        // Reduce player lives
+        playerStatistics.UpdateLives(-1);
+
+        // Destroy enemy
+        Destroy(gameObject);
+    }
+
     /// <summary>
     /// This kills the enemy and starts the explosion particle system and sound effect
     /// </summary>
