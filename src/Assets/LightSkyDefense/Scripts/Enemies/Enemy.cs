@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     public void OnUpdateHealth(float amount)
     {
-        if(amount > 0)
+        if (amount > 0)
         {
             var animationPrefab = Instantiate(
                 HealEffect,
