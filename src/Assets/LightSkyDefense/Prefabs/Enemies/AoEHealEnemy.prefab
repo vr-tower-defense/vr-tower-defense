@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealAmount: 0.1
+  HealRadius: 0.2
   HealInterval: 3
 --- !u!1001 &3812549667534034278
 PrefabInstance:
@@ -57,11 +58,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AoEHealEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7073890643881863432, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 673e5c2e089be384088420f6594b4a77, type: 2}
     - target: {fileID: 4986396300897381402, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -117,6 +113,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7073890643881863432, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 673e5c2e089be384088420f6594b4a77, type: 2}
+    - target: {fileID: 10967276864640786, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: HealEffect
+      value: 
+      objectReference: {fileID: 4024179581054915498, guid: 0cd0afb2c5984e74bb17a002788c6eda,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
 --- !u!4 &8204389453748844924 stripped

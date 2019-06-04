@@ -129,6 +129,8 @@ MonoBehaviour:
   ExplodeEffect: {fileID: 6258934270048886012, guid: 97d9ad363ef3af041890468ff10e8a8d,
     type: 3}
   ExplodeSound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
+  HealEffect: {fileID: 4024179581054915498, guid: 0cd0afb2c5984e74bb17a002788c6eda,
+    type: 3}
 --- !u!114 &239233248778471490
 MonoBehaviour:
   m_ObjectHideFlags: 0
