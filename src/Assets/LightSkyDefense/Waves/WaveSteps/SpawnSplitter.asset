@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
   m_Name: SpawnSplitter
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 8695885477200556864, guid: a56a506fbdb4eb440835b4aa1f0c1eac, type: 3}
+  Enemy: {fileID: 6106747467182230923, guid: 2251238e7224c8241907f4da944fad1f, type: 3}
+  OffsetRadius: 0.2
