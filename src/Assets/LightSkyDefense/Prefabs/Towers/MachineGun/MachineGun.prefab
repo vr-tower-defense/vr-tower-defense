@@ -237,7 +237,9 @@ MonoBehaviour:
   TowerStates: []
   ProjectileSpawns:
   - {fileID: 1735530294072165508}
-  DetectionLayerMask: 512
+  DetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   Range: 0.75
 --- !u!114 &1122127929142115503
 MonoBehaviour:
@@ -246,7 +248,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2730720782309557209}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65eb2959579d7554da445040fc1db6b3, type: 3}
   m_Name: 
@@ -260,7 +262,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2730720782309557209}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d4d178b6e85d784da374e6db8a4c1bf, type: 3}
   m_Name: 
@@ -278,7 +280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2730720782309557209}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e84fbe5e201231e4194ce66976ffb7ec, type: 3}
   m_Name: 
