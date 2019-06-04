@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ShootAtTarget : MonoBehaviour
+public class ShootAtTarget : EnableOnTarget
 {
     public FindTarget FindTarget;
 
     public Rigidbody Projectile;
 
+    public Transform ProjectileSpawn;
+
     public float ProjectileSpeed = .5f;
 
     [Tooltip("The time between every shot")]
     public float Cooldown = 2;
-
-    [HideInInspector]
-    public Collider Target;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -28,31 +27,30 @@ public class ShootAtTarget : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        while (true)
+        var distanceToTarget = Vector3.Distance(Target.transform.position, transform.position);
+
+        // Switch to FindTarget when target does not exist anymore
+        if (Target == null || distanceToTarget > FindTarget.Radius)
         {
-            var distanceToTarget = Vector3.Distance(Target.transform.position, transform.position);
-
-            // Switch to FindTarget when target does not exist anymore
-            if (Target == null || distanceToTarget > FindTarget.Radius)
-            {
-                FindTarget.enabled = true;
-                enabled = false;
-            }
-
-            var projectile = Instantiate(
-                Projectile,
-                transform.position,
-                transform.rotation
-            );
-
-            var direction = Target.transform.position - transform.position;
-
-            projectile.AddForce(
-                Vector3.Normalize(direction) * ProjectileSpeed,
-                ForceMode.VelocityChange
-            );
-
-            yield return new WaitForSeconds(Cooldown);
+            FindTarget.enabled = true;
+            enabled = false;
+            yield break;
         }
+
+        var projectile = Instantiate(
+            Projectile,
+            ProjectileSpawn.position,
+            ProjectileSpawn.rotation
+        );
+
+        var direction = Target.transform.position - ProjectileSpawn.position;
+
+        projectile.AddForce(
+            Vector3.Normalize(direction) * ProjectileSpeed,
+            ForceMode.VelocityChange
+        );
+
+        yield return new WaitForSeconds(Cooldown);
+        yield return Shoot();
     }
 }

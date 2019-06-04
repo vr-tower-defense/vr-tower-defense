@@ -42,7 +42,7 @@ public class Ejected : IMissileState
             var collider = FindClosestTarget(
                 _missile.transform.position,
                 _missile.DetectionRange,
-                Layers.Enemies
+                _missile.CollisionLayerMask
             );
 
             _target = collider?.transform;
@@ -68,7 +68,7 @@ public class Ejected : IMissileState
         Collider[] colliders = Physics.OverlapSphere(
             _missile.transform.position,
             _missile.ExplosionRange,
-            (int) _missile.CollisionLayerMask
+            (int)_missile.CollisionLayerMask
         );
 
         foreach (var collider in colliders)
@@ -89,7 +89,7 @@ public class Ejected : IMissileState
                 -_missile.DamageCurve.Evaluate(enemyDistance)
             );
 
-            rigidbody.AddExplosionForce(
+            rigidbody?.AddExplosionForce(
                 _missile.ExplosionPower,
                 _missile.transform.position,
                 _missile.ExplosionRange
@@ -99,14 +99,14 @@ public class Ejected : IMissileState
         MonoBehaviour.Destroy(_missile.gameObject);
     }
 
-    private Collider FindClosestTarget(Vector3 position, float radius, Layers layerMask = Layers.Default)
+    private Collider FindClosestTarget(Vector3 position, float radius, LayerMask layerMask)
     {
-        var colliders = Physics.OverlapSphere(position, radius, (int) layerMask);
+        var colliders = Physics.OverlapSphere(position, radius, layerMask);
 
         Collider targetCollider = null;
         var minimalDistance = float.MaxValue;
 
-        foreach(var collider in colliders)
+        foreach (var collider in colliders)
         {
             var distance = Vector3.Distance(position, collider.transform.position);
 
@@ -138,7 +138,7 @@ public class MissileBehaviour : MonoBehaviour
     public float DetectionRange = .25f;
 
     [Tooltip("The layers that should be considered when checking for collisions")]
-    public Layers CollisionLayerMask = Layers.Enemies;
+    public LayerMask CollisionLayerMask = (int)Layers.Enemies;
 
     [Tooltip("The time before a bullet is removed from the scene")]
     public float TimeAlive = 8;
