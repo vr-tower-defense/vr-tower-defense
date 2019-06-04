@@ -36,6 +36,20 @@ MonoBehaviour:
   ProjectileSpawn: {fileID: 4514111890428074979}
   ProjectileSpeed: 0.5
   Cooldown: 2
+--- !u!136 &2826923888820428919
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514111890427905987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!1001 &6758449065101368284
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -36,6 +36,20 @@ MonoBehaviour:
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!136 &4304033843059745177
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258952436743246216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!1001 &7133038546561114623
 PrefabInstance:
   m_ObjectHideFlags: 0

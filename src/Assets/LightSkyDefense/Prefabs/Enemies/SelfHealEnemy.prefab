@@ -14,6 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealCooldown: 5
   HealAmount: 0.3
+--- !u!136 &4296376288465056853
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554406636246025772}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!1001 &3307218601920214550
 PrefabInstance:
   m_ObjectHideFlags: 0

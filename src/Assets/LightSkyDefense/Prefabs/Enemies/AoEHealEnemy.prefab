@@ -15,6 +15,20 @@ MonoBehaviour:
   HealAmount: 0.1
   HealRadius: 0.2
   HealInterval: 3
+--- !u!136 &1330768008048835940
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204389453749200220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!1001 &932379534715090308
 PrefabInstance:
   m_ObjectHideFlags: 0
