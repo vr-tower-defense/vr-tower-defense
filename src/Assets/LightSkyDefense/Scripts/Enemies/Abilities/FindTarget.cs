@@ -50,4 +50,17 @@ public class FindTarget : MonoBehaviour
         HasTarget.enabled = true;
         enabled = false;
     }
+
+    #region debugging
+
+    /// <summary>
+    /// Display the range
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0, 0, 1, 0.1f);
+        Gizmos.DrawSphere(transform.position, Radius);
+    }
+
+    #endregion
 }
