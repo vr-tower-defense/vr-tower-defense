@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100470}
-  m_LocalRotation: {x: 0.32650563, y: 0.212631, z: -0.6272114, w: 0.67437977}
-  m_LocalPosition: {x: -0.05199999, y: -0.0157, z: -0.11630082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 485514}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 135, y: 170, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &101548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,8 +1153,8 @@ MonoBehaviour:
   handType: 1
   trackedObject: {fileID: 0}
   grabPinchAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 1
+    actionPath: /actions/default/in/GrapPinch
+    needsReinit: 0
   grabGripAction:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 1
@@ -1166,7 +1166,7 @@ MonoBehaviour:
     needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 4000012325712216}
-  hoverSphereRadius: 0.075
+  hoverSphereRadius: 0.15
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 8480
@@ -1282,8 +1282,8 @@ MonoBehaviour:
   handType: 2
   trackedObject: {fileID: 0}
   grabPinchAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 1
+    actionPath: /actions/default/in/GrapPinch
+    needsReinit: 0
   grabGripAction:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 1
@@ -1291,11 +1291,11 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 1
   uiInteractAction:
-    actionPath: /actions/default/in/TriggerClick
+    actionPath: /actions/default/in/InteractWithUI
     needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 480432}
-  hoverSphereRadius: 0.075
+  hoverSphereRadius: 0.15
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 8480
@@ -1382,7 +1382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.051999986, y: -0.015699983, z: -0.11630082}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 485514}
@@ -1734,7 +1734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000013428287994}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.051999986, y: -0.015699983, z: -0.11630082}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476540}
@@ -1763,8 +1763,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000014277073068}
-  m_LocalRotation: {x: 0.32650566, y: -0.21263102, z: 0.6272114, w: 0.67437977}
-  m_LocalPosition: {x: 0.051999986, y: -0.0157, z: -0.11630082}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476540}
@@ -1975,7 +1975,7 @@ PrefabInstance:
     - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.034899585
       objectReference: {fileID: 0}
     - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
@@ -1990,7 +1990,7 @@ PrefabInstance:
     - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99939084
       objectReference: {fileID: 0}
     - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
@@ -2011,6 +2011,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.035
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1344af5b7097b3046a402fdc19f41346, type: 3}

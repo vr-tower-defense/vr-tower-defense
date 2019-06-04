@@ -207,8 +207,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   ExplosionPower: 5
   ExplosionRange: 0.2
+  ExplosionEffect: {fileID: 3260893505967507422, guid: 5ff16f6a98ad1444d93f7f8928ab8a9b,
+    type: 3}
   DetectionRange: 0.5
-  CollisionLayerMask: 512
+  CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   TimeAlive: 8
   EjectForce: 1
   MaxSpeed: 0.5
