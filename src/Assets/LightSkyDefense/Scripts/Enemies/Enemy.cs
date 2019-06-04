@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     public ParticleSystem ExplodeEffect;
     public AudioClip ExplodeSound;
 
+    [Header("Heal effect")]
+    public GameObject HealEffect;
+
     public void OnReachEndOfPath()
     {
         var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
@@ -32,14 +35,11 @@ public class Enemy : MonoBehaviour
     public void OnDie()
     {
         // If not in the world, instantiate
-        var explodeEffectInstance = Instantiate(
+        Instantiate(
             ExplodeEffect,
             transform.position,
             transform.rotation
         );
-
-        // Play effect
-        explodeEffectInstance.Play();
 
         // Play sound effect
         SoundUtil.PlayClipAtPointWithRandomPitch(
@@ -48,11 +48,20 @@ public class Enemy : MonoBehaviour
             ExplodePitch - ExplodePitchVariation,
             ExplodePitch + ExplodePitchVariation
         );
+    }
 
-        // Destroy after particle (emit) duration + maximum particle lifetime
-        Destroy(
-            explodeEffectInstance.gameObject,
-            explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
-        );
+    public void OnUpdateHealth(float amount)
+    {
+        if (amount > 0)
+        {
+            var animationPrefab = Instantiate(
+                HealEffect,
+                transform
+            );
+
+            var animation = animationPrefab.GetComponent<Animation>();
+
+            Destroy(animationPrefab, animation.clip.averageDuration);
+        }
     }
 }

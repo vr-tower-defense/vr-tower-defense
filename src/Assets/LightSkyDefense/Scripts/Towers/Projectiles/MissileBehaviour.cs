@@ -65,7 +65,14 @@ public class Ejected : IMissileState
     /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
-        Collider[] colliders = Physics.OverlapSphere(
+        // Create new explosion effect instance on missile position
+        MonoBehaviour.Instantiate(
+            _missile.ExplosionEffect,
+            _missile.transform.position,
+            _missile.transform.rotation
+        );
+
+        var colliders = Physics.OverlapSphere(
             _missile.transform.position,
             _missile.ExplosionRange,
             (int)_missile.CollisionLayerMask
@@ -73,7 +80,7 @@ public class Ejected : IMissileState
 
         foreach (var collider in colliders)
         {
-            var damagable = collider
+            var damageable = collider
                .GetComponent<Damageable>();
 
             var rigidbody = collider
@@ -84,10 +91,8 @@ public class Ejected : IMissileState
                 collider.transform.position
             );
 
-            damagable?.UpdateHealth(
-                // Calculate the damage that should be applied to the enemy
-                -_missile.DamageCurve.Evaluate(enemyDistance)
-            );
+            var damage = _missile.DamageCurve.Evaluate(enemyDistance);
+            damageable?.UpdateHealth(-damage);
 
             rigidbody?.AddExplosionForce(
                 _missile.ExplosionPower,
@@ -132,6 +137,9 @@ public class MissileBehaviour : MonoBehaviour
 
     [Tooltip("The radius in which enemies should be to be affected")]
     public float ExplosionRange = .2f;
+
+    [Tooltip("The effect that should play when the missile explodes")]
+    public ParticleSystem ExplosionEffect;
 
     [Header("Behaviour properties")]
     [Tooltip("The range in which an enemy should be in")]
