@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!136 &4304033843059745177
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258952436743246216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!114 &6416439479492515235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,7 +30,7 @@ MonoBehaviour:
   FindTarget: {fileID: 9160887239631321499}
   Projectile: {fileID: 7923765360067624421, guid: 0c88034581168044fa629020ff5595bf,
     type: 3}
-  ProjectileSpawn: {fileID: 0}
+  ProjectileSpawn: {fileID: 4258952436743015848}
   ProjectileSpeed: 0.5
   Cooldown: 2
 --- !u!114 &9160887239631321499
@@ -32,24 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasTarget: {fileID: 6416439479492515235}
-  Radius: 0.25
+  Radius: 0.4
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!136 &4304033843059745177
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4258952436743246216}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.02
-  m_Height: 0.05
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!1001 &7133038546561114623
 PrefabInstance:
   m_ObjectHideFlags: 0

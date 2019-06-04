@@ -27,10 +27,17 @@ public class ShootAtTarget : EnableOnTarget
 
     private IEnumerator Shoot()
     {
+        if (Target == null)
+        {
+            FindTarget.enabled = true;
+            enabled = false;
+            yield break;
+        }
+
         var distanceToTarget = Vector3.Distance(Target.transform.position, transform.position);
 
         // Switch to FindTarget when target does not exist anymore
-        if (Target == null || distanceToTarget > FindTarget.Radius)
+        if (distanceToTarget > FindTarget.Radius)
         {
             FindTarget.enabled = true;
             enabled = false;

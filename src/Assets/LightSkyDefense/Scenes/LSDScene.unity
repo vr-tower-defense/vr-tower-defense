@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,16 +179,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3508331057964363408, guid: 98646ba0344f5cf4e884609d4030a879,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.0008
-      objectReference: {fileID: 0}
-    - target: {fileID: 4252674082331503682, guid: 98646ba0344f5cf4e884609d4030a879,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.0008
-      objectReference: {fileID: 0}
     - target: {fileID: 1035322946134634429, guid: 98646ba0344f5cf4e884609d4030a879,
         type: 3}
       propertyPath: m_Enabled
@@ -198,6 +188,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508331057964363408, guid: 98646ba0344f5cf4e884609d4030a879,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.0008
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252674082331503682, guid: 98646ba0344f5cf4e884609d4030a879,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -0.0008
       objectReference: {fileID: 0}
     - target: {fileID: 6554161100093399148, guid: 98646ba0344f5cf4e884609d4030a879,
         type: 3}
@@ -498,9 +498,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - {fileID: 11400000, guid: 54535abfca567a9498748e0d5ab42add, type: 2}
-  - {fileID: 11400000, guid: 113dce455a4d74c49aa53835725ede26, type: 2}
-  - {fileID: 11400000, guid: 43001d59fc5fe70459b2dcbc9321e58a, type: 2}
-  - {fileID: 11400000, guid: ece719c8cfaac7a439174e193130bd4e, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
+  - {fileID: 11400000, guid: 0087ec707c2594f4d93fecf77a61261a, type: 2}
   WavesEndState: {fileID: 1274171499}
 --- !u!114 &1274171495
 MonoBehaviour:
@@ -516,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameStates: []
   CurrentState: {fileID: 0}
-  InitialState: {fileID: 1274171500}
+  InitialState: {fileID: 1274171494}
   LoseState: {fileID: 1274171498}
 --- !u!4 &1274171496
 Transform:
@@ -812,6 +816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248077501238662836, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: InitialFunds
+      value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 5019034570656213739, guid: dc06161b6d97feb419f45f03b62e14b9,
         type: 3}
