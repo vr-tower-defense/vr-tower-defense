@@ -6,26 +6,15 @@ public class SpawnDialOption : DialOption
 {
     public Buildable Preview;
 
-    public GameObject DialCostText;
+    public GameObject PriceText;
 
     private PlayerStatistics _playerStatistics;
-
-    private GameObject _textMesh;
-
-    /// <summary>
-    /// Instance that is currently being placed
-    /// </summary>
-    private GameObject _preview;
 
     private void Awake()
     {
         _playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
-        SetTextMesh();
-    }
 
-    private void FixedUpdate()
-    {
-        _textMesh.transform.rotation = Player.instance.headCollider.transform.rotation;
+        SetPrice();
     }
 
     /// <summary>
@@ -38,12 +27,13 @@ public class SpawnDialOption : DialOption
             return;
         }
 
-        _preview = Instantiate(
-            Preview.gameObject,
-            transform.position,
-            transform.rotation,
-            transform
+        var hand = Player.instance.GetHand(action.activeDevice);
+
+        hand.AttachObject(
+            Instantiate(Preview.gameObject),
+            GrabTypes.None
         );
+
     }
 
     /// <summary>
@@ -51,22 +41,27 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnRelease(SteamVR_Action_Vector2 action)
     {
-        if (_preview == null)
+        var hand = Player.instance.GetHand(action.activeDevice);
+        var preview = hand.currentAttachedObject;
+
+        if (preview == null)
         {
             return;
         }
 
-        var buildable = _preview.GetComponent<Buildable>();
+        // Destroy preview and replace with "real" instance
+        hand.DetachObject(preview);
+        Destroy(preview);
 
-        // Destroy clone and replace with "real" instance
-        Destroy(_preview);
+        // Handle buildable logic when component exist
+        var buildable = preview.GetComponent<Buildable>();
+
+        if (buildable == null || !buildable.IsPositionValid)
+        {
+            return;
+        }
 
         // Create final instance when position is valid
-        if (!buildable.IsPositionValid)
-        {
-            return;
-        }
-
         buildable.SendMessage(
             "OnBuild",
             transform,
@@ -74,11 +69,18 @@ public class SpawnDialOption : DialOption
         );
     }
 
-    private void SetTextMesh()
+    /// <summary>
+    /// Update price in PriceText
+    /// </summary>
+    private void SetPrice()
     {
-        var costMesh = DialCostText.GetComponent<TextMesh>();
-        costMesh.text = Preview.Price.ToString();
+        var textMesh = PriceText.GetComponent<TextMesh>();
 
-        _textMesh = Instantiate(DialCostText, gameObject.transform);
+        if (textMesh == null)
+        {
+            return;
+        }
+
+        textMesh.text = Preview.Price.ToString();
     }
 }
