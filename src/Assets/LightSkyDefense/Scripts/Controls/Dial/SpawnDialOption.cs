@@ -64,7 +64,7 @@ public class SpawnDialOption : DialOption
         // Create final instance when position is valid
         buildable.SendMessage(
             "OnBuild",
-            transform,
+            hand.objectAttachmentPoint,
             SendMessageOptions.RequireReceiver
         );
     }
