@@ -49,7 +49,7 @@ MonoBehaviour:
     type: 3}
   ProjectileSpawn: {fileID: 4514111890428074979}
   ProjectileSpeed: 0.5
-  Cooldown: 2
+  Cooldown: 1
 --- !u!1001 &6758449065101368284
 PrefabInstance:
   m_ObjectHideFlags: 0
