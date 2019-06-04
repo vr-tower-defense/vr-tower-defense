@@ -237,8 +237,10 @@ MonoBehaviour:
   TowerStates: []
   ProjectileSpawns:
   - {fileID: 1735530294072165508}
-  DetectionLayerMask: 512
-  Range: 0.75
+  DetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  Range: 0.6
 --- !u!114 &1122127929142115503
 MonoBehaviour:
   m_ObjectHideFlags: 0

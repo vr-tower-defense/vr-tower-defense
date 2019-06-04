@@ -48,13 +48,28 @@ PrefabInstance:
     - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: MaxHealth
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: InitialHealth
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d6ca012e23dfd3429f5f8bbc224464e, type: 2}
+    - target: {fileID: 5316245599143126514, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: e6e0dec140ca76c40b69a07b1864078c, type: 3}
     - target: {fileID: 5316245599142323666, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -70,16 +85,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5316245599143126514, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: e6e0dec140ca76c40b69a07b1864078c, type: 3}
-    - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1d6ca012e23dfd3429f5f8bbc224464e, type: 2}
     m_RemovedComponents:
     - {fileID: 4003474340263923501, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}

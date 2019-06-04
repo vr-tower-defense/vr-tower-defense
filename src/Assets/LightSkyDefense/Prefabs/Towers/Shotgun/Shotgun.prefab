@@ -281,8 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
-  InitialHealth: 1
+  MaxHealth: 2
+  InitialHealth: 2
 --- !u!114 &3797012125748751522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +306,9 @@ MonoBehaviour:
   ProjectileSpawns:
   - {fileID: 6043691433295335781}
   - {fileID: 7337458405789845944}
-  DetectionLayerMask: 512
+  DetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   Range: 0.5
 --- !u!114 &4107018253085489156
 MonoBehaviour:
@@ -341,7 +343,7 @@ MonoBehaviour:
     type: 3}
   ProjectileSpeed: 1
   Cooldown: 1
-  PelletCount: 10
+  PelletCount: 12
   ProjectileSpeedVariationRatio: 0.3
   Spread: 20
 --- !u!114 &9201011055191367473
