@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7b6b6e68677b9448aea114715916df, type: 3}
   m_Name: EnemyFlocking
   m_EditorClassIdentifier: 
-  MaxSpeed: 1
-  FlockingLayerMask: 512
+  MaxSpeed: 0.2
+  MaxNeighbours: 10
+  FlockingLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   CohesionRadius: 0.5
-  SeparationMultiplier: 0.25
-  CohesionWeight: 0.206
-  SeparationForce: 1
-  AlignmentForce: 0.096
+  SeparationMultiplier: 0.3
+  SeparationWeight: 0.5
+  AlignmentWeight: 0.25
+  CohesionWeight: 0.25

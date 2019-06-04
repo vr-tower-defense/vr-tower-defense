@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
-  m_Name: SpawnBossOne
+  m_Name: SpawnBugZooka
   m_EditorClassIdentifier: 
   Enemy: {fileID: 490035793464097759, guid: 26bfeee8ea3f8b545acc93b2d67afb75, type: 3}
   OffsetRadius: 0.2

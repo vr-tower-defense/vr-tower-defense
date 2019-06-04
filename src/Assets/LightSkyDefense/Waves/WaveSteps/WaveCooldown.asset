@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442afc17f463ff042bcde9ae48e6e947, type: 3}
   m_Name: WaveCooldown
   m_EditorClassIdentifier: 
-  TimeInSeconds: 5
+  TimeInSeconds: 6

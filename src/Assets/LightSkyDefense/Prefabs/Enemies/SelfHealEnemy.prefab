@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7909320529346818504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7554406636246025772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50e86117850871a40afec8ef2aa88fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealCooldown: 5
-  HealAmount: 0.3
 --- !u!136 &4296376288465056853
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -28,6 +14,20 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.007}
+--- !u!114 &7909320529346818504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554406636246025772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e86117850871a40afec8ef2aa88fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealCooldown: 5
+  HealAmount: 1
 --- !u!1001 &3307218601920214550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,6 +59,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Value
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}

@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     public ParticleSystem ExplodeEffect;
     public AudioClip ExplodeSound;
 
+    [Header("Heal effect")]
+    public GameObject HealEffect;
+
     public void OnReachEndOfPath()
     {
         var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
@@ -45,5 +48,20 @@ public class Enemy : MonoBehaviour
             ExplodePitch - ExplodePitchVariation,
             ExplodePitch + ExplodePitchVariation
         );
+    }
+
+    public void OnUpdateHealth(float amount)
+    {
+        if (amount > 0)
+        {
+            var animationPrefab = Instantiate(
+                HealEffect,
+                transform
+            );
+
+            var animation = animationPrefab.GetComponent<Animation>();
+
+            Destroy(animationPrefab, animation.clip.averageDuration);
+        }
     }
 }

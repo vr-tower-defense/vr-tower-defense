@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
-  m_Name: SpawnUFO
+  m_Script: {fileID: 11500000, guid: 442afc17f463ff042bcde9ae48e6e947, type: 3}
+  m_Name: BossCooldown
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 2891067001920863322, guid: f9b7fcc24631b9b4892930a83a3405ba, type: 3}
-  OffsetRadius: 0.2
+  TimeInSeconds: 30
