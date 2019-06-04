@@ -127,9 +127,12 @@ MonoBehaviour:
   - SteeringBehaviour: {fileID: 11400000, guid: 0f67f57620673814385e7202ead67d44,
       type: 2}
     Weight: 1
+    DrawGizmos: 1
   - SteeringBehaviour: {fileID: 11400000, guid: 0a8f0ef1cb8bc384da87e4cf657860e3,
       type: 2}
-    Weight: 2
+    Weight: 0.2
+    DrawGizmos: 1
   - SteeringBehaviour: {fileID: 11400000, guid: 26980625294436d4a821564ca0bcadc4,
       type: 2}
     Weight: 0.5
+    DrawGizmos: 1

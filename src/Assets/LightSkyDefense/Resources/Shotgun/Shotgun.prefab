@@ -306,7 +306,9 @@ MonoBehaviour:
   ProjectileSpawns:
   - {fileID: 6043691433295335781}
   - {fileID: 7337458405789845944}
-  DetectionLayerMask: 512
+  DetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   Range: 0.5
 --- !u!114 &4107018253085489156
 MonoBehaviour:
@@ -315,7 +317,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380829739056090955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65eb2959579d7554da445040fc1db6b3, type: 3}
   m_Name: 
@@ -329,7 +331,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380829739056090955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae747297926610040938d84d8f401038, type: 3}
   m_Name: 
@@ -351,7 +353,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380829739056090955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d4d178b6e85d784da374e6db8a4c1bf, type: 3}
   m_Name: 
