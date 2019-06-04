@@ -186,27 +186,27 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.5
-      inSlope: -5.3505387
-      outSlope: -5.3505387
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
-      weightedMode: 3
+      weightedMode: 0
       inWeight: 0
-      outWeight: 0.51746035
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.2
-      value: 0
-      inSlope: -0.20443924
-      outSlope: -4.2057004
-      tangentMode: 1
-      weightedMode: 3
-      inWeight: 1
-      outWeight: 0.33333334
+      time: 0.3
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ExplosionPower: 10
-  ExplosionRange: 0.15
+  ExplosionPower: 5
+  ExplosionRange: 0.2
   DetectionRange: 0.5
   CollisionLayerMask: 512
   TimeAlive: 8

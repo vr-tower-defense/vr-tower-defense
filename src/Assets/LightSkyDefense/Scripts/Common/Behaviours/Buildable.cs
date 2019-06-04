@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
+[RequireComponent(typeof(Interactable))]
 public class Buildable : MonoBehaviour
 {
     public float Price = 1;
