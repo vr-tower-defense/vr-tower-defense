@@ -242,6 +242,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Range: 0.75
+  JamEffect: {fileID: 3976999425515206979, guid: 1ce619e0b20ee7c4e88f8cad3b864583,
+    type: 3}
 --- !u!114 &1122127929142115503
 MonoBehaviour:
   m_ObjectHideFlags: 0
