@@ -18,17 +18,17 @@ public class Flocking : ISteering
     public float CohesionRadius = .5f;
 
     [Range(0, 1)]
-    public float SeparationMultiplier = .3f;
+    public float SeparationMultiplier = .5f;
 
     [Header("Behaviour weights")]
     [Range(0, 1)]
+    public float SeparationWeight = .5f;
+
+    [Range(0, 1)]
+    public float AlignmentWeight = .5f;
+
+    [Range(0, 1)]
     public float CohesionWeight = .5f;
-
-    [Range(0, 1)]
-    public float SeparationForce = .5f;
-
-    [Range(0, 1)]
-    public float AlignmentForce = .5f;
 
     private float _seperationRadiusSquared;
 
@@ -108,8 +108,8 @@ public class Flocking : ISteering
 
         return WeightedTruncatedRunningSumWithPrioritization.Calculate(
             new Tuple<Vector3, float>[] {
-                new Tuple<Vector3, float>(separationForce, SeparationForce),
-                new Tuple<Vector3, float>(alignmentForce, AlignmentForce),
+                new Tuple<Vector3, float>(separationForce, SeparationWeight),
+                new Tuple<Vector3, float>(alignmentForce, AlignmentWeight),
                 new Tuple<Vector3, float>(cohesionForce, CohesionWeight),
             },
             MaxSpeed
@@ -121,8 +121,9 @@ public class Flocking : ISteering
     public override void DrawGizmos(GameObject gameObject)
     {
         Gizmos.color = new Color(0, 0, 1, 0.1f);
-
         Gizmos.DrawSphere(gameObject.transform.position, CohesionRadius);
+
+        Gizmos.color = new Color(1, 1, 1, 0.1f);
         Gizmos.DrawSphere(gameObject.transform.position, CohesionRadius * SeparationMultiplier);
     }
 

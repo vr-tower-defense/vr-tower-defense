@@ -10,6 +10,8 @@ public class WeightedSteeringBehaviour
 
     [Range(0, 10)]
     public float Weight = 1f;
+
+    public bool DrawGizmos = true;
 }
 
 public class RigidbodySteering : MonoBehaviour
@@ -34,10 +36,12 @@ public class RigidbodySteering : MonoBehaviour
         {
             var weightedSteeringBehaviour = (WeightedSteeringBehaviour)WeightedSteeringBehaviours[i];
 
+            // We need to create new instance of the Scriptable object because it is shared between gameObjects
             _weightedSteeringBehaviours[i] = new WeightedSteeringBehaviour
             {
                 SteeringBehaviour = Instantiate(weightedSteeringBehaviour.SteeringBehaviour),
-                Weight = weightedSteeringBehaviour.Weight
+                Weight = weightedSteeringBehaviour.Weight,
+                DrawGizmos = weightedSteeringBehaviour.DrawGizmos
             };
 
             _weightedSteeringBehaviours[i].SteeringBehaviour.Initialize(gameObject);
@@ -82,6 +86,11 @@ public class RigidbodySteering : MonoBehaviour
     {
         foreach (var weightedSteeringBehaviour in _weightedSteeringBehaviours)
         {
+            if (!weightedSteeringBehaviour.DrawGizmos)
+            {
+                continue;
+            }
+
             weightedSteeringBehaviour.SteeringBehaviour.DrawGizmos(gameObject);
         }
 

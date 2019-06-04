@@ -19,7 +19,7 @@ public class Buildable : MonoBehaviour
     [HideInInspector]
     public bool IsPositionValid = false;
 
-    private Layers _layerMask = Layers.Path | Layers.Enemies | Layers.Towers;
+    private LayerMask _layerMask = (int)(Layers.Path | Layers.Enemies | Layers.Towers);
 
     private Renderer _renderer;
 
