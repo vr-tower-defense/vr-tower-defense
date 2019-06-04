@@ -29,7 +29,7 @@ public class BaseTower : MonoBehaviour
     public Transform[] ProjectileSpawns;
 
     [Tooltip("The layers that should be considered when checking for collisions")]
-    public Layers DetectionLayerMask = Layers.Enemies;
+    public LayerMask DetectionLayerMask = (int)Layers.Enemies;
 
     [Tooltip("The range in meters which is used to check for collisions")]
     public float Range = .5f;

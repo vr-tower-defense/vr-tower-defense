@@ -26,15 +26,15 @@ class InfinityState : GameState
         yield return new WaitForSeconds(SpawnInterval);
 
         // Set start position to first point in path
-        var startPosition = Path.Instance[5].transform.position;
+        var startTransform = Path.Instance[0].transform;
 
         // Add random offset to startPosition
-        startPosition += Random.insideUnitSphere * OffsetRadius;
+        var startPosition = startTransform.position + (Random.insideUnitSphere * OffsetRadius);
 
         Instantiate(
             Enemy,
             startPosition,
-            Path.Instance[0].transform.rotation
+            startTransform.rotation
         );
 
         yield return SpawnEnemies();
