@@ -3,7 +3,9 @@ using UnityEngine;
 
 class WavesEndState : GameState
 {
+#pragma warning disable 0649
     public GameState WinState;
+#pragma warning restore 0649
 
     [Min(0)]
     public int CheckInterval = 1;

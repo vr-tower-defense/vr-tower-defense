@@ -3,7 +3,9 @@ using UnityEngine;
 
 class InfinityState : GameState
 {
+#pragma warning disable 0649
     public GameObject Enemy;
+#pragma warning restore 0649
 
     [Range(0, .5f)]
     public float OffsetRadius = .2f;
