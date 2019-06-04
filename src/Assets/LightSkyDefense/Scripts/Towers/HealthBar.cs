@@ -15,6 +15,7 @@ public class HealthBar : MonoBehaviour
         _damageable = Tower.GetComponent<Damageable>();
 
         HealthBarElement.maxValue = _damageable.MaxHealth;
+        HealthBarElement.value = _damageable.InitialHealth;
     }
 
     void OnUpdateHealth()
