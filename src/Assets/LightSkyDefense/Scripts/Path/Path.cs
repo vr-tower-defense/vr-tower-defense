@@ -13,7 +13,7 @@ public class Path : MonoBehaviour
     public int WaypointCount = 100;
 
     [Tooltip("The radius that the capsule colliders in the path will get")]
-    private float PathWidth = 0.15f;
+    public float PathWidth = 0.15f;
 
     [Tooltip("The object that is instantiated as a waypoint")]
     public GameObject Prefab;

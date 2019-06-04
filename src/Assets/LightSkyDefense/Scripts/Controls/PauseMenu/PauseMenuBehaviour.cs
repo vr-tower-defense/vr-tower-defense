@@ -20,8 +20,6 @@ public class PauseMenuBehaviour : MonoBehaviour
             return;
         }
 
-        Debug.Log("Open");
-
         // Destroy pause menu when there's already a pause menu instance
         if (_instance != null)
         {
