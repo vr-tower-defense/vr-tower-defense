@@ -2,13 +2,11 @@
 
 class Damageable : MonoBehaviour
 {
-    [SerializeField]
     [Min(0)]
-    private float MaxHealth = 1;
+    public float MaxHealth = 1;
 
-    [SerializeField]
     [Min(0)]
-    private float InitialHealth = 1;
+    public float InitialHealth = 1;
 
     /// <summary>
     /// Returns the current health
@@ -19,7 +17,7 @@ class Damageable : MonoBehaviour
     /// <summary>
     /// Set initial health to health value
     /// </summary>
-    void Start()
+    void Awake()
     {
         Health = InitialHealth;
     }

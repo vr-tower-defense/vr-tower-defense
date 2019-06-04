@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 5633453024230339213}
   - component: {fileID: 3055980576202445091}
   - component: {fileID: 3022138578681958496}
+  - component: {fileID: 4314065891181572232}
+  - component: {fileID: 2927930784388714069}
+  - component: {fileID: 3862151930695399581}
   - component: {fileID: 3797012125748751522}
   - component: {fileID: 4107018253085489156}
   - component: {fileID: 1421314080101391250}
@@ -50,8 +53,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.04, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0.01}
+  m_Size: {x: 0.08, y: 0.04, z: 0.08}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &3022138578681958496
 AudioSource:
   m_ObjectHideFlags: 0
@@ -148,6 +151,138 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4314065891181572232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380829739056090955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateActionSetOnAttach:
+    actionSetPath: 
+  hideHandOnAttach: 1
+  hideSkeletonOnAttach: 0
+  hideControllerOnAttach: 0
+  handAnimationOnPickup: 0
+  setRangeOfMotionOnPickup: -1
+  useHandObjectAttachmentPoint: 1
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: 1
+  highlightOnHover: 1
+  hideHighlight: []
+--- !u!114 &2927930784388714069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380829739056090955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 265eb9d4bf08ef54cb881dc043945cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroySound: {fileID: 8300000, guid: 074d636af82f3e34fba5bd75bccf0a7e, type: 3}
+  DeleteCooldown: 1
+  TriggerClickAction:
+    actionPath: /actions/default/in/TriggerClick
+    needsReinit: 0
+  InputSource: 2
+  Duration: 0.1
+  AmplitudeOverCooldown:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.5
+      outSlope: 0.5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.5
+      inSlope: 0.5
+      outSlope: 0.5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FrequencyOverCooldown:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.9535938
+      outSlope: 0.9535938
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.95962703
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 5.3038087
+      outSlope: 5.3038087
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.4340064
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3862151930695399581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380829739056090955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1
+  InitialHealth: 1
 --- !u!114 &3797012125748751522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +299,7 @@ MonoBehaviour:
   ActiveState: {fileID: 1421314080101391250}
   CelebrationState: {fileID: 9201011055191367473}
   CondemnState: {fileID: 0}
+  JamState: {fileID: 0}
   InitialState: {fileID: 4107018253085489156}
   CurrentState: {fileID: 0}
   TowerStates: []
@@ -199,15 +335,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tower: {fileID: 0}
-  ProjectileSpeed: 1
-  ProjectileSpeedVariationRatio: 0.3
-  Projectile: {fileID: 2096758969451732159, guid: b18f774bd33be4741a832e9819b47014,
-    type: 3}
-  Bullets: 5
-  Spread: 20
-  Cooldown: 1
   RotationSpeed: 60
   AngleTreshold: 10
+  Projectile: {fileID: 2096758969451732159, guid: b18f774bd33be4741a832e9819b47014,
+    type: 3}
+  ProjectileSpeed: 1
+  Cooldown: 1
+  PelletCount: 5
+  ProjectileSpeedVariationRatio: 0.3
+  Spread: 20
 --- !u!114 &9201011055191367473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7337458405789845944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6043691433295335781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8671957542364078368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,6 +463,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_Name
       value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalPosition.x

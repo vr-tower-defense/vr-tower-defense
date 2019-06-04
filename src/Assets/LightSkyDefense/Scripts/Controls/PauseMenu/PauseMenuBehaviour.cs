@@ -11,6 +11,12 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     private GameObject _menuInstance;
 
+    private Camera _camera;
+    
+    public void Start()
+    {
+        _camera = Camera.main;
+    }
 
     // Update is called once per frame
     void Update()
@@ -42,10 +48,11 @@ public class PauseMenuBehaviour : MonoBehaviour
 
         Time.timeScale = 0;
 
+        var playerTransform = Player.instance.headCollider.transform;
         _menuInstance = Instantiate(
-            Prefab, 
-            Player.instance.headCollider.transform.position + (Player.instance.headCollider.transform.rotation * Offset),
-            Player.instance.headCollider.transform.rotation
+            Prefab,
+            playerTransform.position + (playerTransform.rotation * Offset),
+            Quaternion.Euler(new Vector3(0, _camera.gameObject.transform.rotation.y, 0))
         );
     }
 }

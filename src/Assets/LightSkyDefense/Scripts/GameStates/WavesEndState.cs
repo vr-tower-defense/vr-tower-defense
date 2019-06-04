@@ -1,36 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 class WavesEndState : GameState
 {
-    int _leftOverEnemies;
+    public GameState WinState;
 
-    private void Start()
+    [Min(0)]
+    public int CheckInterval = 1;
+
+    private void OnEnable()
+    {
+        StartCoroutine(CheckForEnemies());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private IEnumerator CheckForEnemies()
     {
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach (GameObject enemy in enemies)
+        if (enemies.Length < 1)
         {
-            _leftOverEnemies++;
-            enemy.AddComponent<EnemyDestroyDispatcher>();
-        }
-    }
-
-    /// <summary>
-    /// Gets called when an Enemy is destroyed in this gameState 
-    /// </summary>
-    public void CheckAllEnemiesDestroyed()
-    {
-        _leftOverEnemies--;
-
-        if (_leftOverEnemies != 0)
-            return;
-
-        // Emit OnResumeGame message to all game objects
-        foreach (GameObject go in FindObjectsOfType<GameObject>())
-        {
-            go.SendMessage("OnGameWin", SendMessageOptions.DontRequireReceiver);
+            SetGameState(WinState);
         }
 
-        _gameManager.SetGameState(typeof(WinState));
+        yield return new WaitForSeconds(CheckInterval);
+        yield return CheckForEnemies();
     }
 }

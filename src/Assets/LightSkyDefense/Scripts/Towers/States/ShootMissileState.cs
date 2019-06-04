@@ -13,16 +13,13 @@ public class ShootMissileState : TowerState
     public float Cooldown = 2;
     public float EjectInterval = .25f;
 
-    private Coroutine _coroutine;
-
     /// <summary>
     /// Start shooting missiles
     /// </summary>
     private void OnEnable()
     {
         Reload();
-
-        _coroutine = StartCoroutine(ShootMissiles());
+        StartCoroutine(ShootMissiles());
     }
 
     /// <summary>
