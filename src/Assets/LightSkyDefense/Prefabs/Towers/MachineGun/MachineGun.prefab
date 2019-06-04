@@ -241,9 +241,9 @@ MonoBehaviour:
   DetectionLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  Range: 0.75
   JamEffect: {fileID: 3976999425515206979, guid: 1ce619e0b20ee7c4e88f8cad3b864583,
     type: 3}
+  Range: 0.4
 --- !u!114 &1122127929142115503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +294,6 @@ MonoBehaviour:
   Projectile: {fileID: 2096758969451732159, guid: 43940cfd1478e2342b0d88366c87b3bb,
     type: 3}
   ProjectileSpeed: 1
-  Cooldown: 0.25
 --- !u!1 &4386283097336988827
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBarElement: {fileID: 2337672583238885103}
   Tower: {fileID: 0}
+  Cooldown: 0.3333
 --- !u!1 &7127235948388862705
 GameObject:
   m_ObjectHideFlags: 0

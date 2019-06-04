@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 442afc17f463ff042bcde9ae48e6e947, type: 3}
-  m_Name: WaveCooldown
+  m_Script: {fileID: 11500000, guid: f4d81517bcfecd741881c0a6328c6a62, type: 3}
+  m_Name: SpawnBugZooka
   m_EditorClassIdentifier: 
-  TimeInSeconds: 6
+  Enemy: {fileID: 490035793464097759, guid: 26bfeee8ea3f8b545acc93b2d67afb75, type: 3}
+  OffsetRadius: 0.2

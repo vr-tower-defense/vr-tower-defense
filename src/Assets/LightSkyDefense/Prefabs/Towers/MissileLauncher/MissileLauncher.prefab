@@ -458,8 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd41c01f2f4da7b4a86abc4c54c19416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  InitialHealth: 10
+  MaxHealth: 3
+  InitialHealth: 3
 --- !u!114 &8874621960180760332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
   Cooldown: 2
-  EjectInterval: 1
+  EjectInterval: 2
 --- !u!114 &6244242722572371592
 MonoBehaviour:
   m_ObjectHideFlags: 0
