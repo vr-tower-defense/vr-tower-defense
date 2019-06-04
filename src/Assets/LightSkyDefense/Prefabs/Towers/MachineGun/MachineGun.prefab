@@ -240,7 +240,7 @@ MonoBehaviour:
   DetectionLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  Range: 0.6
+  Range: 0.4
 --- !u!114 &1122127929142115503
 MonoBehaviour:
   m_ObjectHideFlags: 0

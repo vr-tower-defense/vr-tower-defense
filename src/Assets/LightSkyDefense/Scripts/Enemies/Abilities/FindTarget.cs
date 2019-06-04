@@ -20,12 +20,30 @@ public class FindTarget : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var TargetsInRange = Physics.OverlapSphere(transform.position, Radius, LayerBitMask);
+        var nearestTarget = Find();
+
+        if (nearestTarget == null)
+            return;
+
+        // Set new target
+        HasTarget.Target = nearestTarget;
+
+        // Change active script
+        HasTarget.enabled = true;
+        enabled = false;
+    }
+
+    public Collider Find()
+    {
+        var TargetsInRange = Physics.OverlapSphere(
+            transform.position,
+            Radius, 
+            LayerBitMask);
 
         // Abort function when there isn't any target in the overlap sphere
         if (TargetsInRange.Length < 1)
         {
-            return;
+            return null;
         }
 
         // Find target that is near this game object
@@ -43,14 +61,8 @@ public class FindTarget : MonoBehaviour
             }
         }
 
-        // Set new target
-        HasTarget.Target = nearestTarget;
-
-        // Change active script
-        HasTarget.enabled = true;
-        enabled = false;
+        return nearestTarget; 
     }
-
     #region debugging
 
     /// <summary>

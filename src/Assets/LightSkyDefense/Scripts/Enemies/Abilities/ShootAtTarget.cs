@@ -27,17 +27,7 @@ public class ShootAtTarget : EnableOnTarget
 
     private IEnumerator Shoot()
     {
-        if (Target == null)
-        {
-            FindTarget.enabled = true;
-            enabled = false;
-            yield break;
-        }
-
-        var distanceToTarget = Vector3.Distance(Target.transform.position, transform.position);
-
-        // Switch to FindTarget when target does not exist anymore
-        if (distanceToTarget > FindTarget.Radius)
+        if (!TargetInRange())
         {
             FindTarget.enabled = true;
             enabled = false;
@@ -59,5 +49,11 @@ public class ShootAtTarget : EnableOnTarget
 
         yield return new WaitForSeconds(Cooldown);
         yield return Shoot();
+    }
+
+    private bool TargetInRange()
+    {
+        return Target != null &&
+               FindTarget.Radius > Vector3.Distance(Target.transform.position, transform.position);
     }
 }
