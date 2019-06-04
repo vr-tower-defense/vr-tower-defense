@@ -240,7 +240,7 @@ MonoBehaviour:
   DetectionLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  Range: 0.75
+  Range: 0.4
 --- !u!114 &1122127929142115503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   Projectile: {fileID: 2096758969451732159, guid: 43940cfd1478e2342b0d88366c87b3bb,
     type: 3}
   ProjectileSpeed: 1
-  Cooldown: 0.25
+  Cooldown: 0.3333
 --- !u!1 &7127235948388862705
 GameObject:
   m_ObjectHideFlags: 0

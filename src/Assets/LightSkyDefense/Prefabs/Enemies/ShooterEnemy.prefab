@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!136 &2826923888820428919
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514111890427905987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.02
+  m_Height: 0.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.007}
 --- !u!114 &7554677292510940835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +27,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasTarget: {fileID: 7589653732193360438}
-  Radius: 0.25
+  Radius: 1
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
@@ -31,11 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   FindTarget: {fileID: 7554677292510940835}
-  Projectile: {fileID: 7923765360067624421, guid: 0c88034581168044fa629020ff5595bf,
+  Projectile: {fileID: 4098851781701205185, guid: b3b9826145dabd34d9c5f369de7939be,
     type: 3}
   ProjectileSpawn: {fileID: 4514111890428074979}
   ProjectileSpeed: 0.5
-  Cooldown: 2
+  Cooldown: 1
 --- !u!1001 &6758449065101368284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175,6 +189,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Value
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
