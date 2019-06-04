@@ -48,6 +48,8 @@ MonoBehaviour:
   ActiveMaterial: {fileID: 0}
   TargetMesh: {fileID: 0}
   IsSelected: 0
+  HapticPulseDuration: 0.1
+  HapticPulseFrequency: 35
   Preview: {fileID: 0}
   PriceText: {fileID: 5021498214779278960}
 --- !u!1001 &5352797362968213729

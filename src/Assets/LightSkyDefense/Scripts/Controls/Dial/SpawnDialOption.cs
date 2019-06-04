@@ -1,9 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class SpawnDialOption : DialOption
 {
+    [Header("Haptic feedback")]
+    [Tooltip("Duration in seconds")]
+    public float HapticPulseDuration = .1f;
+
+    public float HapticPulseFrequency = 15f;
+
+    [Header("Other stuff")]
     public Buildable Preview;
 
     public GameObject PriceText;
@@ -34,6 +42,7 @@ public class SpawnDialOption : DialOption
             GrabTypes.None
         );
 
+        StartCoroutine(OnBuild(hand));
     }
 
     /// <summary>
@@ -41,6 +50,8 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnRelease(SteamVR_Action_Vector2 action)
     {
+        StopAllCoroutines();
+
         var hand = Player.instance.GetHand(action.activeDevice);
         var preview = hand.currentAttachedObject;
 
@@ -67,6 +78,17 @@ public class SpawnDialOption : DialOption
             hand.objectAttachmentPoint,
             SendMessageOptions.RequireReceiver
         );
+    }
+
+    /// <summary>
+    /// Apply haptic feedback when user is building a tower
+    /// </summary>
+    private IEnumerator OnBuild(Hand hand)
+    {
+        hand.TriggerHapticPulse(HapticPulseDuration, HapticPulseFrequency, 1);
+
+        yield return new WaitForSeconds(HapticPulseDuration);
+        yield return OnBuild(hand);
     }
 
     /// <summary>
