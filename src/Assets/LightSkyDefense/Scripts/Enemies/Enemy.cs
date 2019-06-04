@@ -32,14 +32,11 @@ public class Enemy : MonoBehaviour
     public void OnDie()
     {
         // If not in the world, instantiate
-        var explodeEffectInstance = Instantiate(
+        var dieEffect = Instantiate(
             ExplodeEffect,
             transform.position,
             transform.rotation
         );
-
-        // Play effect
-        explodeEffectInstance.Play();
 
         // Play sound effect
         SoundUtil.PlayClipAtPointWithRandomPitch(
@@ -47,12 +44,6 @@ public class Enemy : MonoBehaviour
             transform.position,
             ExplodePitch - ExplodePitchVariation,
             ExplodePitch + ExplodePitchVariation
-        );
-
-        // Destroy after particle (emit) duration + maximum particle lifetime
-        Destroy(
-            explodeEffectInstance.gameObject,
-            explodeEffectInstance.main.duration + explodeEffectInstance.main.startLifetime.constantMax
         );
     }
 }

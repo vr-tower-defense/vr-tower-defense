@@ -65,6 +65,16 @@ public class Ejected : IMissileState
     /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
+        // If not in the world, instantiate
+        var dieEffect = MonoBehaviour.Instantiate(
+            _missile.ExplosionEffect,
+            _missile.transform.position,
+            _missile.transform.rotation
+        );
+
+        // Play effect
+        dieEffect.Play();
+
         var colliders = Physics.OverlapSphere(
             _missile.transform.position,
             _missile.ExplosionRange,
@@ -130,6 +140,9 @@ public class MissileBehaviour : MonoBehaviour
 
     [Tooltip("The radius in which enemies should be to be affected")]
     public float ExplosionRange = .2f;
+
+    [Tooltip("The effect that should play when the missile explodes")]
+    public ParticleSystem ExplosionEffect;
 
     [Header("Behaviour properties")]
     [Tooltip("The range in which an enemy should be in")]
