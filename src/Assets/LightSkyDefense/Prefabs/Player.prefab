@@ -1038,8 +1038,8 @@ MonoBehaviour:
   handType: 1
   trackedObject: {fileID: 0}
   grabPinchAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 1
+    actionPath: /actions/default/in/GrapPinch
+    needsReinit: 0
   grabGripAction:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 1
@@ -1167,8 +1167,8 @@ MonoBehaviour:
   handType: 2
   trackedObject: {fileID: 0}
   grabPinchAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 1
+    actionPath: /actions/default/in/GrapPinch
+    needsReinit: 0
   grabGripAction:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 1
@@ -1176,7 +1176,7 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 1
   uiInteractAction:
-    actionPath: /actions/default/in/TriggerClick
+    actionPath: /actions/default/in/InteractWithUI
     needsReinit: 0
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 480432}
