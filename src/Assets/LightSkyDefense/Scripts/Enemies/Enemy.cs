@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     public void OnDie()
     {
         // If not in the world, instantiate
-        var dieEffect = Instantiate(
+        Instantiate(
             ExplodeEffect,
             transform.position,
             transform.rotation

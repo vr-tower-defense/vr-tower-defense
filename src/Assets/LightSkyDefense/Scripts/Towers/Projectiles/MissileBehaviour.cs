@@ -66,7 +66,7 @@ public class Ejected : IMissileState
     public void OnCollisionEnter(Collision collision)
     {
         // Create new explosion effect instance on missile position
-        var explosionEffect = MonoBehaviour.Instantiate(
+        MonoBehaviour.Instantiate(
             _missile.ExplosionEffect,
             _missile.transform.position,
             _missile.transform.rotation
