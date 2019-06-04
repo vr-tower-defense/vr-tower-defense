@@ -65,15 +65,12 @@ public class Ejected : IMissileState
     /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
-        // If not in the world, instantiate
-        var dieEffect = MonoBehaviour.Instantiate(
+        // Create new explosion effect instance on missile position
+        var explosionEffect = MonoBehaviour.Instantiate(
             _missile.ExplosionEffect,
             _missile.transform.position,
             _missile.transform.rotation
         );
-
-        // Play effect
-        dieEffect.Play();
 
         var colliders = Physics.OverlapSphere(
             _missile.transform.position,
