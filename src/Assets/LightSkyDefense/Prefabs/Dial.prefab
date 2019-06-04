@@ -54,8 +54,8 @@ MonoBehaviour:
   DialOptionRadius: 0.05
   DialOptions:
   - {fileID: 1679995571414312585, guid: 4ef6961fbdc8afc4c8cf289214b594b4, type: 3}
-  - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
   - {fileID: 5950792470344690874, guid: bacb2fc1d1d776444ba2beb53df990c8, type: 3}
+  - {fileID: 6284518747179566916, guid: edf5175fff21a394a8d3ae6a344804c1, type: 3}
   DialOptionInstances: []
 --- !u!114 &4319183537671922878
 MonoBehaviour:
