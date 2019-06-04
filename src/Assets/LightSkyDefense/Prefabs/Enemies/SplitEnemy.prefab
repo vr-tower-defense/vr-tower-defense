@@ -27,7 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewEnemy: {fileID: 8801229372908632445, guid: 9b6387f7c6fd3fb4c86ec286eff48646,
     type: 3}
-  SplitAmount: 2
+  SplitAmount: 1
 --- !u!1001 &1264591698686721457
 PrefabInstance:
   m_ObjectHideFlags: 0

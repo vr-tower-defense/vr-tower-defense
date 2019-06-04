@@ -500,6 +500,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54535abfca567a9498748e0d5ab42add, type: 2}
   - {fileID: 11400000, guid: 042670d3c7920294cb0b1f8ee2333d83, type: 2}
   - {fileID: 11400000, guid: 113dce455a4d74c49aa53835725ede26, type: 2}
+  - {fileID: 11400000, guid: b550344b8d55a9443b0f3e0545e17946, type: 2}
+  - {fileID: 11400000, guid: 43001d59fc5fe70459b2dcbc9321e58a, type: 2}
   WavesEndState: {fileID: 1274171499}
 --- !u!114 &1274171495
 MonoBehaviour:
