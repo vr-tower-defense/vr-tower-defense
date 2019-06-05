@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class TutorialHandler : MonoBehaviour
 {
     public Transform VideoPlayerParent;
+    public Canvas ButtonCanvas;
+    public Button NextButton;
 
     private VideoPlayer _videoPlayer;
 
-    private int _tutorialIndex = 0;
+    private int _tutorialIndex;
 
     private Queue<IEnumerator> _videoActions = new Queue<IEnumerator>(4);
 
     void Start()
     {
         _videoPlayer = VideoPlayerParent.GetComponentInChildren<VideoPlayer>(true);
-        print(_videoPlayer);
         _videoPlayer?.Prepare();
         StartCoroutine(ProcessQueue(_videoActions));
     }
@@ -40,44 +42,49 @@ public class TutorialHandler : MonoBehaviour
         if (_videoPlayer == null)
             return;
 
-        Canvas canvas = GetComponentInChildren<Canvas>();
-
-        canvas?.gameObject.SetActive(false);
+        ButtonCanvas?.gameObject.SetActive(false);
 
         switch (_tutorialIndex)
         {
             case 0:
-                //Show you
+                //Show "You" slide
                 _tutorialIndex++;
                 VideoPlayerParent.gameObject.SetActive(true);
-                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.5f));
+                NextButton.gameObject.SetActive(false);
+                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.5f, () => NextButton.gameObject.SetActive(true)));
                 break;
             case 1:
-                //Show Enemy
+                //Show "Enemy" slide
                 _tutorialIndex++;
-                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.8f));
+                NextButton.gameObject.SetActive(false);
+                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.8f, () => NextButton.gameObject.SetActive(true)));
                 break;
             case 2:
-                //Show path
+                //Show "Path" slide
                 _tutorialIndex++;
-                _videoActions.Enqueue(PlayForSec(_videoPlayer, 4.5f));
+                NextButton.gameObject.SetActive(false);
+                _videoActions.Enqueue(PlayForSec(_videoPlayer, 4.5f, () => NextButton.gameObject.SetActive(true)));
                 break;
             case 3:
-                //Show path in game preview
+                //Show "Path Game Preview" slide
                 _tutorialIndex++;
+                NextButton.gameObject.SetActive(false);
                 _videoActions.Enqueue(SeekSec(_videoPlayer, 15.0f));
-                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.5f));
+                _videoActions.Enqueue(PlayForSec(_videoPlayer, 3.5f, () => NextButton.gameObject.SetActive(true)));
                 break;
             case 4:
-                //Show tower placement
+                //Show "Tower Placement" slide
+                _tutorialIndex++;
+                NextButton.gameObject.SetActive(false);
                 _videoActions.Enqueue(SeekSec(_videoPlayer, 33.0f));
-                _videoActions.Enqueue(PlayForSec(_videoPlayer, 26.8f));
+                _videoActions.Enqueue(PlayForSec(_videoPlayer, 26.8f, () => NextButton.gameObject.SetActive(true)));
                 break;
             default:
+                //End presetation, show lobby menu again
                 _tutorialIndex = 0;
+                NextButton.gameObject.SetActive(false);
                 VideoPlayerParent.gameObject.SetActive(false);
-                canvas = GetComponentInChildren<Canvas>(true);
-                canvas?.gameObject.SetActive(true);
+                ButtonCanvas?.gameObject.SetActive(true);
                 break;
         }
     }
@@ -93,8 +100,7 @@ public class TutorialHandler : MonoBehaviour
         {
             if (queue.Count > 0)
             {
-                yield return StartCoroutine(queue.Peek());//todo test to dequeue directly?
-                queue.Dequeue();
+                yield return StartCoroutine(queue.Dequeue());
             }
             else
             {
@@ -115,8 +121,7 @@ public class TutorialHandler : MonoBehaviour
     public IEnumerator RepeatSec(VideoPlayer videoPlayer, float playingTime)
     {
         double startTime = videoPlayer.time;
-        print("repeatSec time :" + startTime);
-        //double startTime = 15.0;
+
         while (true)
         {
             videoPlayer.Play();
@@ -127,19 +132,16 @@ public class TutorialHandler : MonoBehaviour
 
     public IEnumerator SeekSec(VideoPlayer videoPlayer, double seekTime, UnityAction callback = null)
     {
+        videoPlayer.time = seekTime;
+        videoPlayer.Play();
 
-        print("starting seek:" + _videoPlayer.time +" and seeking to :"+ seekTime);
-        //VideoPlayer.Play();
-        //VideoPlayer.Pause();
-        _videoPlayer.time = seekTime;
-        _videoPlayer.Play();
         while (!videoPlayer.isPrepared)
         {
-            print("!isPrepared");
             yield return null;
         }
-        _videoPlayer.Pause();
-        print("seeked! :" + _videoPlayer.time);
+
+        videoPlayer.Pause();
+
         callback?.Invoke();
     }
 }
