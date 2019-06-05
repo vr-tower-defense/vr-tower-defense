@@ -29,7 +29,7 @@ MonoBehaviour:
   RotationSpeed: 60
   Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
-  Cooldown: 2
+  Cooldown: 3
   EjectInterval: 1
 --- !u!1 &6039203840422665131
 GameObject:
@@ -339,6 +339,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a0fe6b3ee19c644c977eb6f21c868d2, type: 3}

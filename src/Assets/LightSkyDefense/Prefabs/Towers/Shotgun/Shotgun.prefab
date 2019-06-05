@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6833373525511859947}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8119727406894048527
 GameObject:
@@ -58,7 +58,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6833373525511859947}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5331724205434284316
 BoxCollider:
@@ -86,13 +86,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tower: {fileID: 0}
-  RotationSpeed: 60
-  AngleTreshold: 10
+  RotationSpeed: 90
+  AngleTreshold: 20
   Projectile: {fileID: 2096758969451732159, guid: b18f774bd33be4741a832e9819b47014,
     type: 3}
   ProjectileSpeed: 1
   Cooldown: 1
-  PelletCount: 12
+  PelletCount: 16
   ProjectileSpeedVariationRatio: 0.3
   Spread: 20
 --- !u!1001 &3189688776460376216
@@ -192,6 +192,21 @@ PrefabInstance:
       propertyPath: ProjectileSpawns.Array.data[1]
       value: 
       objectReference: {fileID: 1053353066700633696}
+    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a0fe6b3ee19c644c977eb6f21c868d2, type: 3}
 --- !u!1 &8879836174685313473 stripped
@@ -213,14 +228,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6833373525511859947}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Name
-      value: shotgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0115
@@ -276,6 +283,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.39999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Name
+      value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
