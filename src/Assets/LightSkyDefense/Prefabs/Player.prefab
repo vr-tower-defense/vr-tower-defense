@@ -219,11 +219,11 @@ GameObject:
   - component: {fileID: 447954}
   - component: {fileID: 8634891101427258545}
   - component: {fileID: 8113370796401976014}
+  - component: {fileID: 405968496690642044}
   - component: {fileID: 11465950}
   - component: {fileID: 6248077501238662836}
   - component: {fileID: 8717499262902273479}
   - component: {fileID: 4404635007910887}
-  - component: {fileID: 1041603453875049323}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -296,6 +296,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107946}
   m_Mesh: {fileID: 0}
+--- !u!114 &405968496690642044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1c07a6449b0ca439ee6fac5f6f7d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11465950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +367,7 @@ MonoBehaviour:
     actionPath: /actions/default/in/MenuButtonClick
     needsReinit: 0
   Prefab: {fileID: 7794049174583824409, guid: 43e32e02ad1999c4d87e08c5d9610505, type: 3}
-  Offset: {x: 0, y: 0, z: 1.5}
+  Offset: {x: 0, y: 0, z: 0.75}
 --- !u!82 &4404635007910887
 AudioSource:
   m_ObjectHideFlags: 0
@@ -452,18 +464,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1041603453875049323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d1c07a6449b0ca439ee6fac5f6f7d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &109154
 GameObject:
   m_ObjectHideFlags: 0

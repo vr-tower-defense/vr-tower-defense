@@ -29,8 +29,6 @@ public class PauseMenuBehaviour : MonoBehaviour
                 go.SendMessage("OnResumeGame", SendMessageOptions.DontRequireReceiver);
             }
 
-            Time.timeScale = 1;
-
             Destroy(_instance);
             return;
         }
@@ -40,8 +38,6 @@ public class PauseMenuBehaviour : MonoBehaviour
         {
             go.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
         }
-
-        Time.timeScale = 0;
 
         var camera = Camera.main;
         var yRotation = Quaternion.Euler(0, camera.transform.rotation.eulerAngles.y, 0);
