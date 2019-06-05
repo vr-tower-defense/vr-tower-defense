@@ -27,7 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewEnemy: {fileID: 8801229372908632445, guid: 9b6387f7c6fd3fb4c86ec286eff48646,
     type: 3}
-  SplitAmount: 1
+  SplitAmount: 2
 --- !u!1001 &1264591698686721457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,6 +60,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Value
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: MaxHealth
@@ -69,11 +74,6 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialHealth
       value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
-        type: 3}
-      propertyPath: Value
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}

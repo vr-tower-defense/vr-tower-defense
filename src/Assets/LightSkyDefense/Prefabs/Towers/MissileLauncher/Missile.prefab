@@ -186,7 +186,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.2
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -205,11 +205,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ExplosionPower: 5
-  ExplosionRange: 0.2
+  ExplosionPower: 20
+  ExplosionRange: 0.35
   ExplosionEffect: {fileID: 3260893505967507422, guid: 5ff16f6a98ad1444d93f7f8928ab8a9b,
     type: 3}
-  DetectionRange: 0.5
+  DetectionRange: 0.55
   CollisionLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -223,10 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1945967994869956103}
     m_Modifications:
-    - target: {fileID: 100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
-      propertyPath: m_Name
-      value: Missile
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -282,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
+      propertyPath: m_Name
+      value: Missile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
