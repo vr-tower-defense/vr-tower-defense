@@ -16,6 +16,8 @@ public class Wave : ScriptableObject
             );
         }
 
+        yield return new WaitForSeconds(0);
+
         foreach (var step in Steps)
         {
             yield return step.Run();
