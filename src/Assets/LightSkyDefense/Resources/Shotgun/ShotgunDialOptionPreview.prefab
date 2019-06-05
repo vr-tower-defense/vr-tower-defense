@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Price: 20
-  Prefab: {fileID: 4989372949544130928, guid: 8ac4e6f0768e85a428245365da52bbc1, type: 3}
+  Prefab: {fileID: 993549817927742185, guid: 1288d6b1648b3c643bb253e944654fec, type: 3}
   InvalidPositionMaterial: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583,
     type: 2}
   Margin: 0.2
@@ -137,14 +137,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4709973630796179958}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Name
-      value: shotgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -200,6 +192,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Name
+      value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}

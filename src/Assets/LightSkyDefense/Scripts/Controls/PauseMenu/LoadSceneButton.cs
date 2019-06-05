@@ -5,7 +5,6 @@ using Valve.VR.InteractionSystem;
 public class LoadSceneButton : MenuButton
 {
     public string SceneName;
-    public LoadSceneMode LoadSceneMode;
 
     public override void OnClick(Hand hand)
     {

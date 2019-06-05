@@ -107,10 +107,6 @@ namespace Valve.VR.InteractionSystem
         }
 
         //-------------------------------------------------
-        // Get the hand for given input source.
-        //
-        // i - Zero-based index of the active Hand to get
-        //-------------------------------------------------
         public Hand GetHand(SteamVR_Input_Sources inputSource)
         {
             for (int j = 0; j < hands.Length; j++)
@@ -131,54 +127,12 @@ namespace Valve.VR.InteractionSystem
             return null;
         }
 
-        //-------------------------------------------------
-        public Hand leftHand
-        {
-            get
-            {
-                for (int j = 0; j < hands.Length; j++)
-                {
-                    if (!hands[j].gameObject.activeInHierarchy)
-                    {
-                        continue;
-                    }
-
-                    if (hands[j].handType != SteamVR_Input_Sources.LeftHand)
-                    {
-                        continue;
-                    }
-
-                    return hands[j];
-                }
-
-                return null;
-            }
-        }
-
 
         //-------------------------------------------------
-        public Hand rightHand
-        {
-            get
-            {
-                for (int j = 0; j < hands.Length; j++)
-                {
-                    if (!hands[j].gameObject.activeInHierarchy)
-                    {
-                        continue;
-                    }
+        public Hand leftHand => GetHand(SteamVR_Input_Sources.LeftHand);
 
-                    if (hands[j].handType != SteamVR_Input_Sources.RightHand)
-                    {
-                        continue;
-                    }
-
-                    return hands[j];
-                }
-
-                return null;
-            }
-        }
+        //-------------------------------------------------
+        public Hand rightHand => GetHand(SteamVR_Input_Sources.RightHand);
 
         //-------------------------------------------------
         // Get Player scale. Assumes it is scaled equally on all axes.

@@ -8,7 +8,7 @@ public abstract class MenuButton : MonoBehaviour
 {
     [Header("Action")]
     public SteamVR_Action_Boolean ButtonClickAction = SteamVR_Input.GetBooleanAction("InteractWithUI");
-    
+
     [Header("Button appearance")]
     public TextMesh TextElement;
     public Color HoverColor = Color.red;
@@ -33,7 +33,7 @@ public abstract class MenuButton : MonoBehaviour
 
     private void HandHoverUpdate(Hand hand)
     {
-        var pressedDown = ButtonClickAction.GetState(SteamVR_Input_Sources.Any);
+        var pressedDown = ButtonClickAction.GetStateDown(SteamVR_Input_Sources.Any);
 
         // Ignore this function if button is not pressed down
         if (!pressedDown)
@@ -42,9 +42,9 @@ public abstract class MenuButton : MonoBehaviour
             return;
         }
 
-        hand.TriggerHapticPulse(50);
-
+        hand.TriggerHapticPulse(1000);
         TextElement.color = ActiveColor;
+
         OnClick(hand);
     }
 

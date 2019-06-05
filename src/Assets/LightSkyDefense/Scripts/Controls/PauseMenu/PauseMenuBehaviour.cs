@@ -15,7 +15,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!DialClickAction.stateDown)
+        if (!DialClickAction.GetStateDown(SteamVR_Input_Sources.Any))
         {
             return;
         }
