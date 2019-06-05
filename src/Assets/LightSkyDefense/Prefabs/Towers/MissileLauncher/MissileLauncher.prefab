@@ -30,7 +30,7 @@ MonoBehaviour:
   Projectile: {fileID: 2750454542051786134, guid: fc5d0aacb27aceb4392758cd2fc7976b,
     type: 3}
   Cooldown: 2
-  EjectInterval: 0.25
+  EjectInterval: 1
 --- !u!1 &6039203840422665131
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +335,11 @@ PrefabInstance:
       propertyPath: ActiveState
       value: 
       objectReference: {fileID: 2231943912512788652}
+    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a0fe6b3ee19c644c977eb6f21c868d2, type: 3}
 --- !u!1 &3971849629456028808 stripped
