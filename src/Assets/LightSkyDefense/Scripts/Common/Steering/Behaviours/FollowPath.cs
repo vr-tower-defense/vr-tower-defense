@@ -38,11 +38,6 @@ public class FollowPath : ISteering
 
     public override Vector3 Calculate(GameObject gameObject)
     {
-        if (_currentWaypointIndex >= Path.Instance.WaypointCount)
-        {
-            gameObject.BroadcastMessage("OnReachEndOfPath", SendMessageOptions.RequireReceiver);
-        }
-
         var magnitudeSquaredFromPathProgressTracker = (
             gameObject.transform.position - _progress
         ).magnitude;
@@ -58,12 +53,12 @@ public class FollowPath : ISteering
     /// </summary>
     private void UpdateProgression()
     {
+        var targetWaypoint = Path.Instance[_currentWaypointIndex];
+
         if (_currentWaypointIndex >= Path.Instance.WaypointCount)
         {
-            return;
+            targetWaypoint = FindObjectOfType<EarthSpin>().gameObject;
         }
-
-        var targetWaypoint = Path.Instance[_currentWaypointIndex];
 
         // Move path progression point towards next waypoint
         _progress = Vector3.MoveTowards(

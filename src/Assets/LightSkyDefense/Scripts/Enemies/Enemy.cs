@@ -18,15 +18,21 @@ public class Enemy : MonoBehaviour
     [Header("Heal effect")]
     public GameObject HealEffect;
 
-    public void OnReachEndOfPath()
+    [Tooltip("Earth layer mask")]
+    public LayerMask CollisionLayerMask = (int)Layers.EndGoal;
+
+    void OnCollisionEnter(Collision collision)
     {
-        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
+        if (CollisionLayerMask >> collision.collider.gameObject.layer == 1)
+        {
+            var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
 
-        // Reduce player lives
-        playerStatistics.UpdateLives(-1);
+            // Reduce player lives
+            playerStatistics.UpdateLives(-1);
 
-        // Destroy enemy
-        Destroy(gameObject);
+            // Destroy enemy
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>

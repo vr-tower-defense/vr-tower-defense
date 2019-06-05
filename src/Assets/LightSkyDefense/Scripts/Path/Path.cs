@@ -28,7 +28,10 @@ public class Path : MonoBehaviour
 
     #endregion
 
-    public GameObject EndGoal;
+    public GameObject EndGoalPrefab;
+
+    public GameObject EndGoalInstance;
+
 
     /// <summary>
     /// List of waypoints that represent the path
@@ -185,7 +188,7 @@ public class Path : MonoBehaviour
             lineEnd.transform.position +
             lineEnd.transform.forward * 0.5f;
 
-        Instantiate(EndGoal, earthPosition, Quaternion.identity);
+        EndGoalInstance = Instantiate(EndGoalPrefab, earthPosition, Quaternion.identity);
     }
 
     #region operator overloading
