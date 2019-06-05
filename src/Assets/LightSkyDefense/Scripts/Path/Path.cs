@@ -31,7 +31,12 @@ public class Path : MonoBehaviour
 
     #endregion
 
+    [Header("End Goal")]
     public GameObject EndGoalPrefab;
+
+    [SerializeField]
+    [Tooltip("EndGoal offset from path")]
+    private float _endGoalOffset = 0.5f;
 
     [HideInInspector]
     public GameObject EndGoalInstance;
@@ -217,11 +222,12 @@ public class Path : MonoBehaviour
 
     private void SpawnEndGoal()
     {
+        // Get second-last because last hasn't got a lookDirection
         var lineEnd = _wayPoints[_wayPoints.Length - 2];
 
         var earthPosition =
             lineEnd.transform.position +
-            lineEnd.transform.forward * 0.5f;
+            lineEnd.transform.forward * _endGoalOffset;
 
         EndGoalInstance = Instantiate(EndGoalPrefab, earthPosition, Quaternion.identity);
     }
