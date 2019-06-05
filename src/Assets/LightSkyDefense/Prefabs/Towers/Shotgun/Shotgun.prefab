@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 4314065891181572232}
   - component: {fileID: 2927930784388714069}
   - component: {fileID: 3862151930695399581}
+  - component: {fileID: 1315617687051575677}
   - component: {fileID: 3797012125748751522}
   - component: {fileID: 4107018253085489156}
   - component: {fileID: 1421314080101391250}
@@ -468,6 +469,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 2
   InitialHealth: 2
+--- !u!114 &1315617687051575677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380829739056090955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c93c793dd032c4e8074066b4a75f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealPerSecond: 0.5
+  HapticPulseFrequency: 35
 --- !u!114 &3797012125748751522
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,31 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class SpawnDialOption : DialOption
 {
+    [Header("Haptic feedback")]
+    [Tooltip("Duration in seconds")]
+    public float HapticPulseDuration = .1f;
+
+    public float HapticPulseFrequency = 15f;
+
+    [Header("Other stuff")]
     public Buildable Preview;
 
-    public GameObject DialCostText;
+    public GameObject PriceText;
 
     private PlayerStatistics _playerStatistics;
-
-    private GameObject _textMesh;
-
-    /// <summary>
-    /// Instance that is currently being placed
-    /// </summary>
-    private GameObject _preview;
 
     private void Awake()
     {
         _playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
-        SetTextMesh();
-    }
 
-    private void FixedUpdate()
-    {
-        _textMesh.transform.rotation = Player.instance.headCollider.transform.rotation;
+        SetPrice();
     }
 
     /// <summary>
@@ -38,12 +35,14 @@ public class SpawnDialOption : DialOption
             return;
         }
 
-        _preview = Instantiate(
-            Preview.gameObject,
-            transform.position,
-            transform.rotation,
-            transform
+        var hand = Player.instance.GetHand(action.activeDevice);
+
+        hand.AttachObject(
+            Instantiate(Preview.gameObject),
+            GrabTypes.None
         );
+
+        StartCoroutine(OnBuild(hand));
     }
 
     /// <summary>
@@ -51,34 +50,59 @@ public class SpawnDialOption : DialOption
     /// </summary>
     public override void OnRelease(SteamVR_Action_Vector2 action)
     {
-        if (_preview == null)
+        StopAllCoroutines();
+
+        var hand = Player.instance.GetHand(action.activeDevice);
+        var preview = hand.currentAttachedObject;
+
+        if (preview == null)
         {
             return;
         }
 
-        var buildable = _preview.GetComponent<Buildable>();
+        // Destroy preview and replace with "real" instance
+        hand.DetachObject(preview);
+        Destroy(preview);
 
-        // Destroy clone and replace with "real" instance
-        Destroy(_preview);
+        // Handle buildable logic when component exist
+        var buildable = preview.GetComponent<Buildable>();
+
+        if (buildable == null || !buildable.IsPositionValid)
+        {
+            return;
+        }
 
         // Create final instance when position is valid
-        if (!buildable.IsPositionValid)
-        {
-            return;
-        }
-
         buildable.SendMessage(
             "OnBuild",
-            transform,
+            hand.objectAttachmentPoint,
             SendMessageOptions.RequireReceiver
         );
     }
 
-    private void SetTextMesh()
+    /// <summary>
+    /// Apply haptic feedback when user is building a tower
+    /// </summary>
+    private IEnumerator OnBuild(Hand hand)
     {
-        var costMesh = DialCostText.GetComponent<TextMesh>();
-        costMesh.text = Preview.Price.ToString();
+        hand.TriggerHapticPulse(HapticPulseDuration, HapticPulseFrequency, 1);
 
-        _textMesh = Instantiate(DialCostText, gameObject.transform);
+        yield return new WaitForSeconds(HapticPulseDuration);
+        yield return OnBuild(hand);
+    }
+
+    /// <summary>
+    /// Update price in PriceText
+    /// </summary>
+    private void SetPrice()
+    {
+        var textMesh = PriceText.GetComponent<TextMesh>();
+
+        if (textMesh == null)
+        {
+            return;
+        }
+
+        textMesh.text = Preview.Price.ToString();
     }
 }
