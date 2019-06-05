@@ -21,22 +21,32 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public void OnDie()
     {
-        // If not in the world, instantiate
+        InstantiateExplode();
+
+        Destroy(gameObject);
+    }
+
+    public void OnFinish()
+    {
+        InstantiateExplode();
+
+        Destroy(gameObject);
+    }
+
+    private void InstantiateExplode()
+    {
         Instantiate(
             ExplodeEffect,
             transform.position,
             transform.rotation
         );
 
-        // Play sound effect
         SoundUtil.PlayClipAtPointWithRandomPitch(
             ExplodeSound,
             transform.position,
             ExplodePitch - ExplodePitchVariation,
             ExplodePitch + ExplodePitchVariation
         );
-
-        Destroy(gameObject);
     }
 
     public void OnUpdateHealth(float amount)

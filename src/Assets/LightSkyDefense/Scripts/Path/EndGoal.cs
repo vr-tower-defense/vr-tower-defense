@@ -25,9 +25,9 @@ public class EndGoal : MonoBehaviour
         // Reduce player lives
         _playerStatistics.UpdateLives(-enemy.Damage);
 
-        // Destroy enemy
+        // Call OnFinish on Enemy
         enemy.BroadcastMessage(
-            "OnDie",
+            "OnFinish",
             null,
             SendMessageOptions.DontRequireReceiver
         );
