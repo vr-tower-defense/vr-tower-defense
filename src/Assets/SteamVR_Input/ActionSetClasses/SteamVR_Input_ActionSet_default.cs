@@ -81,6 +81,38 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean InteractWithUI
+        {
+            get
+            {
+                return SteamVR_Actions.default_InteractWithUI;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean GrabGrip
+        {
+            get
+            {
+                return SteamVR_Actions.default_GrabGrip;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean GrapPinch
+        {
+            get
+            {
+                return SteamVR_Actions.default_GrapPinch;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean Teleport
+        {
+            get
+            {
+                return SteamVR_Actions.default_Teleport;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

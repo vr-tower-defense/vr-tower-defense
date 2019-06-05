@@ -51,13 +51,9 @@ public class FallbackController : MonoBehaviour
             return;
         }
 
-        _preview = Instantiate(
-            spawnDialOption.Preview.gameObject,
-            fallbackHand.transform.position,
-            fallbackHand.transform.rotation
-        );
+        _preview = Instantiate(spawnDialOption.Preview.gameObject);
 
-        fallbackHand.AttachObject(_preview, GrabTypes.Trigger);
+        fallbackHand.AttachObject(_preview, GrabTypes.None);
     }
 
     private void OnRelease(GameObject gameObject)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5831061206262523426}
   - component: {fileID: 1486054539220144169}
   - component: {fileID: 7305396199162728255}
+  - component: {fileID: 3345564710108726671}
   m_Layer: 11
   m_Name: MachineGunDialOptionPreview
   m_TagString: Untagged
@@ -72,12 +73,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2143c5f95f91046aee0711944e594b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Price: 25
+  Price: 10
   Prefab: {fileID: 7127235948388862705, guid: 83f3e599ec3d85c4cb8c33e9e10ef80d, type: 3}
   InvalidPositionMaterial: {fileID: 2100000, guid: 3eeb833b049bb274e83d4c96b5640f67,
     type: 2}
   Margin: 0.2
   IsPositionValid: 0
+--- !u!114 &3345564710108726671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787846512612252572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateActionSetOnAttach:
+    actionSetPath: 
+  hideHandOnAttach: 1
+  hideSkeletonOnAttach: 0
+  hideControllerOnAttach: 0
+  handAnimationOnPickup: 0
+  setRangeOfMotionOnPickup: -1
+  useHandObjectAttachmentPoint: 1
+  attachEaseIn: 0
+  snapAttachEaseInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapAttachEaseInTime: 0.15
+  snapAttachEaseInCompleted: 0
+  skeletonPoser: {fileID: 0}
+  handFollowTransform: 1
+  highlightOnHover: 0
+  hideHighlight: []
 --- !u!1001 &8070538997406165591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_LocalRotation.y
@@ -119,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_RootOrder
@@ -127,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ac5f80c84907234e9201ffc503a6386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class ShootBulletState : TowerState
@@ -20,7 +21,7 @@ public class ShootBulletState : TowerState
 
     private Rigidbody _target;
 
-    private IEnumerator _coroutine;
+    private bool _coroutineStarted;
 
     #region lifecycle methods
 
@@ -61,14 +62,7 @@ public class ShootBulletState : TowerState
     private Rigidbody FindTarget()
     {
         // Checks for the enemy that came in closest after his last Target.
-        foreach (var enemy in Tower.TargetsInRange)
-        {
-            if (enemy == null) continue;
-
-            return enemy.GetComponent<Rigidbody>();
-        }
-
-        return null;
+        return Tower.TargetsInRange.FirstOrDefault()?.GetComponent<Rigidbody>();
     }
 
     private void EnableShootRoutineWhenTargetIsInFov()
@@ -80,15 +74,15 @@ public class ShootBulletState : TowerState
         );
 
         // Only start shooting when enemy is in front of tower, stop shooting otherwise
-        if (targetAngle <= AngleTreshold && _coroutine == null)
+        if (targetAngle <= AngleTreshold && !_coroutineStarted)
         {
-            _coroutine = ShootProjectile();
-            StartCoroutine(_coroutine);
+            StartCoroutine(ShootProjectile());
+            _coroutineStarted = true;
         }
-        else if (targetAngle > AngleTreshold && _coroutine != null)
+        else if (targetAngle > AngleTreshold && _coroutineStarted)
         {
-            StopCoroutine(_coroutine);
-            _coroutine = null;
+            StopAllCoroutines();
+            _coroutineStarted = false;
         }
     }
 
