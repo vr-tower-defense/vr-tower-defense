@@ -34,9 +34,11 @@ public class Scoreboard : MonoBehaviour
 
     void OnPlayerStatisticsUpdate(PlayerStatistics playerStatistics)
     {
+        var currentLives = Mathf.Max(playerStatistics.Lives, 0);
+
         foreach (var textNode in LivesTextNodes)
         {
-            textNode.text = $"{playerStatistics.Lives}/{playerStatistics.InitialLives}";
+            textNode.text = $"{currentLives}/{playerStatistics.InitialLives}";
         }
 
         foreach (var textNode in ScoreTextNodes)
