@@ -30,6 +30,16 @@ public class PlayerStatistics : MonoBehaviour
         EmitChangeEvent();
     }
 
+    private void OnDestroy()
+    {
+        var highscore = PlayerPrefs.GetFloat("highscore");
+
+        if (highscore < Score)
+        {
+            PlayerPrefs.SetFloat("highscore", Score);
+        }
+    }
+
     /// <summary>
     /// Updates the players' funds
     /// </summary>
