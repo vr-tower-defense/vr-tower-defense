@@ -86,7 +86,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Preview
       value: 
-      objectReference: {fileID: 8151749966486156527, guid: 25fb36786f01e9d458225409fbc32b46,
+      objectReference: {fileID: 7624687925260311032, guid: 25fb36786f01e9d458225409fbc32b46,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4623bd1a59e9ebd41a6d4c76811d6c14, type: 3}
@@ -103,14 +103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9202422970273447297}
     m_Modifications:
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Name
-      value: shotgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -166,6 +158,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Name
+      value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccfaceb29405c1478dcb6d9ba59c6c6, type: 3}
