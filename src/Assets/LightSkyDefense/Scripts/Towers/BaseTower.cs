@@ -37,9 +37,6 @@ public class BaseTower : MonoBehaviour
     [HideInInspector]
     public Collider[] TargetsInRange { get; private set; } = new Collider[0];
 
-    [Header("Jam effect")]
-    public ParticleSystem JamEffect;
-
     /// <summary>
     /// Set initial state
     /// </summary>
@@ -104,7 +101,6 @@ public class BaseTower : MonoBehaviour
     public void OnJam(float jamTime)
     {
         JamState.JamTime = jamTime;
-        Instantiate(JamEffect, transform.position, Quaternion.identity);
         CurrentState.SetTowerState(JamState);
     }
     /// <summary>
