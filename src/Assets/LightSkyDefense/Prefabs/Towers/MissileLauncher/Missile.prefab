@@ -205,11 +205,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ExplosionPower: 5
-  ExplosionRange: 0.2
+  ExplosionPower: 20
+  ExplosionRange: 0.35
   ExplosionEffect: {fileID: 3260893505967507422, guid: 5ff16f6a98ad1444d93f7f8928ab8a9b,
     type: 3}
-  DetectionRange: 0.5
+  DetectionRange: 0.55
   CollisionLayerMask:
     serializedVersion: 2
     m_Bits: 512
