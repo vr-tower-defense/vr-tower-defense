@@ -11,6 +11,7 @@ public class JamState : TowerState
     {
         JamEffect.Play();
 
+        CancelInvoke("Unjam");
         Invoke("Unjam", JamTime);
     }
 
