@@ -13,10 +13,11 @@ public class TutorialHandler : MonoBehaviour
     public Transform VideoPlayerParent;
 
     [Header("Button hints")]
+    public float ButtonHintTimeout = 2.5f;
     public SteamVR_Action_Boolean PlayTutorialAction = SteamVR_Input.GetBooleanAction("PlayTutorial");
     public SteamVR_Input_Sources Hand = SteamVR_Input_Sources.LeftHand;
     public string PlayTutorialActionHint = "Start tutorial";
-    public string SkipTutorialActionHint = "Skip";
+    public string SkipTutorialActionHint = "Go to next slide";
 
     private VideoPlayer _videoPlayer;
     private readonly Queue<IEnumerator> _videoActions = new Queue<IEnumerator>(4);
@@ -25,13 +26,11 @@ public class TutorialHandler : MonoBehaviour
 
     void Start()
     {
-        _tutorialEnumerator = CreateTutorial();
-        _tutorialEnumerator.MoveNext();
-
         _videoPlayer = VideoPlayerParent.GetComponentInChildren<VideoPlayer>(true);
         _videoPlayer?.Prepare();
 
         StartCoroutine(ProcessQueue(_videoActions));
+        StartCoroutine(InitializeTutorial());
     }
 
     void Update()
@@ -41,6 +40,14 @@ public class TutorialHandler : MonoBehaviour
             return;
         }
 
+        _tutorialEnumerator?.MoveNext();
+    }
+
+    private IEnumerator InitializeTutorial()
+    {
+        yield return new WaitForSeconds(ButtonHintTimeout);
+
+        _tutorialEnumerator = CreateTutorial();
         _tutorialEnumerator.MoveNext();
     }
 
