@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: Wave 5
   m_EditorClassIdentifier: 
   Steps:
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
+  - {fileID: 11400000, guid: f581f7b6653a4be4e9831d5374bd14ca, type: 2}
   - {fileID: 11400000, guid: 0d2de74a934dcb1459a39a47daece1ac, type: 2}
   - {fileID: 11400000, guid: 2ade12b74ce1a20408747e1104d982d0, type: 2}

@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tower: {fileID: 0}
-  RotationSpeed: 60
+  RotationSpeed: 120
   AngleTreshold: 10
   Projectile: {fileID: 2096758969451732159, guid: 43940cfd1478e2342b0d88366c87b3bb,
     type: 3}

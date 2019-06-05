@@ -18,12 +18,14 @@ public class Enemy : MonoBehaviour
     [Header("Heal effect")]
     public GameObject HealEffect;
 
+    public int Damage = 1;
+
     public void OnReachEndOfPath()
     {
         var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
 
         // Reduce player lives
-        playerStatistics.UpdateLives(-1);
+        playerStatistics.UpdateLives(-Damage);
 
         // Destroy enemy
         Destroy(gameObject);

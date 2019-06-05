@@ -13,20 +13,17 @@ MonoBehaviour:
   m_Name: Wave 2
   m_EditorClassIdentifier: 
   Steps:
-  - {fileID: 11400000, guid: 6c40aa6216325dd4aa0144fc3709ecd5, type: 2}
+  - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
   - {fileID: 11400000, guid: 9e85229713c9c7140b3db0810b8bd0cf, type: 2}
   - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
+  - {fileID: 11400000, guid: b90ac3cd610153f498cb919635f8daee, type: 2}
   - {fileID: 11400000, guid: be28f2e64714b104b9448203a52f3963, type: 2}
   - {fileID: 11400000, guid: 9e85229713c9c7140b3db0810b8bd0cf, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
+  - {fileID: 11400000, guid: b90ac3cd610153f498cb919635f8daee, type: 2}
   - {fileID: 11400000, guid: 9e85229713c9c7140b3db0810b8bd0cf, type: 2}
   - {fileID: 11400000, guid: bf94c2b0c49e38f459737f503dcf3166, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
-  - {fileID: 11400000, guid: 6083e0570bbfd98458c84aef71954087, type: 2}
-  - {fileID: 11400000, guid: 6c40aa6216325dd4aa0144fc3709ecd5, type: 2}
+  - {fileID: 11400000, guid: f581f7b6653a4be4e9831d5374bd14ca, type: 2}
+  - {fileID: 11400000, guid: 9e85229713c9c7140b3db0810b8bd0cf, type: 2}
   - {fileID: 11400000, guid: bf94c2b0c49e38f459737f503dcf3166, type: 2}
   - {fileID: 11400000, guid: be28f2e64714b104b9448203a52f3963, type: 2}
   - {fileID: 11400000, guid: 1a10c227851d9e64b8e3ba6ff27714d3, type: 2}
