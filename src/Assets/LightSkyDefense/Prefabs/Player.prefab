@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490018}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ObjectAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471722}
   - component: {fileID: 8194540}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: FollowHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 402768}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: NoSteamVRFallbackObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 2326430}
   - component: {fileID: 3390842}
   - component: {fileID: 11451472}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: PlayVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,15 +188,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107460}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f0522eaef74d984591c060d05a095c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderThickness: -0.07
-  wireframeHeight: 2
-  drawWireframeWhenSelectedOnly: 0
-  drawInGame: 1
+  borderThickness: 0
+  wireframeHeight: 2.3
+  drawWireframeWhenSelectedOnly: 1
+  drawInGame: 0
   size: 0
   color: {r: 0, g: 1, b: 1, a: 0.922}
   vertices:
@@ -219,11 +219,11 @@ GameObject:
   - component: {fileID: 447954}
   - component: {fileID: 8634891101427258545}
   - component: {fileID: 8113370796401976014}
-  - component: {fileID: 7441106341132843983}
   - component: {fileID: 11465950}
   - component: {fileID: 6248077501238662836}
   - component: {fileID: 8717499262902273479}
   - component: {fileID: 4404635007910887}
+  - component: {fileID: 1041603453875049323}
   m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
@@ -296,33 +296,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107946}
   m_Mesh: {fileID: 0}
---- !u!114 &7441106341132843983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f0522eaef74d984591c060d05a095c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  borderThickness: 0.15
-  wireframeHeight: 2
-  drawWireframeWhenSelectedOnly: 0
-  drawInGame: 1
-  size: 0
-  color: {r: 0, g: 1, b: 1, a: 1}
-  vertices:
-  - {x: 1, y: 0.01, z: -0.75000006}
-  - {x: -1, y: 0.01, z: -0.75000006}
-  - {x: -1, y: 0.01, z: 0.75000006}
-  - {x: 1, y: 0.01, z: 0.75000006}
-  - {x: 1.15, y: 0.01, z: -0.9000001}
-  - {x: -1.15, y: 0.01, z: -0.9000001}
-  - {x: -1.15, y: 0.01, z: 0.9000001}
-  - {x: 1.15, y: 0.01, z: 0.9000001}
 --- !u!114 &11465950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +452,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1041603453875049323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1c07a6449b0ca439ee6fac5f6f7d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &109154
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +475,7 @@ GameObject:
   - component: {fileID: 422332}
   - component: {fileID: 3368578}
   - component: {fileID: 2353626}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +553,7 @@ GameObject:
   - component: {fileID: 2083460}
   - component: {fileID: 11476190}
   - component: {fileID: 2907965278067513719}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: FallbackObjects
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -664,7 +649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494198}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: SteamVRObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +686,7 @@ GameObject:
   - component: {fileID: 453574}
   - component: {fileID: 13533284}
   - component: {fileID: 5452286}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: HeadCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,10 +747,9 @@ GameObject:
   - component: {fileID: 429506}
   - component: {fileID: 2014920}
   - component: {fileID: 11450526}
-  - component: {fileID: 9215702}
   - component: {fileID: 12440092}
   - component: {fileID: 8206636459042323442}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: VRCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -824,7 +808,7 @@ Camera:
   m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -840,14 +824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad1e469d4e3e04489f9a36419f1a4f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!92 &9215702
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125964}
-  m_Enabled: 1
 --- !u!124 &12440092
 Behaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495400}
   - component: {fileID: 11405908}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ControllerHoverHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +898,7 @@ GameObject:
   - component: {fileID: 11461462}
   - component: {fileID: 11464692}
   - component: {fileID: 114000013786455312}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: InputModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +977,7 @@ GameObject:
   - component: {fileID: 11497470}
   - component: {fileID: 5492098}
   - component: {fileID: 747842447470055993}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: FallbackHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1088,7 @@ GameObject:
   - component: {fileID: 476540}
   - component: {fileID: 11450312}
   - component: {fileID: 114000011273627542}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1240,7 +1216,7 @@ GameObject:
   - component: {fileID: 485514}
   - component: {fileID: 11401046}
   - component: {fileID: 114000011957598740}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1367,7 +1343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 480432}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: HoverPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1398,7 +1374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451882}
   - component: {fileID: 11461284}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ControllerHoverHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1445,7 +1421,7 @@ GameObject:
   - component: {fileID: 114000012749712888}
   - component: {fileID: 11479638}
   - component: {fileID: 114000010474703086}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: '[SteamVR]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446772}
   - component: {fileID: 11489144}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ControllerButtonHints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413580}
   - component: {fileID: 11494192}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ControllerButtonHints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1623,7 +1599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012025983752}
   - component: {fileID: 114000013709408034}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: DebugUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1666,7 +1642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011699137176}
   - component: {fileID: 114000010777378212}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1719,7 +1695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012325712216}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: HoverPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011474053580}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: ObjectAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1781,7 +1757,7 @@ GameObject:
   - component: {fileID: 8018840303375011489}
   - component: {fileID: 8258256813409411260}
   - component: {fileID: 8751418298424472794}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1839,7 @@ GameObject:
   - component: {fileID: 6408188053664253393}
   - component: {fileID: 4040300134542418693}
   - component: {fileID: 5345954067600101820}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,6 +1945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.05
       objectReference: {fileID: 0}
@@ -2012,10 +1993,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1504230871247721511, guid: 1344af5b7097b3046a402fdc19f41346,
+    - target: {fileID: 4238562281521599807, guid: 1344af5b7097b3046a402fdc19f41346,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.035
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1344af5b7097b3046a402fdc19f41346, type: 3}
@@ -2091,6 +2072,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238562281521599807, guid: 1344af5b7097b3046a402fdc19f41346,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1344af5b7097b3046a402fdc19f41346, type: 3}

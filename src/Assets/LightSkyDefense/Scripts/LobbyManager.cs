@@ -9,11 +9,11 @@ public class LobbyManager : MonoBehaviour
 
     public SteamVR_Action_Boolean MenuButtonClickAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("MenuButtonClick");
     public SteamVR_Action_Boolean TriggerClickAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("TriggerClick");
-    public SteamVR_Action_Vector2 DialAction = SteamVR_Input.GetAction<SteamVR_Action_Vector2>("Dial");
+    public SteamVR_Action_Boolean DialClickAction = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("DialClick");
 
-    public string MenuButtonClickActionHint = "Pauze scherm";
+    public string MenuButtonClickActionHint = "Open pauze scherm";
     public string TriggerClickActionHint = "Verwijder een toren";
-    public string DialActionHint = "Kies een toren";
+    public string DialClickActionHint = "Kies een toren";
 
     /// <summary>
     /// Start routine that is used to show the hints
@@ -30,6 +30,11 @@ public class LobbyManager : MonoBehaviour
     {
         StopAllCoroutines();
 
+        if (Player.instance == null)
+        {
+            return;
+        }
+
         ControllerButtonHints.HideAllTextHints(Player.instance.leftHand);
         ControllerButtonHints.HideAllTextHints(Player.instance.rightHand);
     }
@@ -38,16 +43,16 @@ public class LobbyManager : MonoBehaviour
     {
         var menuButtonClick = MenuButtonClickAction.GetStateDown(SteamVR_Input_Sources.Any);
         var triggerClick = TriggerClickAction.GetStateDown(SteamVR_Input_Sources.Any);
-        var dial = DialAction.GetAxis(SteamVR_Input_Sources.Any);
+        var dialClick = DialClickAction.GetStateDown(SteamVR_Input_Sources.Any);
 
-        if(menuButtonClick)
+        if (menuButtonClick)
             ControllerButtonHints.HideTextHint(Player.instance.leftHand, MenuButtonClickAction);
 
         if (triggerClick)
             ControllerButtonHints.HideTextHint(Player.instance.rightHand, TriggerClickAction);
 
-        if (dial != Vector2.zero)
-            ControllerButtonHints.HideTextHint(Player.instance.rightHand, DialAction);
+        if (dialClick)
+            ControllerButtonHints.HideTextHint(Player.instance.rightHand, DialClickAction);
     }
 
     /// <summary>
@@ -60,6 +65,6 @@ public class LobbyManager : MonoBehaviour
 
         ControllerButtonHints.ShowTextHint(Player.instance.leftHand, MenuButtonClickAction, MenuButtonClickActionHint);
         ControllerButtonHints.ShowTextHint(Player.instance.rightHand, TriggerClickAction, TriggerClickActionHint);
-        ControllerButtonHints.ShowTextHint(Player.instance.rightHand, DialAction, DialActionHint);
+        ControllerButtonHints.ShowTextHint(Player.instance.rightHand, DialClickAction, DialClickActionHint);
     }
 }
