@@ -30,8 +30,8 @@ public class Path : MonoBehaviour
 
     public GameObject EndGoalPrefab;
 
+    [HideInInspector]
     public GameObject EndGoalInstance;
-
 
     /// <summary>
     /// List of waypoints that represent the path

@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4676125942967593911}
   - component: {fileID: 4656227330348155761}
   - component: {fileID: 4664054290868371759}
-  - component: {fileID: 6414986493759779410}
+  - component: {fileID: 5959790980437496333}
   - component: {fileID: 7200592445061117135}
   - component: {fileID: 4077378924275705625}
-  m_Layer: 8
-  m_Name: Earth
+  m_Layer: 16
+  m_Name: EndGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6414986493759779410
+--- !u!114 &5959790980437496333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

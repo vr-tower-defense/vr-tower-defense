@@ -57,7 +57,7 @@ public class FollowPath : ISteering
 
         if (_currentWaypointIndex >= Path.Instance.WaypointCount)
         {
-            targetWaypoint = FindObjectOfType<EarthSpin>().gameObject;
+            targetWaypoint = Path.Instance.EndGoalInstance;
         }
 
         // Move path progression point towards next waypoint

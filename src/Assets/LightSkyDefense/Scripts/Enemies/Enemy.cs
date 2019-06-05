@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Damageable))]
 [RequireComponent(typeof(SpawnCreditOnDie))]
@@ -17,23 +13,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Heal effect")]
     public GameObject HealEffect;
-
-    [Tooltip("Earth layer mask")]
-    public LayerMask CollisionLayerMask = (int)Layers.EndGoal;
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (CollisionLayerMask >> collision.collider.gameObject.layer == 1)
-        {
-            var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
-
-            // Reduce player lives
-            playerStatistics.UpdateLives(-1);
-
-            // Destroy enemy
-            Destroy(gameObject);
-        }
-    }
 
     /// <summary>
     /// This kills the enemy and starts the explosion particle system and sound effect

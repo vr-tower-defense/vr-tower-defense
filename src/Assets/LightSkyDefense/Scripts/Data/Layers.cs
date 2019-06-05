@@ -19,4 +19,5 @@ public enum Layers
     Controls = 1 << 11,
     Projectiles = 1 << 12,
     Pickups = 1 << 13,
+    EndGoal = 1 << 14,
 }
