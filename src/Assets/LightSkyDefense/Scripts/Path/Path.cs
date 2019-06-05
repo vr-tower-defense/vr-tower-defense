@@ -12,9 +12,6 @@ public class Path : MonoBehaviour
     [Tooltip("Amount of points to generate that form the line")]
     public int WaypointCount = 100;
 
-    [Tooltip("The radius that the capsule colliders in the path will get")]
-    public float PathWidth = 0.15f;
-
     [Tooltip("The object that is instantiated as a waypoint")]
     public GameObject Prefab;
 
@@ -31,6 +28,8 @@ public class Path : MonoBehaviour
 
     #endregion
 
+    public GameObject EndGoal;
+
     /// <summary>
     /// List of waypoints that represent the path
     /// </summary>
@@ -43,6 +42,8 @@ public class Path : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
 
         GenerateNewPath();
+
+        SpawnEndGoal();
     }
 
     /// <summary>
@@ -151,40 +152,8 @@ public class Path : MonoBehaviour
                     continue;
                 }
 
-                var currentWaypoint = _wayPoints[waypointIndex];
-                var previousWaypoint = _wayPoints[waypointIndex - 1];
-
                 // Update rotation of previous waypoint to make it look towards the current one
-                previousWaypoint.transform.LookAt(currentWaypoint.transform);
-
-                // Set the rotation of the current waypoint equal to the previous waypoint to make sure that the last
-                // point in the path looks towards a similar direction
-                currentWaypoint.transform.rotation = previousWaypoint.transform.rotation;
-
-
-                #region create capsule colliders
-
-                var capsuleCollider = currentWaypoint.AddComponent<CapsuleCollider>();
-
-                var distanceBetweenWaypoints = Vector3.Distance(
-                    currentWaypoint.transform.position,
-                    previousWaypoint.transform.position
-                );
-
-                // Padding is pathWidth multiplied by 2 to make sure that colliders fully overlap without any gaps
-                var padding = PathWidth * 2;
-
-                // The center (local position) of the path collider should be the distance between two waypoints
-                capsuleCollider.center = new Vector3(0, 0, -(distanceBetweenWaypoints / 2));
-
-                // Set the dimensions of the path
-                capsuleCollider.height = distanceBetweenWaypoints + padding;
-                capsuleCollider.radius = PathWidth;
-
-                // Capsule collider height should be applied to the Z axis
-                capsuleCollider.direction = 2; // 2 == Z-axis
-
-                #endregion
+                _wayPoints[waypointIndex - 1].transform.LookAt(_wayPoints[waypointIndex].transform);
 
                 // Increment waypoint counter
                 waypointIndex++;
@@ -208,6 +177,17 @@ public class Path : MonoBehaviour
         _lineRenderer.SetPositions(positions);
     }
 
+    private void SpawnEndGoal()
+    {
+        var lineEnd = _wayPoints[_wayPoints.Length - 2];
+
+        var earthPosition =
+            lineEnd.transform.position +
+            lineEnd.transform.forward * 0.5f;
+
+        Instantiate(EndGoal, earthPosition, Quaternion.identity);
+    }
+
     #region operator overloading
 
     /// <summary>
@@ -224,28 +204,6 @@ public class Path : MonoBehaviour
             }
 
             return null;
-        }
-    }
-
-    #endregion
-
-    #region debugging
-
-    /// <summary>
-    /// Display the range when selected
-    /// </summary>
-    void OnDrawGizmosSelected()
-    {
-        if (_wayPoints == null)
-        {
-            return;
-        }
-
-        Gizmos.color = Color.yellow;
-
-        foreach (var waypoint in _wayPoints)
-        {
-            Gizmos.DrawSphere(waypoint.transform.position, .01f);
         }
     }
 
