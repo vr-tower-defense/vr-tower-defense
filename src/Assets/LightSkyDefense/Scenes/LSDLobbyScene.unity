@@ -112,75 +112,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &514655839
+--- !u!1001 &1036945419
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8559820636644303833, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267343330, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_Name
       value: LSDPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8559820636644086689, guid: c614b50d5397e454da6213a2e4a3b25e,
+    - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c614b50d5397e454da6213a2e4a3b25e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ab7c8ae358c37b14887042c082171864, type: 3}
 --- !u!1 &1707251497
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +375,140 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1924845582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6868306348267343330, guid: ab7c8ae358c37b14887042c082171864,
+    type: 3}
+  m_PrefabInstance: {fileID: 1036945419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1924845583
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924845582}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0cd92b52e48c4ff43bdace37b8f9e987, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1924845584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924845582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c374bb8830afd6341a41219c7b6c3a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialClickAction:
+    actionPath: /actions/default/in/MenuButtonClick
+    needsReinit: 1
+  Prefab: {fileID: 7794049174583824409, guid: 43e32e02ad1999c4d87e08c5d9610505, type: 3}
+  Offset: {x: 0, y: 0, z: 0.75}
+--- !u!114 &1924845585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924845582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91842cb940430a48adc1e9ecd1d9525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Subscribers: []
+  InitialLives: 5
+  InitialFunds: 20
 --- !u!1001 &2687029689639452918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -487,13 +621,13 @@ MonoBehaviour:
   PauseMenuHintTimeout: 2.5
   MenuButtonClickAction:
     actionPath: /actions/default/in/MenuButtonClick
-    needsReinit: 0
+    needsReinit: 1
   TriggerClickAction:
     actionPath: /actions/default/in/TriggerClick
-    needsReinit: 0
+    needsReinit: 1
   DialClickAction:
     actionPath: /actions/default/in/DialClick
-    needsReinit: 0
+    needsReinit: 1
   MenuButtonClickActionHint: Pauze scherm
   TriggerClickActionHint: Verwijder een toren
   DialClickActionHint: Kies een toren
@@ -527,7 +661,7 @@ MonoBehaviour:
   ButtonHintTimeout: 2.5
   PlayTutorialAction:
     actionPath: /actions/default/in/PlayTutorial
-    needsReinit: 0
+    needsReinit: 1
   Hand: 1
   PlayTutorialActionHint: Start tutorial
   SkipTutorialActionHint: Skip

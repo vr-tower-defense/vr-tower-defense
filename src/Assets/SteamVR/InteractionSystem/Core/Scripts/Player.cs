@@ -127,7 +127,6 @@ namespace Valve.VR.InteractionSystem
             return null;
         }
 
-
         //-------------------------------------------------
         public Hand leftHand => GetHand(SteamVR_Input_Sources.LeftHand);
 
