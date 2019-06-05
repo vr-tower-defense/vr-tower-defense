@@ -10,6 +10,9 @@ public class SpawnCreditOnDie : MonoBehaviour
     /// </summary>
     void OnDie()
     {
+        if(Value <= 0)
+            return;
+
         var clone = Instantiate(
             Credit,
             gameObject.transform.position,

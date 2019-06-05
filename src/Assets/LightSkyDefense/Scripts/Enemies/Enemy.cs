@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [Header("Heal effect")]
     public GameObject HealEffect;
 
+    public int Damage = 1;
+
     /// <summary>
     /// This kills the enemy and starts the explosion particle system and sound effect
     /// </summary>
@@ -33,6 +35,8 @@ public class Enemy : MonoBehaviour
             ExplodePitch - ExplodePitchVariation,
             ExplodePitch + ExplodePitchVariation
         );
+
+        Destroy(gameObject);
     }
 
     public void OnUpdateHealth(float amount)
