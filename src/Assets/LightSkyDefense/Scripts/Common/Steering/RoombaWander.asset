@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a891d614103ff6344abb7160a89b20fe, type: 3}
   m_Name: RoombaWander
   m_EditorClassIdentifier: 
-  WanderRadius: 0.2
-  WanderDistance: 0.2
+  WanderRadius: 0.4
+  WanderDistance: 0.6
   WanderJitter: 5
