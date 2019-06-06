@@ -32,7 +32,7 @@ MonoBehaviour:
     type: 3}
   ProjectileSpawn: {fileID: 4368099462211392352}
   ShootSpeed: 1.25
-  ShootInterval: 4
+  ShootInterval: 2
   LoadUpTime: 3
 --- !u!114 &6323447995526082188
 MonoBehaviour:
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasTarget: {fileID: 1078663374748653289}
-  Radius: 0.4
+  Radius: 0.7
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
@@ -88,10 +88,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490035793463666687}
     m_Modifications:
-    - target: {fileID: 100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
-      propertyPath: m_Name
-      value: BigEnemy
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -148,6 +144,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
+      propertyPath: m_Name
+      value: BigEnemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
 --- !u!1001 &4899856958488546277
@@ -161,6 +161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BugzookaEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845637754431100965, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Score
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4986396300897381402, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
