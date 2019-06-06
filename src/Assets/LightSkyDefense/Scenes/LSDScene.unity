@@ -462,6 +462,18 @@ PrefabInstance:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 2735556328145532274, guid: ac82bd0089866a44788b2374c5b50622,
+        type: 3}
+      propertyPath: EndGoal
+      value: 
+      objectReference: {fileID: 4678745936121586097, guid: 489b580b729d03641a487c2c8e624eb4,
+        type: 3}
+    - target: {fileID: 2735556328145532274, guid: ac82bd0089866a44788b2374c5b50622,
+        type: 3}
+      propertyPath: EndGoalPrefab
+      value: 
+      objectReference: {fileID: 4678745936121586097, guid: 489b580b729d03641a487c2c8e624eb4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac82bd0089866a44788b2374c5b50622, type: 3}
 --- !u!1 &1233241760 stripped

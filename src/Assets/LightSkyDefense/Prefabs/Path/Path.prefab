@@ -55,6 +55,7 @@ MonoBehaviour:
     EndTangent: {x: 0.87, y: 0.15, z: -0.13}
   WaypointCount: 50
   Prefab: {fileID: 6714493177004997205, guid: c951bbabb6a5e17479320bc1689d3854, type: 3}
+  EndGoal: {fileID: 4678745936121586097, guid: 489b580b729d03641a487c2c8e624eb4, type: 3}
 --- !u!120 &2735556328145532272
 LineRenderer:
   m_ObjectHideFlags: 0

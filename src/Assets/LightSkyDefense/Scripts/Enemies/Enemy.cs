@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Damageable))]
 [RequireComponent(typeof(SpawnCreditOnDie))]
@@ -20,30 +16,31 @@ public class Enemy : MonoBehaviour
 
     public int Damage = 1;
 
-    public void OnReachEndOfPath()
-    {
-        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
-
-        // Reduce player lives
-        playerStatistics.UpdateLives(-Damage);
-
-        // Destroy enemy
-        Destroy(gameObject);
-    }
-
     /// <summary>
     /// This kills the enemy and starts the explosion particle system and sound effect
     /// </summary>
     public void OnDie()
     {
-        // If not in the world, instantiate
+        InstantiateExplode();
+
+        Destroy(gameObject);
+    }
+
+    public void OnFinish()
+    {
+        InstantiateExplode();
+
+        Destroy(gameObject);
+    }
+
+    private void InstantiateExplode()
+    {
         Instantiate(
             ExplodeEffect,
             transform.position,
             transform.rotation
         );
 
-        // Play sound effect
         SoundUtil.PlayClipAtPointWithRandomPitch(
             ExplodeSound,
             transform.position,
