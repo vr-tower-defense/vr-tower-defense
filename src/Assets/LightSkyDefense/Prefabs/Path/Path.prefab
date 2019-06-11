@@ -54,7 +54,11 @@ MonoBehaviour:
     StartTangent: {x: 2.56, y: 2.24, z: -0.6}
     EndTangent: {x: 0.87, y: 0.15, z: -0.13}
   WaypointCount: 50
+  PathWidth: 0.15
   Prefab: {fileID: 6714493177004997205, guid: c951bbabb6a5e17479320bc1689d3854, type: 3}
+  EndGoalPrefab: {fileID: 0}
+  _endGoalOffset: 0.5
+  EndGoalInstance: {fileID: 0}
 --- !u!120 &2735556328145532272
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -72,7 +76,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ceefb5487f949fe46bddd4c9f217c53b, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

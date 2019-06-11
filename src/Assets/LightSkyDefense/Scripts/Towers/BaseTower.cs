@@ -34,6 +34,8 @@ public class BaseTower : MonoBehaviour
     [Tooltip("The range in meters which is used to check for collisions")]
     public float Range = .5f;
 
+    public Buildable Preview;
+
     [HideInInspector]
     public Collider[] TargetsInRange { get; private set; } = new Collider[0];
 
@@ -115,6 +117,10 @@ public class BaseTower : MonoBehaviour
     /// </summary>
     public void OnDelete()
     {
+        // Increment funds on tower delete
+        var playerStatistics = Player.instance.GetComponent<PlayerStatistics>();
+        playerStatistics.UpdateFunds(Preview.Price);
+
         Destroy(gameObject);
     }
 

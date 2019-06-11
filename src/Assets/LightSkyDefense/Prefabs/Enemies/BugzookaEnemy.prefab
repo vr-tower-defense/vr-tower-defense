@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasTarget: {fileID: 1078663374748653289}
-  Radius: 0.4
+  Radius: 1.2
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
@@ -162,6 +162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BugzookaEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7845637754431100965, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: Score
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4986396300897381402, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,20 +222,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3619709108155021460, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: Value
       value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 8775435558714434899, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.1321
+      propertyPath: MaxHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775435558714434899, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1321
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d624a3d6a1c95543ac294f5cb3633ad, type: 3}

@@ -215,7 +215,7 @@ MonoBehaviour:
     m_Bits: 512
   TimeAlive: 8
   EjectForce: 1
-  MaxSpeed: 0.5
+  MaxSpeed: 0.7
 --- !u!1001 &287345814034593197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1945967994869956103}
     m_Modifications:
+    - target: {fileID: 100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
+      propertyPath: m_Name
+      value: Missile
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -278,10 +282,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}
-      propertyPath: m_Name
-      value: Missile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776709cf2f1f8544b944aecbaad79e78, type: 3}

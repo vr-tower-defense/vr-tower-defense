@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &849633423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1504230870613186994, guid: ab7c8ae358c37b14887042c082171864,
+    type: 3}
+  m_PrefabInstance: {fileID: 1036945419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1036945419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +153,7 @@ PrefabInstance:
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
@@ -157,7 +163,7 @@ PrefabInstance:
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
@@ -172,13 +178,21 @@ PrefabInstance:
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6868306348267699610, guid: ab7c8ae358c37b14887042c082171864,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 394864717, guid: ab7c8ae358c37b14887042c082171864, type: 3}
+      propertyPath: Subscribers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 394864717, guid: ab7c8ae358c37b14887042c082171864, type: 3}
+      propertyPath: Subscribers.Array.data[0]
+      value: 
+      objectReference: {fileID: 849633423}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab7c8ae358c37b14887042c082171864, type: 3}
 --- !u!1 &1707251497
@@ -300,7 +314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707251497}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.49600047, y: 1.3360596, z: 1.5410006}
+  m_LocalPosition: {x: 0.49600047, y: 1.3360596, z: 1.498}
   m_LocalScale: {x: 0.19048016, y: 0.25000012, z: 0.10714004}
   m_Children: []
   m_Father: {fileID: 0}
@@ -506,7 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91842cb940430a48adc1e9ecd1d9525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Subscribers: []
+  Subscribers:
+  - {fileID: 0}
   InitialLives: 5
   InitialFunds: 20
 --- !u!1001 &2687029689639452918

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3498671206466370696}
   - component: {fileID: 4639496737702317382}
   m_Layer: 15
-  m_Name: BossMissile
+  m_Name: BugzookaProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.51746035
     - serializedVersion: 3
-      time: 0.2
+      time: 0.3
       value: 0
       inSlope: -0.20443924
       outSlope: -4.2057004
@@ -206,9 +206,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   ExplosionPower: 10
-  ExplosionRange: 0.15
+  ExplosionRange: 0.3
+  ExplosionEffect: {fileID: 3260893505967507422, guid: 5ff16f6a98ad1444d93f7f8928ab8a9b,
+    type: 3}
   DetectionRange: 2
-  CollisionLayerMask: 256
+  CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   TimeAlive: 8
   EjectForce: 1
   MaxSpeed: 0.5
