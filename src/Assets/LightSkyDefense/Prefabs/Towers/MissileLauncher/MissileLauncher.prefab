@@ -295,15 +295,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: MaxHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: InitialHealth
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4996990926426022854, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
@@ -335,20 +340,21 @@ PrefabInstance:
       propertyPath: ActiveState
       value: 
       objectReference: {fileID: 2231943912512788652}
-    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 4996990926426022854, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 6
+      propertyPath: Preview
+      value: 
+      objectReference: {fileID: 1999908471555437872, guid: f7daf9f4465ffaf4eb0870fa4f8a2e1c,
+        type: 3}
+    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: MaxHealth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 283927719311403616, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
-        type: 3}
-      propertyPath: InitialHealth
-      value: 3
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a0fe6b3ee19c644c977eb6f21c868d2, type: 3}

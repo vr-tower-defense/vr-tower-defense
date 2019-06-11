@@ -12,6 +12,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShotgunDialOption
       objectReference: {fileID: 0}
+    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
+        type: 3}
+      propertyPath: InactiveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583, type: 2}
+    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
+        type: 3}
+      propertyPath: ActiveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: b131f7805286aa845b530e06101b47a5, type: 2}
+    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
+        type: 3}
+      propertyPath: TargetMesh
+      value: 
+      objectReference: {fileID: 8558905875022447426}
+    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
+        type: 3}
+      propertyPath: Preview
+      value: 
+      objectReference: {fileID: 8151749966486156527, guid: 1288d6b1648b3c643bb253e944654fec,
+        type: 3}
     - target: {fileID: 1654825914279286242, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,27 +88,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
-        type: 3}
-      propertyPath: InactiveMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 33c80cc11d02a0c4cb1bc40fbde3d583, type: 2}
-    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
-        type: 3}
-      propertyPath: ActiveMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: b131f7805286aa845b530e06101b47a5, type: 2}
-    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
-        type: 3}
-      propertyPath: TargetMesh
-      value: 
-      objectReference: {fileID: 8558905875022447426}
-    - target: {fileID: 4152498792656691889, guid: 4623bd1a59e9ebd41a6d4c76811d6c14,
-        type: 3}
-      propertyPath: Preview
-      value: 
-      objectReference: {fileID: 8151749966486156527, guid: 25fb36786f01e9d458225409fbc32b46,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4623bd1a59e9ebd41a6d4c76811d6c14, type: 3}
 --- !u!4 &9202422970273447297 stripped

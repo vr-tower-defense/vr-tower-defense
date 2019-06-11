@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LightSkyDefense/Scenes/LSDScene.unity
     guid: 93e743ea3ad4c9e4d9c6ebae4ab47d47
+  - enabled: 1
+    path: Assets/LightSkyDefense/Scenes/LSDLobbyScene.unity
+    guid: 014af342abe51fa44bca31acfd301369
   m_configObjects: {}

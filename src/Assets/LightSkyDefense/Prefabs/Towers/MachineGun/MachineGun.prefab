@@ -198,15 +198,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4996990926426022854, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
@@ -223,10 +218,21 @@ PrefabInstance:
       propertyPath: ProjectileSpawns.Array.data[0]
       value: 
       objectReference: {fileID: 1478108208445998085}
-    - target: {fileID: 7376781953501531297, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+    - target: {fileID: 4996990926426022854, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
+      propertyPath: Preview
+      value: 
+      objectReference: {fileID: 1990047713209879144, guid: 94d42b82ea4b0fe489df482e54bceee2,
+        type: 3}
+    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599323526665794820, guid: 6a0fe6b3ee19c644c977eb6f21c868d2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a0fe6b3ee19c644c977eb6f21c868d2, type: 3}

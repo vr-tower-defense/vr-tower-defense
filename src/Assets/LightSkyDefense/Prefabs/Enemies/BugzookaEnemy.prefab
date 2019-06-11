@@ -32,7 +32,7 @@ MonoBehaviour:
     type: 3}
   ProjectileSpawn: {fileID: 4368099462211392352}
   ShootSpeed: 1.25
-  ShootInterval: 2
+  ShootInterval: 4
   LoadUpTime: 3
 --- !u!114 &6323447995526082188
 MonoBehaviour:
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasTarget: {fileID: 1078663374748653289}
-  Radius: 0.7
+  Radius: 1.2
   LayerBitMask:
     serializedVersion: 2
     m_Bits: 256
@@ -88,6 +88,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490035793463666687}
     m_Modifications:
+    - target: {fileID: 100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
+      propertyPath: m_Name
+      value: BigEnemy
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -143,10 +147,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
-      propertyPath: m_Name
-      value: BigEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d610873c65bad9e4292d0d9e610d692e, type: 3}
@@ -222,6 +222,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3619709108155021460, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
+        type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1295532292891702988, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: Value
@@ -230,12 +235,12 @@ PrefabInstance:
     - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: MaxHealth
-      value: 64
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1527273287116694936, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
       propertyPath: InitialHealth
-      value: 64
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5316245599144224562, guid: 1d624a3d6a1c95543ac294f5cb3633ad,
         type: 3}
