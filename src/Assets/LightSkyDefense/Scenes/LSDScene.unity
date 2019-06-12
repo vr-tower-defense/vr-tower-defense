@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -608,6 +608,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6868306348279736364, guid: ab7c8ae358c37b14887042c082171864,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868306348268282572, guid: ab7c8ae358c37b14887042c082171864,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868306348268197504, guid: ab7c8ae358c37b14887042c082171864,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 394864717, guid: ab7c8ae358c37b14887042c082171864, type: 3}
       propertyPath: Subscribers.Array.data[0]
       value: 
@@ -615,11 +630,6 @@ PrefabInstance:
     - target: {fileID: 394864717, guid: ab7c8ae358c37b14887042c082171864, type: 3}
       propertyPath: InitialLives
       value: 999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6868306348279736364, guid: ab7c8ae358c37b14887042c082171864,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab7c8ae358c37b14887042c082171864, type: 3}

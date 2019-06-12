@@ -12,7 +12,7 @@ public class ShootBulletState : TowerState
 
     [Tooltip("Angle in degrees in which an enemy should be from the shooting direction")]
     [Range(0, 180)]
-    public float AngleTreshold = 10;
+    public float AngleThreshold = 10;
 
     [Header("Shooting")]
     public Rigidbody Projectile;
@@ -74,12 +74,12 @@ public class ShootBulletState : TowerState
         );
 
         // Only start shooting when enemy is in front of tower, stop shooting otherwise
-        if (targetAngle <= AngleTreshold && !_coroutineStarted)
+        if (targetAngle <= AngleThreshold && !_coroutineStarted)
         {
             StartCoroutine(ShootProjectile());
             _coroutineStarted = true;
         }
-        else if (targetAngle > AngleTreshold && _coroutineStarted)
+        else if (targetAngle > AngleThreshold && _coroutineStarted)
         {
             StopAllCoroutines();
             _coroutineStarted = false;
