@@ -7,7 +7,7 @@
 		_FadeLength("Fade Length", Range(0, 2)) = 0.15
 	}
 
-	SubShader
+		SubShader
 	{
 		ZWrite Off
 		Cull Off
@@ -60,19 +60,27 @@
 
 			fixed4 frag(v2f i, UNITY_VPOS_TYPE vpos : VPOS) : SV_Target
 			{
+				// vpos is Screen space pixel position
+
+				// We need uv of whole screen and not just the material the shader is applied to (we divide by _ScreenParams to correct for the aspect ratio)
 				float2 screenuv = vpos.xy / _ScreenParams.xy;
+				// Sample from depth texture (1..0 on DX11+)
 				float screenDepth = Linear01Depth(tex2D(_CameraDepthTexture, screenuv));
 				float diff = screenDepth - Linear01Depth(vpos.z);
 				float intersect = 0;
 
 				if (diff > 0)
+					//smoothstep diff between 0 and the farplane, 1 - because the screendepth range is from 1..0
 					intersect = 1 - smoothstep(0, _ProjectionParams.w * _FadeLength, diff);
 
+				//Color the intersection
 				fixed4 glowColor = _GlowColor * intersect;
 
+				//Remove the transparency when it's close to the camera to not obstruct your view
 				fixed4 col = (_Color * _Color.a * screenDepth) + glowColor;
 
-				col.a -= vpos.z-0.2;
+				//Make the transparency effect "further away" (but still have the same rollin)
+				col.a -= vpos.z - 0.2;
 				col.a = clamp(col.a, 0.0f, 1.0f);
 				return col;
 			}
