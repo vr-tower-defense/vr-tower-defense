@@ -74,12 +74,12 @@ public class ShootBulletState : TowerState
         );
 
         // Only start shooting when enemy is in front of tower, stop shooting otherwise
-        if (targetAngle <= AngleTreshold && !_coroutineStarted)
+        if (targetAngle <= AngleThreshold && !_coroutineStarted)
         {
             StartCoroutine(ShootProjectile());
             _coroutineStarted = true;
         }
-        else if (targetAngle > AngleTreshold && _coroutineStarted)
+        else if (targetAngle > AngleThreshold && _coroutineStarted)
         {
             StopAllCoroutines();
             _coroutineStarted = false;
