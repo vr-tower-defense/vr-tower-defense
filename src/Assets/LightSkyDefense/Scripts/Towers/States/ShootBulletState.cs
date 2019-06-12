@@ -12,7 +12,7 @@ public class ShootBulletState : TowerState
 
     [Tooltip("Angle in degrees in which an enemy should be from the shooting direction")]
     [Range(0, 180)]
-    public float AngleTreshold = 10;
+    public float AngleThreshold = 10;
 
     [Header("Shooting")]
     public Rigidbody Projectile;
